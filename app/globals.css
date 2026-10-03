@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: #f5ecd7;
+  --color-paper-deep: #ecdfc2;
+  --color-ink: #2b1a10;
+  --color-turmeric: #e0a21b;
+  --color-terracotta: #a8431f;
+  --color-green: #1e3f33;
+  --color-leaf: #9db58a;
+  --font-display: var(--font-gloock), Georgia, serif;
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-terracotta);
+  outline-offset: 3px;
+}
+
+.on-dark :focus-visible {
+  outline-color: var(--color-turmeric);
+}
+
+/* Masala dabba: a steel tin with seven bowls */
+.dabba {
+  background: radial-gradient(circle at 35% 30%, #f1eee6, #cfcabd 70%, #b9b3a4);
+  box-shadow:
+    inset 0 0 0 0.6rem #dedacf,
+    inset 0 0 0 0.68rem rgb(43 26 16 / 0.25),
+    0 1.5rem 3rem -1.5rem rgb(43 26 16 / 0.45);
+}
+
+.bowl {
+  background:
+    radial-gradient(circle at 30% 25%, rgb(255 255 255 / 0.28), transparent 45%),
+    radial-gradient(rgb(0 0 0 / 0.16) 1px, transparent 1.6px) 0 0 / 7px 7px,
+    var(--spice);
+  box-shadow:
+    0 0 0 0.3rem #e6e2d8,
+    0 0 0 0.36rem rgb(43 26 16 / 0.22),
+    inset 0 0.4rem 0.8rem rgb(0 0 0 / 0.3);
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.bowl[aria-pressed="true"] {
+  transform: scale(1.07);
+  box-shadow:
+    0 0 0 0.3rem #e6e2d8,
+    0 0 0 0.55rem var(--color-terracotta),
+    inset 0 0.4rem 0.8rem rgb(0 0 0 / 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .bowl {
+    transition: none;
+  }
+}
