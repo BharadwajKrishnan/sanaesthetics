@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Figtree, Gloock, IBM_Plex_Mono } from "next/font/google";
+import { Anek_Latin, Anek_Tamil, IBM_Plex_Mono, Rozha_One } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const gloock = Gloock({ variable: "--font-gloock", weight: "400", subsets: ["latin"] });
-const figtree = Figtree({ variable: "--font-figtree", subsets: ["latin"] });
+const rozha = Rozha_One({ variable: "--font-rozha", weight: "400", subsets: ["latin"] });
+const anek = Anek_Latin({ variable: "--font-anek", subsets: ["latin"] });
+const anekTamil = Anek_Tamil({ variable: "--font-anek-tamil", subsets: ["tamil"] });
 const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", weight: ["400", "500"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${gloock.variable} ${figtree.variable} ${plexMono.variable} antialiased`}>
+    <html lang="en" className={`${rozha.variable} ${anek.variable} ${anekTamil.variable} ${plexMono.variable} antialiased`}>
       <body>{children}</body>
     </html>
   );

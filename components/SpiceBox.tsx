@@ -69,33 +69,47 @@ export function SpiceBox() {
   const spice = SPICES[active];
 
   return (
-    <div className="mx-auto w-full max-w-[26rem]">
-      <div className="dabba relative aspect-square rounded-full">
-        {SPICES.map((s, i) => (
-          <button
-            key={s.name}
-            type="button"
-            onClick={() => setActive(i)}
-            onMouseEnter={() => setActive(i)}
-            onFocus={() => setActive(i)}
-            aria-pressed={active === i}
-            aria-label={`${s.name} (${s.local})`}
-            className="bowl absolute aspect-square w-[27%] -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{
-              left: `${POSITIONS[i].left.toFixed(2)}%`,
-              top: `${POSITIONS[i].top.toFixed(2)}%`,
-              ["--spice" as string]: s.color,
-            }}
-          />
-        ))}
+    <div className="mx-auto w-full max-w-[30rem]">
+      <div className="relative aspect-square">
+        <svg viewBox="0 0 500 500" aria-hidden="true" className="spin-slow absolute inset-0 h-full w-full">
+          <defs>
+            <path id="ring" d="M250 250m-232 0a232 232 0 1 1 464 0a232 232 0 1 1-464 0" />
+          </defs>
+          <text className="fill-turmeric font-mono text-[15px] uppercase" letterSpacing="5.5">
+            <textPath href="#ring">
+              haldi · curcumin ✦ rai · isothiocyanate ✦ jeera · cuminaldehyde ✦ mirch · capsaicin ✦ dhania · linalool ✦ methi · sotolon ✦
+            </textPath>
+          </text>
+        </svg>
+        <div className="dabba absolute inset-[9%] rounded-full">
+          {SPICES.map((s, i) => (
+            <button
+              key={s.name}
+              type="button"
+              onClick={() => setActive(i)}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
+              aria-pressed={active === i}
+              aria-label={`${s.name} (${s.local})`}
+              className="bowl absolute aspect-square w-[27%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+              style={{
+                left: `${POSITIONS[i].left.toFixed(2)}%`,
+                top: `${POSITIONS[i].top.toFixed(2)}%`,
+                ["--spice" as string]: s.color,
+              }}
+            />
+          ))}
+        </div>
       </div>
-      <div aria-live="polite" className="mt-6 border-l-2 border-terracotta pl-4">
+      <div aria-live="polite" className="hard-shadow mt-4 rounded-2xl bg-rice p-5 text-indigo">
         <p className="flex flex-wrap items-baseline gap-x-3">
-          <span className="font-display text-2xl text-ink">{spice.name}</span>
-          <span className="italic text-ink/60">{spice.local}</span>
+          <span className="font-display text-3xl">{spice.name}</span>
+          <span className="italic opacity-60">{spice.local}</span>
+          <span className="ml-auto rounded-full bg-indigo px-3 py-1 font-mono text-xs uppercase tracking-widest text-turmeric">
+            {spice.compound}
+          </span>
         </p>
-        <p className="mt-1 font-mono text-xs uppercase tracking-widest text-terracotta">{spice.compound}</p>
-        <p className="mt-2 min-h-[4.5rem] text-[0.95rem] leading-relaxed text-ink/80">{spice.fact}</p>
+        <p className="mt-2 min-h-[4.9rem] leading-relaxed opacity-85">{spice.fact}</p>
       </div>
     </div>
   );
