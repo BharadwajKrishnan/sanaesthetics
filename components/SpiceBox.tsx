@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Tag } from "@/components/Tag";
 
 // The masala dabba: seven spices, each with the compound that gives it its character.
 const SPICES = [
@@ -75,7 +76,7 @@ export function SpiceBox() {
           <defs>
             <path id="ring" d="M250 250m-232 0a232 232 0 1 1 464 0a232 232 0 1 1-464 0" />
           </defs>
-          <text className="fill-turmeric font-mono text-[15px] uppercase" letterSpacing="5.5">
+          <text className="fill-ink/55 text-[14px] font-medium uppercase" letterSpacing="5.5">
             <textPath href="#ring">
               haldi · curcumin ✦ rai · isothiocyanate ✦ jeera · cuminaldehyde ✦ mirch · capsaicin ✦ dhania · linalool ✦ methi · sotolon ✦
             </textPath>
@@ -101,15 +102,15 @@ export function SpiceBox() {
           ))}
         </div>
       </div>
-      <div aria-live="polite" className="hard-shadow mt-4 rounded-2xl bg-rice p-5 text-indigo">
-        <p className="flex flex-wrap items-baseline gap-x-3">
-          <span className="font-display text-3xl">{spice.name}</span>
-          <span className="italic opacity-60">{spice.local}</span>
-          <span className="ml-auto rounded-full bg-indigo px-3 py-1 font-mono text-xs uppercase tracking-widest text-turmeric">
-            {spice.compound}
+      <div aria-live="polite" className="mt-6 bg-white p-6">
+        <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="text-2xl font-semibold tracking-tight">{spice.name}</span>
+          <span className="font-serif italic text-ink/60">{spice.local}</span>
+          <span className="ml-auto">
+            <Tag tone="leaf">{spice.compound}</Tag>
           </span>
         </p>
-        <p className="mt-2 min-h-[4.9rem] leading-relaxed opacity-85">{spice.fact}</p>
+        <p className="mt-3 min-h-[4.9rem] font-serif leading-relaxed text-ink/80">{spice.fact}</p>
       </div>
     </div>
   );

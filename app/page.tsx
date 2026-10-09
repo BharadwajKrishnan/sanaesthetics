@@ -1,50 +1,40 @@
 import { InstagramEmbed } from "@/components/InstagramEmbed";
+import { SignupForm } from "@/components/SignupForm";
 import { SixTastes } from "@/components/SixTastes";
 import { SpiceBox } from "@/components/SpiceBox";
 import { TadkaPan } from "@/components/TadkaPan";
-import { WaitlistForm } from "@/components/WaitlistForm";
+import { Tag } from "@/components/Tag";
 import { posts, reels } from "@/lib/instagram";
 import { site } from "@/lib/site";
 
-const CARD_STYLES = [
-  "bg-turmeric text-indigo -rotate-2",
-  "bg-peacock text-rice rotate-1",
-  "bg-rani text-rice -rotate-1",
-  "bg-leaf text-rice rotate-2",
-  "bg-kumkum text-rice -rotate-1",
-];
-
-const MARQUEE = [
-  "haldi → curcumin",
-  "jeera → cuminaldehyde",
-  "mirch → capsaicin",
-  "dhania → linalool",
-  "methi → sotolon",
-  "imli → tartaric acid",
-  "dahi → lactic acid",
-  "milagu → piperine",
-];
-
-const FRAME_COLORS = ["#b5124e", "#0b5a62", "#f4b41a", "#2f7d4f", "#d7301f"];
-
 const INSIDE = [
   {
+    tamil: "சமையல்",
+    tags: ["Recipes", "Everyday"],
     title: "Authentic recipes",
     body: "Everyday, regional and festive vegetarian dishes, written the way they are cooked at home, with the quantities and timings that make them work.",
   },
   {
+    tamil: "பாரம்பரியம்",
+    tags: ["Heritage"],
     title: "Heritage recipes",
     body: "Older family recipes and traditional methods, recorded carefully before they are lost: the stone-ground, the sun-dried, the slow-fermented.",
   },
   {
+    tamil: "வேதியியல்",
+    tags: ["Science"],
     title: "Flavour chemistry",
     body: "Why spices bloom in oil, why batter rises overnight, why onions turn sweet. The reasons behind each step, in plain language.",
   },
   {
+    tamil: "பொருட்கள்",
+    tags: ["Pantry", "Science"],
     title: "Ingredient knowledge",
     body: "Spices, herbs, grains and vegetables, looked at twice: once as a cook uses them, once as a scientist understands them.",
   },
   {
+    tamil: "கதைகள்",
+    tags: ["Stories"],
     title: "Food stories and traditions",
     body: "The memories, regions and rituals a dish belongs to. Who made it, when it was served, and what it meant.",
   },
@@ -67,114 +57,126 @@ const AUDIENCE = [
   "You have a family recipe that deserves to be written down properly.",
 ];
 
-function Eyebrow({ children, className = "text-rani" }: { children: React.ReactNode; className?: string }) {
-  return <p className={`font-mono text-xs font-medium uppercase tracking-[0.25em] ${className}`}>{children}</p>;
-}
+const H2 = "text-4xl font-medium leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl";
+const LEDE = "font-serif text-lg leading-relaxed sm:text-xl";
 
-function Temple({ color, className = "" }: { color: string; className?: string }) {
-  return <div aria-hidden="true" className={`temple ${className}`} style={{ ["--c" as string]: color }} />;
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-60">{children}</p>;
 }
 
 export default function Home() {
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-turmeric focus:px-4 focus:py-2 focus:text-indigo">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-cream">
         Skip to content
       </a>
 
-      <header className="on-dark sticky top-0 z-40 bg-indigo text-rice">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
-          <a href="#top" className="font-display text-2xl text-turmeric">
-            {site.name}
-          </a>
-          <nav aria-label="Sections" className="hidden items-center gap-7 text-sm font-semibold uppercase tracking-wider md:flex">
-            {site.nav.map((item) => (
-              <a key={item.href} href={item.href} className="hover:text-turmeric">
+      <header className="sticky top-0 z-40 border-b border-ink/10 bg-cream/95 backdrop-blur">
+        <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-6 px-5 py-4 sm:px-8 xl:grid-cols-[1fr_auto_1fr]">
+          <nav aria-label="Sections" className="hidden items-center gap-6 whitespace-nowrap text-sm xl:flex">
+            {site.navLeft.map((item) => (
+              <a key={item.href} href={item.href} className="hover:underline hover:underline-offset-4">
                 {item.label}
               </a>
             ))}
           </nav>
-          <a href="#join" className="rounded-full bg-turmeric px-5 py-2 text-sm font-bold text-indigo hover:bg-rice">
-            Join the waitlist
+          <a href="#top" className="whitespace-nowrap text-sm font-semibold uppercase tracking-[0.12em] sm:text-base sm:tracking-[0.18em] xl:text-center xl:text-lg">
+            {site.name}
           </a>
+          <div className="flex items-center justify-end gap-6 whitespace-nowrap text-sm">
+            {site.navRight.map((item) => (
+              <a key={item.href} href={item.href} className="hidden hover:underline hover:underline-offset-4 sm:inline">
+                {item.label}
+              </a>
+            ))}
+            <a href="#join" className="whitespace-nowrap bg-ink px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-cream hover:bg-ink/85">
+              Join<span className="hidden sm:inline"> the waitlist</span>
+            </a>
+          </div>
         </div>
       </header>
 
       <main id="main" className="overflow-x-clip">
         {/* Hero */}
-        <section id="top" className="on-dark kolam-light relative bg-rani text-rice">
-          <span aria-hidden="true" lang="ta" className="pointer-events-none absolute -left-6 bottom-0 select-none font-tamil text-[38vw] font-extrabold leading-[0.8] text-rani-deep/60 lg:text-[26rem]">
-            சுவை
-          </span>
-          <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-24 pt-12 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:pt-16">
-            <div>
-              <Eyebrow className="text-turmeric">Vegetarian Indian cooking · சுவை means flavour</Eyebrow>
-              <h1 className="mt-5 font-display text-[clamp(2.7rem,5.6vw,5.4rem)] leading-none">
-                Where Indian culinary tradition meets{" "}
-                <span className="relative inline-block text-turmeric">
-                  flavour science.
-                  <svg aria-hidden="true" viewBox="0 0 300 14" preserveAspectRatio="none" className="absolute -bottom-2 left-0 h-3 w-full">
-                    <path d="M2 9Q20 1 38 9T74 9T110 9T146 9T182 9T218 9T254 9T298 9" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-                  </svg>
-                </span>
+        <section id="top">
+          <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-24 pt-14 sm:px-8 lg:grid-cols-12 lg:pt-20">
+            <div className="lg:col-span-6">
+              <p className="flex flex-wrap gap-1.5">
+                <Tag tone="leaf">Vegetarian</Tag>
+                <Tag>Heritage</Tag>
+                <Tag>Flavour science</Tag>
+              </p>
+              <h1 className="mt-6 text-[clamp(2.6rem,5.4vw,5rem)] font-medium leading-[1.02] tracking-tight">
+                {site.tagline}
               </h1>
-              <p className="mt-8 max-w-xl text-xl leading-relaxed text-rice/90">
+              <p className={`${LEDE} mt-7 max-w-xl text-ink/80`}>
                 Authentic recipes, heritage methods and the chemistry behind them. Learn what to cook, and why it works. Start by
                 opening the spice box.
               </p>
-              <div className="mt-8">
-                <WaitlistForm />
-                <p className="text-sm text-rice/75">Recipes and classes are in preparation. Join to hear when they open.</p>
+              <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+                <a href="#join" className="bg-ink px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-cream hover:bg-ink/85">
+                  Join the waitlist
+                </a>
+                <a href="#newsletter" className="text-sm font-semibold uppercase tracking-[0.12em] hover:underline hover:underline-offset-4">
+                  Subscribe to the newsletter &gt;
+                </a>
               </div>
             </div>
-            <SpiceBox />
+            <div className="lg:col-span-6">
+              <blockquote className="mb-10 max-w-sm lg:ml-auto">
+                <p className="text-2xl font-medium leading-snug tracking-tight">“Every instruction in a traditional recipe has a reason.”</p>
+                <footer className="mt-3 text-xs font-semibold uppercase tracking-[0.16em] text-ink/60">The idea behind the lab</footer>
+              </blockquote>
+              <div className="bg-sand px-6 py-10 sm:px-12">
+                <SpiceBox />
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Marquee */}
-        <div aria-hidden="true" className="relative z-10 -my-5 -rotate-1 overflow-hidden border-y-4 border-indigo bg-turmeric py-3">
-          <div className="marquee flex w-max gap-10 whitespace-nowrap pr-10 font-mono text-lg font-medium uppercase tracking-widest text-indigo">
-            {[...MARQUEE, ...MARQUEE].map((m, i) => (
-              <span key={i} className="flex items-center gap-10">
-                {m} <span className="text-rani">✦</span>
-              </span>
-            ))}
-          </div>
-        </div>
-
         {/* What's inside */}
-        <section id="inside" className="kolam-dark">
-          <div className="mx-auto max-w-7xl px-5 pb-24 pt-28 sm:px-8">
-            <div className="reveal">
+        <section id="inside" className="bg-sand">
+          <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+            <div className="reveal max-w-4xl">
               <Eyebrow>What&apos;s inside</Eyebrow>
-              <h2 className="mt-4 max-w-4xl font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-                A recipe book, a family archive and a <span className="text-rani">lab notebook</span>, in one place.
-              </h2>
+              <h2 className={`${H2} mt-4`}>A recipe book, a family archive and a lab notebook, in one place.</h2>
             </div>
-            <ul className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-6">
+            <ul className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {INSIDE.map((item, i) => (
-                <li
-                  key={item.title}
-                  className={`reveal hard-shadow rounded-3xl border-2 border-indigo p-7 transition-transform duration-300 hover:rotate-0 hover:scale-[1.03] ${CARD_STYLES[i]} ${i < 2 ? "lg:col-span-3" : "lg:col-span-2"}`}
-                >
-                  <h3 className="font-display text-3xl leading-tight">{item.title}</h3>
-                  <p className="mt-3 text-lg leading-relaxed opacity-90">{item.body}</p>
+                <li key={item.title} className={`reveal ${i % 3 === 1 ? "lg:mt-16" : ""}`}>
+                  <div className="flex aspect-[4/3] items-center justify-center bg-cream px-6">
+                    <span lang="ta" aria-hidden="true" className="text-center font-tamil text-4xl font-medium text-ink/80 sm:text-5xl">
+                      {item.tamil}
+                    </span>
+                  </div>
+                  <p className="mt-5 flex flex-wrap gap-1.5">
+                    {item.tags.map((t, j) => (
+                      <Tag key={t} tone={j === 0 ? "leaf" : "ink"}>
+                        {t}
+                      </Tag>
+                    ))}
+                  </p>
+                  <h3 className="mt-3 text-2xl font-semibold tracking-tight">{item.title}</h3>
+                  <p className="mt-2 font-serif leading-relaxed text-ink/75">{item.body}</p>
                 </li>
               ))}
+              <li className="reveal flex flex-col justify-center border border-ink/20 p-8 lg:mt-16">
+                <p className="text-2xl font-semibold tracking-tight">The first recipes are being written now.</p>
+                <a href="#newsletter" className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] hover:underline hover:underline-offset-4">
+                  Get them in your inbox &gt;
+                </a>
+              </li>
             </ul>
           </div>
         </section>
 
         {/* Flavour science: the tadka */}
-        <section id="science" className="on-dark bg-peacock text-rice">
-          <Temple color="var(--color-rice)" />
-          <div className="mx-auto max-w-7xl px-5 pb-16 pt-20 sm:px-8">
-            <div className="reveal">
-              <Eyebrow className="text-turmeric">Why the food works</Eyebrow>
-              <h2 className="mt-4 max-w-4xl font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-                Your grandmother&apos;s tadka was chemistry. She just never called it that.
-              </h2>
-              <p className="mt-6 max-w-2xl text-xl leading-relaxed text-rice/85">
+        <section id="science">
+          <div className="mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-8">
+            <div className="reveal max-w-4xl">
+              <Eyebrow>Why the food works</Eyebrow>
+              <h2 className={`${H2} mt-4`}>Your grandmother&apos;s tadka was chemistry. She just never called it that.</h2>
+              <p className={`${LEDE} mt-6 max-w-2xl text-ink/80`}>
                 Every instruction in a traditional recipe has a reason. Scroll through one tempering and watch the pan fill: the
                 way it was taught, and the way it works.
               </p>
@@ -184,15 +186,12 @@ export default function Home() {
         </section>
 
         {/* Six tastes */}
-        <section className="on-dark kolam-light bg-indigo text-rice">
-          <Temple color="var(--color-peacock)" />
+        <section className="on-dark bg-ink text-cream">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-            <div className="reveal">
-              <Eyebrow className="text-turmeric">Arusuvai · the six tastes</Eyebrow>
-              <h2 className="mt-4 max-w-4xl font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-                Tamil kitchens counted six tastes long before anyone drew a molecule.
-              </h2>
-              <p className="mt-6 max-w-2xl text-xl leading-relaxed text-rice/85">
+            <div className="reveal max-w-4xl">
+              <Eyebrow>Arusuvai · the six tastes</Eyebrow>
+              <h2 className={`${H2} mt-4`}>Tamil kitchens counted six tastes long before anyone drew a molecule.</h2>
+              <p className={`${LEDE} mt-6 max-w-2xl text-cream/80`}>
                 A balanced meal is meant to carry all six. The mango pachadi made for Tamil New Year puts every one of them in a
                 single bowl. Pick a taste to see what is behind it.
               </p>
@@ -202,35 +201,32 @@ export default function Home() {
         </section>
 
         {/* Instagram */}
-        <section id="kitchen" className="kolam-dark">
-          <Temple color="var(--color-indigo)" />
+        <section id="kitchen">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
             <div className="reveal flex flex-wrap items-end justify-between gap-6">
-              <div>
+              <div className="max-w-3xl">
                 <Eyebrow>From the kitchen</Eyebrow>
-                <h2 className="mt-4 max-w-3xl font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-                  It started as a cook&apos;s notebook on <span className="text-rani">Instagram</span>.
-                </h2>
+                <h2 className={`${H2} mt-4`}>It started as a cook&apos;s notebook on Instagram.</h2>
               </div>
               <a
                 href={site.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hard-shadow rounded-full border-2 border-indigo bg-turmeric px-6 py-3 font-bold transition-transform hover:-translate-y-0.5"
+                className="border border-ink px-5 py-3 text-xs font-semibold uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-cream"
               >
                 Follow @{site.instagramHandle}
               </a>
             </div>
-            <p className="reveal mt-8 max-w-3xl text-xl leading-relaxed text-indigo/85">
+            <p className={`${LEDE} reveal mt-8 max-w-3xl text-ink/80`}>
               An Indian home cook in Germany, cooking vegetarian, baking on weekends, planning menus for friends and waiting on
               the Indian grocery delivery. The habits show up in every post: ghee on the toast, black salt on everything, and a
               note on why an ingredient was chosen. {site.name} is that notebook, grown up.
             </p>
 
-            <div className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-2 lg:grid-cols-6">
+            <div className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
               {[...reels, ...posts].map((item, i) => (
-                <div key={item.id} className={`reveal ${i < 2 ? "lg:col-span-3 lg:px-12" : "lg:col-span-2"} ${i % 2 ? "lg:rotate-1" : "lg:-rotate-1"}`}>
-                  <InstagramEmbed item={item} accent={FRAME_COLORS[i % FRAME_COLORS.length]} />
+                <div key={item.id} className={`reveal ${i % 3 === 1 ? "lg:mt-20" : ""}`}>
+                  <InstagramEmbed item={item} />
                 </div>
               ))}
             </div>
@@ -238,34 +234,27 @@ export default function Home() {
         </section>
 
         {/* Learn */}
-        <section id="learn" className="bg-turmeric">
-          <Temple color="var(--color-rice)" />
+        <section id="learn" className="bg-sand">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-            <div className="reveal flex flex-wrap items-start justify-between gap-8">
-              <div>
-                <Eyebrow className="text-rani-deep">Learn with us</Eyebrow>
-                <h2 className="mt-4 max-w-3xl font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-                  Classes where you cook, ask and understand.
-                </h2>
-              </div>
-              <p className="flex h-32 w-32 shrink-0 rotate-12 items-center justify-center rounded-full border-4 border-double border-kumkum text-center font-mono text-sm font-medium uppercase leading-tight tracking-widest text-kumkum">
-                Opening
-                <br />
-                soon
+            <div className="reveal max-w-3xl">
+              <p className="flex items-center gap-3">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] opacity-60">Learn with us</span>
+                <Tag tone="leaf">Opening soon</Tag>
               </p>
+              <h2 className={`${H2} mt-4`}>Classes where you cook, ask and understand.</h2>
             </div>
-            <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {LEARN.map((item) => (
-                <li key={item.title} className="reveal ticket bg-rice px-9 py-7 transition-transform duration-200 hover:-translate-y-1">
-                  <p className="font-mono text-xs uppercase tracking-[0.25em] text-rani">Admit one</p>
-                  <h3 className="mt-2 border-b-2 border-dashed border-indigo/30 pb-3 font-display text-2xl">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed text-indigo/80">{item.body}</p>
+            <ol className="mt-14 grid gap-px bg-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+              {LEARN.map((item, i) => (
+                <li key={item.title} className="reveal bg-sand py-8 pr-8 sm:p-8">
+                  <p className="text-xs font-semibold tracking-[0.14em] text-ink/50">{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-3 text-2xl font-semibold tracking-tight">{item.title}</h3>
+                  <p className="mt-2 font-serif leading-relaxed text-ink/75">{item.body}</p>
                 </li>
               ))}
-            </ul>
-            <p className="mt-10 text-lg">
+            </ol>
+            <p className="mt-10 font-serif text-lg">
               Dates and prices will be announced to the waitlist first.{" "}
-              <a href="#join" className="font-bold underline decoration-2 underline-offset-4 hover:text-rani-deep">
+              <a href="#join" className="font-sans text-sm font-semibold uppercase tracking-[0.12em] underline underline-offset-4">
                 Join the waitlist
               </a>
             </p>
@@ -273,17 +262,14 @@ export default function Home() {
         </section>
 
         {/* Audience */}
-        <section className="on-dark kolam-light bg-rani text-rice">
-          <Temple color="var(--color-turmeric)" />
+        <section>
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
-            <Eyebrow className="text-turmeric">Who it&apos;s for</Eyebrow>
-            <h2 className="reveal mt-4 font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">Pull up a chair if this sounds like you.</h2>
-            <ul className="mt-12 border-t-2 border-rice/30">
+            <Eyebrow>Who it&apos;s for</Eyebrow>
+            <h2 className={`${H2} reveal mt-4`}>Pull up a chair if this sounds like you.</h2>
+            <ul className="mt-12 border-t border-ink/20">
               {AUDIENCE.map((line) => (
-                <li key={line} className="reveal group flex items-baseline gap-5 border-b-2 border-rice/30 py-6 text-2xl leading-snug transition-colors hover:text-turmeric sm:text-3xl">
-                  <span aria-hidden="true" className="text-turmeric transition-transform duration-300 group-hover:rotate-90">
-                    ✦
-                  </span>
+                <li key={line} className="reveal flex items-baseline gap-5 border-b border-ink/20 py-6 text-xl leading-snug tracking-tight sm:text-2xl">
+                  <span aria-hidden="true" className="inline-block h-2.5 w-2.5 shrink-0 translate-y-[-0.15em] rounded-full bg-leaf" />
                   {line}
                 </li>
               ))}
@@ -292,41 +278,84 @@ export default function Home() {
         </section>
 
         {/* Join */}
-        <section id="join" className="on-dark bg-peacock text-rice">
-          <Temple color="var(--color-rani)" />
+        <section id="join" className="on-dark bg-ink text-cream">
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="reveal">
-              <h2 className="font-display text-5xl leading-[1.02] sm:text-6xl lg:text-7xl">
-                Keep the old recipes. <span className="text-turmeric">Understand them, too.</span>
-              </h2>
-              <p className="mt-6 max-w-xl text-xl leading-relaxed text-rice/85">
-                The aim is a trusted home for traditional Indian vegetarian cooking: preserved faithfully, explained clearly, and
+              <h2 className={H2}>Keep the old recipes. Understand them, too.</h2>
+              <p className={`${LEDE} mt-6 max-w-xl text-cream/80`}>
+                The aim is a trusted home for traditional South Indian vegetarian cooking: preserved faithfully, explained clearly, and
                 taught live. Join the waitlist to get the first recipes and class dates.
               </p>
             </div>
             <div className="lg:justify-self-end">
-              <WaitlistForm />
+              <SignupForm list="waitlist" tone="dark" />
+            </div>
+          </div>
+        </section>
+
+        {/* Newsletter */}
+        <section id="newsletter">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8">
+            <div className="reveal mx-auto max-w-2xl py-24 text-center">
+              <Tag tone="leaf">First issue coming soon</Tag>
+              <h2 className="mt-5 text-3xl font-medium tracking-tight sm:text-4xl">Subscribe to the newsletter</h2>
+              <p className="mx-auto mt-5 max-w-xl font-serif leading-relaxed text-ink/80">
+                A letter from the lab every so often: one recipe, the science that makes it work, and a story from the kitchen it
+                came from. The first issue is still being written. Sign up and it will come straight to you. No spam, and you can
+                unsubscribe at any time.
+              </p>
+              <div className="mt-8">
+                <SignupForm list="newsletter" center />
+              </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="on-dark overflow-hidden bg-indigo text-rice">
-        <Temple color="var(--color-peacock)" />
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 pt-12 sm:px-8">
-          <p className="max-w-md text-rice/75">Authentic vegetarian Indian cooking, explored through tradition, technique, and science.</p>
-          <p className="text-sm text-rice/75">
-            <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-turmeric underline underline-offset-4">
-              Instagram
-            </a>
-            <span className="ml-4">
+      <footer className="on-dark bg-ink text-cream">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 md:grid-cols-[1.5fr_1fr_1fr]">
+          <div>
+            <p className="text-lg font-semibold uppercase tracking-[0.2em]">{site.name}</p>
+            <p className="mt-4 max-w-sm font-serif leading-relaxed text-cream/70">
+              Authentic vegetarian South Indian cooking, explored through tradition, technique, and science.
+            </p>
+          </div>
+          <nav aria-label="Footer">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-cream/50">Explore</p>
+            <ul className="mt-4 space-y-2 text-sm">
+              {[...site.navLeft, ...site.navRight].map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="hover:underline hover:underline-offset-4">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-cream/50">Follow</p>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>
+                <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:underline hover:underline-offset-4">
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a href="#newsletter" className="hover:underline hover:underline-offset-4">
+                  Newsletter
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="border-t border-cream/15">
+          <p className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-5 py-6 text-xs text-cream/60 sm:px-8">
+            <span>
               © {new Date().getFullYear()} {site.name}
             </span>
+            <span>{site.domain}</span>
           </p>
         </div>
-        <p aria-hidden="true" className="-mb-[0.22em] mt-6 select-none whitespace-nowrap text-center font-display text-[14vw] leading-none text-turmeric">
-          {site.name}
-        </p>
       </footer>
     </>
   );

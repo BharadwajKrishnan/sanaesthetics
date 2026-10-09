@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Tag } from "@/components/Tag";
 
 const STEPS = [
   {
@@ -66,18 +67,18 @@ export function TadkaPan() {
 
   return (
     <div className="mt-12 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-      <div className="sticky top-16 z-10 -mx-5 self-start bg-peacock px-5 py-3 lg:top-28 lg:mx-0 lg:p-0">
+      <div className="sticky top-14 z-10 -mx-5 self-start bg-cream px-5 py-3 lg:top-28 lg:mx-0 lg:p-0">
         <svg viewBox="0 0 400 400" role="img" aria-label={`A tadka pan, seen from above. Now in the pan: ${STEPS.slice(0, active + 1).map((s) => s.label).join(", ")}.`} className="mx-auto w-40 sm:w-56 lg:w-full lg:max-w-md">
-          <rect x="320" y="184" width="80" height="32" rx="16" fill="#1b1640" />
-          <circle cx="200" cy="200" r="172" fill="#1b1640" />
-          <circle cx="200" cy="200" r="150" fill="#2a2360" />
-          <circle cx="200" cy="200" r="132" fill="#f4b41a" />
-          <circle cx="200" cy="200" r="132" fill="#d98d0e" opacity="0.35" />
+          <rect x="320" y="184" width="80" height="32" rx="16" fill="#1f2821" />
+          <circle cx="200" cy="200" r="172" fill="#1f2821" />
+          <circle cx="200" cy="200" r="150" fill="#323d35" />
+          <circle cx="200" cy="200" r="132" fill="#e4bb6a" />
+          <circle cx="200" cy="200" r="132" fill="#c8963f" opacity="0.3" />
           {BUBBLES.map((b, i) => (
-            <circle key={i} className="sizzle" style={{ animationDelay: `${(i % 6) * 0.27}s` }} cx={b.x} cy={b.y} r="5" fill="none" stroke="#fff6e4" strokeWidth="1.5" />
+            <circle key={i} className="sizzle" style={{ animationDelay: `${(i % 6) * 0.27}s` }} cx={b.x} cy={b.y} r="5" fill="none" stroke="#fffaf5" strokeWidth="1.5" />
           ))}
           {MUSTARD.map((m, i) => (
-            <circle key={i} className={show(1)} style={{ transitionDelay: `${i * 18}ms` }} cx={m.x} cy={m.y} r="5.5" fill="#1b1640" />
+            <circle key={i} className={show(1)} style={{ transitionDelay: `${i * 18}ms` }} cx={m.x} cy={m.y} r="5.5" fill="#1f2821" />
           ))}
           {CUMIN.map((c, i) => (
             <g key={i} transform={`rotate(${c.rot} ${c.x} ${c.y})`}>
@@ -86,11 +87,11 @@ export function TadkaPan() {
           ))}
           {LEAVES.map((l, i) => (
             <g key={i} transform={`rotate(${l.rot} ${l.x} ${l.y})`}>
-              <path className={show(3)} style={{ transitionDelay: `${i * 60}ms` }} d={`M${l.x - 30} ${l.y}Q${l.x} ${l.y - 20} ${l.x + 30} ${l.y}Q${l.x} ${l.y + 20} ${l.x - 30} ${l.y}Z`} fill="#2f7d4f" stroke="#1b1640" strokeWidth="1.5" />
+              <path className={show(3)} style={{ transitionDelay: `${i * 60}ms` }} d={`M${l.x - 30} ${l.y}Q${l.x} ${l.y - 20} ${l.x + 30} ${l.y}Q${l.x} ${l.y + 20} ${l.x - 30} ${l.y}Z`} fill="#4a9a4e" stroke="#1f2821" strokeWidth="1.5" />
             </g>
           ))}
         </svg>
-        <p className="mt-2 text-center font-mono text-xs uppercase tracking-[0.2em] text-turmeric" aria-hidden="true">
+        <p className="mt-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-ink/60" aria-hidden="true">
           In the pan: {STEPS[active].label}
         </p>
       </div>
@@ -103,12 +104,14 @@ export function TadkaPan() {
             ref={(el) => {
               refs.current[i] = el;
             }}
-            className={`border-l-4 py-10 pl-6 transition-opacity duration-300 lg:py-16 ${active === i ? "border-turmeric" : "border-rice/20 opacity-50"}`}
+            className={`border-l-2 py-10 pl-6 transition-opacity duration-300 lg:py-16 ${active === i ? "border-ink" : "border-ink/15 opacity-45"}`}
           >
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-turmeric">What tradition says</p>
-            <p className="mt-2 font-display text-3xl leading-tight sm:text-4xl">{row.step}</p>
-            <p className="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-turmeric">What the science says</p>
-            <p className="mt-2 max-w-xl text-lg leading-relaxed text-rice/85">{row.why}</p>
+            <Tag tone="outline">What tradition says</Tag>
+            <p className="mt-4 text-3xl font-medium leading-tight tracking-tight sm:text-4xl">{row.step}</p>
+            <p className="mt-7">
+              <Tag tone="leaf">What the science says</Tag>
+            </p>
+            <p className="mt-3 max-w-xl font-serif text-lg leading-relaxed text-ink/80">{row.why}</p>
           </li>
         ))}
       </ol>
