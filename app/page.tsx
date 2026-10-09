@@ -1,5 +1,5 @@
 import { Artwork, HeroGarnish, RiceBowl, SprigOutline, TemperingPan, Thali } from "@/components/Artwork";
-import { BrassDabba } from "@/components/BrassDabba";
+import { Dabba } from "@/components/BrassDabba";
 import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components/Icons";
 import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { MobileMenu } from "@/components/MobileMenu";
@@ -26,7 +26,7 @@ const SERIES = [
 
 const EXPLORE = [
   {
-    art: <BrassDabba className="absolute left-1/2 top-1/2 w-[86%] -translate-x-1/2 -translate-y-1/2" />,
+    art: <Dabba sizes="(min-width: 1024px) 13vw, 38vw" className="absolute left-1/2 top-1/2 w-[86%] -translate-x-1/2 -translate-y-1/2" />,
     photo: photos.anjarapetti,
     alt: "An anjarapetti, the round spice box of a South Indian kitchen",
     eyebrow: "Ingredients",
@@ -78,12 +78,18 @@ function Eyebrow({ children, className = "text-ink/70" }: { children: React.Reac
   return <p className={`text-xs font-medium uppercase tracking-[0.2em] ${className}`}>{children}</p>;
 }
 
-function TextLink({ href, children }: { href: string; children: React.ReactNode }) {
+function TextLink({ href, children }: { href: string; children: string }) {
+  // Keep the arrow on the same line as the last word.
+  const words = children.split(" ");
+  const last = words.pop();
   return (
     <a href={href} className="group font-medium text-ink underline decoration-ink/30 underline-offset-[6px] hover:decoration-ink">
-      {children}
-      <span className="ml-2 inline-block align-[-2px]">
-        <Arrow />
+      {words.length > 0 && `${words.join(" ")} `}
+      <span className="whitespace-nowrap">
+        {last}
+        <span className="ml-2 inline-block align-[-2px]">
+          <Arrow />
+        </span>
       </span>
     </a>
   );
@@ -93,7 +99,7 @@ function HeroArt() {
   return (
     <Artwork src={photos.hero} alt="" sizes="(min-width: 1024px) 62vw, 100vw" priority className="relative h-full w-full">
       <HeroGarnish />
-      <BrassDabba className="absolute right-[8%] top-1/2 w-[min(44%,26rem)] -translate-y-1/2" />
+      <Dabba sizes="(min-width: 1024px) 26rem, 50vw" priority className="absolute left-1/2 top-1/2 w-[min(64%,20rem)] -translate-x-1/2 -translate-y-1/2 lg:left-auto lg:right-[9%] lg:top-[56%] lg:w-[min(42%,25rem)] lg:translate-x-0" />
     </Artwork>
   );
 }
@@ -137,7 +143,7 @@ export default function Home() {
         <section id="top" className="relative">
           <div className="fade-left absolute inset-y-0 right-0 hidden w-[62%] lg:block">
             <HeroArt />
-            <p aria-hidden="true" className="absolute right-[5%] top-[14%] -rotate-[8deg] font-script text-[2.1rem] leading-[1.15] text-cream/90">
+            <p aria-hidden="true" className="absolute right-[4%] top-[7%] -rotate-[8deg] font-script text-[2rem] leading-[1.15] text-cream/90">
               Ingredients
               <br />
               Tradition

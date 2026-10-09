@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { dabbaCutout } from "@/lib/photos";
 import { POSITIONS, SPICES } from "@/lib/spices";
 
 // A still, decorative anjarapetti for artwork slots. SpiceBox is the interactive one.
@@ -13,5 +15,21 @@ export function BrassDabba({ className = "" }: { className?: string }) {
         />
       ))}
     </div>
+  );
+}
+
+// The photographed spice box when there is one, otherwise the drawn one.
+export function Dabba({ className = "", alt = "", sizes, priority }: { className?: string; alt?: string; sizes: string; priority?: boolean }) {
+  if (!dabbaCutout) return <BrassDabba className={className} />;
+  return (
+    <Image
+      src={dabbaCutout}
+      alt={alt}
+      width={848}
+      height={848}
+      sizes={sizes}
+      priority={priority}
+      className={`aspect-square rounded-full drop-shadow-[0_2rem_2.5rem_rgb(10_6_3/0.7)] ${className}`}
+    />
   );
 }
