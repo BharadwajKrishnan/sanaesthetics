@@ -1,19 +1,21 @@
 export const site = {
   name: "South Indian Food Lab",
+  wordmark: ["South Indian", "Food Lab"],
   domain: "southindianfoodlab.com",
   url: "https://southindianfoodlab.com",
-  tagline: "Where South Indian culinary tradition meets flavour science.",
+  newsletter: "Arusuvai",
+  tagline: "Traditional flavours. A deeper understanding.",
   description:
-    "Authentic vegetarian South Indian cooking, explored through tradition, technique, and science. Recipes, heritage, flavour chemistry and live classes.",
+    "South Indian vegetarian recipes, stories and flavour science, from a home kitchen to a wider table. Home of the Arusuvai newsletter.",
   instagramHandle: "san_aesthetixs",
   instagramUrl: "https://www.instagram.com/san_aesthetixs/",
-  navLeft: [
-    { href: "#inside", label: "What's inside" },
-    { href: "#science", label: "Flavour science" },
-    { href: "#kitchen", label: "From the kitchen" },
-  ],
-  navRight: [
-    { href: "#learn", label: "Classes" },
-    { href: "#newsletter", label: "Newsletter" },
+  nav: [
+    { href: "#top", label: "Home" },
+    { href: "#arusuvai", label: "Newsletter" },
+    { href: "#recipes", label: "Recipes" },
+    { href: "#science", label: "Flavour Science" },
+    { href: "#culture", label: "Culture" },
+    { href: "#classes", label: "Classes" },
+    { href: "#about", label: "About" },
   ],
 };

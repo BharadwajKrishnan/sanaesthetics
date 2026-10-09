@@ -15,7 +15,7 @@ const COPY: Record<List, { cta: string; sending: string; added: string; exists: 
   newsletter: {
     cta: "Subscribe",
     sending: "Subscribing…",
-    added: "You're subscribed. The first issue will arrive when it's ready.",
+    added: "You're subscribed to Arusuvai. Issue 1 will arrive when it's ready.",
     exists: "This email is already subscribed.",
   },
 };
@@ -58,7 +58,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
 
   return (
     <form onSubmit={onSubmit} noValidate className={`w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
-      <label htmlFor={id} className={`block text-xs font-semibold uppercase tracking-[0.16em] ${dark ? "text-cream/75" : "text-ink/65"}`}>
+      <label htmlFor={id} className={`block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`}>
         Email address
       </label>
       <div className="mt-2 flex flex-col gap-2 sm:flex-row">
@@ -74,13 +74,13 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           }}
           aria-invalid={isError}
           aria-describedby={message ? `${id}-msg` : undefined}
-          className={`min-w-0 flex-1 border px-4 py-3 text-ink placeholder:text-ink/40 ${dark ? "border-cream bg-cream" : "border-ink/25 bg-white"}`}
+          className={`min-w-0 flex-1 rounded-md border px-4 py-3 text-ink placeholder:text-ink/40 ${dark ? "border-cream bg-cream" : "border-line bg-white"}`}
         />
         <button
           type="submit"
           disabled={state === "sending"}
-          className={`px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors disabled:opacity-60 ${
-            dark ? "bg-leaf text-ink hover:bg-cream" : "bg-ink text-cream hover:bg-ink/85"
+          className={`rounded-md px-6 py-3 font-medium transition-colors disabled:opacity-60 ${
+            dark ? "bg-cream text-forest-deep hover:bg-parchment" : "bg-forest text-cream hover:bg-forest-deep"
           }`}
         >
           {state === "sending" ? copy.sending : copy.cta}
@@ -89,7 +89,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       <p
         id={`${id}-msg`}
         role="status"
-        className={`mt-3 min-h-6 font-serif text-[0.95rem] ${isError ? "font-semibold" : ""} ${dark ? "text-cream" : "text-ink"}`}
+        className={`mt-3 min-h-6 text-[0.95rem] ${isError ? "font-semibold" : ""} ${dark ? "text-cream" : "text-ink"}`}
       >
         {message}
       </p>

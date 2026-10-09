@@ -79,7 +79,7 @@ export function SixTastes() {
               onFocus={() => setActive(i)}
               aria-pressed={active === i}
               className={`absolute flex aspect-square w-[31%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border transition-colors duration-200 ${
-                active === i ? "border-leaf bg-leaf text-ink" : "border-cream/35 text-cream hover:border-cream"
+                active === i ? "border-cream bg-cream text-forest-deep" : "border-cream/35 text-cream hover:border-cream"
               }`}
               style={{
                 left: `${(50 + 34.5 * Math.cos(a)).toFixed(2)}%`,
@@ -99,18 +99,18 @@ export function SixTastes() {
         <p className="font-tamil text-6xl font-semibold leading-none sm:text-7xl" lang="ta">
           {t.tamil}
         </p>
-        <p className="mt-5 text-4xl font-medium tracking-tight">
-          {t.english} <span className="font-serif text-xl italic text-cream/60">{t.roman}</span>
+        <p className="mt-5 font-serif text-5xl font-semibold">
+          {t.english} <span className="font-sans text-xl italic text-cream/60">{t.roman}</span>
         </p>
-        <p className="mt-5 min-h-[5.5rem] max-w-lg font-serif text-lg leading-relaxed text-cream/80">{t.does}</p>
+        <p className="mt-5 min-h-[5.5rem] max-w-lg text-lg leading-relaxed text-cream/80">{t.does}</p>
         <dl className="mt-6 grid max-w-lg grid-cols-2 gap-6 border-t border-cream/20 pt-6">
           <div>
-            <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-leaf">Found in</dt>
-            <dd className="mt-2 font-serif">{t.found}</dd>
+            <dt className="text-xs font-medium uppercase tracking-[0.18em] text-brass">Found in</dt>
+            <dd className="mt-2">{t.found}</dd>
           </div>
           <div>
-            <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-leaf">The molecule</dt>
-            <dd className="mt-2 font-serif italic">{t.molecule}</dd>
+            <dt className="text-xs font-medium uppercase tracking-[0.18em] text-brass">The molecule</dt>
+            <dd className="mt-2 italic">{t.molecule}</dd>
           </div>
         </dl>
       </div>

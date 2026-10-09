@@ -1,69 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Tag } from "@/components/Tag";
-
-// The masala dabba: seven spices, each with the compound that gives it its character.
-const SPICES = [
-  {
-    name: "Turmeric",
-    local: "haldi",
-    compound: "curcumin",
-    color: "#E0A21B",
-    fact: "Curcumin dissolves in fat, not water. That is why haldi goes into the hot oil rather than the simmering dal.",
-  },
-  {
-    name: "Mustard seed",
-    local: "rai",
-    compound: "allyl isothiocyanate",
-    color: "#3B2A24",
-    fact: "Crushed with water, mustard turns sharp. Popped whole in hot oil, the enzyme that makes the sharpness is switched off, and the seeds taste nutty.",
-  },
-  {
-    name: "Cumin",
-    local: "jeera",
-    compound: "cuminaldehyde",
-    color: "#8C6A3C",
-    fact: "The warm, earthy smell of jeera is cuminaldehyde. A few seconds of sizzling pulls it into the oil, which carries it through the dish.",
-  },
-  {
-    name: "Red chilli",
-    local: "mirch",
-    compound: "capsaicin",
-    color: "#B3271E",
-    fact: "Capsaicin clings to fat and ignores water. A spoon of yoghurt or ghee calms the heat when a glass of water will not.",
-  },
-  {
-    name: "Coriander seed",
-    local: "dhania",
-    compound: "linalool",
-    color: "#B8A065",
-    fact: "Linalool gives dhania its floral, citrus note. It evaporates quickly once ground, so freshly ground seed smells brighter.",
-  },
-  {
-    name: "Asafoetida",
-    local: "hing",
-    compound: "sulfur compounds",
-    color: "#DCC68C",
-    fact: "Raw hing is harsh. A pinch in hot fat changes its sulfur compounds into something savoury, close to cooked onion and garlic.",
-  },
-  {
-    name: "Fenugreek",
-    local: "methi",
-    compound: "sotolon",
-    color: "#C0903A",
-    fact: "In small amounts sotolon smells of maple and caramel. Toast methi seeds gently: they turn bitter when they burn.",
-  },
-];
-
-// Centre bowl, then six around it.
-const POSITIONS = [
-  { left: 50, top: 50 },
-  ...[0, 1, 2, 3, 4, 5].map((i) => {
-    const a = ((-90 + i * 60) * Math.PI) / 180;
-    return { left: 50 + 31.5 * Math.cos(a), top: 50 + 31.5 * Math.sin(a) };
-  }),
-];
+import { POSITIONS, SPICES } from "@/lib/spices";
 
 export function SpiceBox() {
   const [active, setActive] = useState(0);
@@ -76,9 +14,9 @@ export function SpiceBox() {
           <defs>
             <path id="ring" d="M250 250m-232 0a232 232 0 1 1 464 0a232 232 0 1 1-464 0" />
           </defs>
-          <text className="fill-ink/55 text-[14px] font-medium uppercase" letterSpacing="5.5">
+          <text className="fill-cream/60 text-[13px] font-medium uppercase" letterSpacing="3.6">
             <textPath href="#ring">
-              haldi · curcumin ✦ rai · isothiocyanate ✦ jeera · cuminaldehyde ✦ mirch · capsaicin ✦ dhania · linalool ✦ methi · sotolon ✦
+              manjal · curcumin ✦ kadugu · isothiocyanate ✦ jeeragam · cuminaldehyde ✦ milagai · capsaicin ✦ vendhayam · sotolon ✦
             </textPath>
           </text>
         </svg>
@@ -102,15 +40,13 @@ export function SpiceBox() {
           ))}
         </div>
       </div>
-      <div aria-live="polite" className="mt-6 bg-white p-6">
-        <p className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <span className="text-2xl font-semibold tracking-tight">{spice.name}</span>
-          <span className="font-serif italic text-ink/60">{spice.local}</span>
-          <span className="ml-auto">
-            <Tag tone="leaf">{spice.compound}</Tag>
-          </span>
+      <div aria-live="polite" className="mt-6 rounded-sm bg-cream p-6 text-ink shadow-xl shadow-black/20">
+        <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span className="font-serif text-3xl font-semibold">{spice.name}</span>
+          <span className="italic text-ink/60">{spice.local}</span>
+          <span className="ml-auto text-xs font-medium uppercase tracking-[0.16em] text-maroon">{spice.compound}</span>
         </p>
-        <p className="mt-3 min-h-[4.9rem] font-serif leading-relaxed text-ink/80">{spice.fact}</p>
+        <p className="mt-3 min-h-[4.9rem] leading-relaxed text-ink/80">{spice.fact}</p>
       </div>
     </div>
   );

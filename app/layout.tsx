@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Anek_Tamil, Schibsted_Grotesk, Source_Serif_4 } from "next/font/google";
+import { Anek_Tamil, Caveat, Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const grotesk = Schibsted_Grotesk({ variable: "--font-grotesk", subsets: ["latin"] });
-const serif = Source_Serif_4({ variable: "--font-source-serif", subsets: ["latin"], style: ["normal", "italic"] });
+const cormorant = Cormorant_Garamond({ variable: "--font-cormorant", weight: ["500", "600", "700"], subsets: ["latin"] });
+const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"] });
+const caveat = Caveat({ variable: "--font-caveat", subsets: ["latin"] });
 const anekTamil = Anek_Tamil({ variable: "--font-anek-tamil", subsets: ["tamil"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: `${site.name} | Vegetarian South Indian cooking and flavour science`,
+  title: `${site.name} | South Indian vegetarian recipes, stories and flavour science`,
   description: site.description,
   alternates: { canonical: "/" },
   openGraph: {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${grotesk.variable} ${serif.variable} ${anekTamil.variable} antialiased`}>
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${caveat.variable} ${anekTamil.variable} antialiased`}>
       <body>{children}</body>
     </html>
   );
