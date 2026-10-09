@@ -18,12 +18,6 @@ const FEATURES = [
   { Icon: BowlIcon, lines: ["Classes", "online & in-person"] },
 ];
 
-const SERIES = [
-  { n: 2, title: "The Anjarapetti", body: "The spice box and what it reveals about a South Indian kitchen." },
-  { n: 3, title: "When Ingredients Meet Heat", body: "The science behind tempering." },
-  { n: 4, title: "Fermentation, Soaking and Time", body: "Why they matter in South Indian cooking." },
-];
-
 const EXPLORE = [
   {
     art: <Dabba sizes="(min-width: 1024px) 13vw, 38vw" className="absolute left-1/2 top-1/2 w-[86%] -translate-x-1/2 -translate-y-1/2" />,
@@ -188,7 +182,7 @@ export default function Home() {
         {/* Arusuvai */}
         <section id="arusuvai" className="px-0 sm:px-4">
           <div className="mx-auto max-w-[88rem] bg-parchment">
-            <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_1.2fr_0.85fr] lg:gap-10">
+            <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.95fr_1.25fr] lg:gap-14">
               <div className="relative">
                 <SprigOutline className="pointer-events-none absolute -top-6 right-0 hidden w-36 text-ink/25 md:block" />
                 <Eyebrow>The newsletter</Eyebrow>
@@ -210,11 +204,16 @@ export default function Home() {
                 </div>
               </div>
 
-              <article className="relative flex min-h-[20rem] items-center">
-                <Artwork src={photos.issue1} alt="A South Indian meal served on a banana leaf" sizes="(min-width: 1024px) 22vw, 60vw" className="absolute inset-y-0 left-0 w-[58%] rounded-sm">
+              <article className="grid items-center gap-6 sm:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] sm:gap-8">
+                <Artwork
+                  src={photos.issue1}
+                  alt="Arusuvai poster, the six tastes in Tamil food tradition: sweet (jaggery, payasam), sour (tamarind, raw mango), salty (salt, pickle), bitter (fenugreek, neem flowers, bitter gourd), pungent (chilli, black pepper) and astringent (raw banana, lentils)."
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 90vw"
+                  className="relative mx-auto aspect-[4/5] w-full max-w-md rounded-sm shadow-xl shadow-ink/15"
+                >
                   <Thali />
                 </Artwork>
-                <div className="relative ml-[30%] bg-cream/95 p-6 shadow-xl shadow-ink/10 sm:p-7">
+                <div className="bg-cream/95 p-6 shadow-xl shadow-ink/10 sm:p-7">
                   <Eyebrow>Issue 1</Eyebrow>
                   <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">The Six Tastes of a South Indian Meal</h3>
                   <p className="mt-3 leading-relaxed text-ink/80">How tradition, taste and sensory science come together.</p>
@@ -223,24 +222,6 @@ export default function Home() {
                   </p>
                 </div>
               </article>
-
-              <div className="lg:border-l lg:border-line lg:pl-10">
-                <Eyebrow>Next in the series</Eyebrow>
-                <ol className="mt-5">
-                  {SERIES.map((s, i) => (
-                    <li key={s.n} className="relative flex gap-5 pb-6 last:pb-0">
-                      {i < SERIES.length - 1 && <span aria-hidden="true" className="absolute left-5 top-12 h-[calc(100%-3.5rem)] w-px bg-ink/25" />}
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cream/80 font-serif text-lg font-semibold">
-                        {s.n}
-                      </span>
-                      <div>
-                        <p className="font-serif text-xl font-semibold leading-tight">{s.title}</p>
-                        <p className="mt-1 text-sm leading-relaxed text-ink/75">{s.body}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
             </div>
           </div>
         </section>

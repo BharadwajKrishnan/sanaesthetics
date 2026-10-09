@@ -3,7 +3,7 @@
 // here, e.g. issue1: "/images/thali.jpg".
 export const photos: Record<"hero" | "issue1" | "anjarapetti" | "heat" | "recipes", string | undefined> = {
   hero: undefined,
-  issue1: undefined,
+  issue1: "/images/arusuvai-issue-1.webp",
   anjarapetti: undefined,
   heat: undefined,
   recipes: undefined,
