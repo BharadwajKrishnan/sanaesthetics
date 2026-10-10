@@ -38,7 +38,7 @@ export default async function Issue({ params }: PageProps<"/newsletter/[slug]">)
       readingTime={post.readingTime}
       cover={post.cover}
       coverAlt={post.coverAlt}
-      fallback={<Thali />}
+      fallback={post.Cover ? <post.Cover /> : <Thali />}
       footer={
         <>
           <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">

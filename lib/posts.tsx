@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { HeroGarnish } from "@/components/Artwork";
+import { Dabba } from "@/components/BrassDabba";
 import { photos } from "@/lib/photos";
 import { recipePath } from "@/lib/recipes";
 
-// Newsletter issues. Add one here and it gets its own page at /newsletter/<slug>.
+// Newsletter issues, newest first. Add one at the top and it gets its own page at /newsletter/<slug>.
 
 export type Post = {
   slug: string;
@@ -11,6 +13,8 @@ export type Post = {
   excerpt: string;
   cover?: string;
   coverAlt: string;
+  // Drawn in place of the cover photo until there is one. Defaults to the thali.
+  Cover?: () => React.ReactNode;
   readingTime: string;
   Body: () => React.ReactNode;
 };
@@ -126,7 +130,103 @@ function ArusuvaiBody() {
   );
 }
 
+const BIG_FIVE = [
+  { name: "Mustard seeds", note: "One of the first ingredients that comes to mind when I think of tempering. Their popping sound is almost a signal that the cooking has begun." },
+  { name: "Cumin seeds", note: "Warm, earthy and aromatic. I use them in several everyday preparations where I want a softer spice note." },
+  { name: "Urad dal", note: "Apart from flavour, urad dal gives a lovely toasted nuttiness and a slight crunch when used in tempering." },
+  { name: "Chana dal", note: "Another ingredient I love for its nutty flavour and texture, especially when it turns golden in hot oil." },
+  { name: "Fenugreek seeds", note: "Used in much smaller quantities, but incredibly distinctive. A little can add depth and pleasant bitterness; too much can easily dominate." },
+];
+
+const SECOND_BOX = ["Turmeric powder", "Chilli powder", "Coriander powder", "Byadagi chilli powder", "Black and white sesame seeds", "Cardamom"];
+
+// Issue 2: the photographed spice box among leaves, chillies and seeds.
+function AnjarapettiCover() {
+  return (
+    <>
+      <HeroGarnish />
+      <Dabba sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 60vw" className="absolute left-1/2 top-1/2 w-[72%] -translate-x-1/2 -translate-y-1/2" />
+    </>
+  );
+}
+
+function AnjarapettiBody() {
+  return (
+    <>
+      <p>I would rather call this “Inside My Anjarapetti” 😉 because every kitchen has its own story.</p>
+      <p>
+        The word Anjarapetti literally refers to a spice box with five compartments, although over the years many of us have come
+        to use boxes with six or seven compartments depending on what we cook most often.
+      </p>
+      <p>For me, it is simply a convenient home for the spices, seeds and lentils I reach for almost every day.</p>
+      {/* Author's note: link "tempering" to the Flavour Science article on tempering once it exists. */}
+      <p>
+        These ingredients often come together in thaalipu / tadka / tempering — one of the most familiar techniques in South Indian
+        cooking. Not every dish is tempered in the same way, and not every ingredient is used each time, but each one can contribute
+        something different: aroma, nuttiness, bitterness, texture or warmth.
+      </p>
+
+      <h3>The Big Five</h3>
+      <dl className="mt-6 divide-y divide-line border-y border-line">
+        {BIG_FIVE.map((row) => (
+          <div key={row.name} className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-5">
+            <dt className="font-serif text-xl font-semibold text-maroon">{row.name}</dt>
+            <dd className="leading-relaxed text-ink/80">{row.note}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>And, of course, tempering does not stop with what is inside the box.</p>
+      <p>
+        Curry leaves, dried red chillies and hing (asafoetida) are three ingredients I often reach for as well. They bring their own
+        powerful aromas and can completely change the character of a dish.
+      </p>
+
+      <h3>And then there is the second box...</h3>
+      <p>What can I say — one box is never quite enough.</p>
+      <p>I also keep another box with ingredients I use often for different kinds of dishes:</p>
+      <ul className="mt-6 grid gap-2 sm:grid-cols-2">
+        {SECOND_BOX.map((item) => (
+          <li key={item} className="flex items-baseline gap-3 font-serif text-xl">
+            <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-brass" />
+            {item}
+          </li>
+        ))}
+      </ul>
+      <p>
+        Sesame seeds may not technically be a masala, but they appear often enough in my cooking to deserve their own permanent
+        place. I especially love the way their flavour changes when toasted, becoming deeper and nuttier.
+      </p>
+      <p>
+        Cardamom is something I reach for less frequently, but for certain sweets, festive dishes and aromatic preparations, it is
+        indispensable.
+      </p>
+
+      <h3>More than just a spice box</h3>
+      <p>What I like most about an Anjarapetti is that it quietly reflects the way a household cooks.</p>
+      <p>Someone else’s box may look completely different from mine — and that is exactly the point.</p>
+      <p>
+        The ingredients we keep closest to hand say something about the dishes we make often, the flavours we grew up with, and the
+        habits we carry into our own kitchens.
+      </p>
+      <p className="font-serif text-2xl font-medium">So this is not the Anjarapetti. It is my Anjarapetti.</p>
+      <p>And perhaps that little box tells more of my cooking story than I realised.</p>
+    </>
+  );
+}
+
 export const posts: Post[] = [
+  {
+    slug: "inside-the-anjarapetti",
+    title: "Inside the Anjarapetti",
+    eyebrow: "Issue 2",
+    excerpt:
+      "A spice box with five compartments, and the seeds, dals and powders that live in mine. What goes into a tempering, why one box is never enough, and what the box you keep closest to hand says about the way you cook.",
+    cover: photos.anjarapetti,
+    coverAlt: "A brass anjarapetti, the South Indian spice box, seen from above",
+    Cover: AnjarapettiCover,
+    readingTime: "3 min read",
+    Body: AnjarapettiBody,
+  },
   {
     slug: "arusuvai-where-tradition-meets-taste",
     title: "Arusuvai — Where Tradition Meets Taste",

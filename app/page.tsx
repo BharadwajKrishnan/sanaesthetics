@@ -9,7 +9,7 @@ import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChro
 import { SixTastes } from "@/components/SixTastes";
 import { posts } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
-import { issueLink, posts as issues } from "@/lib/posts";
+import { getPost, issueLink } from "@/lib/posts";
 import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
@@ -34,7 +34,8 @@ const AUDIENCE = [
   "You have a family recipe that deserves to be written down properly.",
 ];
 
-const issue1 = issueLink(issues[0].slug);
+const arusuvai = getPost("arusuvai-where-tradition-meets-taste")!;
+const issue1 = issueLink(arusuvai.slug);
 
 const H2 = "font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-[3.5rem]";
 const PRIMARY = "group inline-flex items-center gap-2.5 rounded-md px-6 py-3 font-medium transition-colors";
@@ -137,7 +138,7 @@ export default function Home() {
                 </Artwork>
                 <div className="bg-cream/95 p-6 shadow-xl shadow-ink/10 sm:p-7">
                   <Eyebrow>Issue 1</Eyebrow>
-                  <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">{issues[0].title}</h3>
+                  <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">{arusuvai.title}</h3>
                   <p className="mt-3 leading-relaxed text-ink/80">How tradition, taste and sensory science come together.</p>
                   <p className="mt-5">
                     <TextLink {...issue1}>Read the issue</TextLink>

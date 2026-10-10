@@ -37,7 +37,7 @@ export default function Newsletter() {
               <li key={post.slug} className="reveal grid items-center gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)]">
                 <a {...issueLink(post.slug)} aria-label={post.title} className="block">
                   <Artwork src={post.cover} alt={post.coverAlt} sizes="(min-width: 1024px) 24vw, (min-width: 640px) 33vw, 90vw" className="relative aspect-[4/5] max-w-sm rounded-sm shadow-xl shadow-ink/15">
-                    <Thali />
+                    {post.Cover ? <post.Cover /> : <Thali />}
                   </Artwork>
                 </a>
                 <div>

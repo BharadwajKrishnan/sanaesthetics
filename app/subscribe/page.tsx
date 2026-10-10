@@ -44,7 +44,7 @@ export default async function Subscribe({ searchParams }: PageProps<"/subscribe"
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
                 {list === "newsletter" ? (
                   <a {...issueLink(posts[0].slug)} className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
-                    Read issue 1 <Arrow />
+                    Read the latest issue <Arrow />
                   </a>
                 ) : (
                   <Link href="/#classes" className="group inline-flex items-center gap-2.5 rounded-md bg-forest px-6 py-3 font-medium text-cream transition-colors hover:bg-forest-deep">
