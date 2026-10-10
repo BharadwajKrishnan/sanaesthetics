@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Arrow } from "@/components/Icons";
+import { KolamBorder, KolamDivider, KolamKnot } from "@/components/Kolam";
 import { MobileMenu } from "@/components/MobileMenu";
 import { site } from "@/lib/site";
 
@@ -59,12 +60,15 @@ export function SiteHeader({ current }: { current: string }) {
       </a>
       <header className="sticky top-0 z-40 border-b border-line/70 bg-cream/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
-          <Link href="/" className="font-serif text-[1.6rem] font-semibold leading-[0.92] text-forest-deep sm:text-[1.8rem]">
-            {site.wordmark[0]}
-            <br />
-            {site.wordmark[1]}
+          <Link href="/" className="flex items-center gap-3 font-serif text-[1.6rem] font-semibold leading-[0.92] text-forest-deep sm:text-[1.8rem]">
+            <KolamKnot className="h-10 w-10 shrink-0 text-brass" />
+            <span className="whitespace-nowrap">
+              {site.wordmark[0]}
+              <br />
+              {site.wordmark[1]}
+            </span>
           </Link>
-          <nav aria-label="Sections" className="hidden items-center gap-7 text-[0.95rem] lg:flex">
+          <nav aria-label="Sections" className="hidden items-center gap-6 whitespace-nowrap text-[0.95rem] lg:flex">
             {site.nav.map((item) => (
               <Link
                 key={item.href}
@@ -91,12 +95,18 @@ export function SiteHeader({ current }: { current: string }) {
 export function SiteFooter() {
   return (
     <footer className="on-dark bg-umber text-cream">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 md:grid-cols-[1.5fr_1fr_1fr]">
+      <div className="mx-auto max-w-7xl px-5 pt-10 sm:px-8">
+        <KolamDivider className="text-cream/60" />
+      </div>
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
-          <p className="font-serif text-3xl font-semibold leading-[0.95]">
-            {site.wordmark[0]}
-            <br />
-            {site.wordmark[1]}
+          <p className="flex items-center gap-3 font-serif text-3xl font-semibold leading-[0.95]">
+            <KolamKnot className="h-11 w-11 shrink-0 text-brass" />
+            <span>
+              {site.wordmark[0]}
+              <br />
+              {site.wordmark[1]}
+            </span>
           </p>
           <p className="mt-4 max-w-sm leading-relaxed text-cream/70">{site.description}</p>
         </div>
@@ -128,6 +138,7 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
+      <KolamBorder className="text-cream/45" />
       <div className="border-t border-cream/15">
         <p className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-5 py-6 text-xs text-cream/60 sm:px-8">
           <span>

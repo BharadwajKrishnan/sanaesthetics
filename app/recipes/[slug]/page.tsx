@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Artwork, TemperingPan } from "@/components/Artwork";
+import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
-import { getRecipe, recipePromise, recipes } from "@/lib/recipes";
+import { getRecipe, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -54,7 +55,6 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                     </span>
                   )}
                 </h1>
-                <p className="mt-6 max-w-xl font-serif text-xl font-medium leading-snug text-maroon">“{recipePromise}”</p>
 
                 <div className="mt-10 lg:hidden">
                   <Photo src={recipe.photo} title={recipe.title} />
@@ -75,7 +75,8 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
 
           {/* Ingredients and method */}
           <section className="mx-auto max-w-7xl px-5 pb-20 pt-16 sm:px-8 lg:pb-28 lg:pt-20">
-            <div className="grid gap-12 border-t border-line pt-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+            <KolamDivider className="text-brass" />
+            <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
               <aside className="lg:sticky lg:top-28 lg:self-start">
                 <div className="bg-parchment p-6 sm:p-8">
                   <h2 className="font-serif text-3xl font-semibold">Ingredients</h2>

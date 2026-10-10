@@ -3,6 +3,7 @@ import { Artwork, HeroGarnish, SprigOutline, Thali } from "@/components/Artwork"
 import { Dabba } from "@/components/BrassDabba";
 import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components/Icons";
 import { InstagramEmbed } from "@/components/InstagramEmbed";
+import { KolamCorner, KolamDivider } from "@/components/Kolam";
 import { SignupForm } from "@/components/SignupForm";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { SixTastes } from "@/components/SixTastes";
@@ -68,6 +69,8 @@ export default function Home() {
               <span className="mt-3 block h-px w-24 bg-cream/60" />
             </p>
           </div>
+          <KolamCorner className="pointer-events-none absolute left-3 top-3 hidden w-28 text-brass/70 md:block lg:w-36" />
+          <KolamCorner className="pointer-events-none absolute bottom-3 left-3 hidden w-28 -scale-y-100 text-brass/70 md:block lg:w-36" />
           <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-12 sm:px-8 lg:pb-20 lg:pt-20">
             <div className="lg:max-w-[50%]">
               <h1 className="font-serif text-[clamp(2.75rem,5vw,4.6rem)] font-medium leading-[1.02]">
@@ -77,7 +80,7 @@ export default function Home() {
               <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/85">
                 South Indian vegetarian recipes, stories and flavour science, from a home kitchen to a wider table.
               </p>
-              <a href="#newsletter" className={`${PRIMARY} mt-8 bg-forest text-cream hover:bg-forest-deep`}>
+              <a href="/recipes" target="_blank" rel="noopener" className={`${PRIMARY} mt-8 bg-forest text-cream hover:bg-forest-deep`}>
                 Explore the Kitchen <Arrow />
               </a>
               <ul className="mt-12 grid grid-cols-2 gap-y-6 sm:grid-cols-4 sm:divide-x sm:divide-line lg:w-[min(47rem,62vw)]">
@@ -101,8 +104,10 @@ export default function Home() {
 
         {/* Newsletter */}
         <section id="newsletter" className="px-0 sm:px-4">
-          <div className="mx-auto max-w-[88rem] bg-parchment">
-            <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.95fr_1.25fr] lg:gap-14">
+          <div className="relative mx-auto max-w-[88rem] overflow-hidden bg-parchment">
+            <KolamCorner className="pointer-events-none absolute right-2 top-2 w-32 -scale-x-100 text-brass/35 lg:w-44" />
+            <KolamCorner className="pointer-events-none absolute bottom-2 left-2 w-32 -scale-y-100 text-brass/35 lg:w-44" />
+            <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.95fr_1.25fr] lg:gap-14">
               <div className="relative">
                 <SprigOutline className="pointer-events-none absolute -top-6 right-0 hidden w-36 text-ink/25 md:block" />
                 <Eyebrow>The newsletter</Eyebrow>
@@ -150,9 +155,7 @@ export default function Home() {
               <Eyebrow className="text-brass">Newsletter · Issue 1 preview</Eyebrow>
               <h2 className={`${H2} mt-4`}>The six tastes of a South Indian meal.</h2>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream/80">
-                Tamil kitchens counted six tastes long before anyone drew a molecule. A balanced meal is meant to carry all six, and
-                the mango pachadi made for Tamil New Year puts every one of them in a single bowl. Pick a taste to see what is
-                behind it.
+                Tamil kitchens counted six tastes long before anyone drew a molecule. Pick a taste to see what is behind it.
               </p>
             </div>
             <SixTastes />
@@ -170,6 +173,7 @@ export default function Home() {
         {/* Recipes */}
         <section id="recipes">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+            <KolamDivider className="mb-16 text-brass" />
             <div className="reveal flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-3xl">
                 <Eyebrow className="text-maroon">Recipes with a story</Eyebrow>
@@ -217,7 +221,8 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-            <div className="mt-14 grid items-center gap-8 border-t border-line pt-12 lg:grid-cols-2">
+            <KolamDivider className="mt-14 text-brass" />
+            <div className="mt-12 grid items-center gap-8 lg:grid-cols-2">
               <div>
                 <h3 className="font-serif text-3xl font-semibold">Join the waitlist</h3>
                 <p className="mt-3 max-w-lg leading-relaxed text-ink/80">
@@ -261,8 +266,12 @@ export default function Home() {
         </section>
 
         {/* Subscribe */}
-        <section id="subscribe" className="on-dark bg-forest-deep text-cream">
-          <div className="reveal mx-auto max-w-2xl px-5 py-24 text-center sm:px-8">
+        <section id="subscribe" className="on-dark relative overflow-hidden bg-forest-deep text-cream">
+          <KolamCorner className="pointer-events-none absolute left-3 top-3 w-32 text-cream/25 lg:w-44" />
+          <KolamCorner className="pointer-events-none absolute right-3 top-3 w-32 -scale-x-100 text-cream/25 lg:w-44" />
+          <KolamCorner className="pointer-events-none absolute bottom-3 left-3 w-32 -scale-y-100 text-cream/25 lg:w-44" />
+          <KolamCorner className="pointer-events-none absolute bottom-3 right-3 w-32 -scale-x-100 -scale-y-100 text-cream/25 lg:w-44" />
+          <div className="reveal relative mx-auto max-w-2xl px-5 py-24 text-center sm:px-8">
             <Eyebrow className="text-brass">The newsletter</Eyebrow>
             <h2 className={`${H2} mt-4`}>Straight to your inbox.</h2>
             <p className="mt-4 font-serif text-2xl font-medium">Stories, ingredients and the science behind South Indian flavour.</p>

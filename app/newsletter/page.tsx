@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Artwork, Thali } from "@/components/Artwork";
+import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
 import { site } from "@/lib/site";
@@ -30,7 +31,8 @@ export default function Newsletter() {
             </p>
           </div>
 
-          <ul className="mt-14 grid gap-12 border-t border-line pt-12">
+          <KolamDivider className="mt-14 text-brass" />
+          <ul className="mt-12 grid gap-12">
             {posts.map((post) => (
               <li key={post.slug} className="reveal grid items-center gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)]">
                 <a {...issueLink(post.slug)} aria-label={post.title} className="block">

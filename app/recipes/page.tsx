@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Artwork, TemperingPan } from "@/components/Artwork";
+import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { recipePath, recipePromise, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
@@ -25,7 +26,8 @@ export default function Recipes() {
             <p className="mt-4 text-sm text-ink/60">{site.author}</p>
           </div>
 
-          <ul className="mt-14 grid gap-10 border-t border-line pt-12 sm:grid-cols-2 lg:grid-cols-3">
+          <KolamDivider className="mt-14 text-brass" />
+          <ul className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {recipes.map((recipe) => (
               <li key={recipe.slug} className="reveal">
                 <Link href={recipePath(recipe.slug)} aria-label={recipe.title} className="block">

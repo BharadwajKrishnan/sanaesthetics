@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Arrow } from "@/components/Icons";
+import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { TadkaPan } from "@/components/TadkaPan";
 import { site } from "@/lib/site";
@@ -27,7 +28,8 @@ export default function FlavourScience() {
             </p>
           </div>
           <TadkaPan />
-          <div className="reveal mt-16 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-line pt-10">
+          <KolamDivider className="mt-16 text-brass" />
+          <div className="reveal mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
             <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
               Subscribe to the newsletter <Arrow />
             </Link>

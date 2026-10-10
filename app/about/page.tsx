@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Artwork, SprigOutline } from "@/components/Artwork";
 import { Arrow } from "@/components/Icons";
+import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { photos } from "@/lib/photos";
 import { site } from "@/lib/site";
@@ -84,7 +85,8 @@ export default function About() {
                 ))}
               </div>
 
-              <div className="reveal mt-12 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-line pt-10">
+              <KolamDivider className="mt-12 text-brass" />
+              <div className="reveal mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
                   Subscribe to the newsletter <Arrow />
                 </Link>

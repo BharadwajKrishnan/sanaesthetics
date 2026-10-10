@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Artwork, Thali } from "@/components/Artwork";
 import { Arrow } from "@/components/Icons";
+import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { getPost, posts } from "@/lib/posts";
 import { site } from "@/lib/site";
@@ -58,7 +59,8 @@ export default async function Issue({ params }: PageProps<"/newsletter/[slug]">)
                 <post.Body />
               </div>
 
-              <div className="reveal mt-14 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-line pt-10">
+              <KolamDivider className="mt-14 text-brass" />
+              <div className="reveal mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
                 <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
                   Subscribe to the newsletter <Arrow />
                 </Link>
