@@ -15,7 +15,7 @@ Then open http://localhost:3000.
 
 - `app/page.tsx`: the page and its copy.
 - `lib/site.ts`: brand name, domain (southindianfoodlab.com), author, navigation and Instagram handle.
-- `lib/posts.tsx`: the newsletter issues; `lib/recipes.ts`: the written recipes. Each entry becomes a page under `/newsletter` or `/recipes`. Links to issues go through `issueLink()` so they always open in a new tab.
+- `lib/posts.tsx`: the newsletter issues; `lib/articles.tsx`: the flavour science articles; `lib/recipes.ts`: the written recipes. Each entry becomes a page under `/newsletter`, `/flavour-science` or `/recipes`. Links to issues and articles go through `issueLink()` / `articleLink()` so they always open in a new tab.
 - `app/globals.css`: the colour palette (cream, parchment, forest green, maroon, brass) and the brass anjarapetti styling.
 - `lib/photos.ts`: photos for the picture slots (hero, issue 1, and the three explore cards). Until a slot has a photo, an illustration from `components/Artwork.tsx` is drawn instead. Put photos in `public/images/` and set their paths here.
 - `lib/instagram.ts`: the reels and posts shown under "Recipes with a story". Add a line to feature another one.
