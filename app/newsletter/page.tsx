@@ -23,7 +23,7 @@ export default function Newsletter() {
             <Eyebrow className="text-maroon">The newsletter</Eyebrow>
             <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">Stories, ingredients and the science behind South Indian flavour.</h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
-              Every issue is here to read in full, newest first. To get the next one by email,{" "}
+              Every issue is here to read in full, from the first. To get the next one by email,{" "}
               <Link href="/#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
                 subscribe
               </Link>

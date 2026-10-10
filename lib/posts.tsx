@@ -4,7 +4,7 @@ import { Dabba } from "@/components/BrassDabba";
 import { photos } from "@/lib/photos";
 import { recipePath } from "@/lib/recipes";
 
-// Newsletter issues, newest first. Add one at the top and it gets its own page at /newsletter/<slug>.
+// Newsletter issues, oldest first. Add one at the end and it gets its own page at /newsletter/<slug>.
 
 export type Post = {
   slug: string;
@@ -216,6 +216,17 @@ function AnjarapettiBody() {
 
 export const posts: Post[] = [
   {
+    slug: "arusuvai-where-tradition-meets-taste",
+    title: "Arusuvai — Where Tradition Meets Taste",
+    eyebrow: "Issue 1",
+    excerpt:
+      "Tamil kitchens counted six tastes long before anyone drew a molecule. Where the old idea and modern sensory science agree, where they part ways, and why balance matters more than a checklist.",
+    cover: photos.issue1,
+    coverAlt: "Arusuvai poster, the six tastes in Tamil food tradition",
+    readingTime: "5 min read",
+    Body: ArusuvaiBody,
+  },
+  {
     slug: "inside-the-anjarapetti",
     title: "Inside the Anjarapetti",
     eyebrow: "Issue 2",
@@ -227,18 +238,9 @@ export const posts: Post[] = [
     readingTime: "3 min read",
     Body: AnjarapettiBody,
   },
-  {
-    slug: "arusuvai-where-tradition-meets-taste",
-    title: "Arusuvai — Where Tradition Meets Taste",
-    eyebrow: "Issue 1",
-    excerpt:
-      "Tamil kitchens counted six tastes long before anyone drew a molecule. Where the old idea and modern sensory science agree, where they part ways, and why balance matters more than a checklist.",
-    cover: photos.issue1,
-    coverAlt: "Arusuvai poster, the six tastes in Tamil food tradition",
-    readingTime: "5 min read",
-    Body: ArusuvaiBody,
-  },
 ];
+
+export const latestPost = posts[posts.length - 1];
 
 export function getPost(slug: string) {
   return posts.find((post) => post.slug === slug);

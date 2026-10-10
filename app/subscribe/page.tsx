@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Arrow } from "@/components/Icons";
 import { SignupForm } from "@/components/SignupForm";
 import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
-import { issueLink, posts } from "@/lib/posts";
+import { issueLink, latestPost } from "@/lib/posts";
 import { LISTS, type List } from "@/lib/signups";
 import { site } from "@/lib/site";
 
@@ -43,7 +43,7 @@ export default async function Subscribe({ searchParams }: PageProps<"/subscribe"
               <p className="mt-6 text-lg leading-relaxed text-ink/85">{result.body}</p>
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
                 {list === "newsletter" ? (
-                  <a {...issueLink(posts[0].slug)} className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
+                  <a {...issueLink(latestPost.slug)} className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
                     Read the latest issue <Arrow />
                   </a>
                 ) : (
