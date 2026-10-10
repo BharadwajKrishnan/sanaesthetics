@@ -40,6 +40,7 @@ export const recipes: Recipe[] = [
       {
         group: "For the kuzhambu",
         items: [
+          "Vathal, or any vegetables of your choice",
           "4 tbsp sesame oil",
           "1 tsp mustard seeds",
           "1 tsp fenugreek seeds",
@@ -56,10 +57,11 @@ export const recipes: Recipe[] = [
       "Heat the sesame oil in a kadai or heavy-bottomed pan over medium heat.",
       "Add the mustard seeds and allow them to splutter. Add the fenugreek seeds and let them turn slightly golden and aromatic. Be careful not to darken them too much, as fenugreek can become bitter very quickly.",
       "Add the curry leaves and asafoetida. Let them sizzle briefly.",
-      "Lower the heat slightly and add the sambar powder. Stir for only a few seconds so that the spices bloom in the oil without burning.",
+      "Lower the heat slightly and add the vathal, or vegetables of your choice, followed by the sambar powder. Stir for only a few seconds so that the spices bloom in the oil without burning.",
       "Pour in the tamarind extract carefully and add salt.",
       "Bring the mixture to a boil, then reduce to medium-low heat and let it simmer uncovered for about 20 to 30 minutes.",
       "If it becomes too thick, add a little hot water. If it is still watery, continue simmering until it reaches a thick, pourable consistency.",
+      "Some households add rice flour to thicken the kuzhambu, but it is purely optional.",
       "Let it rest for 15 to 30 minutes before serving if possible. The flavour usually becomes more rounded as it sits.",
     ],
     ready: {
