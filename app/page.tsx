@@ -9,7 +9,7 @@ import { SixTastes } from "@/components/SixTastes";
 import { TadkaPan } from "@/components/TadkaPan";
 import { posts, reels } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
-import { posts as issues, postPath } from "@/lib/posts";
+import { issueLink, posts as issues } from "@/lib/posts";
 import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
@@ -58,7 +58,7 @@ const AUDIENCE = [
   "You have a family recipe that deserves to be written down properly.",
 ];
 
-const issue1 = postPath(issues[0].slug);
+const issue1 = issueLink(issues[0].slug);
 
 const H2 = "font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-[3.5rem]";
 const PRIMARY = "group inline-flex items-center gap-2.5 rounded-md px-6 py-3 font-medium transition-colors";
@@ -137,9 +137,9 @@ export default function Home() {
                   everyday ingredients in our kitchens. The first issue begins with Arusuvai, the six tastes of a Tamil meal.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
-                  <Link href={issue1} className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
+                  <a {...issue1} className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
                     Read issue 1 <Arrow />
-                  </Link>
+                  </a>
                   <a href="#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
                     Subscribe to the newsletter
                   </a>
@@ -160,7 +160,7 @@ export default function Home() {
                   <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">{issues[0].title}</h3>
                   <p className="mt-3 leading-relaxed text-ink/80">How tradition, taste and sensory science come together.</p>
                   <p className="mt-5">
-                    <TextLink href={issue1}>Read the issue</TextLink>
+                    <TextLink {...issue1}>Read the issue</TextLink>
                   </p>
                 </div>
               </article>
@@ -218,7 +218,7 @@ export default function Home() {
             </div>
             <SixTastes />
             <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <TextLink href={issue1} className="text-cream decoration-cream/40 hover:decoration-cream">
+              <TextLink {...issue1} className="text-cream decoration-cream/40 hover:decoration-cream">
                 Read issue 1 in full
               </TextLink>
               <Link href="#subscribe" className="font-medium underline decoration-cream/40 underline-offset-[6px] hover:decoration-cream">

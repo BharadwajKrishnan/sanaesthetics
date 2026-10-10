@@ -3,31 +3,32 @@
 import { useId, useState } from "react";
 import type { List } from "@/lib/signups";
 
-type State = "idle" | "sending" | "added" | "exists" | "invalid" | "failed";
+type State = "idle" | "sending" | "pending" | "exists" | "invalid" | "failed";
 
-const COPY: Record<List, { cta: string; sending: string; added: string; exists: string }> = {
+const COPY: Record<List, { cta: string; sending: string; pending: (email: string) => string; exists: string }> = {
   waitlist: {
     cta: "Join the waitlist",
     sending: "Joining…",
-    added: "You're on the list. We'll write when the first recipes and classes open.",
+    pending: (email) => `Almost there. We've sent a link to ${email}. Open it to confirm your place on the waitlist.`,
     exists: "This email is already on the waitlist.",
   },
   newsletter: {
     cta: "Subscribe",
     sending: "Subscribing…",
-    added: "You're subscribed. The next issue will arrive by email.",
+    pending: (email) => `Almost there. We've sent a link to ${email}. Open it to confirm your subscription.`,
     exists: "This email is already subscribed.",
   },
 };
 
 const ERRORS: Partial<Record<State, string>> = {
   invalid: "Enter an email address like name@example.com.",
-  failed: "The list couldn't be reached. Check your connection and try again.",
+  failed: "The list couldn't be reached. Please try again in a few minutes.",
 };
 
 export function SignupForm({ list, tone = "light", center = false }: { list: List; tone?: "light" | "dark"; center?: boolean }) {
   const id = useId();
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
   const [state, setState] = useState<State>("idle");
   const copy = COPY[list];
   const dark = tone === "dark";
@@ -43,10 +44,10 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       const res = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ list, email }),
+        body: JSON.stringify({ list, email, website }),
       });
       const data = await res.json();
-      if (res.ok) setState(data.status === "exists" ? "exists" : "added");
+      if (res.ok) setState(data.status === "exists" ? "exists" : "pending");
       else setState(data.error === "invalid" ? "invalid" : "failed");
     } catch {
       setState("failed");
@@ -54,13 +55,18 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
   }
 
   const isError = state === "invalid" || state === "failed";
-  const message = state === "added" ? copy.added : state === "exists" ? copy.exists : ERRORS[state];
+  const message = state === "pending" ? copy.pending(email.trim()) : state === "exists" ? copy.exists : ERRORS[state];
 
   return (
-    <form onSubmit={onSubmit} noValidate className={`w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
+    <form onSubmit={onSubmit} noValidate className={`relative w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
       <label htmlFor={id} className={`block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`}>
         Email address
       </label>
+      {/* Honeypot: hidden from people, filled in by bots */}
+      <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
+        <label htmlFor={`${id}-website`}>Website</label>
+        <input id={`${id}-website`} type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
+      </div>
       <div className="mt-2 flex flex-col gap-2 sm:flex-row">
         <input
           id={id}

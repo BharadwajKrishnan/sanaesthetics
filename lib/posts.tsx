@@ -147,3 +147,8 @@ export function getPost(slug: string) {
 export function postPath(slug: string) {
   return `/newsletter/${slug}`;
 }
+
+// Issues always open in a new tab. Spread this onto every link that opens an issue.
+export function issueLink(slug: string) {
+  return { href: postPath(slug), target: "_blank", rel: "noopener" } as const;
+}

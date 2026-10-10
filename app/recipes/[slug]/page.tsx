@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Artwork, TemperingPan } from "@/components/Artwork";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
-import { postPath, posts } from "@/lib/posts";
+import { issueLink, posts } from "@/lib/posts";
 import { getRecipe, recipePromise, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
@@ -120,7 +120,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                     <Eyebrow className="text-maroon">Read more</Eyebrow>
                     <p className="mt-3 text-lg leading-relaxed text-ink/85">{recipe.readMore}</p>
                     <p className="mt-4">
-                      <TextLink href={postPath(related.slug)}>{related.title}</TextLink>
+                      <TextLink {...issueLink(related.slug)}>{related.title}</TextLink>
                     </p>
                   </div>
                 )}

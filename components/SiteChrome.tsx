@@ -8,11 +8,25 @@ export function Eyebrow({ children, className = "text-ink/70" }: { children: Rea
 }
 
 // An underlined link with an arrow that stays on the same line as the last word.
-export function TextLink({ href, children, className = "text-ink decoration-ink/30 hover:decoration-ink" }: { href: string; children: string; className?: string }) {
+// With a target (e.g. a newsletter issue, which opens in a new tab) it is a plain anchor.
+export function TextLink({
+  href,
+  target,
+  rel,
+  children,
+  className = "text-ink decoration-ink/30 hover:decoration-ink",
+}: {
+  href: string;
+  target?: string;
+  rel?: string;
+  children: string;
+  className?: string;
+}) {
   const words = children.split(" ");
   const last = words.pop();
-  return (
-    <Link href={href} className={`group font-medium underline underline-offset-[6px] ${className}`}>
+  const classes = `group font-medium underline underline-offset-[6px] ${className}`;
+  const inner = (
+    <>
       {words.length > 0 && `${words.join(" ")} `}
       <span className="whitespace-nowrap">
         {last}
@@ -20,6 +34,18 @@ export function TextLink({ href, children, className = "text-ink decoration-ink/
           <Arrow />
         </span>
       </span>
+    </>
+  );
+  if (target) {
+    return (
+      <a href={href} target={target} rel={rel} className={classes}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={classes}>
+      {inner}
     </Link>
   );
 }
