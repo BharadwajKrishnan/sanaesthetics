@@ -96,7 +96,7 @@ export function SiteFooter() {
             </li>
             <li>
               <Link href="/#subscribe" className="hover:underline hover:underline-offset-4">
-                {site.newsletter} newsletter
+                Newsletter
               </Link>
             </li>
           </ul>

@@ -3,10 +3,9 @@ export const site = {
   wordmark: ["South Indian", "Food Lab"],
   domain: "southindianfoodlab.com",
   url: "https://southindianfoodlab.com",
-  newsletter: "Arusuvai",
   tagline: "Traditional flavours. A deeper understanding.",
   description:
-    "South Indian vegetarian recipes, stories and flavour science, from a home kitchen to a wider table. Home of the Arusuvai newsletter.",
+    "South Indian vegetarian recipes, stories and flavour science, from a home kitchen to a wider table. Read the newsletter, cook the recipes.",
   instagramHandle: "san_aesthetixs",
   instagramUrl: "https://www.instagram.com/san_aesthetixs/",
   author: "Sandhya Ravichandran",

@@ -6,10 +6,10 @@ import { postPath, posts } from "@/lib/posts";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `${site.newsletter} newsletter | ${site.name}`,
-  description: `Every issue of ${site.newsletter}, the ${site.name} newsletter: South Indian vegetarian cooking, its traditions and the flavour science behind them.`,
+  title: `Newsletter | ${site.name}`,
+  description: `Every issue of the ${site.name} newsletter: South Indian vegetarian cooking, its traditions and the flavour science behind them.`,
   alternates: { canonical: "/newsletter" },
-  openGraph: { title: `${site.newsletter} newsletter`, description: "Stories, ingredients and the science behind South Indian flavour.", url: "/newsletter", type: "website" },
+  openGraph: { title: `${site.name} newsletter`, description: "Stories, ingredients and the science behind South Indian flavour.", url: "/newsletter", type: "website" },
 };
 
 export default function Newsletter() {
@@ -20,10 +20,9 @@ export default function Newsletter() {
         <section className="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:pb-28 lg:pt-20">
           <div className="max-w-3xl">
             <Eyebrow className="text-maroon">The newsletter</Eyebrow>
-            <h1 className="mt-4 font-serif text-6xl font-bold leading-none text-maroon sm:text-7xl">{site.newsletter}</h1>
-            <p className="mt-4 font-serif text-2xl font-medium leading-snug sm:text-[1.75rem]">Stories, ingredients and the science behind South Indian flavour.</p>
+            <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">Stories, ingredients and the science behind South Indian flavour.</h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
-              Arusuvai means “six tastes” in Tamil. Every issue is here to read in full, newest first. To get the next one by email,{" "}
+              Every issue is here to read in full, newest first. To get the next one by email,{" "}
               <Link href="/#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
                 subscribe
               </Link>

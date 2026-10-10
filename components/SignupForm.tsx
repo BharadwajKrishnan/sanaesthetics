@@ -15,7 +15,7 @@ const COPY: Record<List, { cta: string; sending: string; added: string; exists: 
   newsletter: {
     cta: "Subscribe",
     sending: "Subscribing…",
-    added: "You're subscribed to Arusuvai. Issue 1 will arrive when it's ready.",
+    added: "You're subscribed. The next issue will arrive by email.",
     exists: "This email is already subscribed.",
   },
 };

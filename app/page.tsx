@@ -124,27 +124,24 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Arusuvai */}
-        <section id="arusuvai" className="px-0 sm:px-4">
+        {/* Newsletter */}
+        <section id="newsletter" className="px-0 sm:px-4">
           <div className="mx-auto max-w-[88rem] bg-parchment">
             <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.95fr_1.25fr] lg:gap-14">
               <div className="relative">
                 <SprigOutline className="pointer-events-none absolute -top-6 right-0 hidden w-36 text-ink/25 md:block" />
                 <Eyebrow>The newsletter</Eyebrow>
-                <h2 className="mt-3 font-serif text-6xl font-bold leading-none text-maroon sm:text-7xl">{site.newsletter}</h2>
-                <p className="mt-4 max-w-md font-serif text-2xl font-medium leading-snug sm:text-[1.75rem]">
-                  Stories, ingredients and the science behind South Indian flavour.
-                </p>
-                <p className="mt-4 max-w-lg leading-relaxed text-ink/80">
-                  Arusuvai means “six tastes” in Tamil. Through this newsletter, I explore South Indian vegetarian cooking through
-                  tradition, sensory science and the everyday ingredients in our kitchens.
+                <h2 className={`${H2} mt-4 text-maroon`}>Stories, ingredients and the science behind South Indian flavour.</h2>
+                <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
+                  Through this newsletter, I explore South Indian vegetarian cooking through tradition, sensory science and the
+                  everyday ingredients in our kitchens. The first issue begins with Arusuvai, the six tastes of a Tamil meal.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
                   <Link href={issue1} className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
                     Read issue 1 <Arrow />
                   </Link>
                   <a href="#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
-                    Subscribe to {site.newsletter}
+                    Subscribe to the newsletter
                   </a>
                 </div>
               </div>
@@ -160,7 +157,7 @@ export default function Home() {
                 </Artwork>
                 <div className="bg-cream/95 p-6 shadow-xl shadow-ink/10 sm:p-7">
                   <Eyebrow>Issue 1</Eyebrow>
-                  <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">The Six Tastes of a South Indian Meal</h3>
+                  <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">{issues[0].title}</h3>
                   <p className="mt-3 leading-relaxed text-ink/80">How tradition, taste and sensory science come together.</p>
                   <p className="mt-5">
                     <TextLink href={issue1}>Read the issue</TextLink>
@@ -211,7 +208,7 @@ export default function Home() {
         <section id="culture" className="on-dark bg-forest-deep text-cream">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
             <div className="reveal max-w-3xl">
-              <Eyebrow className="text-brass">{site.newsletter} · Issue 1 preview</Eyebrow>
+              <Eyebrow className="text-brass">Newsletter · Issue 1 preview</Eyebrow>
               <h2 className={`${H2} mt-4`}>The six tastes of a South Indian meal.</h2>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream/80">
                 Tamil kitchens counted six tastes long before anyone drew a molecule. A balanced meal is meant to carry all six, and
@@ -225,7 +222,7 @@ export default function Home() {
                 Read issue 1 in full
               </TextLink>
               <Link href="#subscribe" className="font-medium underline decoration-cream/40 underline-offset-[6px] hover:decoration-cream">
-                Subscribe to {site.newsletter}
+                Subscribe to the newsletter
               </Link>
             </div>
           </div>
@@ -327,8 +324,8 @@ export default function Home() {
         {/* Subscribe */}
         <section id="subscribe" className="on-dark bg-forest-deep text-cream">
           <div className="reveal mx-auto max-w-2xl px-5 py-24 text-center sm:px-8">
-            <Eyebrow className="text-brass">The newsletter · first issue coming soon</Eyebrow>
-            <h2 className="mt-4 font-serif text-6xl font-bold sm:text-7xl">{site.newsletter}</h2>
+            <Eyebrow className="text-brass">The newsletter</Eyebrow>
+            <h2 className={`${H2} mt-4`}>Straight to your inbox.</h2>
             <p className="mt-4 font-serif text-2xl font-medium">Stories, ingredients and the science behind South Indian flavour.</p>
             <p className="mx-auto mt-5 max-w-xl leading-relaxed text-cream/80">
               One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam,

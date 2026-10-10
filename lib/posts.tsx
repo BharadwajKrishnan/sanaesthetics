@@ -130,7 +130,7 @@ export const posts: Post[] = [
   {
     slug: "arusuvai-where-tradition-meets-taste",
     title: "Arusuvai — Where Tradition Meets Taste",
-    eyebrow: "Arusuvai · Issue 1",
+    eyebrow: "Issue 1",
     excerpt:
       "Tamil kitchens counted six tastes long before anyone drew a molecule. Where the old idea and modern sensory science agree, where they part ways, and why balance matters more than a checklist.",
     cover: photos.issue1,

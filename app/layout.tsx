@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Anek_Tamil, Caveat, Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { ScrollToHash } from "@/components/ScrollToHash";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -23,8 +24,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${caveat.variable} ${anekTamil.variable} antialiased`}>
-      <body>{children}</body>
+    <html lang="en" data-scroll-behavior="smooth" className={`${cormorant.variable} ${dmSans.variable} ${caveat.variable} ${anekTamil.variable} antialiased`}>
+      <body>
+        <ScrollToHash />
+        {children}
+      </body>
     </html>
   );
 }

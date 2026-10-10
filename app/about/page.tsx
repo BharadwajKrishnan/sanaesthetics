@@ -86,7 +86,7 @@ export default function About() {
 
               <div className="reveal mt-12 flex flex-wrap items-center gap-x-7 gap-y-4 border-t border-line pt-10">
                 <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
-                  Subscribe to {site.newsletter} <Arrow />
+                  Subscribe to the newsletter <Arrow />
                 </Link>
                 <Link href="/#recipes" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
                   Browse the recipes

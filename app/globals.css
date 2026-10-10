@@ -29,12 +29,34 @@ body {
   font-variant-numeric: lining-nums;
 }
 
+/* Body copy is justified; centred blocks stay centred */
+main p,
+main li,
+main dd {
+  text-align: justify;
+}
+
+main .text-center p {
+  text-align: center;
+}
+
 :focus-visible {
   outline: 2px solid var(--color-maroon);
   outline-offset: 3px;
 }
 
-.on-dark :focus-visible {
+.on-dark /* Body copy is justified; centred blocks stay centred */
+main p,
+main li,
+main dd {
+  text-align: justify;
+}
+
+main .text-center p {
+  text-align: center;
+}
+
+:focus-visible {
   outline-color: var(--color-cream);
 }
 
