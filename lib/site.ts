@@ -14,7 +14,7 @@ export const site = {
     { href: "/", label: "Home" },
     { href: "/newsletter", label: "Newsletter" },
     { href: "/recipes", label: "Recipes" },
-    { href: "/#science", label: "Flavour Science" },
+    { href: "/flavour-science", label: "Flavour Science" },
     { href: "/#culture", label: "Culture" },
     { href: "/#classes", label: "Classes" },
     { href: "/about", label: "About Me" },

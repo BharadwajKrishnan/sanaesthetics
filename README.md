@@ -49,4 +49,11 @@ The webhook receives JSON:
 { "event": "confirmed", "list": "newsletter", "email": "name@example.com", "confirmedAt": "2026-10-10T09:05:00.000Z" }
 ```
 
-`list` is `newsletter` or `waitlist` (the classes form). A minimal workflow: Webhook → IF `event` is `pending` → send an email containing `confirmUrl`; otherwise → append `email`, `list` and `confirmedAt` to the sheet. If the workflow replies with `{ "status": "exists" }` for an address that is already in the sheet, the site tells the reader so instead of adding it twice.
+`list` is `newsletter` or `waitlist` (the classes form). If the workflow replies with `{ "status": "exists" }` for an address that is already in the sheet, the site tells the reader so instead of adding it twice.
+
+A ready-made workflow is in `n8n/signup-workflow.json`. Import it in n8n (Workflow menu → Import from file), then:
+
+1. On the **Webhook** node, create a Header Auth credential with name `X-Signup-Secret` and the value you put in `SIGNUP_WEBHOOK_SECRET`. Copy the node's production URL into `SIGNUP_WEBHOOK_URL`.
+2. On **Send confirmation email**, connect a Microsoft Outlook credential (or swap the node for Gmail or Send Email, keeping the To, Subject and body expressions).
+3. On **Add to Excel sheet**, connect a Microsoft Excel 365 credential and pick the workbook and worksheet. The sheet needs a header row with `email`, `list` and `confirmedAt`. Rows are upserted on `email`, so an address is never added twice.
+4. Activate the workflow.

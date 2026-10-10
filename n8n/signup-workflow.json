@@ -1,0 +1,239 @@
+{
+  "name": "South Indian Food Lab signups",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "signup",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1b3c7a4e-0001-4a2b-9c3d-000000000001",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "notes": "Set SIGNUP_WEBHOOK_URL on the site to this node's Production URL. Create a Header Auth credential with name X-Signup-Secret and the same value as SIGNUP_WEBHOOK_SECRET."
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c0000000-0000-4000-8000-000000000001",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "pending",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1b3c7a4e-0002-4a2b-9c3d-000000000002",
+      "name": "Is pending?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        260,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "toRecipients": "={{ $json.body.email }}",
+        "subject": "={{ $json.body.list === 'waitlist' ? 'Confirm your place on the classes waitlist' : 'Confirm your subscription to South Indian Food Lab' }}",
+        "bodyContent": "=<!doctype html>\n<html>\n  <body style=\"margin:0;padding:0;background:#f7f2eb;font-family:Georgia,serif;color:#2b2521;\">\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f7f2eb;padding:32px 16px;\">\n      <tr><td align=\"center\">\n        <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:560px;background:#ffffff;border:1px solid #ddd0bf;padding:40px;\">\n          <tr><td style=\"font-size:22px;font-weight:bold;color:#1f3627;\">South Indian Food Lab</td></tr>\n          <tr><td style=\"padding-top:24px;font-size:26px;line-height:1.2;\">{{ $json.body.list === 'waitlist' ? 'Confirm your place on the waitlist' : 'Confirm your subscription' }}</td></tr>\n          <tr><td style=\"padding-top:16px;font-size:17px;line-height:1.6;\">\n            {{ $json.body.list === 'waitlist'\n              ? 'Thank you for your interest in the classes. Please confirm your email address so we can let you know first when dates and prices are announced.'\n              : 'Thank you for subscribing to the newsletter: stories, ingredients and the science behind South Indian flavour. Please confirm your email address to start receiving issues.' }}\n          </td></tr>\n          <tr><td style=\"padding-top:28px;\">\n            <a href=\"{{ $json.body.confirmUrl }}\" style=\"display:inline-block;background:#7b2d26;color:#f7f2eb;text-decoration:none;font-size:17px;padding:14px 28px;border-radius:6px;\">Confirm my email</a>\n          </td></tr>\n          <tr><td style=\"padding-top:28px;font-size:14px;line-height:1.6;color:#6b625b;\">\n            The link works for 48 hours. If you did not request this, you can ignore this email and nothing will happen.<br><br>\n            If the button does not work, copy this address into your browser:<br>\n            <span style=\"word-break:break-all;\">{{ $json.body.confirmUrl }}</span>\n          </td></tr>\n        </table>\n        <p style=\"font-family:Arial,sans-serif;font-size:12px;color:#8a7f76;padding-top:16px;\">southindianfoodlab.com</p>\n      </td></tr>\n    </table>\n  </body>\n</html>",
+        "additionalFields": {
+          "bodyContentType": "html"
+        }
+      },
+      "id": "1b3c7a4e-0003-4a2b-9c3d-000000000003",
+      "name": "Send confirmation email",
+      "type": "n8n-nodes-base.microsoftOutlook",
+      "typeVersion": 2,
+      "position": [
+        540,
+        160
+      ],
+      "notes": "Connect a Microsoft Outlook credential. To send with Gmail or SMTP instead, replace this node with a Gmail or Send Email node and keep the To, Subject and HTML body expressions."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"status\": \"pending\" }",
+        "options": {}
+      },
+      "id": "1b3c7a4e-0004-4a2b-9c3d-000000000004",
+      "name": "Respond: pending",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        820,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a0000000-0000-4000-8000-000000000001",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "a0000000-0000-4000-8000-000000000002",
+              "name": "list",
+              "value": "={{ $json.body.list }}",
+              "type": "string"
+            },
+            {
+              "id": "a0000000-0000-4000-8000-000000000003",
+              "name": "confirmedAt",
+              "value": "={{ $json.body.confirmedAt }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1b3c7a4e-0005-4a2b-9c3d-000000000005",
+      "name": "Row for the sheet",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        540,
+        440
+      ],
+      "notes": "The sheet needs a header row with these column names: email, list, confirmedAt."
+    },
+    {
+      "parameters": {
+        "resource": "worksheet",
+        "operation": "upsert",
+        "workbook": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "worksheet": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "columnToMatchOn": "email",
+        "dataMode": "autoMap",
+        "options": {}
+      },
+      "id": "1b3c7a4e-0006-4a2b-9c3d-000000000006",
+      "name": "Add to Excel sheet",
+      "type": "n8n-nodes-base.microsoftExcel",
+      "typeVersion": 2.1,
+      "position": [
+        820,
+        440
+      ],
+      "notes": "Connect a Microsoft Excel 365 credential, then pick the workbook and worksheet. Upsert matches on the email column, so an address is never added twice."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{ \"status\": \"confirmed\" }",
+        "options": {}
+      },
+      "id": "1b3c7a4e-0007-4a2b-9c3d-000000000007",
+      "name": "Respond: confirmed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1100,
+        440
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Is pending?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is pending?": {
+      "main": [
+        [
+          {
+            "node": "Send confirmation email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Row for the sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send confirmation email": {
+      "main": [
+        [
+          {
+            "node": "Respond: pending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Row for the sheet": {
+      "main": [
+        [
+          {
+            "node": "Add to Excel sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add to Excel sheet": {
+      "main": [
+        [
+          {
+            "node": "Respond: confirmed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}

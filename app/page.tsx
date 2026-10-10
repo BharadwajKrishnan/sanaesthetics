@@ -1,13 +1,12 @@
 import Link from "next/link";
-import { Artwork, HeroGarnish, RiceBowl, SprigOutline, TemperingPan, Thali } from "@/components/Artwork";
+import { Artwork, HeroGarnish, SprigOutline, Thali } from "@/components/Artwork";
 import { Dabba } from "@/components/BrassDabba";
 import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components/Icons";
 import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { SignupForm } from "@/components/SignupForm";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { SixTastes } from "@/components/SixTastes";
-import { TadkaPan } from "@/components/TadkaPan";
-import { posts, reels } from "@/lib/instagram";
+import { posts } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
 import { issueLink, posts as issues } from "@/lib/posts";
 import { recipePath, recipes } from "@/lib/recipes";
@@ -20,34 +19,10 @@ const FEATURES = [
   { Icon: BowlIcon, lines: ["Classes", "online & in-person"] },
 ];
 
-const EXPLORE = [
-  {
-    art: <TemperingPan />,
-    photo: photos.heat,
-    alt: "Curry leaves and mustard seeds sizzling in hot oil",
-    eyebrow: "Flavour science",
-    title: "When Ingredients Meet Heat",
-    body: "How heat transforms spices, lentils, herbs and more, and creates the distinctive aromas of South Indian cooking.",
-    link: { href: "#science", label: "Read the science" },
-  },
-  {
-    art: <RiceBowl />,
-    photo: photos.recipes,
-    alt: "A bowl of lemon rice with peanuts and curry leaves",
-    eyebrow: "Recipes",
-    title: "Recipes with a Story",
-    body: "Traditional South Indian vegetarian recipes, with the science and cultural stories behind them.",
-    link: { href: "/recipes", label: "Browse recipes" },
-  },
-];
-
 const LEARN = [
   { title: "Online cooking courses", body: "Structured lessons that build from the anjarapetti upwards." },
   { title: "Live cooking workshops", body: "Cook one dish together, in real time, with questions as you go." },
   { title: "Flavour science sessions", body: "One idea per session, such as tempering or fermentation, shown at the stove." },
-  { title: "Small-group classes", body: "A handful of cooks, so everyone's pan gets looked at." },
-  { title: "Recipe troubleshooting", body: "Bring the dish that never turns out right and find out why." },
-  { title: "Regional specials", body: "Workshops on one region's cooking or one traditional technique." },
 ];
 
 const AUDIENCE = [
@@ -102,7 +77,7 @@ export default function Home() {
               <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/85">
                 South Indian vegetarian recipes, stories and flavour science, from a home kitchen to a wider table.
               </p>
-              <a href="#explore" className={`${PRIMARY} mt-8 bg-forest text-cream hover:bg-forest-deep`}>
+              <a href="#newsletter" className={`${PRIMARY} mt-8 bg-forest text-cream hover:bg-forest-deep`}>
                 Explore the Kitchen <Arrow />
               </a>
               <ul className="mt-12 grid grid-cols-2 gap-y-6 sm:grid-cols-4 sm:divide-x sm:divide-line lg:w-[min(47rem,62vw)]">
@@ -168,42 +143,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Explore */}
-        <section id="explore">
-          <ul className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:gap-12">
-            {EXPLORE.map((card) => (
-              <li key={card.title} className="reveal grid grid-cols-[40%_minmax(0,1fr)] items-center gap-5 sm:grid-cols-[44%_minmax(0,1fr)] sm:gap-6">
-                <Artwork src={card.photo} alt={card.alt} sizes="(min-width: 1024px) 14vw, 44vw" className="relative aspect-[4/5] rounded-sm">
-                  {card.art}
-                </Artwork>
-                <div>
-                  <Eyebrow>{card.eyebrow}</Eyebrow>
-                  <h3 className="mt-2 font-serif text-[1.75rem] font-semibold leading-tight">{card.title}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-ink/80">{card.body}</p>
-                  <p className="mt-4">
-                    <TextLink href={card.link.href}>{card.link.label}</TextLink>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Flavour science: tempering */}
-        <section id="science">
-          <div className="mx-auto max-w-7xl px-5 pb-16 pt-24 sm:px-8">
-            <div className="reveal max-w-3xl">
-              <Eyebrow className="text-maroon">Flavour science</Eyebrow>
-              <h2 className={`${H2} mt-4`}>When ingredients meet heat.</h2>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
-                Your grandmother&apos;s tempering was chemistry. She just never called it that. Scroll through one and watch the pan
-                fill: the way it was taught, and the way it works.
-              </p>
-            </div>
-            <TadkaPan />
-          </div>
-        </section>
-
         {/* Culture: the six tastes, previewing issue 1 */}
         <section id="culture" className="on-dark bg-forest-deep text-cream">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
@@ -253,8 +192,8 @@ export default function Home() {
               </a>
             </div>
             <div className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-              {[...reels, ...posts].map((item, i) => (
-                <div key={item.id} className={`reveal ${i % 3 === 1 ? "lg:mt-20" : ""}`}>
+              {posts.map((item) => (
+                <div key={item.id} className="reveal">
                   <InstagramEmbed item={item} />
                 </div>
               ))}

@@ -12,37 +12,13 @@ export type InstagramItem = {
   src?: string;
 };
 
-export const reels: InstagramItem[] = [
-  {
-    id: "C3esPAeNDaJ",
-    kind: "reel",
-    title: "Thin-crust pizza from scratch",
-    tags: ["Weekend", "Baking"],
-    note: "Caramelised red onion, small mushrooms, corn and a jalapeño sauce hot enough to need yoghurt on the side.",
-  },
-  {
-    id: "C_XntLVtdg4",
-    kind: "reel",
-    title: "Sunday brunch toast",
-    tags: ["Quick"],
-    note: "Crisp sourdough, avocado, cheese and a spiced spread, finished with chilli salt.",
-  },
-];
-
 export const posts: InstagramItem[] = [
   {
-    id: "DasIUqAjRuK",
-    kind: "post",
-    title: "A housewarming menu",
-    tags: ["Feast"],
-    note: "Part made from scratch, part ready-made, planned so the cook gets to sit down too.",
-  },
-  {
-    id: "DZwrx8WtNdF",
-    kind: "post",
-    title: "Ghee toast, black salt, chilli",
-    tags: ["Quick"],
-    note: "Sourdough toasted in ghee, avocado, kala namak and chilli flakes.",
+    id: "C2IW8jEthVP",
+    kind: "reel",
+    title: "Filter coffee, Kumbakonam style",
+    tags: ["Evening", "Brass filter"],
+    note: "Decoction from a brass filter, with coffee powder carried over from Salem. A tea lover's occasional lapse.",
   },
   {
     id: "DcI7606CZfy",
@@ -50,5 +26,12 @@ export const posts: InstagramItem[] = [
     title: "A cottage kitchen in Kerala",
     tags: ["Stories"],
     note: "A pottery studio in the woods near Thrissur, and the kitchen its meals come from.",
+  },
+  {
+    id: "C_Xm2vztjRb",
+    kind: "post",
+    title: "Roadside-style empty salna",
+    tags: ["Street food"],
+    note: "The spice plate for a roadside salna: cinnamon, cloves, cardamom, fennel, poppy seeds and cashews, with onion, tomato, mint and coriander.",
   },
 ];
