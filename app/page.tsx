@@ -1,14 +1,17 @@
+import Link from "next/link";
 import { Artwork, HeroGarnish, RiceBowl, SprigOutline, TemperingPan, Thali } from "@/components/Artwork";
 import { Dabba } from "@/components/BrassDabba";
 import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components/Icons";
 import { InstagramEmbed } from "@/components/InstagramEmbed";
-import { MobileMenu } from "@/components/MobileMenu";
 import { SignupForm } from "@/components/SignupForm";
+import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { SixTastes } from "@/components/SixTastes";
 import { SpiceBox } from "@/components/SpiceBox";
 import { TadkaPan } from "@/components/TadkaPan";
 import { posts, reels } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
+import { posts as blogPosts, postPath } from "@/lib/posts";
+import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
 const FEATURES = [
@@ -44,7 +47,7 @@ const EXPLORE = [
     eyebrow: "Recipes",
     title: "Recipes with a Story",
     body: "Traditional South Indian vegetarian recipes, with the science and cultural stories behind them.",
-    link: { href: "#recipes", label: "Browse recipes" },
+    link: { href: "/recipes", label: "Browse recipes" },
   },
 ];
 
@@ -65,29 +68,10 @@ const AUDIENCE = [
   "You have a family recipe that deserves to be written down properly.",
 ];
 
+const issue1 = postPath(blogPosts[0].slug);
+
 const H2 = "font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-[3.5rem]";
 const PRIMARY = "group inline-flex items-center gap-2.5 rounded-md px-6 py-3 font-medium transition-colors";
-
-function Eyebrow({ children, className = "text-ink/70" }: { children: React.ReactNode; className?: string }) {
-  return <p className={`text-xs font-medium uppercase tracking-[0.2em] ${className}`}>{children}</p>;
-}
-
-function TextLink({ href, children }: { href: string; children: string }) {
-  // Keep the arrow on the same line as the last word.
-  const words = children.split(" ");
-  const last = words.pop();
-  return (
-    <a href={href} className="group font-medium text-ink underline decoration-ink/30 underline-offset-[6px] hover:decoration-ink">
-      {words.length > 0 && `${words.join(" ")} `}
-      <span className="whitespace-nowrap">
-        {last}
-        <span className="ml-2 inline-block align-[-2px]">
-          <Arrow />
-        </span>
-      </span>
-    </a>
-  );
-}
 
 function HeroArt() {
   return (
@@ -101,36 +85,7 @@ function HeroArt() {
 export default function Home() {
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-forest focus:px-4 focus:py-2 focus:text-cream">
-        Skip to content
-      </a>
-
-      <header className="sticky top-0 z-40 border-b border-line/70 bg-cream/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
-          <a href="#top" className="font-serif text-[1.6rem] font-semibold leading-[0.92] text-forest-deep sm:text-[1.8rem]">
-            {site.wordmark[0]}
-            <br />
-            {site.wordmark[1]}
-          </a>
-          <nav aria-label="Sections" className="hidden items-center gap-7 text-[0.95rem] lg:flex">
-            {site.nav.map((item, i) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className={i === 0 ? "border-b-2 border-maroon pb-1 text-maroon" : "border-b-2 border-transparent pb-1 hover:border-line"}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-2">
-            <a href="#subscribe" className="rounded-md bg-forest px-5 py-2.5 font-medium text-cream transition-colors hover:bg-forest-deep">
-              Subscribe
-            </a>
-            <MobileMenu />
-          </div>
-        </div>
-      </header>
+      <SiteHeader current="/" />
 
       <main id="main" className="overflow-x-clip">
         {/* Hero */}
@@ -195,9 +150,9 @@ export default function Home() {
                   tradition, sensory science and the everyday ingredients in our kitchens.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
-                  <a href="#culture" className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
-                    Preview issue 1 <Arrow />
-                  </a>
+                  <Link href={issue1} className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
+                    Read issue 1 <Arrow />
+                  </Link>
                   <a href="#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
                     Subscribe to {site.newsletter}
                   </a>
@@ -218,7 +173,7 @@ export default function Home() {
                   <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">The Six Tastes of a South Indian Meal</h3>
                   <p className="mt-3 leading-relaxed text-ink/80">How tradition, taste and sensory science come together.</p>
                   <p className="mt-5">
-                    <TextLink href="#culture">Read a preview</TextLink>
+                    <TextLink href={issue1}>Read the issue</TextLink>
                   </p>
                 </div>
               </article>
@@ -290,11 +245,14 @@ export default function Home() {
               </p>
             </div>
             <SixTastes />
-            <p className="mt-14">
-              <a href="#subscribe" className="group inline-flex items-center gap-2 font-medium underline decoration-cream/40 underline-offset-[6px] hover:decoration-cream">
-                Get the full issue: subscribe to {site.newsletter} <Arrow />
-              </a>
-            </p>
+            <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <TextLink href={issue1} className="text-cream decoration-cream/40 hover:decoration-cream">
+                Read issue 1 in full
+              </TextLink>
+              <Link href="#subscribe" className="font-medium underline decoration-cream/40 underline-offset-[6px] hover:decoration-cream">
+                Subscribe to {site.newsletter}
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -307,7 +265,10 @@ export default function Home() {
                 <h2 className={`${H2} mt-4`}>From the kitchen, one post at a time.</h2>
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
                   The recipes start life on Instagram, with a note on why each ingredient was chosen. The full write-ups, with
-                  quantities and the science, are on their way.
+                  quantities and the science, are arriving one at a time.
+                </p>
+                <p className="mt-5">
+                  <TextLink href={recipePath(recipes[0].slug)}>{`Read the first written recipe: ${recipes[0].title}`}</TextLink>
                 </p>
               </div>
               <a
@@ -370,6 +331,9 @@ export default function Home() {
                 weekends, planning menus for friends and waiting on the Indian grocery delivery. Every post carried a note on why
                 an ingredient was chosen. {site.name} is where those notes become recipes, stories and the science behind them.
               </p>
+              <p className="mt-6">
+                <TextLink href="/about">{`Meet ${site.author.split(" ")[0]}`}</TextLink>
+              </p>
             </div>
             <div>
               <p className="font-serif text-2xl font-semibold">Pull up a chair if this sounds like you.</p>
@@ -402,53 +366,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="on-dark bg-umber text-cream">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 md:grid-cols-[1.5fr_1fr_1fr]">
-          <div>
-            <p className="font-serif text-3xl font-semibold leading-[0.95]">
-              {site.wordmark[0]}
-              <br />
-              {site.wordmark[1]}
-            </p>
-            <p className="mt-4 max-w-sm leading-relaxed text-cream/70">{site.description}</p>
-          </div>
-          <nav aria-label="Footer">
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-cream/50">Explore</p>
-            <ul className="mt-4 space-y-2 text-sm">
-              {site.nav.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="hover:underline hover:underline-offset-4">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          <div>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-cream/50">Follow</p>
-            <ul className="mt-4 space-y-2 text-sm">
-              <li>
-                <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" className="hover:underline hover:underline-offset-4">
-                  Instagram
-                </a>
-              </li>
-              <li>
-                <a href="#subscribe" className="hover:underline hover:underline-offset-4">
-                  {site.newsletter} newsletter
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="border-t border-cream/15">
-          <p className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-5 py-6 text-xs text-cream/60 sm:px-8">
-            <span>
-              © {new Date().getFullYear()} {site.name}
-            </span>
-            <span>{site.domain}</span>
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

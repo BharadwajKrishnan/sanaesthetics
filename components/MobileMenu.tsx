@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { site } from "@/lib/site";
 
@@ -15,14 +16,14 @@ export function MobileMenu() {
       </summary>
       <nav aria-label="Sections" className="absolute right-0 mt-2 w-56 rounded-md border border-line bg-cream p-2 shadow-lg">
         {site.nav.map((item) => (
-          <a
+          <Link
             key={item.href}
             href={item.href}
             onClick={() => ref.current?.removeAttribute("open")}
             className="block rounded px-3 py-2.5 hover:bg-parchment"
           >
             {item.label}
-          </a>
+          </Link>
         ))}
       </nav>
     </details>

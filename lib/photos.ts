@@ -1,12 +1,14 @@
 // Photos for the artwork slots. Until a slot has a photo, an illustration is
 // drawn in its place. To use a photo, put it in public/images/ and set its path
 // here, e.g. issue1: "/images/thali.jpg".
-export const photos: Record<"hero" | "issue1" | "anjarapetti" | "heat" | "recipes", string | undefined> = {
+export const photos: Record<"hero" | "issue1" | "anjarapetti" | "heat" | "recipes" | "portrait", string | undefined> = {
   hero: undefined,
   issue1: "/images/arusuvai-issue-1.webp",
   anjarapetti: undefined,
   heat: undefined,
   recipes: undefined,
+  // Sandhya's photo on the About page, e.g. "/images/sandhya.webp".
+  portrait: undefined,
 };
 
 // The spice box seen from above, cut out as a circle on a transparent

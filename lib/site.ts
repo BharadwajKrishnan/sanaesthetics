@@ -9,13 +9,16 @@ export const site = {
     "South Indian vegetarian recipes, stories and flavour science, from a home kitchen to a wider table. Home of the Arusuvai newsletter.",
   instagramHandle: "san_aesthetixs",
   instagramUrl: "https://www.instagram.com/san_aesthetixs/",
+  author: "Sandhya Ravichandran",
+  // Section links point at the homepage so they work from every page.
   nav: [
-    { href: "#top", label: "Home" },
-    { href: "#arusuvai", label: "Newsletter" },
-    { href: "#recipes", label: "Recipes" },
-    { href: "#science", label: "Flavour Science" },
-    { href: "#culture", label: "Culture" },
-    { href: "#classes", label: "Classes" },
-    { href: "#about", label: "About" },
+    { href: "/", label: "Home" },
+    { href: "/#arusuvai", label: "Newsletter" },
+    { href: "/blog", label: "Blog" },
+    { href: "/recipes", label: "Recipes" },
+    { href: "/#science", label: "Flavour Science" },
+    { href: "/#culture", label: "Culture" },
+    { href: "/#classes", label: "Classes" },
+    { href: "/about", label: "About" },
   ],
 };
