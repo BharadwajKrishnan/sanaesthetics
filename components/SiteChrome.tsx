@@ -61,7 +61,7 @@ export function SiteHeader({ current }: { current: string }) {
       <header className="sticky top-0 z-40 border-b border-line/70 bg-cream/95 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
           <Link href="/" className="flex items-center gap-3 font-serif text-[1.6rem] font-semibold leading-[0.92] text-forest-deep sm:text-[1.8rem]">
-            <KolamKnot className="h-10 w-10 shrink-0 text-brass" />
+            <KolamKnot className="h-14 w-14 shrink-0 text-brass sm:h-16 sm:w-16" />
             <span className="whitespace-nowrap">
               {site.wordmark[0]}
               <br />
@@ -81,7 +81,7 @@ export function SiteHeader({ current }: { current: string }) {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <Link href="/#subscribe" className="rounded-md bg-forest px-5 py-2.5 font-medium text-cream transition-colors hover:bg-forest-deep">
+            <Link href="/#subscribe" className="hidden rounded-md bg-forest px-5 py-2.5 font-medium text-cream transition-colors hover:bg-forest-deep sm:inline-block">
               Subscribe
             </Link>
             <MobileMenu />
