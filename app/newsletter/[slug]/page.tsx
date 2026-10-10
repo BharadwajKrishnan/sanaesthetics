@@ -11,15 +11,15 @@ export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps<"/newsletter/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
   return {
     title: `${post.title} | ${site.name}`,
     description: post.excerpt,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: { title: post.title, description: post.excerpt, url: `/blog/${post.slug}`, type: "article", authors: [site.author] },
+    alternates: { canonical: `/newsletter/${post.slug}` },
+    openGraph: { title: post.title, description: post.excerpt, url: `/newsletter/${post.slug}`, type: "article", authors: [site.author] },
   };
 }
 
@@ -27,21 +27,21 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
 const BODY =
   "mt-10 text-lg leading-relaxed text-ink/85 [&>p]:mt-6 [&>p:first-child]:mt-0 [&>h2]:mt-14 [&>h2]:font-serif [&>h2]:text-4xl [&>h2]:font-semibold [&>h2]:leading-tight [&>h2]:text-ink sm:[&>h2]:text-[2.75rem]";
 
-export default async function BlogPost({ params }: PageProps<"/blog/[slug]">) {
+export default async function Issue({ params }: PageProps<"/newsletter/[slug]">) {
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) notFound();
 
   return (
     <>
-      <SiteHeader current="/blog" />
+      <SiteHeader current="/newsletter" />
       <main id="main" className="overflow-x-clip">
         <article className="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:pb-28 lg:pt-20">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-20">
             <div className="max-w-3xl">
               <p className="text-sm">
-                <Link href="/blog" className="text-ink/60 hover:text-ink hover:underline hover:underline-offset-4">
-                  ← All posts
+                <Link href="/newsletter" className="text-ink/60 hover:text-ink hover:underline hover:underline-offset-4">
+                  ← All issues
                 </Link>
               </p>
               <Eyebrow className="mt-8 text-maroon">{post.eyebrow}</Eyebrow>
@@ -62,7 +62,7 @@ export default async function BlogPost({ params }: PageProps<"/blog/[slug]">) {
                 <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
                   Subscribe to {site.newsletter} <Arrow />
                 </Link>
-                <TextLink href="/blog">More from the blog</TextLink>
+                <TextLink href="/newsletter">All issues</TextLink>
               </div>
             </div>
 

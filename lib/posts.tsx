@@ -2,7 +2,7 @@ import Link from "next/link";
 import { photos } from "@/lib/photos";
 import { recipePath } from "@/lib/recipes";
 
-// Blog posts: the newsletter issues and other articles. Add a post here and it gets its own page at /blog/<slug>.
+// Newsletter issues. Add one here and it gets its own page at /newsletter/<slug>.
 
 export type Post = {
   slug: string;
@@ -24,9 +24,9 @@ const SCIENCE = [
   { taste: "Astringent", how: "often linked to polyphenols interacting with salivary proteins, creating that dry, puckering sensation." },
 ];
 
-function RecipeLink({ children }: { children: string }) {
+function RecipeLink({ slug, children }: { slug: string; children: string }) {
   return (
-    <Link href={recipePath("vathakuzhambu")} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+    <Link href={recipePath(slug)} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
       {children}
     </Link>
   );
@@ -67,7 +67,9 @@ function ArusuvaiBody() {
         </dl>
       </aside>
 
-      <p>A beautiful example of Arusuvai is mangai pachadi, made with raw mango.</p>
+      <p>
+        A beautiful example of Arusuvai is <RecipeLink slug="mangai-pachadi">mangai pachadi</RecipeLink>, made with raw mango.
+      </p>
       <p>
         The raw mango brings sourness. Jaggery adds sweetness. Chilli contributes pungency. Salt balances the dish. In some
         traditional versions, neem flowers introduce bitterness.
@@ -90,7 +92,7 @@ function ArusuvaiBody() {
         complement one another without one overpowering the whole meal.
       </p>
       <p>
-        Another example is <RecipeLink>vathakuzhambu</RecipeLink>.
+        Another example is <RecipeLink slug="vathakuzhambu">vathakuzhambu</RecipeLink>.
       </p>
       <p>
         This is a dish that can be strongly sour and pungent, often driven by tamarind, chilli and spices. Fenugreek or certain
@@ -143,5 +145,5 @@ export function getPost(slug: string) {
 }
 
 export function postPath(slug: string) {
-  return `/blog/${slug}`;
+  return `/newsletter/${slug}`;
 }

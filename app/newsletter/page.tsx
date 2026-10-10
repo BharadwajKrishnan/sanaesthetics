@@ -6,24 +6,28 @@ import { postPath, posts } from "@/lib/posts";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Blog | ${site.name}`,
-  description: `Issues of the ${site.newsletter} newsletter and articles on South Indian vegetarian cooking, its traditions and the flavour science behind them.`,
-  alternates: { canonical: "/blog" },
-  openGraph: { title: `${site.name} blog`, description: `Issues of ${site.newsletter} and articles on South Indian flavour.`, url: "/blog", type: "website" },
+  title: `${site.newsletter} newsletter | ${site.name}`,
+  description: `Every issue of ${site.newsletter}, the ${site.name} newsletter: South Indian vegetarian cooking, its traditions and the flavour science behind them.`,
+  alternates: { canonical: "/newsletter" },
+  openGraph: { title: `${site.newsletter} newsletter`, description: "Stories, ingredients and the science behind South Indian flavour.", url: "/newsletter", type: "website" },
 };
 
-export default function Blog() {
+export default function Newsletter() {
   return (
     <>
-      <SiteHeader current="/blog" />
+      <SiteHeader current="/newsletter" />
       <main id="main" className="overflow-x-clip">
         <section className="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:pb-28 lg:pt-20">
           <div className="max-w-3xl">
-            <Eyebrow className="text-maroon">The blog</Eyebrow>
-            <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">Stories, ingredients and the science behind the flavour.</h1>
+            <Eyebrow className="text-maroon">The newsletter</Eyebrow>
+            <h1 className="mt-4 font-serif text-6xl font-bold leading-none text-maroon sm:text-7xl">{site.newsletter}</h1>
+            <p className="mt-4 font-serif text-2xl font-medium leading-snug sm:text-[1.75rem]">Stories, ingredients and the science behind South Indian flavour.</p>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
-              Every issue of {site.newsletter} lives here, along with longer articles on the traditions and chemistry of South Indian vegetarian
-              cooking.
+              Arusuvai means “six tastes” in Tamil. Every issue is here to read in full, newest first. To get the next one by email,{" "}
+              <Link href="/#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
+                subscribe
+              </Link>
+              .
             </p>
           </div>
 

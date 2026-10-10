@@ -118,10 +118,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                 {related && (
                   <div className="reveal mt-14 border-t border-line pt-10">
                     <Eyebrow className="text-maroon">Read more</Eyebrow>
-                    <p className="mt-3 text-lg leading-relaxed text-ink/85">
-                      Why does half a teaspoon of jaggery change this dish so much? {site.newsletter} issue 1 looks at the six tastes and how a
-                      small adjustment rebalances a whole meal.
-                    </p>
+                    <p className="mt-3 text-lg leading-relaxed text-ink/85">{recipe.readMore}</p>
                     <p className="mt-4">
                       <TextLink href={postPath(related.slug)}>{related.title}</TextLink>
                     </p>

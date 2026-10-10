@@ -13,12 +13,11 @@ export const site = {
   // Section links point at the homepage so they work from every page.
   nav: [
     { href: "/", label: "Home" },
-    { href: "/#arusuvai", label: "Newsletter" },
-    { href: "/blog", label: "Blog" },
+    { href: "/newsletter", label: "Newsletter" },
     { href: "/recipes", label: "Recipes" },
     { href: "/#science", label: "Flavour Science" },
     { href: "/#culture", label: "Culture" },
     { href: "/#classes", label: "Classes" },
-    { href: "/about", label: "About" },
+    { href: "/about", label: "About Me" },
   ],
 };

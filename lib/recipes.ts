@@ -13,6 +13,8 @@ export type Recipe = {
   ingredients: { group: string; items: string[] }[];
   steps: string[];
   ready: { title: string; body: string[] };
+  // Why the newsletter issue is worth reading after this recipe.
+  readMore: string;
 };
 
 export const recipes: Recipe[] = [
@@ -67,6 +69,53 @@ export const recipes: Recipe[] = [
         "Taste once the kuzhambu has reduced. If the sourness feels very sharp, add the optional ½ teaspoon of jaggery. The jaggery should not make the dish taste sweet. It should simply round out the sourness and bitterness.",
       ],
     },
+    readMore: "Why does half a teaspoon of jaggery change this dish so much? Issue 1 looks at the six tastes and how a small adjustment rebalances a whole meal.",
+  },
+  {
+    slug: "mangai-pachadi",
+    title: "Mangai Pachadi",
+    tamil: "மாங்காய் பச்சடி",
+    eyebrow: "Raw mango relish · Tamil New Year",
+    summary:
+      "Raw mango simmered with jaggery, chilli and salt, finished with a mustard-seed tempering and a pinch of neem flowers: all six tastes in one bowl.",
+    intro: [
+      "One amazing example of Arusuvai is mango pachadi. It is a special dish on Tamil New Year, eaten to embrace each flavour, as you would each flavour of your life.",
+      "Mangai pachadi can bring together several taste experiences in one dish: sour from raw mango, sweet from jaggery, pungent from chilli, salty from salt, and in some versions bitter notes from neem flowers.",
+      "Household versions vary, and that is what makes the recipe feel authentic rather than fixed.",
+    ],
+    serve: "Serve warm or at room temperature.",
+    ingredients: [
+      {
+        group: "For the pachadi",
+        items: [
+          "1 medium raw mango, peeled and chopped",
+          "3 to 4 tbsp jaggery, grated or powdered",
+          "¼ tsp turmeric",
+          "1 small green chilli, slit, or ¼ tsp chilli powder",
+          "¼ tsp salt, or to taste",
+          "½ to ¾ cup water, as needed",
+        ],
+      },
+      {
+        group: "For the tempering",
+        items: ["1 tsp sesame oil or neutral oil", "½ tsp mustard seeds", "1 small pinch asafoetida", "6 to 8 curry leaves", "A small pinch of roasted neem flowers"],
+      },
+    ],
+    steps: [
+      "Cook the chopped raw mango with turmeric, chilli, salt and about ½ cup water over medium heat.",
+      "Let it simmer until the mango softens but still holds some shape. Depending on the mango, this usually takes around 8 to 12 minutes.",
+      "Add the jaggery and stir until it dissolves completely.",
+      "Continue cooking for another 3 to 5 minutes, until the mixture looks glossy and lightly syrupy. Add a little more water if it becomes too thick.",
+      "For the tempering, heat the oil in a small pan. Add the mustard seeds and let them splutter. Add the asafoetida and curry leaves, then pour the tempering over the pachadi.",
+      "If using neem flowers, add only a very small amount. Their bitterness should sit in the background rather than dominate the dish.",
+    ],
+    ready: {
+      title: "What to look for",
+      body: [
+        "The mango should be soft but not completely mashed. The jaggery should round out the mango’s sharp sourness, while the chilli and salt keep the dish lively.",
+      ],
+    },
+    readMore: "Why do Tamil kitchens put all six tastes in one bowl for the new year? Issue 1 looks at where that tradition and modern sensory science meet.",
   },
 ];
 

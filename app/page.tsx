@@ -6,11 +6,10 @@ import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { SignupForm } from "@/components/SignupForm";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { SixTastes } from "@/components/SixTastes";
-import { SpiceBox } from "@/components/SpiceBox";
 import { TadkaPan } from "@/components/TadkaPan";
 import { posts, reels } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
-import { posts as blogPosts, postPath } from "@/lib/posts";
+import { posts as issues, postPath } from "@/lib/posts";
 import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
@@ -22,15 +21,6 @@ const FEATURES = [
 ];
 
 const EXPLORE = [
-  {
-    art: <Dabba sizes="(min-width: 1024px) 13vw, 38vw" className="absolute left-1/2 top-1/2 w-[86%] -translate-x-1/2 -translate-y-1/2" />,
-    photo: photos.anjarapetti,
-    alt: "An anjarapetti, the round spice box of a South Indian kitchen",
-    eyebrow: "Ingredients",
-    title: "Inside the Anjarapetti",
-    body: "A closer look at the everyday ingredients that build flavour in a South Indian kitchen.",
-    link: { href: "#anjarapetti", label: "Explore the ingredients" },
-  },
   {
     art: <TemperingPan />,
     photo: photos.heat,
@@ -68,7 +58,7 @@ const AUDIENCE = [
   "You have a family recipe that deserves to be written down properly.",
 ];
 
-const issue1 = postPath(blogPosts[0].slug);
+const issue1 = postPath(issues[0].slug);
 
 const H2 = "font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-[3.5rem]";
 const PRIMARY = "group inline-flex items-center gap-2.5 rounded-md px-6 py-3 font-medium transition-colors";
@@ -183,7 +173,7 @@ export default function Home() {
 
         {/* Explore */}
         <section id="explore">
-          <ul className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 lg:grid-cols-3 lg:gap-8">
+          <ul className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:gap-12">
             {EXPLORE.map((card) => (
               <li key={card.title} className="reveal grid grid-cols-[40%_minmax(0,1fr)] items-center gap-5 sm:grid-cols-[44%_minmax(0,1fr)] sm:gap-6">
                 <Artwork src={card.photo} alt={card.alt} sizes="(min-width: 1024px) 14vw, 44vw" className="relative aspect-[4/5] rounded-sm">
@@ -200,21 +190,6 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </section>
-
-        {/* Anjarapetti */}
-        <section id="anjarapetti" className="umber-backdrop on-dark text-cream">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 py-24 sm:px-8 lg:grid-cols-2">
-            <div className="reveal">
-              <Eyebrow className="text-brass">Inside the anjarapetti</Eyebrow>
-              <h2 className={`${H2} mt-4`}>Seven bowls, seven reasons.</h2>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-cream/80">
-                Every South Indian kitchen has one: a round brass or steel box of seven spices, opened several times a day. Each
-                bowl holds a compound that does a particular job in the pan. Pick a bowl to see which.
-              </p>
-            </div>
-            <SpiceBox />
-          </div>
         </section>
 
         {/* Flavour science: tempering */}

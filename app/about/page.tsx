@@ -52,7 +52,7 @@ export default function About() {
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-20">
             {/* Story */}
             <div>
-              <Eyebrow className="text-maroon">About</Eyebrow>
+              <Eyebrow className="text-maroon">About me</Eyebrow>
               <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">{TITLE}</h1>
               <p className="mt-8 max-w-2xl text-xl leading-relaxed text-ink/90">
                 Hi, I’m {site.author}. I’m a full-time Research Technologist and have been living in Germany for the past eight
