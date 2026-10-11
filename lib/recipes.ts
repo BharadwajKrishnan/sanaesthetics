@@ -35,7 +35,7 @@ export const recipes: Recipe[] = [
     photo: "/images/vathakuzhambu-tamarind.webp",
     photoAlt: "A block of tamarind and a bowl of sambar powder beside a ceramic jar",
     photoTags: [
-      { label: "Sambar powder", at: { left: 62, top: 24 }, text: { left: 82, top: 14 } },
+      { label: "Sambar powder", at: { left: 60, top: 24 }, text: { left: 82, top: 14 } },
       { label: "Tamarind", at: { left: 72, top: 84 }, text: { left: 84, top: 92 } },
     ],
     tip: "Store tamarind in a ceramic jar. Tamarind is acidic and slowly reacts with metal, which gives it a metallic taste. Ceramic is inert, so the flavour stays clean.",
