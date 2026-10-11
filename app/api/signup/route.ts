@@ -1,16 +1,8 @@
-import { createToken, LISTS, notify, type List } from "@/lib/signups";
-import { site } from "@/lib/site";
+import { LISTS, notify, type List } from "@/lib/signups";
 
 export const runtime = "nodejs";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-// The public origin for links in emails. In development it is the dev server.
-function origin(request: Request) {
-  if (process.env.SITE_URL) return process.env.SITE_URL;
-  if (process.env.NODE_ENV !== "production") return new URL(request.url).origin;
-  return site.url;
-}
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -24,13 +16,11 @@ export async function POST(request: Request) {
   }
   // Bots fill the hidden "website" field; people never see it.
   if (typeof body?.website === "string" && body.website !== "") {
-    return Response.json({ status: "pending" });
+    return Response.json({ status: "subscribed" });
   }
   try {
-    const token = createToken(list, email);
-    const confirmUrl = `${origin(request)}/api/signup/confirm?token=${encodeURIComponent(token)}`;
-    const status = await notify({ event: "pending", list, email, confirmUrl, requestedAt: new Date().toISOString() });
-    return Response.json({ status: status === "exists" ? "exists" : "pending" });
+    const status = await notify({ event: "subscribed", list, email, subscribedAt: new Date().toISOString() });
+    return Response.json({ status: status === "exists" ? "exists" : "subscribed" });
   } catch (error) {
     console.error("[signup] could not reach the webhook", error);
     return Response.json({ error: "webhook" }, { status: 502 });

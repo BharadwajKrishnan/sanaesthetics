@@ -21,39 +21,35 @@ Then open http://localhost:3000.
 - `lib/instagram.ts`: the reels and posts shown under "Recipes with a story". Add a line to feature another one.
 - `lib/spices.ts`, `components/TadkaPan.tsx`, `components/SixTastes.tsx`: the interactive pieces and their flavour facts.
 - `components/SignupForm.tsx`: the email form used for both the newsletter and the classes waitlist.
-- `lib/signups.ts`, `app/api/signup/`: the double opt-in signup flow described below.
+- `lib/signups.ts`, `app/api/signup/`: the signup flow described below.
 
 ## Signups
 
-The site keeps no subscriber list. It hands every signup to an n8n workflow, which sends the confirmation email and keeps the sheet.
+The site keeps no subscriber list. It hands every signup to an n8n workflow, which adds the address to the sheet straight away. No confirmation email is sent.
 
-1. A reader enters an address. The site signs a confirmation link and POSTs a `pending` event to the webhook. The workflow emails the link.
-2. The reader opens the link. The site checks the signature (links last 48 hours) and POSTs a `confirmed` event. The workflow adds the address to the sheet.
-3. The reader lands on `/subscribe?status=confirmed`.
+1. A reader enters an address. The site POSTs a `subscribed` event to the webhook.
+2. The workflow adds the address to the Google Sheet, or updates its row if the address is already there.
+3. The form tells the reader they're on the list.
 
 Set these in `.env.local` locally and in the host's environment settings when deployed (see `.env.example`):
 
 | Variable | Purpose |
 | --- | --- |
 | `SIGNUP_WEBHOOK_URL` | The n8n webhook URL (a Webhook node set to POST). |
-| `SIGNUP_WEBHOOK_SECRET` | Optional. Sent as the `X-Signup-Secret` header; have the workflow reject requests without it. |
-| `SIGNUP_SECRET` | Signs the links. Any long random string. Required in production. |
-| `SITE_URL` | Optional. Origin for links in emails; defaults to https://southindianfoodlab.com in production. |
+| `SIGNUP_WEBHOOK_SECRET` | Optional. Sent as the `xi-api-key` header; have the workflow reject requests without it. |
 
-Without `SIGNUP_WEBHOOK_URL`, the events (including the confirmation link) are printed to the dev server's console so the flow can be tried locally.
+Without `SIGNUP_WEBHOOK_URL`, signups are printed to the dev server's console so the form can be tried locally.
 
 The webhook receives JSON:
 
 ```json
-{ "event": "pending", "list": "newsletter", "email": "name@example.com", "confirmUrl": "https://…/api/signup/confirm?token=…", "requestedAt": "2026-10-10T09:00:00.000Z" }
-{ "event": "confirmed", "list": "newsletter", "email": "name@example.com", "confirmedAt": "2026-10-10T09:05:00.000Z" }
+{ "event": "subscribed", "list": "newsletter", "email": "name@example.com", "subscribedAt": "2026-10-10T09:00:00.000Z" }
 ```
 
-`list` is `newsletter` or `waitlist` (the classes form). If the workflow replies with `{ "status": "exists" }` for an address that is already in the sheet, the site tells the reader so instead of adding it twice.
+`list` is `newsletter` or `waitlist` (the classes form). If the workflow replies with `{ "status": "exists" }` for an address that is already in the sheet, the site tells the reader so.
 
 A ready-made workflow is in `n8n/signup-workflow.json`. Import it in n8n (Workflow menu → Import from file), then:
 
-1. On the **Webhook** node, create a Header Auth credential with name `X-Signup-Secret` and the value you put in `SIGNUP_WEBHOOK_SECRET`. Copy the node's production URL into `SIGNUP_WEBHOOK_URL`.
-2. On **Send confirmation email**, connect a Microsoft Outlook credential (or swap the node for Gmail or Send Email, keeping the To, Subject and body expressions).
-3. On **Add to Excel sheet**, connect a Microsoft Excel 365 credential and pick the workbook and worksheet. The sheet needs a header row with `email`, `list` and `confirmedAt`. Rows are upserted on `email`, so an address is never added twice.
-4. Activate the workflow.
+1. Copy the **Webhook** node's production URL into `SIGNUP_WEBHOOK_URL`. To keep other callers out, set the node's authentication to Header Auth with a credential named `xi-api-key`, and put its value in `SIGNUP_WEBHOOK_SECRET`.
+2. On **Append or update row in sheet**, connect a Google Sheets credential and pick the spreadsheet and sheet. The sheet needs a header row with `email`, `list` and `subscribedAt`. Rows are matched on `email`, so an address is never added twice.
+3. Activate the workflow.

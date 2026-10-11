@@ -3,19 +3,19 @@
 import { useId, useState } from "react";
 import type { List } from "@/lib/signups";
 
-type State = "idle" | "sending" | "pending" | "exists" | "invalid" | "failed";
+type State = "idle" | "sending" | "subscribed" | "exists" | "invalid" | "failed";
 
-const COPY: Record<List, { cta: string; sending: string; pending: (email: string) => string; exists: string }> = {
+const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string }> = {
   waitlist: {
     cta: "Join the waitlist",
     sending: "Joining…",
-    pending: (email) => `Almost there. We've sent a link to ${email}. Open it to confirm your place on the waitlist.`,
+    subscribed: "You're on the waitlist. Dates and prices for the first classes will reach you first.",
     exists: "This email is already on the waitlist.",
   },
   newsletter: {
     cta: "Subscribe",
     sending: "Subscribing…",
-    pending: (email) => `Almost there. We've sent a link to ${email}. Open it to confirm your subscription.`,
+    subscribed: "You're subscribed. The next issue will arrive by email.",
     exists: "This email is already subscribed.",
   },
 };
@@ -47,7 +47,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
         body: JSON.stringify({ list, email, website }),
       });
       const data = await res.json();
-      if (res.ok) setState(data.status === "exists" ? "exists" : "pending");
+      if (res.ok) setState(data.status === "exists" ? "exists" : "subscribed");
       else setState(data.error === "invalid" ? "invalid" : "failed");
     } catch {
       setState("failed");
@@ -55,7 +55,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
   }
 
   const isError = state === "invalid" || state === "failed";
-  const message = state === "pending" ? copy.pending(email.trim()) : state === "exists" ? copy.exists : ERRORS[state];
+  const message = state === "subscribed" ? copy.subscribed : state === "exists" ? copy.exists : ERRORS[state];
 
   return (
     <form onSubmit={onSubmit} noValidate className={`relative w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
