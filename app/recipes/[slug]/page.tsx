@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Artwork, PhotoKey, PhotoTags, TemperingPan } from "@/components/Artwork";
+import { Artwork, PhotoTags, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
@@ -145,15 +145,10 @@ function Photo({ recipe }: { recipe: Recipe }) {
         </Artwork>
         {tags && <PhotoTags tags={tags} />}
       </div>
-      {(tags || recipe.tip) && (
-        <figcaption>
-          {tags && <PhotoKey tags={tags} className="mt-4" />}
-          {recipe.tip && (
-            <p className="mt-5 border-l-4 border-brass bg-parchment px-5 py-4 text-base leading-relaxed text-ink/85">
-              <span className="mr-2 font-serif text-lg font-semibold text-maroon">Pro tip</span>
-              {recipe.tip}
-            </p>
-          )}
+      {recipe.tip && (
+        <figcaption className="mt-5 border-l-4 border-brass bg-parchment px-5 py-4 text-base leading-relaxed text-ink/85">
+          <span className="mr-2 font-serif text-lg font-semibold text-maroon">Pro tip</span>
+          {recipe.tip}
         </figcaption>
       )}
     </figure>

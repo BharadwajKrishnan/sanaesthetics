@@ -24,37 +24,32 @@ export function Artwork({
   );
 }
 
-// Numbered markers pinned onto a photo, each centred on a point given as percentages
-// of the picture's width and height. Put the point at the edge of the ingredient, not
-// over it. PhotoKey, placed under the picture, names each number.
-export type PhotoTag = { label: string; left: number; top: number };
+// Labels pinned onto a photo. Each has a point at the edge of the ingredient (a dot)
+// and a place for the text, in an empty part of the picture, joined by a thin line.
+// Both are percentages of the picture's width and height.
+export type PhotoTag = { label: string; at: { left: number; top: number }; text: { left: number; top: number } };
 
 export function PhotoTags({ tags }: { tags: PhotoTag[] }) {
   return (
-    <ol aria-hidden="true" className="pointer-events-none absolute inset-0">
-      {tags.map((tag, i) => (
-        <li
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
+        {tags.map((tag) => (
+          <line key={tag.label} x1={tag.at.left} y1={tag.at.top} x2={tag.text.left} y2={tag.text.top} stroke="#f7f2eb" strokeWidth="1.5" strokeOpacity="0.9" vectorEffect="non-scaling-stroke" />
+        ))}
+      </svg>
+      {tags.map((tag) => (
+        <span key={tag.label} className="absolute h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-maroon ring-2 ring-cream" style={{ left: `${tag.at.left}%`, top: `${tag.at.top}%` }} />
+      ))}
+      {tags.map((tag) => (
+        <span
           key={tag.label}
-          className="absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream font-serif text-[13px] font-semibold leading-none text-maroon shadow-md shadow-ink/50 ring-1 ring-maroon/50 sm:h-7 sm:w-7 sm:text-sm"
-          style={{ left: `${tag.left}%`, top: `${tag.top}%` }}
+          className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-cream/95 px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.12em] text-ink shadow-md shadow-ink/40 sm:px-2.5 sm:py-1 sm:text-[11px] sm:tracking-[0.14em]"
+          style={{ left: `${tag.text.left}%`, top: `${tag.text.top}%` }}
         >
-          {i + 1}
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-export function PhotoKey({ tags, className = "" }: { tags: PhotoTag[]; className?: string }) {
-  return (
-    <ol className={`grid grid-cols-2 gap-x-5 gap-y-2 text-sm leading-snug text-ink/80 ${className}`}>
-      {tags.map((tag, i) => (
-        <li key={tag.label} className="flex items-baseline gap-2.5">
-          <span className="w-4 shrink-0 text-right font-serif text-base font-semibold leading-none text-maroon">{i + 1}</span>
           {tag.label}
-        </li>
+        </span>
       ))}
-    </ol>
+    </div>
   );
 }
 

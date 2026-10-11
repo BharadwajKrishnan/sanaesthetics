@@ -13,7 +13,7 @@ export type Post = {
   excerpt: string;
   cover?: string;
   coverAlt: string;
-  // Numbered markers on the cover photo, each at a point given as percentages of its width and height. Named in a key below it.
+  // Labels on the cover photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
   coverTags?: PhotoTag[];
   // Drawn in place of the cover photo until there is one. Defaults to the thali.
   Cover?: () => React.ReactNode;
@@ -238,14 +238,14 @@ export const posts: Post[] = [
     coverAlt:
       "An open brass anjarapetti with chana dal, cumin seeds, fenugreek seeds, mustard seeds and urad dal, beside curry leaves, dried red chillies and a jar of hing",
     coverTags: [
-      { label: "Chana dal", left: 39, top: 9 },
-      { label: "Cumin seeds", left: 32, top: 28 },
-      { label: "Fenugreek seeds", left: 73, top: 29 },
-      { label: "Mustard seeds", left: 46, top: 51 },
-      { label: "Urad dal", left: 83, top: 50 },
-      { label: "Curry leaves", left: 13, top: 55 },
-      { label: "Dried red chillies", left: 71, top: 67 },
-      { label: "Hing", left: 36, top: 77 },
+      { label: "Chana dal", at: { left: 38, top: 10 }, text: { left: 17, top: 8 } },
+      { label: "Cumin seeds", at: { left: 32, top: 28 }, text: { left: 14, top: 26 } },
+      { label: "Fenugreek seeds", at: { left: 73, top: 29 }, text: { left: 83, top: 20 } },
+      { label: "Mustard seeds", at: { left: 48, top: 52 }, text: { left: 56, top: 59 } },
+      { label: "Urad dal", at: { left: 83, top: 50 }, text: { left: 89, top: 57 } },
+      { label: "Curry leaves", at: { left: 22, top: 50 }, text: { left: 25, top: 43 } },
+      { label: "Dried red chillies", at: { left: 69, top: 82 }, text: { left: 80, top: 89 } },
+      { label: "Hing", at: { left: 33, top: 84 }, text: { left: 49, top: 87 } },
     ],
     Cover: AnjarapettiCover,
     readingTime: "3 min read",
