@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HeroGarnish, type PhotoTag } from "@/components/Artwork";
+import { articleLink } from "@/lib/articles";
 import { Dabba } from "@/components/BrassDabba";
 import { photos } from "@/lib/photos";
 import { recipePath } from "@/lib/recipes";
@@ -161,10 +162,12 @@ function AnjarapettiBody() {
         to use boxes with six or seven compartments depending on what we cook most often.
       </p>
       <p>For me, it is simply a convenient home for the spices, seeds and lentils I reach for almost every day.</p>
-      {/* Author's note: link "tempering" to the Flavour Science article on tempering once it exists. */}
       <p>
-        These ingredients often come together in thaalipu / tadka / tempering — one of the most familiar techniques in South Indian
-        cooking. Not every dish is tempered in the same way, and not every ingredient is used each time, but each one can contribute
+        These ingredients often come together in thaalipu / tadka /{" "}
+        <a {...articleLink("when-ingredients-meet-heat")} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          tempering
+        </a>{" "}
+        — one of the most familiar techniques in South Indian cooking. Not every dish is tempered in the same way, and not every ingredient is used each time, but each one can contribute
         something different: aroma, nuttiness, bitterness, texture or warmth.
       </p>
 
