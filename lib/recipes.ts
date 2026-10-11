@@ -11,7 +11,7 @@ export type Recipe = {
   // Path under public/, e.g. "/images/vathakuzhambu.webp". Until set, an illustration is drawn instead.
   photo?: string;
   photoAlt?: string;
-  // Labels pinned onto the photo, each centred on a point given as percentages of its width and height.
+  // Numbered markers on the photo, each at a point given as percentages of its width and height. Named in a key below it.
   photoTags?: PhotoTag[];
   // A short, highlighted tip shown under the photo.
   tip?: string;
@@ -35,8 +35,8 @@ export const recipes: Recipe[] = [
     photo: "/images/vathakuzhambu-tamarind.webp",
     photoAlt: "A block of tamarind and a bowl of sambar powder beside a ceramic jar",
     photoTags: [
-      { label: "Sambar powder", left: 30, top: 12 },
-      { label: "Tamarind", left: 24, top: 62 },
+      { label: "Sambar powder", left: 9, top: 8 },
+      { label: "Tamarind", left: 77, top: 80 },
     ],
     tip: "Store tamarind in a ceramic jar. Tamarind is acidic and slowly reacts with metal, which gives it a metallic taste. Ceramic is inert, so the flavour stays clean.",
     intro: [

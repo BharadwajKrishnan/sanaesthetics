@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Artwork, PhotoTags, type PhotoTag } from "@/components/Artwork";
+import { Artwork, PhotoKey, PhotoTags, type PhotoTag } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { site } from "@/lib/site";
@@ -39,13 +39,21 @@ export function ArticlePage({
   children: React.ReactNode;
   footer: React.ReactNode;
 }) {
+  const tags = cover && coverTags?.length ? coverTags : undefined;
   const picture = (
-    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-      <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${coverAspect}`}>
-        {fallback}
-      </Artwork>
-      {cover && coverTags?.length ? <PhotoTags tags={coverTags} /> : null}
-    </div>
+    <figure className="mx-auto w-full max-w-md lg:max-w-none">
+      <div className="relative">
+        <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${coverAspect}`}>
+          {fallback}
+        </Artwork>
+        {tags && <PhotoTags tags={tags} />}
+      </div>
+      {tags && (
+        <figcaption className="mt-4">
+          <PhotoKey tags={tags} />
+        </figcaption>
+      )}
+    </figure>
   );
   return (
     <>

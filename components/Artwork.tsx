@@ -24,24 +24,37 @@ export function Artwork({
   );
 }
 
-// Labels pinned onto a photo, each centred on a point given as percentages of the
-// picture's width and height. Put it inside the same positioned box as the Artwork.
+// Numbered markers pinned onto a photo, each centred on a point given as percentages
+// of the picture's width and height. Put the point at the edge of the ingredient, not
+// over it. PhotoKey, placed under the picture, names each number.
 export type PhotoTag = { label: string; left: number; top: number };
 
 export function PhotoTags({ tags }: { tags: PhotoTag[] }) {
   return (
-    <ul aria-hidden="true" className="pointer-events-none absolute inset-0">
-      {tags.map((tag) => (
+    <ol aria-hidden="true" className="pointer-events-none absolute inset-0">
+      {tags.map((tag, i) => (
         <li
           key={tag.label}
-          className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-cream/95 py-1 pl-2 pr-2.5 text-[10px] font-medium uppercase tracking-[0.14em] text-ink shadow-md shadow-ink/30 sm:gap-2 sm:py-1.5 sm:pl-2.5 sm:pr-3.5 sm:text-xs sm:tracking-[0.15em]"
+          className="absolute flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-cream font-serif text-[13px] font-semibold leading-none text-maroon shadow-md shadow-ink/50 ring-1 ring-maroon/50 sm:h-7 sm:w-7 sm:text-sm"
           style={{ left: `${tag.left}%`, top: `${tag.top}%` }}
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-maroon sm:h-2 sm:w-2" />
+          {i + 1}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+export function PhotoKey({ tags, className = "" }: { tags: PhotoTag[]; className?: string }) {
+  return (
+    <ol className={`grid grid-cols-2 gap-x-5 gap-y-2 text-sm leading-snug text-ink/80 ${className}`}>
+      {tags.map((tag, i) => (
+        <li key={tag.label} className="flex items-baseline gap-2.5">
+          <span className="w-4 shrink-0 text-right font-serif text-base font-semibold leading-none text-maroon">{i + 1}</span>
           {tag.label}
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }
 
