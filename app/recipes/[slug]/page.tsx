@@ -5,7 +5,7 @@ import { Artwork, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
-import { getRecipe, recipes } from "@/lib/recipes";
+import { getRecipe, recipes, type Recipe } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -57,7 +57,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                 </h1>
 
                 <div className="mt-10 lg:hidden">
-                  <Photo src={recipe.photo} title={recipe.title} />
+                  <Photo recipe={recipe} />
                 </div>
 
                 <div className="mt-8 space-y-5 text-lg leading-relaxed text-ink/85">
@@ -68,7 +68,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                 </div>
               </div>
               <div className="hidden lg:block">
-                <Photo src={recipe.photo} title={recipe.title} />
+                <Photo recipe={recipe} />
               </div>
             </div>
           </section>
@@ -135,10 +135,31 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   );
 }
 
-function Photo({ src, title }: { src?: string; title: string }) {
+function Photo({ recipe }: { recipe: Recipe }) {
+  const tall = Boolean(recipe.photoTags?.length);
   return (
-    <Artwork src={src} alt={`A bowl of ${title}`} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className="relative mx-auto aspect-[4/5] w-full max-w-md rounded-sm shadow-xl shadow-ink/15 lg:max-w-none">
-      <TemperingPan />
-    </Artwork>
+    <figure className="mx-auto w-full max-w-md lg:max-w-none">
+      <div className="relative">
+        <Artwork src={recipe.photo} alt={recipe.photoAlt ?? `A bowl of ${recipe.title}`} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${tall ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
+          <TemperingPan />
+        </Artwork>
+        {recipe.photo && recipe.photoTags?.length ? (
+          <ul aria-hidden="true" className="pointer-events-none absolute inset-0">
+            {recipe.photoTags.map((tag) => (
+              <li key={tag.label} className="absolute flex items-center gap-2 rounded-full bg-cream/95 py-1.5 pl-2.5 pr-3.5 text-xs font-medium uppercase tracking-[0.15em] text-ink shadow-md shadow-ink/30" style={{ left: `${tag.left}%`, top: `${tag.top}%` }}>
+                <span className="h-2 w-2 rounded-full bg-maroon" />
+                {tag.label}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+      {recipe.tip && (
+        <figcaption className="mt-5 border-l-4 border-brass bg-parchment px-5 py-4 text-base leading-relaxed text-ink/85">
+          <span className="mr-2 font-serif text-lg font-semibold text-maroon">Pro tip</span>
+          {recipe.tip}
+        </figcaption>
+      )}
+    </figure>
   );
 }

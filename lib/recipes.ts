@@ -8,6 +8,11 @@ export type Recipe = {
   summary: string;
   // Path under public/, e.g. "/images/vathakuzhambu.webp". Until set, an illustration is drawn instead.
   photo?: string;
+  photoAlt?: string;
+  // Labels pinned onto the photo, positioned as percentages of its width and height.
+  photoTags?: { label: string; left: number; top: number }[];
+  // A short, highlighted tip shown under the photo.
+  tip?: string;
   intro: string[];
   serve: string;
   ingredients: { group: string; items: string[] }[];
@@ -25,6 +30,13 @@ export const recipes: Recipe[] = [
     eyebrow: "Tamarind gravy · Tamil Nadu",
     summary:
       "A sour, spicy tamarind gravy made in sesame oil, with a spice powder that makes it lip-smacking and a pinch of jaggery to round out the edges.",
+    photo: "/images/vathakuzhambu-tamarind.webp",
+    photoAlt: "A block of tamarind and a bowl of sambar powder beside a ceramic jar",
+    photoTags: [
+      { label: "Sambar powder", left: 8, top: 10 },
+      { label: "Tamarind", left: 8, top: 60 },
+    ],
+    tip: "Store tamarind in a ceramic jar. Tamarind is acidic and slowly reacts with metal, which gives it a metallic taste. Ceramic is inert, so the flavour stays clean.",
     intro: [
       "Vathakuzhambu is a much cherished food in South Indian homes and will be slurped in no time.",
       "It is a tamarind-based gravy made traditionally with gingelly or sesame oil, and it is known for its longer shelf life.",
