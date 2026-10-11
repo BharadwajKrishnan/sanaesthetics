@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Artwork, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
-import { TadkaPan } from "@/components/TadkaPan";
 import { articleLink, articles } from "@/lib/articles";
 import { site } from "@/lib/site";
 
@@ -55,21 +54,6 @@ export default function FlavourScience() {
               </li>
             ))}
           </ul>
-        </section>
-
-        {/* Interactive: tempering, step by step */}
-        <section className="bg-parchment">
-          <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-24">
-            <div className="reveal max-w-3xl">
-              <Eyebrow className="text-maroon">Try it</Eyebrow>
-              <h2 className="mt-4 font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl">When ingredients meet heat.</h2>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
-                Your grandmother&apos;s tempering was chemistry. She just never called it that. Scroll through one and watch the pan fill:
-                the way it was taught, and the way it works.
-              </p>
-            </div>
-            <TadkaPan />
-          </div>
         </section>
       </main>
       <SiteFooter />
