@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Artwork, TemperingPan } from "@/components/Artwork";
+import { Artwork, PhotoTags, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
@@ -143,16 +143,7 @@ function Photo({ recipe }: { recipe: Recipe }) {
         <Artwork src={recipe.photo} alt={recipe.photoAlt ?? `A bowl of ${recipe.title}`} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${tall ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
           <TemperingPan />
         </Artwork>
-        {recipe.photo && recipe.photoTags?.length ? (
-          <ul aria-hidden="true" className="pointer-events-none absolute inset-0">
-            {recipe.photoTags.map((tag) => (
-              <li key={tag.label} className="absolute flex items-center gap-2 rounded-full bg-cream/95 py-1.5 pl-2.5 pr-3.5 text-xs font-medium uppercase tracking-[0.15em] text-ink shadow-md shadow-ink/30" style={{ left: `${tag.left}%`, top: `${tag.top}%` }}>
-                <span className="h-2 w-2 rounded-full bg-maroon" />
-                {tag.label}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        {recipe.photo && recipe.photoTags?.length ? <PhotoTags tags={recipe.photoTags} /> : null}
       </div>
       {recipe.tip && (
         <figcaption className="mt-5 border-l-4 border-brass bg-parchment px-5 py-4 text-base leading-relaxed text-ink/85">

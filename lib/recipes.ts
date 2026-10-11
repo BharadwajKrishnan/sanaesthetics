@@ -1,3 +1,5 @@
+import type { PhotoTag } from "@/components/Artwork";
+
 // Written recipes, one object each. Add a recipe here and it gets its own page at /recipes/<slug>.
 
 export type Recipe = {
@@ -9,8 +11,8 @@ export type Recipe = {
   // Path under public/, e.g. "/images/vathakuzhambu.webp". Until set, an illustration is drawn instead.
   photo?: string;
   photoAlt?: string;
-  // Labels pinned onto the photo, positioned as percentages of its width and height.
-  photoTags?: { label: string; left: number; top: number }[];
+  // Labels pinned onto the photo, each centred on a point given as percentages of its width and height.
+  photoTags?: PhotoTag[];
   // A short, highlighted tip shown under the photo.
   tip?: string;
   intro: string[];
@@ -33,8 +35,8 @@ export const recipes: Recipe[] = [
     photo: "/images/vathakuzhambu-tamarind.webp",
     photoAlt: "A block of tamarind and a bowl of sambar powder beside a ceramic jar",
     photoTags: [
-      { label: "Sambar powder", left: 8, top: 10 },
-      { label: "Tamarind", left: 8, top: 60 },
+      { label: "Sambar powder", left: 30, top: 12 },
+      { label: "Tamarind", left: 24, top: 62 },
     ],
     tip: "Store tamarind in a ceramic jar. Tamarind is acidic and slowly reacts with metal, which gives it a metallic taste. Ceramic is inert, so the flavour stays clean.",
     intro: [

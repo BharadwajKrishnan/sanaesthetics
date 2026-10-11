@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HeroGarnish } from "@/components/Artwork";
+import { HeroGarnish, type PhotoTag } from "@/components/Artwork";
 import { Dabba } from "@/components/BrassDabba";
 import { photos } from "@/lib/photos";
 import { recipePath } from "@/lib/recipes";
@@ -13,6 +13,8 @@ export type Post = {
   excerpt: string;
   cover?: string;
   coverAlt: string;
+  // Labels pinned onto the cover photo, each centred on a point given as percentages of its width and height.
+  coverTags?: PhotoTag[];
   // Drawn in place of the cover photo until there is one. Defaults to the thali.
   Cover?: () => React.ReactNode;
   readingTime: string;
@@ -232,8 +234,19 @@ export const posts: Post[] = [
     eyebrow: "Issue 2",
     excerpt:
       "A spice box with five compartments, and the seeds, dals and powders that live in mine. What goes into a tempering, why one box is never enough, and what the box you keep closest to hand says about the way you cook.",
-    cover: photos.anjarapetti,
-    coverAlt: "A brass anjarapetti, the South Indian spice box, seen from above",
+    cover: "/images/anjarapetti-issue-2.webp",
+    coverAlt:
+      "An open brass anjarapetti with chana dal, cumin seeds, fenugreek seeds, mustard seeds and urad dal, beside curry leaves, dried red chillies and a jar of hing",
+    coverTags: [
+      { label: "Chana dal", left: 52, top: 13 },
+      { label: "Cumin seeds", left: 42, top: 26 },
+      { label: "Fenugreek seeds", left: 64, top: 34 },
+      { label: "Urad dal", left: 76, top: 39 },
+      { label: "Mustard seeds", left: 53, top: 49 },
+      { label: "Curry leaves", left: 26, top: 58 },
+      { label: "Dried red chillies", left: 50, top: 72 },
+      { label: "Hing", left: 21, top: 87 },
+    ],
     Cover: AnjarapettiCover,
     readingTime: "3 min read",
     Body: AnjarapettiBody,

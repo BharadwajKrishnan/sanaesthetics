@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Artwork } from "@/components/Artwork";
+import { Artwork, PhotoTags, type PhotoTag } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { site } from "@/lib/site";
@@ -20,6 +20,7 @@ export function ArticlePage({
   cover,
   coverAlt,
   coverAspect = "aspect-[4/5]",
+  coverTags,
   fallback,
   children,
   footer,
@@ -32,14 +33,19 @@ export function ArticlePage({
   cover?: string;
   coverAlt: string;
   coverAspect?: string;
+  // Labels pinned onto the cover photo. Ignored while the illustration is drawn instead.
+  coverTags?: PhotoTag[];
   fallback: React.ReactNode;
   children: React.ReactNode;
   footer: React.ReactNode;
 }) {
   const picture = (
-    <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative mx-auto w-full max-w-md rounded-sm shadow-xl shadow-ink/15 lg:max-w-none ${coverAspect}`}>
-      {fallback}
-    </Artwork>
+    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+      <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${coverAspect}`}>
+        {fallback}
+      </Artwork>
+      {cover && coverTags?.length ? <PhotoTags tags={coverTags} /> : null}
+    </div>
   );
   return (
     <>

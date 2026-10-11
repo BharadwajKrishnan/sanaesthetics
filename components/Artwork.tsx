@@ -24,6 +24,27 @@ export function Artwork({
   );
 }
 
+// Labels pinned onto a photo, each centred on a point given as percentages of the
+// picture's width and height. Put it inside the same positioned box as the Artwork.
+export type PhotoTag = { label: string; left: number; top: number };
+
+export function PhotoTags({ tags }: { tags: PhotoTag[] }) {
+  return (
+    <ul aria-hidden="true" className="pointer-events-none absolute inset-0">
+      {tags.map((tag) => (
+        <li
+          key={tag.label}
+          className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-cream/95 py-1 pl-2 pr-2.5 text-[10px] font-medium uppercase tracking-[0.14em] text-ink shadow-md shadow-ink/30 sm:gap-2 sm:py-1.5 sm:pl-2.5 sm:pr-3.5 sm:text-xs sm:tracking-[0.15em]"
+          style={{ left: `${tag.left}%`, top: `${tag.top}%` }}
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-maroon sm:h-2 sm:w-2" />
+          {tag.label}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 // Deterministic scatter so server and client draw the same picture.
 function scatter(count: number, seed: number, w: number, h: number) {
   let s = seed;

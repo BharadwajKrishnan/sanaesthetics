@@ -38,6 +38,7 @@ export default async function Issue({ params }: PageProps<"/newsletter/[slug]">)
       readingTime={post.readingTime}
       cover={post.cover}
       coverAlt={post.coverAlt}
+      coverTags={post.coverTags}
       fallback={post.Cover ? <post.Cover /> : <Thali />}
       footer={
         <>
