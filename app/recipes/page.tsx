@@ -30,11 +30,15 @@ export default function Recipes() {
           <ul className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {recipes.map((recipe) => (
               <li key={recipe.slug} className="reveal">
-                <Link href={recipePath(recipe.slug)} aria-label={recipe.title} className="block">
-                  <Artwork src={recipe.photo} alt={recipe.title} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw" className="relative aspect-[4/5] rounded-sm">
-                    <TemperingPan />
-                  </Artwork>
-                </Link>
+                <Artwork
+                  src={recipe.photo}
+                  alt={recipe.photoAlt ?? recipe.title}
+                  link={{ href: recipePath(recipe.slug), "aria-label": recipe.title }}
+                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                  className="relative aspect-[4/5] rounded-sm"
+                >
+                  <TemperingPan />
+                </Artwork>
                 <Eyebrow className="mt-5">{recipe.eyebrow}</Eyebrow>
                 <h2 className="mt-2 font-serif text-3xl font-semibold leading-tight">
                   <Link href={recipePath(recipe.slug)} className="hover:text-maroon">

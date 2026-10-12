@@ -31,11 +31,15 @@ export default function FlavourScience() {
           <ul className="mt-12 grid gap-12">
             {articles.map((article) => (
               <li key={article.slug} className="reveal grid items-center gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)]">
-                <a {...articleLink(article.slug)} aria-label={article.title} className="block">
-                  <Artwork src={article.cover} alt={article.coverAlt} sizes="(min-width: 1024px) 24vw, (min-width: 640px) 33vw, 90vw" className={`relative max-w-sm rounded-sm shadow-xl shadow-ink/15 ${article.coverAspect ?? "aspect-[4/3]"}`}>
-                    <TemperingPan />
-                  </Artwork>
-                </a>
+                <Artwork
+                  src={article.cover}
+                  alt={article.coverAlt}
+                  link={{ ...articleLink(article.slug), "aria-label": article.title }}
+                  sizes="(min-width: 1024px) 24vw, (min-width: 640px) 33vw, 90vw"
+                  className={`relative max-w-sm rounded-sm shadow-xl shadow-ink/15 ${article.coverAspect ?? "aspect-[4/3]"}`}
+                >
+                  <TemperingPan />
+                </Artwork>
                 <div>
                   <Eyebrow>{article.eyebrow}</Eyebrow>
                   <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight sm:text-4xl">

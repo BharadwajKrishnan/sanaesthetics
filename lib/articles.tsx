@@ -13,11 +13,11 @@ export type Article = {
   coverAlt: string;
   // Tailwind aspect class for the cover. Defaults to 4:3.
   coverAspect?: string;
-  // The cover has text in it: readers can open it full screen.
-  coverZoom?: boolean;
   readingTime: string;
   Body: () => React.ReactNode;
 };
+
+const SKETCHES_ALT = "Line drawings of a South Indian coffee filter, dabara and tumbler, and decoction being poured";
 
 const ROASTING_ALT =
   "Roasting chemistry: sugars and amino compounds plus heat drive the Maillard reaction, giving brown colour, roasted aroma and deeper flavour";
@@ -68,7 +68,10 @@ function DecoctionBody() {
       <p>Behind that seemingly simple cup of South Indian filter coffee, however, there is quite a bit of chemistry happening.</p>
 
       <figure>
-        <Image src="/images/filter-coffee-sketches.webp" alt="Line drawings of a South Indian coffee filter, dabara and tumbler, and decoction being poured" width={1400} height={1050} quality={90} sizes="(min-width: 1024px) 48rem, 90vw" className="w-full rounded-sm" />
+        <div className="relative">
+          <Image src="/images/filter-coffee-sketches.webp" alt={SKETCHES_ALT} width={1400} height={1050} quality={90} sizes="(min-width: 1024px) 48rem, 90vw" className="w-full rounded-sm" />
+          <Zoomable src="/images/filter-coffee-sketches.webp" alt={SKETCHES_ALT} />
+        </div>
       </figure>
 
       <h2>What is a coffee decoction?</h2>
@@ -396,7 +399,6 @@ export const articles: Article[] = [
     coverAlt:
       "Thalipu, the flavour science behind South Indian tempering: a line drawing of a spice box, bowls of seeds and dal, curry leaves, chillies and a pan of sizzling tempering",
     coverAspect: "aspect-[16/9]",
-    coverZoom: true,
     readingTime: "5 min read",
     Body: TemperingBody,
   },
@@ -408,7 +410,6 @@ export const articles: Article[] = [
       "What happens between the roaster and the dabara: percolation, the Maillard reaction, chicory, and the four brewing variables that change a cup of South Indian filter coffee.",
     cover: "/images/caffeine-molecule.webp",
     coverAlt: "The structure of caffeine, a naturally occurring alkaloid in coffee",
-    coverZoom: true,
     readingTime: "6 min read",
     Body: DecoctionBody,
   },

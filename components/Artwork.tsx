@@ -1,15 +1,20 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Zoomable } from "@/components/Zoomable";
+
+type PictureLink = { href: string; target?: string; rel?: string; "aria-label"?: string };
 
 // A picture slot: shows the photo when there is one, otherwise the illustration passed as children.
 // Pass a positioning class (relative or absolute): the picture fills it.
-// Set zoom for a photo with text in it, so readers can open it full screen.
+// Every photo can be opened full screen and zoomed (see Zoomable); pass zoom={false} to turn that off.
+// With a link, clicking the picture follows the link and only the corner badge opens it full screen.
 export function Artwork({
   src,
   alt,
   sizes,
   priority,
-  zoom,
+  zoom = true,
+  link,
   className = "",
   children,
 }: {
@@ -18,13 +23,21 @@ export function Artwork({
   sizes: string;
   priority?: boolean;
   zoom?: boolean;
+  link?: PictureLink;
   className?: string;
   children: React.ReactNode;
 }) {
+  const picture = src ? <Image src={src} alt={alt} fill sizes={sizes} quality={90} priority={priority} className="object-cover" /> : children;
   return (
     <div className={`umber-backdrop overflow-hidden ${className}`}>
-      {src ? <Image src={src} alt={alt} fill sizes={sizes} quality={90} priority={priority} className="object-cover" /> : children}
-      {src && zoom && <Zoomable src={src} alt={alt} />}
+      {link ? (
+        <Link {...link} className="absolute inset-0 block">
+          {picture}
+        </Link>
+      ) : (
+        picture
+      )}
+      {src && zoom && <Zoomable src={src} alt={alt} badgeOnly={!!link} />}
     </div>
   );
 }

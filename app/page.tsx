@@ -72,8 +72,9 @@ export default function Home() {
           </div>
           <KolamCorner className="pointer-events-none absolute left-3 top-3 hidden w-28 text-brass/70 md:block lg:w-36" />
           <KolamCorner className="pointer-events-none absolute bottom-3 left-3 hidden w-28 -scale-y-100 text-brass/70 md:block lg:w-36" />
-          <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-12 sm:px-8 lg:pb-20 lg:pt-20">
-            <div className="lg:max-w-[50%]">
+          {/* On large screens this block spans the artwork too; clicks pass through its empty part to the spice box. */}
+          <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-12 sm:px-8 lg:pointer-events-none lg:pb-20 lg:pt-20">
+            <div className="lg:pointer-events-auto lg:max-w-[50%]">
               <h1 className="font-serif text-[clamp(2.75rem,5vw,4.6rem)] font-medium leading-[1.02]">
                 Traditional flavours.
                 <br />A deeper understanding.
@@ -132,7 +133,6 @@ export default function Home() {
                   src={photos.issue1}
                   alt="Arusuvai poster, the six tastes in Tamil food tradition: sweet (jaggery, payasam), sour (tamarind, raw mango), salty (salt, pickle), bitter (fenugreek, neem flowers, bitter gourd), pungent (chilli, black pepper) and astringent (raw banana, lentils)."
                   sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 90vw"
-                  zoom
                   className="relative mx-auto aspect-[4/5] w-full max-w-md rounded-sm shadow-xl shadow-ink/15"
                 >
                   <Thali />

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Zoomable } from "@/components/Zoomable";
 import { dabbaCutout } from "@/lib/photos";
 import { POSITIONS, SPICES } from "@/lib/spices";
 
@@ -18,19 +19,23 @@ export function BrassDabba({ className = "" }: { className?: string }) {
   );
 }
 
-// The photographed spice box when there is one, otherwise the drawn one.
+// The photographed spice box when there is one, otherwise the drawn one. Pass a positioning
+// class (e.g. absolute) and a width. The photo can be opened full screen and zoomed.
 export function Dabba({ className = "", alt = "", sizes, priority }: { className?: string; alt?: string; sizes: string; priority?: boolean }) {
   if (!dabbaCutout) return <BrassDabba className={className} />;
   return (
-    <Image
-      src={dabbaCutout}
-      alt={alt}
-      width={848}
-      height={848}
-      sizes={sizes}
-      quality={90}
-      priority={priority}
-      className={`aspect-square rounded-full drop-shadow-[0_2rem_2.5rem_rgb(10_6_3/0.7)] ${className}`}
-    />
+    <div className={`aspect-square rounded-full ${className}`}>
+      <Image
+        src={dabbaCutout}
+        alt={alt}
+        width={848}
+        height={848}
+        sizes={sizes}
+        quality={90}
+        priority={priority}
+        className="h-full w-full rounded-full drop-shadow-[0_2rem_2.5rem_rgb(10_6_3/0.7)]"
+      />
+      <Zoomable src={dabbaCutout} alt={alt || "An open brass anjarapetti spice box, seen from above"} />
+    </div>
   );
 }
