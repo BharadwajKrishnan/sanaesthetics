@@ -27,7 +27,7 @@ Then open http://localhost:3000.
 
 The site keeps no subscriber list. It hands every signup to an n8n workflow, which adds the address to the sheet straight away. No confirmation email is sent.
 
-1. A reader enters an address. The site POSTs a `subscribed` event to the webhook.
+1. A reader enters their name and email address. The site POSTs a `subscribed` event to the webhook.
 2. The workflow adds the address to the Google Sheet, or updates its row if the address is already there.
 3. The form tells the reader they're on the list.
 
@@ -43,7 +43,7 @@ Without `SIGNUP_WEBHOOK_URL`, signups are printed to the dev server's console so
 The webhook receives JSON:
 
 ```json
-{ "event": "subscribed", "list": "newsletter", "email": "name@example.com", "subscribedAt": "2026-10-10T09:00:00.000Z" }
+{ "event": "subscribed", "list": "newsletter", "name": "Meena Iyer", "email": "name@example.com", "subscribedAt": "2026-10-10T09:00:00.000Z" }
 ```
 
 `list` is `newsletter` or `waitlist` (the classes form). If the workflow replies with `{ "status": "exists" }` for an address that is already in the sheet, the site tells the reader so.
@@ -51,5 +51,5 @@ The webhook receives JSON:
 A ready-made workflow is in `n8n/signup-workflow.json`. Import it in n8n (Workflow menu → Import from file), then:
 
 1. Copy the **Webhook** node's production URL into `SIGNUP_WEBHOOK_URL`. To keep other callers out, set the node's authentication to Header Auth with a credential named `xi-api-key`, and put its value in `SIGNUP_WEBHOOK_SECRET`.
-2. On **Append or update row in sheet**, connect a Google Sheets credential and pick the spreadsheet and sheet. The sheet needs a header row with `email`, `list` and `subscribedAt`. Rows are matched on `email`, so an address is never added twice.
+2. On **Append or update row in sheet**, connect a Google Sheets credential and pick the spreadsheet and sheet. The sheet needs a header row with `name`, `email`, `list` and `subscribedAt`. Rows are matched on `email`, so an address is never added twice.
 3. Activate the workflow.

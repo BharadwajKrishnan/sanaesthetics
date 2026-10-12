@@ -34,6 +34,7 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
+            "name": "={{ $json.body.name }}",
             "email": "={{ $json.body.email }}",
             "list": "={{ $json.body.list }}",
             "subscribedAt": "={{ $json.body.subscribedAt }}"
@@ -42,6 +43,15 @@
             "email"
           ],
           "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
             {
               "id": "email",
               "displayName": "email",
@@ -81,7 +91,7 @@
         300,
         300
       ],
-      "notes": "Connect a Google Sheets credential, then pick the spreadsheet and sheet. The sheet needs a header row with these column names: email, list, subscribedAt. Rows are matched on email, so an address is never added twice."
+      "notes": "Connect a Google Sheets credential, then pick the spreadsheet and sheet. The sheet needs a header row with these column names: name, email, list, subscribedAt. Rows are matched on email, so an address is never added twice."
     }
   ],
   "connections": {

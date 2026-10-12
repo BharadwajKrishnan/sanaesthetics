@@ -10,7 +10,7 @@
 export const LISTS = ["waitlist", "newsletter"] as const;
 export type List = (typeof LISTS)[number];
 
-export type SignupEvent = { event: "subscribed"; list: List; email: string; subscribedAt: string };
+export type SignupEvent = { event: "subscribed"; list: List; name: string; email: string; subscribedAt: string };
 
 // Sends a signup to the webhook. Resolves to "exists" when n8n answers { "status": "exists" }, otherwise "ok".
 export async function notify(event: SignupEvent): Promise<"ok" | "exists"> {

@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import type { List } from "@/lib/signups";
 
-type State = "idle" | "sending" | "subscribed" | "exists" | "invalid" | "failed";
+type State = "idle" | "sending" | "subscribed" | "exists" | "name" | "invalid" | "failed";
 
 const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string }> = {
   waitlist: {
@@ -21,12 +21,14 @@ const COPY: Record<List, { cta: string; sending: string; subscribed: string; exi
 };
 
 const ERRORS: Partial<Record<State, string>> = {
+  name: "Enter your name.",
   invalid: "Enter an email address like name@example.com.",
   failed: "The list couldn't be reached. Please try again in a few minutes.",
 };
 
 export function SignupForm({ list, tone = "light", center = false }: { list: List; tone?: "light" | "dark"; center?: boolean }) {
   const id = useId();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [state, setState] = useState<State>("idle");
@@ -35,6 +37,10 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!name.trim()) {
+      setState("name");
+      return;
+    }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) {
       setState("invalid");
       return;
@@ -44,22 +50,47 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       const res = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ list, email, website }),
+        body: JSON.stringify({ list, name, email, website }),
       });
       const data = await res.json();
       if (res.ok) setState(data.status === "exists" ? "exists" : "subscribed");
-      else setState(data.error === "invalid" ? "invalid" : "failed");
+      else setState(data.error === "name" ? "name" : data.error === "invalid" ? "invalid" : "failed");
     } catch {
       setState("failed");
     }
   }
 
-  const isError = state === "invalid" || state === "failed";
+  const isError = state === "name" || state === "invalid" || state === "failed";
   const message = state === "subscribed" ? copy.subscribed : state === "exists" ? copy.exists : ERRORS[state];
+
+  const label = `block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`;
+  const field = `min-w-0 rounded-md border px-4 py-3 text-ink placeholder:text-ink/40 ${dark ? "border-cream bg-cream" : "border-line bg-white"}`;
+  const describedBy = message ? `${id}-msg` : undefined;
+  const reset = () => {
+    if (state !== "idle") setState("idle");
+  };
 
   return (
     <form onSubmit={onSubmit} noValidate className={`relative w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
-      <label htmlFor={id} className={`block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`}>
+      <label htmlFor={`${id}-name`} className={label}>
+        Name
+      </label>
+      <input
+        id={`${id}-name`}
+        type="text"
+        autoComplete="name"
+        placeholder="Your name"
+        maxLength={100}
+        value={name}
+        onChange={(e) => {
+          setName(e.target.value);
+          reset();
+        }}
+        aria-invalid={state === "name"}
+        aria-describedby={describedBy}
+        className={`mt-2 w-full ${field}`}
+      />
+      <label htmlFor={id} className={`mt-4 ${label}`}>
         Email address
       </label>
       {/* Honeypot: hidden from people, filled in by bots */}
@@ -76,11 +107,11 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (state !== "idle") setState("idle");
+            reset();
           }}
-          aria-invalid={isError}
-          aria-describedby={message ? `${id}-msg` : undefined}
-          className={`min-w-0 flex-1 rounded-md border px-4 py-3 text-ink placeholder:text-ink/40 ${dark ? "border-cream bg-cream" : "border-line bg-white"}`}
+          aria-invalid={state === "invalid"}
+          aria-describedby={describedBy}
+          className={`flex-1 ${field}`}
         />
         <button
           type="submit"
