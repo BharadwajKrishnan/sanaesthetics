@@ -7,8 +7,8 @@ export const photos: Record<"hero" | "issue1" | "anjarapetti" | "heat" | "recipe
   anjarapetti: undefined,
   heat: undefined,
   recipes: undefined,
-  // Sandhya's photo on the About page, cropped to the 4:5 frame it is shown in.
-  portrait: "/images/sandhya.webp",
+  // Sandhya's photo on the About page, cropped square to match its frame.
+  portrait: "/images/sandhya-kitchen-table.webp",
 };
 
 // The spice box seen from above, cut out as a circle on a transparent

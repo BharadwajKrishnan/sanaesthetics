@@ -119,7 +119,7 @@ function Portrait() {
         alt={`${site.author} at a kitchen table, beside a blue and white tea set`}
         sizes="(min-width: 1024px) 36vw, (min-width: 640px) 28rem, 90vw"
         priority
-        className="relative aspect-[4/5] rounded-sm shadow-xl shadow-ink/15"
+        className="relative aspect-square rounded-sm shadow-xl shadow-ink/15"
       >
         <PortraitPlaceholder />
       </Artwork>
