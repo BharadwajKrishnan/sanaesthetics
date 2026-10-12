@@ -29,6 +29,11 @@ body {
   font-variant-numeric: lining-nums;
 }
 
+/* The page stays put behind an enlarged picture */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* Body copy is justified; centred blocks stay centred */
 main p,
 main li,

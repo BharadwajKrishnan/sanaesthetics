@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Zoomable } from "@/components/Zoomable";
 import Link from "next/link";
 
 // Flavour science articles. Add one here and it gets its own page at /flavour-science/<slug>.
@@ -12,9 +13,14 @@ export type Article = {
   coverAlt: string;
   // Tailwind aspect class for the cover. Defaults to 4:3.
   coverAspect?: string;
+  // The cover has text in it: readers can open it full screen.
+  coverZoom?: boolean;
   readingTime: string;
   Body: () => React.ReactNode;
 };
+
+const ROASTING_ALT =
+  "Roasting chemistry: sugars and amino compounds plus heat drive the Maillard reaction, giving brown colour, roasted aroma and deeper flavour";
 
 const STAGES = ["Roasting", "Grinding", "Extraction", "Decoction", "Milk", "The final cup"];
 
@@ -62,7 +68,7 @@ function DecoctionBody() {
       <p>Behind that seemingly simple cup of South Indian filter coffee, however, there is quite a bit of chemistry happening.</p>
 
       <figure>
-        <Image src="/images/filter-coffee-sketches.webp" alt="Line drawings of a South Indian coffee filter, dabara and tumbler, and decoction being poured" width={1400} height={1050} sizes="(min-width: 1024px) 48rem, 90vw" className="w-full rounded-sm" />
+        <Image src="/images/filter-coffee-sketches.webp" alt="Line drawings of a South Indian coffee filter, dabara and tumbler, and decoction being poured" width={1400} height={1050} quality={90} sizes="(min-width: 1024px) 48rem, 90vw" className="w-full rounded-sm" />
       </figure>
 
       <h2>What is a coffee decoction?</h2>
@@ -105,7 +111,10 @@ function DecoctionBody() {
       <p>A lot of what we recognise as “coffee flavour” is actually created before water ever touches the coffee.</p>
       <p>Green coffee beans do not smell like the coffee we drink.</p>
       <figure>
-        <Image src="/images/roasting-chemistry.webp" alt="Roasting chemistry: sugars and amino compounds plus heat drive the Maillard reaction, giving brown colour, roasted aroma and deeper flavour" width={1400} height={1050} sizes="(min-width: 1024px) 48rem, 90vw" className="w-full rounded-sm" />
+        <div className="relative">
+          <Image src="/images/roasting-chemistry.webp" alt={ROASTING_ALT} width={1400} height={1050} quality={90} sizes="(min-width: 1024px) 48rem, 90vw" className="w-full rounded-sm" />
+          <Zoomable src="/images/roasting-chemistry.webp" alt={ROASTING_ALT} />
+        </div>
       </figure>
       <p>
         During roasting, heat causes extensive chemical transformations. One important group of reactions is the Maillard reaction, where
@@ -387,6 +396,7 @@ export const articles: Article[] = [
     coverAlt:
       "Thalipu, the flavour science behind South Indian tempering: a line drawing of a spice box, bowls of seeds and dal, curry leaves, chillies and a pan of sizzling tempering",
     coverAspect: "aspect-[16/9]",
+    coverZoom: true,
     readingTime: "5 min read",
     Body: TemperingBody,
   },
@@ -398,6 +408,7 @@ export const articles: Article[] = [
       "What happens between the roaster and the dabara: percolation, the Maillard reaction, chicory, and the four brewing variables that change a cup of South Indian filter coffee.",
     cover: "/images/caffeine-molecule.webp",
     coverAlt: "The structure of caffeine, a naturally occurring alkaloid in coffee",
+    coverZoom: true,
     readingTime: "6 min read",
     Body: DecoctionBody,
   },

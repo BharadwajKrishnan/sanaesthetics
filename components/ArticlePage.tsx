@@ -21,6 +21,7 @@ export function ArticlePage({
   coverAlt,
   coverAspect = "aspect-[4/5]",
   coverTags,
+  coverZoom,
   fallback,
   children,
   footer,
@@ -35,6 +36,8 @@ export function ArticlePage({
   coverAspect?: string;
   // Labels pinned onto the cover photo. Ignored while the illustration is drawn instead.
   coverTags?: PhotoTag[];
+  // The cover has text in it: readers can open it full screen.
+  coverZoom?: boolean;
   fallback: React.ReactNode;
   children: React.ReactNode;
   footer: React.ReactNode;
@@ -42,7 +45,7 @@ export function ArticlePage({
   const tags = cover && coverTags?.length ? coverTags : undefined;
   const picture = (
     <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-      <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${coverAspect}`}>
+      <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority zoom={coverZoom} className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${coverAspect}`}>
         {fallback}
       </Artwork>
       {tags && <PhotoTags tags={tags} />}

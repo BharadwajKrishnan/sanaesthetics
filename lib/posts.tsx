@@ -16,6 +16,8 @@ export type Post = {
   coverAlt: string;
   // Labels on the cover photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
   coverTags?: PhotoTag[];
+  // The cover has text in it (a poster): readers can open it full screen.
+  coverZoom?: boolean;
   // Drawn in place of the cover photo until there is one. Defaults to the thali.
   Cover?: () => React.ReactNode;
   readingTime: string;
@@ -228,6 +230,7 @@ export const posts: Post[] = [
       "Tamil kitchens counted six tastes long before anyone drew a molecule. Where the old idea and modern sensory science agree, where they part ways, and why balance matters more than a checklist.",
     cover: photos.issue1,
     coverAlt: "Arusuvai poster, the six tastes in Tamil food tradition",
+    coverZoom: true,
     readingTime: "5 min read",
     Body: ArusuvaiBody,
   },

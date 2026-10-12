@@ -39,6 +39,7 @@ export default async function FlavourScienceArticle({ params }: PageProps<"/flav
       cover={article.cover}
       coverAlt={article.coverAlt}
       coverAspect={article.coverAspect ?? "aspect-[4/3]"}
+      coverZoom={article.coverZoom}
       fallback={<TemperingPan />}
       footer={
         <>

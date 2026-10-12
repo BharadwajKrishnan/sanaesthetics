@@ -28,6 +28,7 @@ export function Dabba({ className = "", alt = "", sizes, priority }: { className
       width={848}
       height={848}
       sizes={sizes}
+      quality={90}
       priority={priority}
       className={`aspect-square rounded-full drop-shadow-[0_2rem_2.5rem_rgb(10_6_3/0.7)] ${className}`}
     />

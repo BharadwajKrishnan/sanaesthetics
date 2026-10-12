@@ -132,6 +132,7 @@ export default function Home() {
                   src={photos.issue1}
                   alt="Arusuvai poster, the six tastes in Tamil food tradition: sweet (jaggery, payasam), sour (tamarind, raw mango), salty (salt, pickle), bitter (fenugreek, neem flowers, bitter gourd), pungent (chilli, black pepper) and astringent (raw banana, lentils)."
                   sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 90vw"
+                  zoom
                   className="relative mx-auto aspect-[4/5] w-full max-w-md rounded-sm shadow-xl shadow-ink/15"
                 >
                   <Thali />

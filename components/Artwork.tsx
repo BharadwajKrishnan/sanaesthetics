@@ -1,12 +1,15 @@
 import Image from "next/image";
+import { Zoomable } from "@/components/Zoomable";
 
 // A picture slot: shows the photo when there is one, otherwise the illustration passed as children.
 // Pass a positioning class (relative or absolute): the picture fills it.
+// Set zoom for a photo with text in it, so readers can open it full screen.
 export function Artwork({
   src,
   alt,
   sizes,
   priority,
+  zoom,
   className = "",
   children,
 }: {
@@ -14,12 +17,14 @@ export function Artwork({
   alt: string;
   sizes: string;
   priority?: boolean;
+  zoom?: boolean;
   className?: string;
   children: React.ReactNode;
 }) {
   return (
     <div className={`umber-backdrop overflow-hidden ${className}`}>
-      {src ? <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className="object-cover" /> : children}
+      {src ? <Image src={src} alt={alt} fill sizes={sizes} quality={90} priority={priority} className="object-cover" /> : children}
+      {src && zoom && <Zoomable src={src} alt={alt} />}
     </div>
   );
 }
