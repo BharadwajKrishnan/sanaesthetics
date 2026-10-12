@@ -116,7 +116,7 @@ function Portrait() {
     <figure className="mx-auto max-w-md lg:max-w-none">
       <Artwork
         src={photos.portrait}
-        alt={site.author}
+        alt={`${site.author} at a kitchen table, beside a blue and white tea set`}
         sizes="(min-width: 1024px) 36vw, (min-width: 640px) 28rem, 90vw"
         priority
         className="relative aspect-[4/5] rounded-sm shadow-xl shadow-ink/15"
