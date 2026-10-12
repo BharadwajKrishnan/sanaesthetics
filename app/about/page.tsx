@@ -77,6 +77,20 @@ export default function About() {
                 <p className="font-serif text-3xl font-semibold leading-tight text-maroon sm:text-4xl">“A Curious Cook, Always Learning.”</p>
               </blockquote>
 
+              {photos.grinding && (
+                <figure className="reveal mb-12 max-w-md">
+                  <Artwork
+                    src={photos.grinding}
+                    alt={`${site.author} grinding with a stone mortar and pestle at the kitchen table`}
+                    sizes="(min-width: 640px) 28rem, 90vw"
+                    zoom={false}
+                    className="relative aspect-[4/5] rounded-sm shadow-xl shadow-ink/15"
+                  >
+                    {null}
+                  </Artwork>
+                </figure>
+              )}
+
               <div className="max-w-2xl space-y-6 text-lg leading-relaxed text-ink/80">
                 {LEARNING.map((paragraph) => (
                   <p key={paragraph.slice(0, 24)} className="reveal">
