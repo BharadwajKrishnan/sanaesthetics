@@ -6,13 +6,23 @@ import { useRef, useState } from "react";
 // Lets a reader open a picture full screen and zoom into it. Put it inside the picture's
 // positioned box: it covers the picture with an invisible button and adds a small "enlarge"
 // badge in the corner. With badgeOnly, only the badge is a button, for pictures that are
-// themselves links.
+// themselves links. badgePosition moves the badge when a corner is taken, e.g. by photo labels.
 //
 // Opened, the picture fits the screen. Tapping it zooms in (to 2.5 times the screen width, at
 // most 1400px) with the tapped spot kept under the finger, and the reader pans by scrolling;
 // tapping again zooms back out. Tapping outside the picture, Close or Escape shuts it.
 // The larger files only load once the picture is opened.
-export function Zoomable({ src, alt, badgeOnly = false }: { src: string; alt: string; badgeOnly?: boolean }) {
+export function Zoomable({
+  src,
+  alt,
+  badgeOnly = false,
+  badgePosition = "bottom-3 right-3",
+}: {
+  src: string;
+  alt: string;
+  badgeOnly?: boolean;
+  badgePosition?: string;
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   const scroller = useRef<HTMLDivElement>(null);
   // Where the reader tapped, as fractions of the picture and as a point on screen.
@@ -68,9 +78,9 @@ export function Zoomable({ src, alt, badgeOnly = false }: { src: string; alt: st
         type="button"
         onClick={show}
         aria-label={`Enlarge picture: ${alt}`}
-        className={`group absolute cursor-zoom-in ${badgeOnly ? "bottom-3 right-3 h-10 w-10 rounded-full" : "inset-0"}`}
+        className={`group absolute cursor-zoom-in ${badgeOnly ? `${badgePosition} h-10 w-10 rounded-full` : "inset-0"}`}
       >
-        <span className={`absolute flex ${badgeOnly ? "inset-0" : "bottom-3 right-3"} h-10 w-10 items-center justify-center rounded-full bg-ink/70 text-cream shadow-lg transition-colors group-hover:bg-ink/85`}>
+        <span className={`absolute flex ${badgeOnly ? "inset-0" : badgePosition} h-10 w-10 items-center justify-center rounded-full bg-ink/70 text-cream shadow-lg transition-colors group-hover:bg-ink/85`}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="10.5" cy="10.5" r="6.5" />
             <path d="m15.5 15.5 5 5M10.5 7.5v6M7.5 10.5h6" />

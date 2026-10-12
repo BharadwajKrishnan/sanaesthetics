@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
-import { HeroGarnish, type PhotoTag } from "@/components/Artwork";
+import { HeroGarnish, PhotoTags, type PhotoTag } from "@/components/Artwork";
+import { Zoomable } from "@/components/Zoomable";
 import { articleLink } from "@/lib/articles";
 import { Dabba } from "@/components/BrassDabba";
 import { photos } from "@/lib/photos";
@@ -143,6 +145,21 @@ const BIG_FIVE = [
 
 const SECOND_BOX = ["Turmeric powder", "Chilli powder", "Coriander powder", "Byadagi chilli powder", "Black and white sesame seeds", "Cardamom"];
 
+// The second box from above, cut out of its background. Labels as on the cover: a dot at the edge
+// of the ingredient and the text in a quieter spot, as percentages of the picture.
+const SECOND_BOX_PHOTO = "/images/anjarapetti-second-box.webp";
+const SECOND_BOX_ALT =
+  "The second spice box from above: white sesame seeds, coriander powder, chilli powder, cardamom, Byadagi chilli powder, turmeric powder and black sesame seeds";
+const SECOND_BOX_TAGS: PhotoTag[] = [
+  { label: "White sesame seeds", at: { left: 27, top: 19 }, text: { left: 19, top: 6 } },
+  { label: "Coriander powder", at: { left: 71, top: 16 }, text: { left: 81, top: 6 } },
+  { label: "Chilli powder", at: { left: 14, top: 44 }, text: { left: 16, top: 33 } },
+  { label: "Byadagi chilli powder", at: { left: 88, top: 37 }, text: { left: 80, top: 29 } },
+  { label: "Cardamom", at: { left: 50, top: 60 }, text: { left: 50, top: 97 } },
+  { label: "Turmeric powder", at: { left: 24, top: 80 }, text: { left: 17, top: 90 } },
+  { label: "Black sesame seeds", at: { left: 76, top: 82 }, text: { left: 83, top: 90 } },
+];
+
 // Issue 2: the photographed spice box among leaves, chillies and seeds.
 function AnjarapettiCover() {
   return (
@@ -197,6 +214,13 @@ function AnjarapettiBody() {
           </li>
         ))}
       </ul>
+      <figure>
+        <div className="relative mx-auto max-w-xl">
+          <Image src={SECOND_BOX_PHOTO} alt={SECOND_BOX_ALT} width={1099} height={1079} quality={90} sizes="(min-width: 640px) 36rem, 90vw" className="h-auto w-full" />
+          <Zoomable src={SECOND_BOX_PHOTO} alt={SECOND_BOX_ALT} badgePosition="right-1 top-[56%]" />
+          <PhotoTags tags={SECOND_BOX_TAGS} />
+        </div>
+      </figure>
       <p>
         Sesame seeds may not technically be a masala, but they appear often enough in my cooking to deserve their own permanent
         place. I especially love the way their flavour changes when toasted, becoming deeper and nuttier.
