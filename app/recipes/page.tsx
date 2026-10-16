@@ -31,8 +31,8 @@ export default function Recipes() {
             {recipes.map((recipe) => (
               <li key={recipe.slug} className="reveal">
                 <Artwork
-                  src={recipe.photo}
-                  alt={recipe.photoAlt ?? recipe.title}
+                  src={recipe.cover ?? recipe.photo}
+                  alt={recipe.coverAlt ?? recipe.photoAlt ?? recipe.title}
                   link={{ href: recipePath(recipe.slug), "aria-label": recipe.title }}
                   sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
                   className="relative aspect-[4/5] rounded-sm"

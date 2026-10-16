@@ -135,22 +135,50 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   );
 }
 
+// The finished dish on top, then the second picture (the ingredients, with labels) and the tip, when there is one.
 function Photo({ recipe }: { recipe: Recipe }) {
-  const tags = recipe.photo && recipe.photoTags?.length ? recipe.photoTags : undefined;
+  const cover = recipe.cover ?? recipe.photo;
+  const second = recipe.cover && recipe.photo ? recipe.photo : undefined;
+  const tags = second && recipe.photoTags?.length ? recipe.photoTags : undefined;
+  const sizes = "(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw";
+  const credit = recipe.coverCredit;
   return (
-    <figure className="mx-auto w-full max-w-md lg:max-w-none">
-      <div className="relative">
-        <Artwork src={recipe.photo} alt={recipe.photoAlt ?? `A bowl of ${recipe.title}`} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${tags ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
+    <div className="mx-auto w-full max-w-md space-y-8 lg:max-w-none">
+      <figure>
+        <Artwork src={cover} alt={recipe.coverAlt ?? recipe.photoAlt ?? `A bowl of ${recipe.title}`} sizes={sizes} priority className="relative aspect-[4/5] w-full rounded-sm shadow-xl shadow-ink/15">
           <TemperingPan />
         </Artwork>
-        {tags && <PhotoTags tags={tags} />}
-      </div>
-      {recipe.tip && (
-        <figcaption className="mt-5 border-l-4 border-brass bg-parchment px-5 py-4 text-base leading-relaxed text-ink/85">
-          <span className="mr-2 font-serif text-lg font-semibold text-maroon">Pro tip</span>
-          {recipe.tip}
-        </figcaption>
+        {credit && (
+          <figcaption className="mt-2 text-right text-xs text-ink/55">
+            Photo:{" "}
+            <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
+              {credit.by}
+            </a>
+            , {credit.source},{" "}
+            <a href={credit.licenceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
+              {credit.licence}
+            </a>
+          </figcaption>
+        )}
+      </figure>
+      {(second || recipe.tip) && (
+        <figure>
+          {second && (
+            <div className="relative">
+              <Artwork src={second} alt={recipe.photoAlt ?? ""} sizes={sizes} className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${tags ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
+                <TemperingPan />
+              </Artwork>
+              {tags && <PhotoTags tags={tags} />}
+            </div>
+          )}
+          {recipe.tip && (
+            <figcaption className={`${second ? "mt-5" : ""} border-l-4 border-brass bg-parchment px-5 py-4 text-base leading-relaxed text-ink/85`}>
+              <span className="mr-2 font-serif text-lg font-semibold text-maroon">Pro tip</span>
+              {recipe.tip}
+            </figcaption>
+          )}
+        </figure>
       )}
-    </figure>
+    </div>
   );
 }

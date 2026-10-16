@@ -8,7 +8,14 @@ export type Recipe = {
   tamil?: string;
   eyebrow: string;
   summary: string;
-  // Path under public/, e.g. "/images/vathakuzhambu.webp". Until set, an illustration is drawn instead.
+  // The finished dish, shown on the recipe card and at the top of the recipe page. Until set, `photo` is used,
+  // and until that is set an illustration is drawn instead.
+  cover?: string;
+  coverAlt?: string;
+  // Who took the cover photo, when it is not ours. Shown under the picture, as the licence requires.
+  coverCredit?: { by: string; source: string; sourceUrl: string; licence: string; licenceUrl: string };
+  // Path under public/, e.g. "/images/vathakuzhambu-tamarind.webp". With `cover` set, this is a second picture on the
+  // recipe page (for example the ingredients, with labels).
   photo?: string;
   photoAlt?: string;
   // Labels on the photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
@@ -33,6 +40,15 @@ export const recipes: Recipe[] = [
     eyebrow: "Tamarind gravy · Tamil Nadu",
     summary:
       "A sour, spicy tamarind gravy made in sesame oil, with a spice powder that makes it lip-smacking and a pinch of jaggery to round out the edges.",
+    cover: "/images/vathakuzhambu.webp",
+    coverAlt: "Manathakkali vathakuzhambu: a dark red tamarind gravy with dried berries and curry leaves, in a small steel vessel",
+    coverCredit: {
+      by: "Abinandhankumar2045",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Manathakkalikkai_vathakuzhambu.jpg",
+      licence: "CC BY-SA 4.0",
+      licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
     photo: "/images/vathakuzhambu-tamarind.webp",
     photoAlt: "A block of tamarind and a bowl of sambar powder beside a ceramic jar",
     photoTags: [
@@ -96,6 +112,15 @@ export const recipes: Recipe[] = [
     eyebrow: "Raw mango relish · Tamil New Year",
     summary:
       "Raw mango simmered with jaggery, chilli and salt, finished with a mustard-seed tempering and a pinch of neem flowers: all six tastes in one bowl.",
+    cover: "/images/mangai-pachadi.webp",
+    coverAlt: "A white bowl of mangai pachadi: raw mango cooked down with jaggery to a glossy amber, flecked with mustard seeds and a curry leaf",
+    coverCredit: {
+      by: "Nithyasrm",
+      source: "Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Manga_pachadi.JPG",
+      licence: "CC BY-SA 4.0",
+      licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
     intro: [
       "One amazing example of Arusuvai is mango pachadi. It is a special dish on Tamil New Year, eaten to embrace each flavour, as you would each flavour of your life.",
       "Mangai pachadi can bring together several taste experiences in one dish: sour from raw mango, sweet from jaggery, pungent from chilli, salty from salt, and in some versions bitter notes from neem flowers.",
