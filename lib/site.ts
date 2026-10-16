@@ -9,6 +9,8 @@ export const site = {
   instagramHandle: "san_aesthetixs",
   instagramUrl: "https://www.instagram.com/san_aesthetixs/",
   author: "Sandhya Ravichandran",
+  // Where readers write to be taken off a list or to ask about their data. Shown on the privacy page.
+  contactEmail: "CHANGE-ME@southindianfoodlab.com",
   // Section links point at the homepage so they work from every page.
   nav: [
     { href: "/", label: "Home" },

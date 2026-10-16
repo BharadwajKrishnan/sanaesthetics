@@ -1,0 +1,136 @@
+import type { Metadata } from "next";
+import { KolamDivider } from "@/components/Kolam";
+import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
+import { openGraphShared, site } from "@/lib/site";
+
+// Plain-language notice: a hobby site that keeps two email lists, and nothing else.
+
+export const metadata: Metadata = {
+  title: `Privacy | ${site.name}`,
+  description: `What ${site.name} collects when you subscribe, where it is kept, and how to be taken off the list.`,
+  alternates: { canonical: "/privacy" },
+  openGraph: { ...openGraphShared, title: "Privacy", description: `How ${site.name} handles your details.`, url: "/privacy", type: "website" },
+};
+
+const UPDATED = "16 October 2026";
+
+const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
+  {
+    title: "Who runs this site",
+    body: [
+      <>
+        {site.name} is a personal, non-commercial site run by {site.author}. It is a hobby, not a business: nothing is sold here and no
+        advertising is shown.
+      </>,
+      <>
+        Questions about your details go to <Mail />.
+      </>,
+    ],
+  },
+  {
+    title: "What the two forms collect",
+    body: [
+      <>
+        The site has two sign-up forms: one for the newsletter and one for the classes waitlist. Each asks for your name and your email
+        address. When you submit a form the site also records which list you joined and the time.
+      </>,
+      <>That is everything. There are no accounts, no passwords and no payment details.</>,
+    ],
+  },
+  {
+    title: "Where it goes",
+    body: [
+      <>
+        A sign-up is handed to an automation workflow, which adds the row to a private Google Sheet. That sheet is the list. It is not
+        shared, sold or used for anything other than sending you the emails you asked for.
+      </>,
+      <>
+        The site itself is hosted on Vercel. Like any web host, it may keep short-lived server logs, which include the IP address of a
+        request, for keeping the service running.
+      </>,
+    ],
+  },
+  {
+    title: "What it is used for",
+    body: [
+      <>
+        The newsletter list receives the newsletter, when there is an issue. The waitlist receives news about the classes, if and when
+        they happen. Neither list is used for anything else.
+      </>,
+    ],
+  },
+  {
+    title: "How to be taken off a list",
+    body: [
+      <>
+        Reply to any email from the site, or write to <Mail />, and say which address to remove. Your row is deleted from the sheet.
+        You can also ask what is stored about you, or have it corrected, the same way.
+      </>,
+    ],
+  },
+  {
+    title: "Cookies, analytics and fonts",
+    body: [
+      <>
+        The site sets no cookies of its own and runs no analytics or tracking. Fonts are served from the site itself, so reading a page
+        does not call out to a font service.
+      </>,
+    ],
+  },
+  {
+    title: "Embedded Instagram posts",
+    body: [
+      <>
+        The Recipes section on the home page shows a few Instagram posts in embedded frames. They load from instagram.com as you scroll
+        to them, and at that point Meta can see your IP address and may set its own cookies, as described in{" "}
+        <a href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener noreferrer" className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+          Instagram&apos;s privacy policy
+        </a>
+        . Nothing else on the site loads from a third party.
+      </>,
+    ],
+  },
+];
+
+function Mail() {
+  return (
+    <a href={`mailto:${site.contactEmail}`} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+      {site.contactEmail}
+    </a>
+  );
+}
+
+export default function Privacy() {
+  return (
+    <>
+      <SiteHeader current="/privacy" />
+      <main id="main" className="overflow-x-clip">
+        <section className="mx-auto max-w-3xl px-5 pb-24 pt-12 sm:px-8 lg:pt-20">
+          <Eyebrow className="text-maroon">Privacy</Eyebrow>
+          <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">What this site keeps, and why.</h1>
+          <p className="mt-6 text-lg leading-relaxed text-ink/80">
+            The short version: if you sign up, your name and email address go on a list so that the newsletter can reach you. Nothing
+            else is collected, and one email is enough to be taken off again.
+          </p>
+          <p className="mt-3 text-sm text-ink/60">Last updated {UPDATED}.</p>
+
+          <KolamDivider className="mt-12 text-brass" />
+
+          <div className="mt-12 space-y-12">
+            {SECTIONS.map((section) => (
+              <section key={section.title}>
+                <h2 className="font-serif text-3xl font-semibold leading-tight">{section.title}</h2>
+                <div className="mt-4 space-y-4 text-lg leading-relaxed text-ink/80">
+                  {section.body.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}

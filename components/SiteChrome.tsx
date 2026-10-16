@@ -143,6 +143,10 @@ export function SiteFooter() {
         <p className="mx-auto flex max-w-7xl flex-wrap justify-between gap-2 px-5 py-6 text-xs text-cream/60 sm:px-8">
           <span>
             © {new Date().getFullYear()} {site.name}
+            <span aria-hidden="true"> · </span>
+            <Link href="/privacy" className="hover:underline hover:underline-offset-4">
+              Privacy
+            </Link>
           </span>
           <span>{site.domain}</span>
         </p>

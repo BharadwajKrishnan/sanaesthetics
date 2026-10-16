@@ -296,7 +296,7 @@ export default function Home() {
             <p className="mt-4 font-serif text-2xl font-medium">Stories, ingredients and the science behind South Indian flavour.</p>
             <p className="mx-auto mt-5 max-w-xl leading-relaxed text-cream/80">
               One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam,
-              and you can unsubscribe at any time.
+              and a reply to any issue is enough to be taken off the list.
             </p>
             <div className="mt-9">
               <SignupForm list="newsletter" tone="dark" center />

@@ -1,22 +1,25 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useState } from "react";
 import type { List } from "@/lib/signups";
 
 type State = "idle" | "sending" | "subscribed" | "exists" | "name" | "invalid" | "failed";
 
-const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string }> = {
+const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string; consent: string }> = {
   waitlist: {
     cta: "Join the waitlist",
     sending: "Joining…",
     subscribed: "You're on the waitlist. Dates and prices for the first classes will reach you first.",
     exists: "This email is already on the waitlist.",
+    consent: "By joining, you agree to hear about the classes by email. One reply is enough to be taken off the list.",
   },
   newsletter: {
     cta: "Subscribe",
     sending: "Subscribing…",
     subscribed: "You're subscribed. The next issue will arrive by email.",
     exists: "This email is already subscribed.",
+    consent: "By subscribing, you agree to receive the newsletter by email. A reply to any issue is enough to be taken off the list.",
   },
 };
 
@@ -129,6 +132,13 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
         className={`mt-3 min-h-6 text-[0.95rem] ${isError ? "font-semibold" : ""} ${dark ? "text-cream" : "text-ink"}`}
       >
         {message}
+      </p>
+      <p className={`mt-1 text-sm leading-relaxed ${dark ? "text-cream/65" : "text-ink/60"}`}>
+        {copy.consent}{" "}
+        <Link href="/privacy" className={`underline underline-offset-4 ${dark ? "decoration-cream/40 hover:decoration-cream" : "decoration-ink/30 hover:decoration-ink"}`}>
+          How your details are handled
+        </Link>
+        .
       </p>
     </form>
   );

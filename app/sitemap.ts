@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/flavour-science", 0.8),
     page("/recipes", 0.8),
     page("/about", 0.6),
+    page("/privacy", 0.3),
     ...posts.map((post) => page(postPath(post.slug), 0.7)),
     ...articles.map((article) => page(articleLink(article.slug).href, 0.7)),
     ...recipes.map((recipe) => page(recipePath(recipe.slug), 0.7)),

@@ -21,7 +21,7 @@ export default function Subscribe() {
             Stories, ingredients and the science behind South Indian flavour.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-ink/85">
-            One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam, and you can unsubscribe at any time.
+            One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam, and a reply to any issue is enough to be taken off the list.
           </p>
           <div className="mt-10">
             <SignupForm list="newsletter" />
