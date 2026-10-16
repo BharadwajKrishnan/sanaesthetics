@@ -50,18 +50,7 @@ main .text-center p {
   outline-offset: 3px;
 }
 
-.on-dark /* Body copy is justified; centred blocks stay centred */
-main p,
-main li,
-main dd {
-  text-align: justify;
-}
-
-main .text-center p {
-  text-align: center;
-}
-
-:focus-visible {
+.on-dark :focus-visible {
   outline-color: var(--color-cream);
 }
 

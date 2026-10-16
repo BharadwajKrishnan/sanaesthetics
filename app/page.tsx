@@ -5,11 +5,13 @@ import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components
 import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { KolamCorner, KolamDivider } from "@/components/Kolam";
 import { SignupForm } from "@/components/SignupForm";
+import { FlavourPyramid } from "@/components/FlavourPyramid";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { SixTastes } from "@/components/SixTastes";
 import { posts } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
 import { getPost, issueLink } from "@/lib/posts";
+import { PYRAMID } from "@/lib/pyramid";
 import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
@@ -150,11 +152,26 @@ export default function Home() {
           </div>
         </section>
 
+        {/* The flavour pyramid: how a South Indian dish is built, layer by layer */}
+        <section id="pyramid">
+          <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
+            <div className="reveal max-w-3xl">
+              <Eyebrow className="text-maroon">The flavour pyramid</Eyebrow>
+              <h2 className={`${H2} mt-4`}>Flavour is built from the ground up.</h2>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
+                Six layers, from the kitchens we grew up in to the taste on the tongue. Pick a layer to see what lives there and
+                what has been written about it so far.
+              </p>
+            </div>
+            <FlavourPyramid layers={PYRAMID} />
+          </div>
+        </section>
+
         {/* Culture: the six tastes, previewing issue 1 */}
         <section id="culture" className="on-dark bg-forest-deep text-cream">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
             <div className="reveal max-w-3xl">
-              <Eyebrow className="text-brass">Newsletter · Issue 1 preview</Eyebrow>
+              <Eyebrow className="text-brass">Layer 05 · Taste balance · Issue 1 preview</Eyebrow>
               <h2 className={`${H2} mt-4`}>The six tastes of a South Indian meal.</h2>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream/80">
                 Tamil kitchens counted six tastes long before anyone drew a molecule. Pick a taste to see what is behind it.
