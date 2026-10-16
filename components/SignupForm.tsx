@@ -86,6 +86,18 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
     if (state !== "idle") setState("idle");
   };
 
+  const submit = (
+    <button
+      type="submit"
+      disabled={state === "sending"}
+      className={`rounded-md px-6 py-3 font-medium transition-colors disabled:opacity-60 ${
+        dark ? "bg-cream text-forest-deep hover:bg-parchment" : "bg-forest text-cream hover:bg-forest-deep"
+      }`}
+    >
+      {state === "sending" ? copy.sending : copy.cta}
+    </button>
+  );
+
   return (
     <form onSubmit={onSubmit} noValidate className={`relative w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
       {list === "waitlist" && (
@@ -154,7 +166,9 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
         <label htmlFor={`${id}-website`}>Website</label>
         <input id={`${id}-website`} type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
       </div>
-      <div className="mt-2 flex flex-col gap-2 sm:flex-row">
+      {/* The newsletter form keeps its button beside the email field. The classes form has more fields, so the
+          email field runs full width and the button comes after the phone number. */}
+      <div className={`mt-2 flex flex-col gap-2 ${list === "waitlist" ? "" : "sm:flex-row"}`}>
         <input
           id={id}
           type="email"
@@ -169,15 +183,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           aria-describedby={describedBy}
           className={`flex-1 ${field}`}
         />
-        <button
-          type="submit"
-          disabled={state === "sending"}
-          className={`rounded-md px-6 py-3 font-medium transition-colors disabled:opacity-60 ${
-            dark ? "bg-cream text-forest-deep hover:bg-parchment" : "bg-forest text-cream hover:bg-forest-deep"
-          }`}
-        >
-          {state === "sending" ? copy.sending : copy.cta}
-        </button>
+        {list !== "waitlist" && submit}
       </div>
       {list === "waitlist" && (
         <>
@@ -199,6 +205,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
             aria-describedby={describedBy}
             className={`mt-2 w-full ${field}`}
           />
+          <div className={`mt-5 flex ${center ? "justify-center" : ""}`}>{submit}</div>
         </>
       )}
       <p
