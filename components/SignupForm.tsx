@@ -93,24 +93,39 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           <label htmlFor={`${id}-class`} className={label}>
             Which class?
           </label>
-          <select
-            id={`${id}-class`}
-            value={classId}
-            onChange={(e) => {
-              setClassId(e.target.value);
-              reset();
-            }}
-            aria-invalid={state === "class"}
-            aria-describedby={describedBy}
-            className={`mt-2 w-full ${field} ${classId ? "" : "text-ink/40"}`}
-          >
-            <option value="">Choose a class</option>
-            {CLASSES.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.title}
-              </option>
-            ))}
-          </select>
+          {/* The browser's own arrow sits hard against the edge; this draws one inside the field's padding instead. */}
+          <div className="relative mt-2">
+            <select
+              id={`${id}-class`}
+              value={classId}
+              onChange={(e) => {
+                setClassId(e.target.value);
+                reset();
+              }}
+              aria-invalid={state === "class"}
+              aria-describedby={describedBy}
+              className={`w-full appearance-none pr-11 ${field} ${classId ? "" : "text-ink/40"}`}
+            >
+              <option value="">Choose a class</option>
+              {CLASSES.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.title}
+                </option>
+              ))}
+            </select>
+            <svg
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+              className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/60"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 8l5 5 5-5" />
+            </svg>
+          </div>
         </>
       )}
       <label htmlFor={`${id}-name`} className={`${label} ${list === "waitlist" ? "mt-4" : ""}`}>
