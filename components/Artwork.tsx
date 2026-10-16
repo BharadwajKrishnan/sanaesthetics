@@ -194,36 +194,6 @@ export function TemperingPan() {
   );
 }
 
-const RICE = scatter(160, 9, 220, 150);
-
-// Recipes: a brass bowl of lemon rice with peanuts and curry leaves.
-export function RiceBowl() {
-  return (
-    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" className="absolute inset-0 h-full w-full">
-      <defs>
-        <radialGradient id="brass" cx="0.4" cy="0.35" r="0.7">
-          <stop offset="0" stopColor="#e6c27c" />
-          <stop offset="0.6" stopColor="#a87835" />
-          <stop offset="1" stopColor="#5e3f17" />
-        </radialGradient>
-      </defs>
-      <circle cx="200" cy="215" r="160" fill="url(#brass)" />
-      <circle cx="200" cy="215" r="138" fill="#e0b43e" />
-      <g transform="translate(90 140)">
-        {RICE.map((g, i) => (
-          <ellipse key={i} cx={g.x} cy={g.y} rx="4" ry="1.6" transform={`rotate(${g.r} ${g.x} ${g.y})`} fill={i % 9 ? "#f3d873" : "#3a2a20"} opacity="0.9" />
-        ))}
-      </g>
-      {[ [150, 200], [250, 250], [205, 290], [270, 180] ].map(([x, y]) => (
-        <ellipse key={x} cx={x} cy={y} rx="9" ry="6" fill="#c7884a" />
-      ))}
-      <Leaf x={170} y={170} rot={-40} size={1.1} />
-      <Leaf x={215} y={200} rot={20} size={1.2} />
-      <Leaf x={190} y={240} rot={-75} size={1} />
-    </svg>
-  );
-}
-
 // Line-drawn sprig used as a quiet ornament beside the Arusuvai heading.
 export function SprigOutline({ className = "" }: { className?: string }) {
   return (

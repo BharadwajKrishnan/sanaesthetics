@@ -166,8 +166,8 @@ function DecoctionBody() {
           <aside className="w-full max-w-xl border-l-4 border-maroon bg-parchment p-6 shadow-xl shadow-ink/15 sm:p-8">
             <p className="text-left font-serif text-2xl font-semibold">Want to explore it further?</p>
             <p className="mt-3 leading-relaxed text-ink/85">
-              In my classes, we will look more closely at how grind size, coffee-to-chicory ratio, dosage, water temperature and
-              extraction time influence the decoction — and how to adjust them to make a cup that suits your own taste.
+              In my classes, we will look more closely at how grind size, the coffee-to-water ratio, water temperature and contact
+              time influence the decoction — and how to adjust them to make a cup that suits your own taste.
             </p>
             <p className="mt-4">
               <Link href="/#classes" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
@@ -247,6 +247,7 @@ function TemperingBody() {
         extraction and physical changes, and each ingredient behaves differently.
       </p>
 
+      <h2>What happens to each ingredient</h2>
       <h3>Mustard seeds — why do they pop?</h3>
       <p>Mustard seeds contain a small amount of moisture. As the seeds heat in oil, that moisture turns to steam and pressure builds inside the seed.</p>
       <p>Eventually the seed coat ruptures — and we hear the familiar pop.</p>

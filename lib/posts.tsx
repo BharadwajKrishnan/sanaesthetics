@@ -188,7 +188,7 @@ function AnjarapettiBody() {
         something different: aroma, nuttiness, bitterness, texture or warmth.
       </p>
 
-      <h3>The Big Five</h3>
+      <h2>The Big Five</h2>
       <dl className="mt-6 divide-y divide-line border-y border-line">
         {BIG_FIVE.map((row) => (
           <div key={row.name} className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-5">
@@ -203,7 +203,7 @@ function AnjarapettiBody() {
         powerful aromas and can completely change the character of a dish.
       </p>
 
-      <h3>And then there is the second box...</h3>
+      <h2>And then there is the second box...</h2>
       <p>What can I say — one box is never quite enough.</p>
       <p>I also keep another box with ingredients I use often for different kinds of dishes:</p>
       <ul className="mt-6 grid gap-2 sm:grid-cols-2">
@@ -230,7 +230,7 @@ function AnjarapettiBody() {
         indispensable.
       </p>
 
-      <h3>More than just a spice box</h3>
+      <h2>More than just a spice box</h2>
       <p>What I like most about an Anjarapetti is that it quietly reflects the way a household cooks.</p>
       <p>Someone else’s box may look completely different from mine — and that is exactly the point.</p>
       <p>
@@ -251,7 +251,8 @@ export const posts: Post[] = [
     excerpt:
       "Tamil kitchens counted six tastes long before anyone drew a molecule. Where the old idea and modern sensory science agree, where they part ways, and why balance matters more than a checklist.",
     cover: photos.issue1,
-    coverAlt: "Arusuvai poster, the six tastes in Tamil food tradition",
+    coverAlt:
+      "Arusuvai poster, the six tastes in Tamil food tradition: sweet (jaggery, payasam), sour (tamarind, raw mango), salty (salt, pickle), bitter (fenugreek, neem flowers, bitter gourd), pungent (chilli, black pepper) and astringent (raw banana, lentils)",
     readingTime: "5 min read",
     Body: ArusuvaiBody,
   },

@@ -3,7 +3,7 @@ import { Zoomable } from "@/components/Zoomable";
 import { dabbaCutout } from "@/lib/photos";
 import { POSITIONS, SPICES } from "@/lib/spices";
 
-// A still, decorative anjarapetti for artwork slots. SpiceBox is the interactive one.
+// A still, decorative anjarapetti for artwork slots, drawn when there is no photographed box.
 // Pass a positioning class (e.g. absolute): the bowls are placed inside it.
 export function BrassDabba({ className = "" }: { className?: string }) {
   return (
