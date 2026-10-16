@@ -10,8 +10,8 @@
 export const LISTS = ["waitlist", "newsletter"] as const;
 export type List = (typeof LISTS)[number];
 
-// `classType` is the title of the class a reader asked about; only the waitlist form sends it.
-export type SignupEvent = { event: "subscribed"; list: List; name: string; email: string; classType?: string; subscribedAt: string };
+// `classType` is the title of the class a reader asked about and `phone` is optional; only the waitlist form sends them.
+export type SignupEvent = { event: "subscribed"; list: List; name: string; email: string; classType?: string; phone?: string; subscribedAt: string };
 
 // Sends a signup to the webhook. Resolves to "exists" when n8n answers { "status": "exists" }, otherwise "ok".
 export async function notify(event: SignupEvent): Promise<"ok" | "exists"> {

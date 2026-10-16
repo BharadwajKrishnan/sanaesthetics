@@ -5,7 +5,7 @@ import { useId, useState } from "react";
 import { CLASSES } from "@/lib/classes";
 import type { List } from "@/lib/signups";
 
-type State = "idle" | "sending" | "subscribed" | "exists" | "class" | "name" | "invalid" | "failed";
+type State = "idle" | "sending" | "subscribed" | "exists" | "class" | "name" | "invalid" | "phone" | "failed";
 
 const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string; consent: string }> = {
   waitlist: {
@@ -28,6 +28,7 @@ const ERRORS: Partial<Record<State, string>> = {
   class: "Choose a class.",
   name: "Enter your name.",
   invalid: "Enter an email address like name@example.com.",
+  phone: "Enter a phone number with digits only, or leave it empty.",
   failed: "The list couldn't be reached. Please try again in a few minutes.",
 };
 
@@ -36,6 +37,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
   const [classId, setClassId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
   const [state, setState] = useState<State>("idle");
   const copy = COPY[list];
@@ -55,22 +57,26 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       setState("invalid");
       return;
     }
+    if (list === "waitlist" && phone.trim() && !/^\+?[0-9][0-9 ().\/-]{4,30}$/.test(phone.trim())) {
+      setState("phone");
+      return;
+    }
     setState("sending");
     try {
       const res = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ list, name, email, website, classType: list === "waitlist" ? classId : undefined }),
+        body: JSON.stringify({ list, name, email, website, classType: list === "waitlist" ? classId : undefined, phone: list === "waitlist" ? phone : undefined }),
       });
       const data = await res.json();
       if (res.ok) setState(data.status === "exists" ? "exists" : "subscribed");
-      else setState(data.error === "class" ? "class" : data.error === "name" ? "name" : data.error === "invalid" ? "invalid" : "failed");
+      else setState(data.error === "class" ? "class" : data.error === "name" ? "name" : data.error === "invalid" ? "invalid" : data.error === "phone" ? "phone" : "failed");
     } catch {
       setState("failed");
     }
   }
 
-  const isError = state === "class" || state === "name" || state === "invalid" || state === "failed";
+  const isError = state === "class" || state === "name" || state === "invalid" || state === "phone" || state === "failed";
   const message = state === "subscribed" ? copy.subscribed : state === "exists" ? copy.exists : ERRORS[state];
 
   const label = `block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`;
@@ -158,6 +164,28 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           {state === "sending" ? copy.sending : copy.cta}
         </button>
       </div>
+      {list === "waitlist" && (
+        <>
+          <label htmlFor={`${id}-phone`} className={`mt-4 ${label}`}>
+            Phone <span className="normal-case tracking-normal opacity-80">(optional)</span>
+          </label>
+          <input
+            id={`${id}-phone`}
+            type="tel"
+            autoComplete="tel"
+            placeholder="+49 170 1234567"
+            maxLength={32}
+            value={phone}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              reset();
+            }}
+            aria-invalid={state === "phone"}
+            aria-describedby={describedBy}
+            className={`mt-2 w-full ${field}`}
+          />
+        </>
+      )}
       <p
         id={`${id}-msg`}
         role="status"

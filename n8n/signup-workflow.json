@@ -38,7 +38,8 @@
             "email": "={{ $json.body.email }}",
             "list": "={{ $json.body.list }}",
             "subscribedAt": "={{ $json.body.subscribedAt }}",
-            "classType": "={{ $json.body.classType }}"
+            "classType": "={{ $json.body.classType }}",
+            "phone": "={{ $json.body.phone }}"
           },
           "matchingColumns": [
             "email"
@@ -83,6 +84,15 @@
             {
               "id": "classType",
               "displayName": "classType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "phone",
+              "displayName": "phone",
               "required": false,
               "defaultMatch": false,
               "display": true,

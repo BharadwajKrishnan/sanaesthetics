@@ -4,6 +4,8 @@ import { LISTS, notify, type List } from "@/lib/signups";
 export const runtime = "nodejs";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+// Digits with the usual separators, e.g. "+49 170 1234567". Loose on purpose: it is a contact number, not an identifier.
+const PHONE = /^\+?[0-9][0-9 ().\/-]{4,30}$/;
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -25,12 +27,17 @@ export async function POST(request: Request) {
   if (list === "waitlist" && !cls) {
     return Response.json({ error: "class" }, { status: 400 });
   }
+  // Optional on the classes form. Empty means not given.
+  const phone = list === "waitlist" && typeof body?.phone === "string" ? body.phone.replace(/\s+/g, " ").trim() : "";
+  if (phone && !PHONE.test(phone)) {
+    return Response.json({ error: "phone" }, { status: 400 });
+  }
   // Bots fill the hidden "website" field; people never see it.
   if (typeof body?.website === "string" && body.website !== "") {
     return Response.json({ status: "subscribed" });
   }
   try {
-    const status = await notify({ event: "subscribed", list, name, email, classType: cls?.title, subscribedAt: new Date().toISOString() });
+    const status = await notify({ event: "subscribed", list, name, email, classType: cls?.title, phone: phone || undefined, subscribedAt: new Date().toISOString() });
     return Response.json({ status: status === "exists" ? "exists" : "subscribed" });
   } catch (error) {
     console.error("[signup] could not reach the webhook", error);

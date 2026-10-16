@@ -31,8 +31,9 @@ const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
     title: "What the two forms collect",
     body: [
       <>
-        The site has two sign-up forms: one for the newsletter and one for the classes waitlist. Each asks for your name and your email
-        address. When you submit a form the site also records which list you joined and the time.
+        The site has two sign-up forms: one for the newsletter and one for requesting a class. Each asks for your name and your email
+        address; the classes form also asks which class you are interested in and, if you choose to give it, a phone number. When you
+        submit a form the site also records which list you joined and the time.
       </>,
       <>That is everything. There are no accounts, no passwords and no payment details.</>,
     ],
