@@ -10,7 +10,8 @@ import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChro
 import { SixTastes } from "@/components/SixTastes";
 import { posts } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
-import { getPost, issueLink } from "@/lib/posts";
+import { CLASSES } from "@/lib/classes";
+import { getPost, issueLink, latestPost } from "@/lib/posts";
 import { PYRAMID } from "@/lib/pyramid";
 import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
@@ -20,12 +21,6 @@ const FEATURES = [
   { Icon: FlaskIcon, lines: ["Flavour", "science"] },
   { Icon: TempleIcon, lines: ["Culture", "& heritage"] },
   { Icon: BowlIcon, lines: ["Classes", "online & in-person"] },
-];
-
-const LEARN = [
-  { title: "Online cooking courses", body: "Structured lessons that build from the anjarapetti upwards." },
-  { title: "Live cooking workshops", body: "Cook one dish together, in real time, with questions as you go." },
-  { title: "Flavour science sessions", body: "One idea per session, such as tempering or fermentation, shown at the stove." },
 ];
 
 const AUDIENCE = [
@@ -38,6 +33,7 @@ const AUDIENCE = [
 
 const arusuvai = getPost("arusuvai-where-tradition-meets-taste")!;
 const issue1 = issueLink(arusuvai.slug);
+const latest = issueLink(latestPost.slug);
 
 const H2 = "font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-[3.5rem]";
 const PRIMARY = "group inline-flex items-center gap-2.5 rounded-md px-6 py-3 font-medium transition-colors";
@@ -118,33 +114,37 @@ export default function Home() {
                 <h2 className={`${H2} mt-4 text-maroon`}>Stories, ingredients and the science behind South Indian flavour.</h2>
                 <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
                   Through this newsletter, I explore South Indian vegetarian cooking through tradition, sensory science and the
-                  everyday ingredients in our kitchens. The first issue begins with Arusuvai, the six tastes of a Tamil meal.
+                  everyday ingredients in our kitchens. Each issue takes one idea, from the six tastes of a Tamil meal to the spice
+                  box by the stove, and follows it into the science.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
-                  <a {...issue1} className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
-                    Read issue 1 <Arrow />
+                  <a {...latest} className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
+                    Read the latest issue <Arrow />
+                  </a>
+                  <a {...issue1} className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
+                    Start with Issue 1: Arusuvai
                   </a>
                   <a href="#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
-                    Subscribe to the newsletter
+                    Subscribe
                   </a>
                 </div>
               </div>
 
               <article className="grid items-center gap-6 sm:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] sm:gap-8">
                 <Artwork
-                  src={photos.issue1}
-                  alt="Arusuvai poster, the six tastes in Tamil food tradition: sweet (jaggery, payasam), sour (tamarind, raw mango), salty (salt, pickle), bitter (fenugreek, neem flowers, bitter gourd), pungent (chilli, black pepper) and astringent (raw banana, lentils)."
+                  src={latestPost.cover}
+                  alt={latestPost.coverAlt}
                   sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 90vw"
                   className="relative mx-auto aspect-[4/5] w-full max-w-md rounded-sm shadow-xl shadow-ink/15"
                 >
-                  <Thali />
+                  {latestPost.Cover ? <latestPost.Cover /> : <Thali />}
                 </Artwork>
                 <div className="bg-cream/95 p-6 shadow-xl shadow-ink/10 sm:p-7">
-                  <Eyebrow>Issue 1</Eyebrow>
-                  <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">{arusuvai.title}</h3>
-                  <p className="mt-3 leading-relaxed text-ink/80">How tradition, taste and sensory science come together.</p>
+                  <Eyebrow>{latestPost.eyebrow} · the latest</Eyebrow>
+                  <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">{latestPost.title}</h3>
+                  <p className="mt-3 leading-relaxed text-ink/80">{latestPost.excerpt}</p>
                   <p className="mt-5">
-                    <TextLink {...issue1}>Read the issue</TextLink>
+                    <TextLink {...latest}>Read the issue</TextLink>
                   </p>
                 </div>
               </article>
@@ -198,11 +198,23 @@ export default function Home() {
                 <Eyebrow className="text-maroon">Recipes with a story</Eyebrow>
                 <h2 className={`${H2} mt-4`}>From the kitchen, one post at a time.</h2>
                 <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
-                  The recipes start life on Instagram, with a note on why each ingredient was chosen. The full write-ups, with
-                  quantities and the science, are arriving one at a time.
+                  The recipes start life on Instagram, with a note on why each ingredient was chosen. The written versions, with
+                  quantities and the science, live on the Recipes page.
                 </p>
-                <p className="mt-5">
-                  <TextLink href={recipePath(recipes[0].slug)}>{`Read the first written recipe: ${recipes[0].title}`}</TextLink>
+                <p className="mt-5 flex flex-wrap items-baseline gap-x-6 gap-y-2">
+                  <TextLink href="/recipes">Browse the written recipes</TextLink>
+                  <span className="text-ink/70">
+                    So far:{" "}
+                    {recipes.map((recipe, i) => (
+                      <span key={recipe.slug}>
+                        {i > 0 && ", "}
+                        <Link href={recipePath(recipe.slug)} className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+                          {recipe.title}
+                        </Link>
+                      </span>
+                    ))}
+                    .
+                  </span>
                 </p>
               </div>
               <a
@@ -228,11 +240,11 @@ export default function Home() {
         <section id="classes" className="bg-parchment">
           <div className="mx-auto max-w-7xl px-5 py-24 sm:px-8">
             <div className="reveal max-w-3xl">
-              <Eyebrow className="text-maroon">Classes · online &amp; in-person · opening soon</Eyebrow>
+              <Eyebrow className="text-maroon">Classes · online &amp; in-person · by request</Eyebrow>
               <h2 className={`${H2} mt-4`}>Classes where you cook, ask and understand.</h2>
             </div>
             <ol className="mt-14 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
-              {LEARN.map((item, i) => (
+              {CLASSES.map((item, i) => (
                 <li key={item.title} className="reveal bg-parchment py-8 pr-8 sm:p-8">
                   <p className="font-serif text-lg font-semibold text-maroon">{String(i + 1).padStart(2, "0")}</p>
                   <h3 className="mt-2 font-serif text-2xl font-semibold">{item.title}</h3>
@@ -243,9 +255,10 @@ export default function Home() {
             <KolamDivider className="mt-14 text-brass" />
             <div className="mt-12 grid items-center gap-8 lg:grid-cols-2">
               <div>
-                <h3 className="font-serif text-3xl font-semibold">Join the waitlist</h3>
+                <h3 className="font-serif text-3xl font-semibold">Request a class</h3>
                 <p className="mt-3 max-w-lg leading-relaxed text-ink/80">
-                  Dates and prices will be announced to the waitlist first, along with the first recipe write-ups.
+                  Classes run when there are enough requests for one. Pick the class you are interested in and leave your name and
+                  email, and I will write back with what is possible, when, and at what cost.
                 </p>
               </div>
               <div className="lg:justify-self-end">

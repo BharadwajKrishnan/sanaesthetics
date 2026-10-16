@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Artwork, PhotoTags, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
-import { issueLink, posts } from "@/lib/posts";
+import { getPost, issueLink } from "@/lib/posts";
 import { getRecipe, recipes, type Recipe } from "@/lib/recipes";
 import { openGraphShared, site } from "@/lib/site";
 
@@ -29,8 +29,8 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   const recipe = getRecipe(slug);
   if (!recipe) notFound();
 
-  // The newsletter issue that talks about this dish, if there is one.
-  const related = posts.find((post) => post.slug === "arusuvai-where-tradition-meets-taste");
+  // The newsletter issue that talks about this dish.
+  const related = getPost(recipe.issueSlug);
 
   return (
     <>

@@ -37,7 +37,8 @@
             "name": "={{ $json.body.name }}",
             "email": "={{ $json.body.email }}",
             "list": "={{ $json.body.list }}",
-            "subscribedAt": "={{ $json.body.subscribedAt }}"
+            "subscribedAt": "={{ $json.body.subscribedAt }}",
+            "classType": "={{ $json.body.classType }}"
           },
           "matchingColumns": [
             "email"
@@ -73,6 +74,15 @@
             {
               "id": "subscribedAt",
               "displayName": "subscribedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "classType",
+              "displayName": "classType",
               "required": false,
               "defaultMatch": false,
               "display": true,

@@ -2,17 +2,18 @@
 
 import Link from "next/link";
 import { useId, useState } from "react";
+import { CLASSES } from "@/lib/classes";
 import type { List } from "@/lib/signups";
 
-type State = "idle" | "sending" | "subscribed" | "exists" | "name" | "invalid" | "failed";
+type State = "idle" | "sending" | "subscribed" | "exists" | "class" | "name" | "invalid" | "failed";
 
 const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string; consent: string }> = {
   waitlist: {
-    cta: "Join the waitlist",
-    sending: "Joining…",
-    subscribed: "You're on the waitlist. Dates and prices for the first classes will reach you first.",
-    exists: "This email is already on the waitlist.",
-    consent: "By joining, you agree to hear about the classes by email. One reply is enough to be taken off the list.",
+    cta: "Request a class",
+    sending: "Sending…",
+    subscribed: "Request received. I will write back with what is possible, and when.",
+    exists: "A request from this address is already on the list. I will be in touch.",
+    consent: "By sending a request, you agree to be contacted about it by email. One reply is enough to be taken off the list.",
   },
   newsletter: {
     cta: "Subscribe",
@@ -24,6 +25,7 @@ const COPY: Record<List, { cta: string; sending: string; subscribed: string; exi
 };
 
 const ERRORS: Partial<Record<State, string>> = {
+  class: "Choose a class.",
   name: "Enter your name.",
   invalid: "Enter an email address like name@example.com.",
   failed: "The list couldn't be reached. Please try again in a few minutes.",
@@ -31,6 +33,7 @@ const ERRORS: Partial<Record<State, string>> = {
 
 export function SignupForm({ list, tone = "light", center = false }: { list: List; tone?: "light" | "dark"; center?: boolean }) {
   const id = useId();
+  const [classId, setClassId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
@@ -40,6 +43,10 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (list === "waitlist" && !classId) {
+      setState("class");
+      return;
+    }
     if (!name.trim()) {
       setState("name");
       return;
@@ -53,17 +60,17 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       const res = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ list, name, email, website }),
+        body: JSON.stringify({ list, name, email, website, classType: list === "waitlist" ? classId : undefined }),
       });
       const data = await res.json();
       if (res.ok) setState(data.status === "exists" ? "exists" : "subscribed");
-      else setState(data.error === "name" ? "name" : data.error === "invalid" ? "invalid" : "failed");
+      else setState(data.error === "class" ? "class" : data.error === "name" ? "name" : data.error === "invalid" ? "invalid" : "failed");
     } catch {
       setState("failed");
     }
   }
 
-  const isError = state === "name" || state === "invalid" || state === "failed";
+  const isError = state === "class" || state === "name" || state === "invalid" || state === "failed";
   const message = state === "subscribed" ? copy.subscribed : state === "exists" ? copy.exists : ERRORS[state];
 
   const label = `block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`;
@@ -75,7 +82,32 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
 
   return (
     <form onSubmit={onSubmit} noValidate className={`relative w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
-      <label htmlFor={`${id}-name`} className={label}>
+      {list === "waitlist" && (
+        <>
+          <label htmlFor={`${id}-class`} className={label}>
+            Which class?
+          </label>
+          <select
+            id={`${id}-class`}
+            value={classId}
+            onChange={(e) => {
+              setClassId(e.target.value);
+              reset();
+            }}
+            aria-invalid={state === "class"}
+            aria-describedby={describedBy}
+            className={`mt-2 w-full ${field} ${classId ? "" : "text-ink/40"}`}
+          >
+            <option value="">Choose a class</option>
+            {CLASSES.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.title}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
+      <label htmlFor={`${id}-name`} className={`${label} ${list === "waitlist" ? "mt-4" : ""}`}>
         Name
       </label>
       <input

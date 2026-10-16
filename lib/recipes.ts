@@ -20,7 +20,8 @@ export type Recipe = {
   ingredients: { group: string; items: string[] }[];
   steps: string[];
   ready: { title: string; body: string[] };
-  // Why the newsletter issue is worth reading after this recipe.
+  // The newsletter issue that talks about this dish, and why it is worth reading after the recipe.
+  issueSlug: string;
   readMore: string;
 };
 
@@ -85,6 +86,7 @@ export const recipes: Recipe[] = [
         "Taste once the kuzhambu has reduced. If the sourness feels very sharp, add the optional ½ teaspoon of jaggery. The jaggery should not make the dish taste sweet. It should simply round out the sourness and bitterness.",
       ],
     },
+    issueSlug: "arusuvai-where-tradition-meets-taste",
     readMore: "Why does half a teaspoon of jaggery change this dish so much? Issue 1 looks at the six tastes and how a small adjustment rebalances a whole meal.",
   },
   {
@@ -131,6 +133,7 @@ export const recipes: Recipe[] = [
         "The mango should be soft but not completely mashed. The jaggery should round out the mango’s sharp sourness, while the chilli and salt keep the dish lively.",
       ],
     },
+    issueSlug: "arusuvai-where-tradition-meets-taste",
     readMore: "Why do Tamil kitchens put all six tastes in one bowl for the new year? Issue 1 looks at where that tradition and modern sensory science meet.",
   },
 ];

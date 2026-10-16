@@ -9,7 +9,7 @@ import { getRecipe, recipePath } from "@/lib/recipes";
 
 export type PyramidLink = { href: string; target?: "_blank"; rel?: "noopener" };
 export type PyramidChip = { label: string; link?: PyramidLink };
-export type PyramidRead = { kind: "Issue" | "Article" | "Recipe"; title: string; link: PyramidLink };
+export type PyramidRead = { kind: "Issue" | "Article" | "Recipe" | "Recipes"; title: string; link: PyramidLink };
 export type PyramidLayer = {
   n: number;
   id: string;
@@ -147,7 +147,7 @@ export const PYRAMID: PyramidLayer[] = [
     tagline: "The complete experience",
     blurb: "Everything below, in one spoonful. Memory, technique, ingredient, aroma and taste arriving together, which is why a dish can taste like home.",
     chips: [],
-    reads: [{ kind: "Recipe", title: "Cook it: the recipes", link: { href: "/recipes" } }],
+    reads: [{ kind: "Recipes", title: "Cook it: the recipes", link: { href: "/recipes" } }],
     tone: { bg: "bg-parchment", fg: "text-ink" },
   },
 ];

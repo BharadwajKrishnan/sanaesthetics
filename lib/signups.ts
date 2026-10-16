@@ -1,6 +1,6 @@
 // Signups go straight to the list and the site keeps no list of its own.
 // The form posts an address to /api/signup, which hands it to the n8n webhook;
-// n8n adds the address to the sheet.
+// n8n adds the address to the sheet. The classes form also says which class was asked for.
 //
 // Environment:
 //   SIGNUP_WEBHOOK_URL     the n8n webhook that receives signups
@@ -10,7 +10,8 @@
 export const LISTS = ["waitlist", "newsletter"] as const;
 export type List = (typeof LISTS)[number];
 
-export type SignupEvent = { event: "subscribed"; list: List; name: string; email: string; subscribedAt: string };
+// `classType` is the title of the class a reader asked about; only the waitlist form sends it.
+export type SignupEvent = { event: "subscribed"; list: List; name: string; email: string; classType?: string; subscribedAt: string };
 
 // Sends a signup to the webhook. Resolves to "exists" when n8n answers { "status": "exists" }, otherwise "ok".
 export async function notify(event: SignupEvent): Promise<"ok" | "exists"> {

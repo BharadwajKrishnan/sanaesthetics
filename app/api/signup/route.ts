@@ -1,3 +1,4 @@
+import { getClass } from "@/lib/classes";
 import { LISTS, notify, type List } from "@/lib/signups";
 
 export const runtime = "nodejs";
@@ -19,12 +20,17 @@ export async function POST(request: Request) {
   if (!EMAIL.test(email) || email.length > 254) {
     return Response.json({ error: "invalid" }, { status: 400 });
   }
+  // A class request says which class; the newsletter form sends none.
+  const cls = list === "waitlist" ? getClass(typeof body?.classType === "string" ? body.classType : "") : undefined;
+  if (list === "waitlist" && !cls) {
+    return Response.json({ error: "class" }, { status: 400 });
+  }
   // Bots fill the hidden "website" field; people never see it.
   if (typeof body?.website === "string" && body.website !== "") {
     return Response.json({ status: "subscribed" });
   }
   try {
-    const status = await notify({ event: "subscribed", list, name, email, subscribedAt: new Date().toISOString() });
+    const status = await notify({ event: "subscribed", list, name, email, classType: cls?.title, subscribedAt: new Date().toISOString() });
     return Response.json({ status: status === "exists" ? "exists" : "subscribed" });
   } catch (error) {
     console.error("[signup] could not reach the webhook", error);
