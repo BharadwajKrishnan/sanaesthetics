@@ -4,8 +4,6 @@ import { LISTS, notify, type List } from "@/lib/signups";
 export const runtime = "nodejs";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-// Digits with the usual separators, e.g. "+49 170 1234567". Loose on purpose: it is a contact number, not an identifier.
-const PHONE = /^\+?[0-9][0-9 ().\/-]{4,30}$/;
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
@@ -27,9 +25,10 @@ export async function POST(request: Request) {
   if (list === "waitlist" && !cls) {
     return Response.json({ error: "class" }, { status: 400 });
   }
-  // Optional on the classes form. Always sent for a class request, as "" when not given, so the sheet column is filled.
-  const phone = list === "waitlist" && typeof body?.phone === "string" ? body.phone.replace(/\s+/g, " ").trim() : "";
-  if (phone && !PHONE.test(phone)) {
+  // Optional on the classes form, passed on exactly as typed (spaces, "+" and all); "" when not given, so the sheet
+  // column is always filled. Only an absurd length is refused.
+  const phone = list === "waitlist" && typeof body?.phone === "string" ? body.phone : "";
+  if (phone.length > 64) {
     return Response.json({ error: "phone" }, { status: 400 });
   }
   // Bots fill the hidden "website" field; people never see it.

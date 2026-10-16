@@ -28,7 +28,7 @@ const ERRORS: Partial<Record<State, string>> = {
   class: "Choose a class.",
   name: "Enter your name.",
   invalid: "Enter an email address like name@example.com.",
-  phone: "Enter a phone number with digits only, or leave it empty.",
+  phone: "That phone number is too long.",
   failed: "The list couldn't be reached. Please try again in a few minutes.",
 };
 
@@ -55,10 +55,6 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())) {
       setState("invalid");
-      return;
-    }
-    if (list === "waitlist" && phone.trim() && !/^\+?[0-9][0-9 ().\/-]{4,30}$/.test(phone.trim())) {
-      setState("phone");
       return;
     }
     setState("sending");
@@ -195,7 +191,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
             type="tel"
             autoComplete="tel"
             placeholder="+49 170 1234567"
-            maxLength={32}
+            maxLength={64}
             value={phone}
             onChange={(e) => {
               setPhone(e.target.value);
