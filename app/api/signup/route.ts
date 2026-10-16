@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   if (list === "waitlist" && !cls) {
     return Response.json({ error: "class" }, { status: 400 });
   }
-  // Optional on the classes form. Empty means not given.
+  // Optional on the classes form. Always sent for a class request, as "" when not given, so the sheet column is filled.
   const phone = list === "waitlist" && typeof body?.phone === "string" ? body.phone.replace(/\s+/g, " ").trim() : "";
   if (phone && !PHONE.test(phone)) {
     return Response.json({ error: "phone" }, { status: 400 });
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     return Response.json({ status: "subscribed" });
   }
   try {
-    const status = await notify({ event: "subscribed", list, name, email, classType: cls?.title, phone: phone || undefined, subscribedAt: new Date().toISOString() });
+    const status = await notify({ event: "subscribed", list, name, email, classType: cls?.title, phone: list === "waitlist" ? phone : undefined, subscribedAt: new Date().toISOString() });
     return Response.json({ status: status === "exists" ? "exists" : "subscribed" });
   } catch (error) {
     console.error("[signup] could not reach the webhook", error);

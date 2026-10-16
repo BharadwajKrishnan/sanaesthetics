@@ -50,7 +50,7 @@ The webhook receives JSON. A newsletter signup:
 { "event": "subscribed", "list": "newsletter", "name": "Meena Iyer", "email": "name@example.com", "subscribedAt": "2026-10-10T09:00:00.000Z" }
 ```
 
-A class request adds the class the reader chose, as its title, and the phone number if one was given (the key is absent otherwise):
+A class request adds the class the reader chose, as its title, and the phone number, which is `""` when none was given:
 
 ```json
 { "event": "subscribed", "list": "waitlist", "name": "Meena Iyer", "email": "name@example.com", "classType": "Live cooking workshops", "phone": "+49 170 1234567", "subscribedAt": "2026-10-10T09:00:00.000Z" }
