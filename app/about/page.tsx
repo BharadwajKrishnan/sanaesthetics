@@ -5,7 +5,7 @@ import { Arrow } from "@/components/Icons";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { photos } from "@/lib/photos";
-import { site } from "@/lib/site";
+import { openGraphShared, site } from "@/lib/site";
 
 const TITLE = "From Passion to Profession — and Back to the Kitchen";
 
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description: `${site.author} is a research technologist in the flavour industry and a home cook of South Indian vegetarian food. ${site.name} is where tradition, science, experience and continued learning meet.`,
   alternates: { canonical: "/about" },
   openGraph: {
+    ...openGraphShared,
     title: `About ${site.author}`,
     description: TITLE,
     url: "/about",

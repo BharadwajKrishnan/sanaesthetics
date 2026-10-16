@@ -6,7 +6,7 @@ import { TemperingPan } from "@/components/Artwork";
 import { Arrow } from "@/components/Icons";
 import { TextLink } from "@/components/SiteChrome";
 import { articles, getArticle } from "@/lib/articles";
-import { site } from "@/lib/site";
+import { openGraphShared, site } from "@/lib/site";
 
 export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/flavour-science/[
     title: `${article.title} | ${site.name}`,
     description: article.excerpt,
     alternates: { canonical: `/flavour-science/${article.slug}` },
-    openGraph: { title: article.title, description: article.excerpt, url: `/flavour-science/${article.slug}`, type: "article", authors: [site.author] },
+    openGraph: { ...openGraphShared, title: article.title, description: article.excerpt, url: `/flavour-science/${article.slug}`, type: "article", authors: [site.author] },
   };
 }
 

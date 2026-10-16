@@ -20,3 +20,10 @@ export const site = {
     { href: "/about", label: "About Me" },
   ],
 };
+
+// Spread into every page's `openGraph`. A page that sets openGraph replaces the root layout's fields
+// wholesale, including the picture drawn by app/opengraph-image.tsx, so each page puts it back here.
+export const openGraphShared = {
+  siteName: site.name,
+  images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${site.name}: ${site.tagline}` }],
+};

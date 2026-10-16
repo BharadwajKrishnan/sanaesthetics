@@ -6,7 +6,7 @@ import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
 import { getRecipe, recipes, type Recipe } from "@/lib/recipes";
-import { site } from "@/lib/site";
+import { openGraphShared, site } from "@/lib/site";
 
 export function generateStaticParams() {
   return recipes.map((recipe) => ({ slug: recipe.slug }));
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/recipes/[slug]">)
     title: `${recipe.title} recipe | ${site.name}`,
     description: recipe.summary,
     alternates: { canonical: `/recipes/${recipe.slug}` },
-    openGraph: { title: `${recipe.title} recipe`, description: recipe.summary, url: `/recipes/${recipe.slug}`, type: "article", authors: [site.author] },
+    openGraph: { ...openGraphShared, title: `${recipe.title} recipe`, description: recipe.summary, url: `/recipes/${recipe.slug}`, type: "article", authors: [site.author] },
   };
 }
 

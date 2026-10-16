@@ -4,13 +4,13 @@ import { Artwork, Thali } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
-import { site } from "@/lib/site";
+import { openGraphShared, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Newsletter | ${site.name}`,
   description: `Every issue of the ${site.name} newsletter: South Indian vegetarian cooking, its traditions and the flavour science behind them.`,
   alternates: { canonical: "/newsletter" },
-  openGraph: { title: `${site.name} newsletter`, description: "Stories, ingredients and the science behind South Indian flavour.", url: "/newsletter", type: "website" },
+  openGraph: { ...openGraphShared, title: `${site.name} newsletter`, description: "Stories, ingredients and the science behind South Indian flavour.", url: "/newsletter", type: "website" },
 };
 
 export default function Newsletter() {

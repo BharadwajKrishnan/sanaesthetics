@@ -3,13 +3,13 @@ import { Artwork, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { articleLink, articles } from "@/lib/articles";
-import { site } from "@/lib/site";
+import { openGraphShared, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Flavour science | ${site.name}`,
   description: "Articles on what happens in the pan, the filter and the mouth when South Indian ingredients meet heat, water and time.",
   alternates: { canonical: "/flavour-science" },
-  openGraph: { title: "Flavour science", description: "The chemistry behind South Indian flavour.", url: "/flavour-science", type: "website" },
+  openGraph: { ...openGraphShared, title: "Flavour science", description: "The chemistry behind South Indian flavour.", url: "/flavour-science", type: "website" },
 };
 
 export default function FlavourScience() {

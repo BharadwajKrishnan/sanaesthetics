@@ -3,30 +3,38 @@
 
 type Props = { className?: string };
 
-// The knot: four interlaced loops around a square of dots, with a dot at each cardinal point.
-function KnotPaths({ x, y, size }: { x: number; y: number; size: number }) {
+// The knot's geometry at a given size: four interlaced loops around a square of dots, with a dot at each
+// cardinal point. Shared with the social-card and icon images, which can only use plain SVG elements.
+export function knotGeometry(size: number) {
   const s = size / 100;
   const t = (n: number) => n * s;
+  return {
+    outer: `M${t(50)} ${t(50)}c${t(-38)} ${t(-6)},${t(-6)} ${t(-38)},0 0c${t(6)} ${t(-38)},${t(38)} ${t(-6)},0 0c${t(38)} ${t(6)},${t(6)} ${t(38)},0 0c${t(-6)} ${t(38)},${t(-38)} ${t(6)},0 0z`,
+    inner: `M${t(50)} ${t(50)}c${t(-24)} ${t(-4)},${t(-4)} ${t(-24)},0 0c${t(4)} ${t(-24)},${t(24)} ${t(-4)},0 0c${t(24)} ${t(4)},${t(4)} ${t(24)},0 0c${t(-4)} ${t(24)},${t(-24)} ${t(4)},0 0z`,
+    diamond: `M${t(50)} ${t(22)}L${t(78)} ${t(50)}L${t(50)} ${t(78)}L${t(22)} ${t(50)}Z`,
+    dots: [
+      [31, 31],
+      [69, 31],
+      [69, 69],
+      [31, 69],
+      [50, 8],
+      [92, 50],
+      [50, 92],
+      [8, 50],
+    ].map(([cx, cy]) => ({ cx: t(cx), cy: t(cy), r: t(2.6) })),
+  };
+}
+
+// The knot, drawn at (x, y).
+function KnotPaths({ x, y, size }: { x: number; y: number; size: number }) {
+  const g = knotGeometry(size);
   return (
     <g transform={`translate(${x - size / 2} ${y - size / 2})`}>
-      <path
-        d={`M${t(50)} ${t(50)}c${t(-38)} ${t(-6)},${t(-6)} ${t(-38)},0 0c${t(6)} ${t(-38)},${t(38)} ${t(-6)},0 0c${t(38)} ${t(6)},${t(6)} ${t(38)},0 0c${t(-6)} ${t(38)},${t(-38)} ${t(6)},0 0z`}
-      />
-      <path
-        d={`M${t(50)} ${t(50)}c${t(-24)} ${t(-4)},${t(-4)} ${t(-24)},0 0c${t(4)} ${t(-24)},${t(24)} ${t(-4)},0 0c${t(24)} ${t(4)},${t(4)} ${t(24)},0 0c${t(-4)} ${t(24)},${t(-24)} ${t(4)},0 0z`}
-      />
-      <path d={`M${t(50)} ${t(22)}L${t(78)} ${t(50)}L${t(50)} ${t(78)}L${t(22)} ${t(50)}Z`} strokeLinejoin="round" />
-      {[
-        [31, 31],
-        [69, 31],
-        [69, 69],
-        [31, 69],
-        [50, 8],
-        [92, 50],
-        [50, 92],
-        [8, 50],
-      ].map(([cx, cy]) => (
-        <circle key={`${cx}-${cy}`} cx={t(cx)} cy={t(cy)} r={t(2.6)} fill="currentColor" stroke="none" />
+      <path d={g.outer} />
+      <path d={g.inner} />
+      <path d={g.diamond} strokeLinejoin="round" />
+      {g.dots.map((dot) => (
+        <circle key={`${dot.cx}-${dot.cy}`} cx={dot.cx} cy={dot.cy} r={dot.r} fill="currentColor" stroke="none" />
       ))}
     </g>
   );

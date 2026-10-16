@@ -4,13 +4,13 @@ import { Artwork, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { recipePath, recipePromise, recipes } from "@/lib/recipes";
-import { site } from "@/lib/site";
+import { openGraphShared, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `Recipes | ${site.name}`,
   description: "Traditional South Indian vegetarian recipes, tested and measured so you can reproduce them, with the science and the story behind each one.",
   alternates: { canonical: "/recipes" },
-  openGraph: { title: `${site.name} recipes`, description: "South Indian vegetarian recipes, tested and measured.", url: "/recipes", type: "website" },
+  openGraph: { ...openGraphShared, title: `${site.name} recipes`, description: "South Indian vegetarian recipes, tested and measured.", url: "/recipes", type: "website" },
 };
 
 export default function Recipes() {

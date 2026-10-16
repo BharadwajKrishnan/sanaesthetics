@@ -6,7 +6,7 @@ import { Thali } from "@/components/Artwork";
 import { Arrow } from "@/components/Icons";
 import { TextLink } from "@/components/SiteChrome";
 import { getPost, posts } from "@/lib/posts";
-import { site } from "@/lib/site";
+import { openGraphShared, site } from "@/lib/site";
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<"/newsletter/[slug]
     title: `${post.title} | ${site.name}`,
     description: post.excerpt,
     alternates: { canonical: `/newsletter/${post.slug}` },
-    openGraph: { title: post.title, description: post.excerpt, url: `/newsletter/${post.slug}`, type: "article", authors: [site.author] },
+    openGraph: { ...openGraphShared, title: post.title, description: post.excerpt, url: `/newsletter/${post.slug}`, type: "article", authors: [site.author] },
   };
 }
 
