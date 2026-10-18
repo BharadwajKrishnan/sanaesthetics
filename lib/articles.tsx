@@ -389,7 +389,141 @@ function TemperingBody() {
   );
 }
 
+// Each spice's signature molecule, as the article lists them.
+const MOLECULES = [
+  { spice: "Pepper", molecule: "piperine" },
+  { spice: "Fennel", molecule: "anethole" },
+  { spice: "Coriander", molecule: "linalool" },
+  { spice: "Clove", molecule: "eugenol" },
+  { spice: "Cinnamon", molecule: "cinnamaldehyde" },
+  { spice: "Star anise", molecule: "anethole" },
+  { spice: "Black cardamom", molecule: "1,8-cineole + smoky volatile compounds" },
+];
+
+function SpicesBody() {
+  return (
+    <>
+      <p>Whole spices may look quiet sitting inside a box, but the moment we crush them, roast them or add them to hot oil, they begin to change.</p>
+
+      <h2>The aroma is already there — but we have to release it</h2>
+      <p>
+        Many spices contain <strong>volatile aroma compounds</strong> stored within their plant tissues and essential oils. When a spice is
+        whole, these compounds are relatively protected.
+      </p>
+      <p>
+        Once we crush or grind it, we break open those structures and expose a much larger surface area. Aroma molecules can then escape
+        much more easily into the air — which is why freshly ground spices often smell so much stronger than whole ones.
+      </p>
+      <p>
+        It is also why pre-ground spices can slowly lose their intensity with time. Once the spice has been broken open, those volatile
+        compounds have more opportunity to evaporate or change during storage.
+      </p>
+      <p>
+        This is one of the things I find most fascinating about spices. The flavour is not only in the ingredient itself — it is also in{" "}
+        <strong>what we do to it</strong>.
+      </p>
+      <p>A whole coriander seed, freshly crushed coriander and roasted coriander powder can all come from the same spice, yet smell and taste completely different.</p>
+      <p>Each spice has its own characteristic chemistry, which is why the same technique can produce very different results.</p>
+
+      <h2>Different spices, different chemistry</h2>
+      <figure>
+        <dl className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 sm:[&>div:last-child:nth-child(odd)]:col-span-2">
+          {MOLECULES.map((row) => (
+            <div key={row.spice} className="flex items-baseline gap-3 bg-parchment px-5 py-3">
+              <dt className="font-serif text-lg font-semibold text-maroon">{row.spice}</dt>
+              <span aria-hidden="true" className="text-brass">
+                →
+              </span>
+              <dd className="text-left text-base italic leading-snug text-ink/80">{row.molecule}</dd>
+            </div>
+          ))}
+        </dl>
+      </figure>
+
+      <h3>Black pepper — pungency and aroma</h3>
+      <p>Pepper also contains volatile aroma compounds that give freshly crushed pepper its woody, citrusy and warm character.</p>
+      <p>That is why freshly cracked pepper can smell so much more vibrant than finely ground pepper that has been sitting in a jar for months.</p>
+
+      <h3>Fennel seeds — naturally sweet and aromatic</h3>
+      <p>Fennel has a very distinctive sweet, almost liquorice-like aroma.</p>
+      <p>When fennel is lightly roasted or crushed, that aroma becomes much more noticeable because more of the volatile compounds are released.</p>
+      <p>This is also why fennel can completely change the personality of a spice mix, even when used in a relatively small quantity.</p>
+
+      <h3>Coriander seeds — citrus hiding inside a seed</h3>
+      <p>Whole coriander seeds have a warm, slightly citrusy character.</p>
+      <p>Roasting coriander seeds can make their aroma warmer and nuttier, while crushing them releases the fresher aromatic compounds more quickly.</p>
+      <p>This makes coriander especially interesting because the same seed can bring both brightness and warmth depending on how it is treated.</p>
+
+      <h3>Cinnamon — warm, woody and sweet</h3>
+      <p>When a cinnamon stick is simmered slowly in a dish, its aroma is released gradually.</p>
+      <p>Ground cinnamon behaves very differently because so much more of the spice is exposed at once.</p>
+      <p>This is why a whole cinnamon stick can quietly perfume a dish, while powdered cinnamon can become much more dominant.</p>
+
+      <h3>Cloves — small spice, powerful aroma</h3>
+      <p>This is one of those spices where a tiny amount can influence the whole dish.</p>
+      <p>When heated, cloves release their aroma very quickly, which is why they are usually used with some restraint.</p>
+      <p>Too many cloves — or too much heat — can easily overpower the rest of the spice blend.</p>
+
+      <h3>Star anise — similar aroma, different spice</h3>
+      <p>Although similar to fennel, the overall aroma profile is not identical because each spice contains many other compounds as well.</p>
+      <p>
+        That is an important part of flavour science: one molecule may be very characteristic of a spice, but the flavour we actually
+        experience comes from a <strong>mixture of many compounds</strong>, not just one.
+      </p>
+
+      <h3>Black cardamom — smoky, woody and bold</h3>
+      <p>Black cardamom has a much deeper and smokier profile than green cardamom.</p>
+      <p>Its aroma comes from a complex mixture of volatile compounds, along with other terpenes and smoky notes formed during traditional drying.</p>
+      <p>When lightly crushed and cooked, it releases a warm, earthy aroma that works especially well in savoury dishes.</p>
+
+      <h3>Poppy seeds — more about nuttiness than perfume</h3>
+      <p>Poppy seeds behave a little differently from spices such as cloves or cinnamon. They contain a relatively high amount of oil.</p>
+      <p>When roasted, they develop a deeper, nuttier flavour and a more noticeable toasted character.</p>
+      <p>
+        They can also contribute body and texture when ground into a paste, which is why their role in cooking can be as much about{" "}
+        <strong>mouthfeel and richness</strong> as aroma.
+      </p>
+
+      <h2>“So what makes the difference — heat, grinding, oil, or the way we use the spice?”</h2>
+      <p>One can either dry roast a spice or grind it or even use it as a whole. It depends on the requirement of the dish and the final taste you want to achieve.</p>
+      <p>
+        As the spice warms, moisture is reduced and aromatic compounds become easier to release. Heat can also create new toasted and
+        roasted notes through chemical reactions within the spice.
+      </p>
+      <p className="font-serif text-2xl font-medium text-ink">But there is a very small window between fragrant and burnt.</p>
+      <p>Gentle roasting can make spices warmer, deeper and more complex. Too much heat can destroy delicate aroma compounds and create harsh, bitter or burnt flavours instead.</p>
+      <p>That is why we often say “roast until aromatic” rather than giving an exact number of minutes. The smell itself becomes an important cooking cue.</p>
+      <p>
+        Grinding changes flavour mainly by breaking the spice open and increasing its surface area. More aroma compounds are exposed at
+        once, which is why freshly ground spices smell so intense — but also why they lose aroma faster during storage.
+      </p>
+      <p>
+        When spices are <strong>heated in oil</strong>, another layer of flavour development happens.
+      </p>
+      <p>
+        Many aroma molecules have some affinity for fat, so oil can help extract and carry them. Once that flavoured oil is mixed through
+        the dish, the aroma can spread much more effectively than if the spices had simply been added to water.
+      </p>
+      <p>This is one reason why a small quantity of spices bloomed in oil can influence an entire curry.</p>
+      <p>The same principle appears in tempering too: the oil is not only cooking the spices — it is also helping transport flavour.</p>
+    </>
+  );
+}
+
 export const articles: Article[] = [
+  {
+    slug: "when-spices-wake-up",
+    title: "When Spices Wake Up",
+    eyebrow: "Flavour science · Whole spices",
+    excerpt: "Whole spices may look quiet sitting inside a box, but the moment we crush them, roast them or add them to hot oil, they begin to change.",
+    // Sandhya's photo of the whole spices, shared with Issue 3.
+    cover: "/images/whole-spices-board.webp",
+    coverAlt:
+      "Whole spices laid out on a bamboo board: star anise, a cinnamon stick, bay leaves, black pepper, fennel seeds, poppy seeds, coriander seeds, cloves and black cardamom",
+    coverAspect: "aspect-[16/9]",
+    readingTime: "5 min read",
+    Body: SpicesBody,
+  },
   {
     slug: "when-ingredients-meet-heat",
     title: "When Ingredients Meet Heat",

@@ -1,12 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { BananaLeafMeal } from "@/components/BananaLeaf";
 
-// The hero picture (the photo of the meal, or the drawn banana leaf when there is none), tilting a few
-// degrees towards the pointer as it moves over the hero. The tilt is written as two custom properties; the
+// The hero picture, tilting a few degrees towards the pointer as it moves over the hero. The tilt is written as two custom properties; the
 // stylesheet turns them into the transform and drops them under reduced motion.
-export function HeroLeaf({ className = "", children }: { className?: string; children?: React.ReactNode }) {
+export function HeroFrame({ className = "", children }: { className?: string; children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
   function tilt(e: React.PointerEvent<HTMLDivElement>) {
@@ -25,8 +23,8 @@ export function HeroLeaf({ className = "", children }: { className?: string; chi
   }
 
   return (
-    <div ref={ref} onPointerMove={tilt} onPointerLeave={rest} className={`leaf-tilt ${className}`}>
-      <div className="leaf-in">{children ?? <BananaLeafMeal className="block h-auto w-full" />}</div>
+    <div ref={ref} onPointerMove={tilt} onPointerLeave={rest} className={`hero-tilt ${className}`}>
+      <div className="hero-in">{children}</div>
     </div>
   );
 }

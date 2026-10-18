@@ -10,8 +10,6 @@
   --color-maroon: #7b2d26;
   --color-brass: #b98a44;
   --color-umber: #2e2119;
-  --color-leaf: #3f7a3a;
-  --color-leaf-deep: #2a5a2a;
   --color-turmeric: #e0a21b;
   --font-serif: var(--font-cormorant), Georgia, serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
@@ -321,76 +319,25 @@ button.bowl {
   50% { transform: scale(1.3); opacity: 0.7; }
 }
 
-/* ---------- The banana-leaf meal in the hero ---------- */
+/* ---------- The hero picture ---------- */
 
-/* The leaf settles onto the table, then the dishes are served one after another. */
-.leaf-in {
-  animation: leaf-in 1.1s var(--ease-out-soft) both;
+/* The picture settles into place as the page opens */
+.hero-in {
+  animation: hero-in 1.1s var(--ease-out-soft) both;
 }
 
-@keyframes leaf-in {
+@keyframes hero-in {
   from {
     opacity: 0;
     transform: translateY(28px) scale(0.96) rotate(-2deg);
   }
 }
 
-.leaf-float {
-  animation: leaf-float 9s ease-in-out infinite;
-  transform-origin: 50% 50%;
-}
-
-@keyframes leaf-float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(0.5deg); }
-}
-
-/* The pointer tilts the whole meal a few degrees, set as custom properties by the hero component */
-.leaf-tilt {
+/* The pointer tilts the picture a few degrees, set as custom properties by the hero component */
+.hero-tilt {
   transform: perspective(1400px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   transition: transform 600ms var(--ease-out-soft);
   transform-style: preserve-3d;
-}
-
-.dish {
-  opacity: 0;
-  transform: scale(0.3);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: dish-in 650ms var(--ease-spring) both;
-  animation-delay: calc(650ms + var(--i, 0) * 85ms);
-}
-
-@keyframes dish-in {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.steam {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  animation: steam 3.4s ease-in-out infinite;
-  animation-delay: calc(var(--i, 0) * 900ms);
-  opacity: 0;
-}
-
-@keyframes steam {
-  0% { opacity: 0; transform: translateY(6px) scaleY(0.8); }
-  30% { opacity: 0.75; }
-  100% { opacity: 0; transform: translateY(-22px) scaleY(1.15); }
-}
-
-/* The hero photo drifts in very slowly, the way a still camera never quite is */
-.kenburns {
-  transform-origin: 50% 46%;
-  animation: kenburns 26s ease-in-out infinite alternate;
-}
-
-@keyframes kenburns {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
 }
 
 /* ---------- Hero text ---------- */
@@ -532,11 +479,11 @@ html.no-js .draw path {
   .pan-item,
   .card-lift,
   .card-lift img,
-  .leaf-tilt,
+  .hero-tilt,
   .nav-link::after {
     transition: none;
   }
-  .leaf-tilt {
+  .hero-tilt {
     transform: none;
   }
   .spin-slow,
@@ -544,15 +491,11 @@ html.no-js .draw path {
   .ticker-track,
   .orbit,
   .pulse-ring::before,
-  .leaf-float,
-  .kenburns,
-  .steam,
   .teaser-progress,
   .site-header {
     animation: none;
   }
-  .leaf-in,
-  .dish,
+  .hero-in,
   .hero-line > span,
   .hero-fade,
   .swap-in,

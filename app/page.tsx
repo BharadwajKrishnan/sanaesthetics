@@ -1,6 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
-import { HeroLeaf } from "@/components/HeroLeaf";
+import { Artwork, HeroGarnish } from "@/components/Artwork";
+import { Dabba } from "@/components/BrassDabba";
+import { HeroFrame } from "@/components/HeroFrame";
 import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components/Icons";
 import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { KolamCorner } from "@/components/Kolam";
@@ -12,7 +13,7 @@ import { SixTastes } from "@/components/SixTastes";
 import { TopicsTicker } from "@/components/TopicsTicker";
 import { posts } from "@/lib/instagram";
 import { CLASSES, TOPICS } from "@/lib/classes";
-import { heroCredit, photos } from "@/lib/photos";
+import { photos } from "@/lib/photos";
 import { getPost, issueLink, posts as issues } from "@/lib/posts";
 import { PYRAMID } from "@/lib/pyramid";
 import { recipePath, recipes } from "@/lib/recipes";
@@ -51,7 +52,7 @@ export default function Home() {
       <SiteHeader current="/" />
 
       <main id="main" className="overflow-x-clip">
-        {/* Hero: the meal on the leaf, served as the page opens */}
+        {/* Hero: the anjarapetti on its warm backdrop, settling in as the page opens */}
         <section id="top" className="relative overflow-hidden">
           <div aria-hidden="true" className="kolam-dots absolute inset-y-0 right-0 hidden w-[60%] lg:block" />
           <KolamCorner className="pointer-events-none absolute left-2 top-2 hidden w-20 text-brass/60 md:block lg:w-24" />
@@ -89,35 +90,19 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <HeroLeaf className="mx-auto w-full max-w-[34rem] lg:max-w-none">
-                {photos.hero && (
-                  <figure>
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl shadow-ink/30 sm:aspect-square lg:aspect-[5/4]">
-                      <Image
-                        src={photos.hero}
-                        alt="A sadya on a banana leaf, seen from above: rice with sambar, avial, thoran, pickles, banana chips, appalam, a banana and bowls of payasam"
-                        fill
-                        priority
-                        sizes="(min-width: 1024px) 55vw, (min-width: 640px) 34rem, 100vw"
-                        quality={90}
-                        className="kenburns object-cover object-[50%_46%]"
-                      />
-                    </div>
-                    <figcaption className="hero-fade mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-1" style={{ ["--i" as string]: 3 }}>
-                      <span aria-hidden="true" className="-rotate-2 whitespace-nowrap font-script text-[1.35rem] leading-none text-maroon sm:text-[1.5rem] lg:text-[1.3rem] xl:text-[1.5rem]">
-                        Ingredients · Tradition · Science · Stories
-                      </span>
-                      <span className="shrink-0 text-[0.7rem] text-ink/50">
-                        Photo:{" "}
-                        <a href={heroCredit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline decoration-ink/25 underline-offset-2 hover:decoration-ink">
-                          {heroCredit.by}
-                        </a>
-                        , {heroCredit.source}
-                      </span>
-                    </figcaption>
-                  </figure>
-                )}
-              </HeroLeaf>
+              <HeroFrame className="mx-auto w-full max-w-[34rem] lg:max-w-none">
+                <figure>
+                  <Artwork src={photos.hero} alt="" sizes="(min-width: 1024px) 55vw, (min-width: 640px) 34rem, 100vw" priority className="relative aspect-[4/5] rounded-2xl shadow-2xl shadow-ink/30 sm:aspect-square lg:aspect-[5/4]">
+                    <HeroGarnish />
+                    <Dabba sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 60vw" priority className="absolute left-1/2 top-1/2 w-[min(60%,22rem)] -translate-x-1/2 -translate-y-1/2" />
+                  </Artwork>
+                  <figcaption className="hero-fade mt-2 px-1" style={{ ["--i" as string]: 3 }}>
+                    <span aria-hidden="true" className="-rotate-2 inline-block whitespace-nowrap font-script text-[1.35rem] leading-none text-maroon sm:text-[1.5rem] lg:text-[1.3rem] xl:text-[1.5rem]">
+                      Ingredients · Tradition · Science · Stories
+                    </span>
+                  </figcaption>
+                </figure>
+              </HeroFrame>
             </div>
           </div>
         </section>
