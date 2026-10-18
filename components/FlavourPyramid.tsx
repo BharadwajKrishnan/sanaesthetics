@@ -25,7 +25,7 @@ function Chevron({ className = "" }: { className?: string }) {
 }
 
 const CHIP_LINKED = "inline-flex items-center rounded-full border border-line bg-cream px-3 py-1 text-sm font-medium text-ink transition-colors hover:border-maroon hover:text-maroon";
-const CHIP_SOON = "inline-flex items-center gap-1.5 rounded-full border border-dashed border-line px-3 py-1 text-sm text-ink/55";
+const CHIP_PLAIN = "inline-flex items-center rounded-full border border-line px-3 py-1 text-sm text-ink/70";
 const READ_LINK = "group font-medium underline decoration-ink/30 underline-offset-[6px] hover:decoration-ink";
 
 export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
@@ -72,11 +72,6 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
                     style={{ width: `${bottom - STEP / 2}%` }}
                   >
                     {layer.title}
-                    {layer.tamil && (
-                      <span className="mt-0.5 hidden font-tamil text-xs font-semibold normal-case tracking-normal sm:block" lang="ta">
-                        {layer.tamil}
-                      </span>
-                    )}
                   </span>
                 </span>
               </button>
@@ -96,11 +91,6 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
             </p>
             <h3 id={`pyramid-title-${layer.n}`} className="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl">
               {layer.title}
-              {layer.tamil && (
-                <span className="ml-3 font-tamil text-2xl font-semibold text-maroon sm:text-3xl" lang="ta">
-                  {layer.tamil}
-                </span>
-              )}
             </h3>
             <p className="mt-4 text-lg leading-relaxed text-ink/80">{layer.blurb}</p>
 
@@ -117,10 +107,7 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
                         {chip.label}
                       </Link>
                     ) : (
-                      <span className={CHIP_SOON}>
-                        {chip.label}
-                        <span className="text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-brass">soon</span>
-                      </span>
+                      <span className={CHIP_PLAIN}>{chip.label}</span>
                     )}
                   </li>
                 ))}

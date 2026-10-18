@@ -3,7 +3,7 @@ import { getPost, issueLink } from "@/lib/posts";
 import { getRecipe, recipePath } from "@/lib/recipes";
 
 // Sandhya's flavour pyramid: how a South Indian dish is built, read from the foundation upward.
-// Every chip that has a link points at writing that already exists; the rest are shown as "soon".
+// A chip with a link points at writing that already exists; the rest are plain labels.
 // This file imports the content modules, so it is only used from server components. The pyramid
 // component receives the resolved, serialisable layers as props.
 
@@ -16,8 +16,6 @@ export type PyramidLayer = {
   title: string;
   tagline: string;
   blurb: string;
-  // Tamil word shown on the layer, when there is a traditional name for it.
-  tamil?: string;
   chips: PyramidChip[];
   reads: PyramidRead[];
   // Tailwind classes for the layer's band and its label.
@@ -124,7 +122,6 @@ export const PYRAMID: PyramidLayer[] = [
     id: "taste",
     title: "Taste Balance",
     tagline: "What we taste",
-    tamil: "அறுசுவை",
     blurb: "Arusuvai, the six tastes a Tamil meal is built to hold in balance. Each one has a job, and each one keeps another in check.",
     chips: [
       { label: "Sweet", link: arusuvai.link },
