@@ -147,6 +147,52 @@ export const recipes: Recipe[] = [
     issueSlug: "arusuvai-where-tradition-meets-taste",
     readMore: "Why do Tamil kitchens put all six tastes in one bowl for the new year? Issue 1 looks at where that tradition and modern sensory science meet.",
   },
+  {
+    slug: "chettinad-urulai-roast",
+    title: "Chettinad Urulai Roast",
+    tamil: "உருளைக்கிழங்கு வறுவல்",
+    eyebrow: "Potato roast · Chettinad",
+    summary:
+      "Boiled potatoes tossed in a freshly roasted, coarsely ground masala of red chilli, coriander, pepper and fennel, until the edges turn slightly crisp.",
+    cover: "/images/chettinad-urulai-roast.webp",
+    coverAlt: "Chettinad urulai roast in a brass bowl: cubes of potato coated in a coarse brown masala with mustard seeds, curry leaves and a dried red chilli",
+    intro: ["For this recipe we first need a spice mix, which forms the base of a Chettinad urulai (potato) roast."],
+    serve: "I normally serve it with piping hot rasam rice, or with curd rice (this can never go wrong 😛).",
+    ingredients: [
+      {
+        group: "For the spice mix",
+        items: ["2 dried red chillies", "1½ tsp coriander seeds", "1 tsp urad dal", "½ to 1 tsp black peppercorns", "½ tsp fennel seeds"],
+      },
+      {
+        group: "For the potatoes",
+        items: [
+          "700 to 750 g baby potatoes or regular potatoes, boiled and cut into chunks",
+          "2 to 3 tbsp sesame oil or neutral oil",
+          "1 tsp mustard seeds",
+          "10 to 12 curry leaves",
+          "8 to 10 small shallots, sliced or halved",
+          "¼ tsp turmeric",
+          "Salt, as needed",
+          "Coriander leaves, to finish",
+        ],
+      },
+    ],
+    steps: [
+      "First boil the potatoes: not too soft, so that they can cook further in the pan.",
+      "Meanwhile, dry-roast the ingredients for the spice mix on low heat until they smell warm and aromatic.",
+      "Let them cool, then grind them coarsely. I prefer keeping a little texture rather than making a very fine powder.",
+      "Heat the oil in a wide pan and add the mustard seeds. Once they begin to pop, add the curry leaves and shallots and cook until the shallots soften.",
+      "Add the turmeric and boiled potatoes, season with salt, and toss everything well.",
+      "Now add the freshly ground spice mix. Cook on low to medium heat for a few more minutes, turning the potatoes gently until the masala coats them and the edges start becoming slightly crisp.",
+      "Finish with fresh coriander.",
+    ],
+    ready: {
+      title: "How should it taste?",
+      body: ["The final dish should be peppery, aromatic and slightly crisp on the outside, without the spices tasting burnt or overly bitter."],
+    },
+    issueSlug: "beyond-the-basics",
+    readMore: "Pepper, fennel and coriander seeds all come out of the second spice box. Issue 3 opens it, and looks at why Chettinad cooking builds flavour in layers.",
+  },
 ];
 
 export const recipePromise = "I cook by instinct, but I test and measure the recipes here so you can reproduce them.";

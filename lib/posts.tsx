@@ -364,7 +364,7 @@ function BeyondTheBasicsBody() {
         masalas and careful roasting can build flavour in layers rather than all at once.
       </p>
       <p className={WRAPPED}>
-        Chettinad potato roast and vegetable kurma are two dishes I keep coming back to — easy enough for everyday cooking, but
+        <RecipeLink slug="chettinad-urulai-roast">Chettinad potato roast</RecipeLink> and vegetable kurma are two dishes I keep coming back to — easy enough for everyday cooking, but
         special enough to serve when I have people over 🙂
       </p>
       <div className="clear-both" />
