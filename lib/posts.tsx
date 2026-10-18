@@ -247,6 +247,7 @@ const SPICE_BOX = [
   { name: "Black pepper", note: "warm, sharp and deeply aromatic." },
   { name: "Fennel seeds", note: "slightly sweet, fresh and very fragrant." },
   { name: "Cinnamon sticks", note: "woody, warm and gently sweet." },
+  { name: "Coriander seeds", note: "warm, gently citrusy and slightly nutty." },
   { name: "Cloves", note: "tiny, but incredibly powerful in aroma." },
   { name: "Star anise", note: "sweet, liquorice-like and instantly recognisable." },
   { name: "Bay leaves", note: "subtle, but useful for building background aroma." },

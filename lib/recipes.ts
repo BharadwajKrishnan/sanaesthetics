@@ -40,15 +40,8 @@ export const recipes: Recipe[] = [
     eyebrow: "Tamarind gravy · Tamil Nadu",
     summary:
       "A sour, spicy tamarind gravy made in sesame oil, with a spice powder that makes it lip-smacking and a pinch of jaggery to round out the edges.",
-    cover: "/images/vathakuzhambu.webp",
-    coverAlt: "Manathakkali vathakuzhambu: a dark red tamarind gravy with dried berries and curry leaves, in a small steel vessel",
-    coverCredit: {
-      by: "Abinandhankumar2045",
-      source: "Wikimedia Commons",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Manathakkalikkai_vathakuzhambu.jpg",
-      licence: "CC BY-SA 4.0",
-      licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
-    },
+    cover: "/images/vathakuzhambu-bowl.webp",
+    coverAlt: "Manathakkali vathakuzhambu in a brass vessel: a dark tamarind gravy with shallots, dried berries, red chillies and curry leaves, a plate of rice and appalam behind",
     photo: "/images/vathakuzhambu-tamarind.webp",
     photoAlt: "A block of tamarind and a bowl of sambar powder beside a ceramic jar",
     photoTags: [
@@ -112,15 +105,8 @@ export const recipes: Recipe[] = [
     eyebrow: "Raw mango relish · Tamil New Year",
     summary:
       "Raw mango simmered with jaggery, chilli and salt, finished with a mustard-seed tempering and a pinch of neem flowers: all six tastes in one bowl.",
-    cover: "/images/mangai-pachadi.webp",
-    coverAlt: "A white bowl of mangai pachadi: raw mango cooked down with jaggery to a glossy amber, flecked with mustard seeds and a curry leaf",
-    coverCredit: {
-      by: "Nithyasrm",
-      source: "Wikimedia Commons",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Manga_pachadi.JPG",
-      licence: "CC BY-SA 4.0",
-      licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
-    },
+    cover: "/images/mangai-pachadi-bowl.webp",
+    coverAlt: "Mangai pachadi in a steel bowl: pieces of raw mango in a glossy jaggery sauce with mustard seeds, curry leaves and a red chilli, a whole raw mango beside it",
     intro: [
       "One amazing example of Arusuvai is mango pachadi. It is a special dish on Tamil New Year, eaten to embrace each flavour, as you would each flavour of your life.",
       "Mangai pachadi can bring together several taste experiences in one dish: sour from raw mango, sweet from jaggery, pungent from chilli, salty from salt, and in some versions bitter notes from neem flowers.",
