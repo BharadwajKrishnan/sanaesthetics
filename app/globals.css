@@ -34,15 +34,22 @@ html:has(dialog[open]) {
   overflow: hidden;
 }
 
-/* Body copy is justified; centred blocks stay centred */
-main p,
-main li,
-main dd {
-  text-align: justify;
-}
+/* Body copy is justified; centred and left-aligned blocks stay as they are. In the base layer so that
+   an alignment utility on the element itself (text-left, md:text-left, ...) still wins. */
+@layer base {
+  main p,
+  main li,
+  main dd {
+    text-align: justify;
+  }
 
-main .text-center p {
-  text-align: center;
+  main .text-center p {
+    text-align: center;
+  }
+
+  main .text-left p {
+    text-align: left;
+  }
 }
 
 :focus-visible {

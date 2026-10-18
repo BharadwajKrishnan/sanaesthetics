@@ -212,3 +212,101 @@ export function SprigOutline({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+
+const PEPPERCORNS = scatter(26, 17, 150, 110);
+const FENNEL = scatter(30, 23, 110, 70);
+
+function CinnamonStick({ x, y, rot, length = 170 }: { x: number; y: number; rot: number; length?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+      <rect x="0" y="-13" width={length} height="26" rx="12" fill="#8a4a2a" />
+      <rect x="0" y="-13" width={length} height="10" rx="5" fill="#a8623a" opacity="0.7" />
+      <path d={`M8 -2H${length - 8}`} stroke="#5e2f18" strokeWidth="2" opacity="0.7" />
+      <path d={`M14 7H${length - 14}`} stroke="#5e2f18" strokeWidth="1.2" opacity="0.5" />
+      <ellipse cx="0" cy="0" rx="6" ry="13" fill="#6a3620" />
+      <ellipse cx="0" cy="0" rx="3" ry="8" fill="#3e1e10" />
+    </g>
+  );
+}
+
+function StarAnise({ x, y, rot, size = 1 }: { x: number; y: number; rot: number; size?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${size})`}>
+      {Array.from({ length: 8 }, (_, i) => (
+        <g key={i} transform={`rotate(${i * 45})`}>
+          <path d="M0 0Q10 -16 42 -4Q46 0 42 4Q10 16 0 0Z" fill="#5a3426" />
+          <path d="M6 0Q14 -8 36 -2Q38 0 36 2Q14 8 6 0Z" fill="#3a2016" opacity="0.8" />
+          <ellipse cx="26" cy="0" rx="8" ry="4.5" fill="#b78a4a" />
+        </g>
+      ))}
+      <circle r="6" fill="#3a2016" />
+    </g>
+  );
+}
+
+function Clove({ x, y, rot }: { x: number; y: number; rot: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+      <path d="M0 0L30 -3L30 3Z" fill="#3b2418" />
+      <circle cx="33" cy="0" r="7" fill="#4e3020" />
+      <circle cx="33" cy="0" r="3" fill="#7a5a3a" />
+    </g>
+  );
+}
+
+function BayLeaf({ x, y, rot, size = 1 }: { x: number; y: number; rot: number; size?: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${size})`}>
+      <path d="M0 0Q40-30 120 0Q40 30 0 0Z" fill="#6b7a3c" />
+      <path d="M0 0Q40-30 120 0Z" fill="#8a9650" opacity="0.4" />
+      <path d="M4 0H112" stroke="#45502a" strokeWidth="1.2" opacity="0.8" />
+      {[20, 40, 60, 80, 96].map((v) => (
+        <path key={v} d={`M${v} 0L${v + 14} -9M${v} 0L${v + 14} 9`} stroke="#45502a" strokeWidth="0.7" opacity="0.6" />
+      ))}
+    </g>
+  );
+}
+
+function BlackCardamom({ x, y, rot }: { x: number; y: number; rot: number }) {
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot})`}>
+      <ellipse rx="26" ry="15" fill="#3e2a20" />
+      <ellipse rx="26" ry="15" fill="#5a3f30" opacity="0.5" transform="translate(-3 -4) scale(0.7)" />
+      {[-14, -5, 4, 13].map((v) => (
+        <path key={v} d={`M${v} -14Q${v + 4} 0 ${v} 14`} stroke="#241610" strokeWidth="1.4" fill="none" opacity="0.8" />
+      ))}
+    </g>
+  );
+}
+
+// Issue 3: whole spices on dark wood — cinnamon, star anise, cloves, bay leaves, black cardamom, pepper and fennel.
+export function WholeSpices() {
+  return (
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" className="absolute inset-0 h-full w-full">
+      <CinnamonStick x={60} y={300} rot={-38} length={190} />
+      <CinnamonStick x={90} y={330} rot={-30} length={170} />
+      <BayLeaf x={190} y={60} rot={18} size={1.1} />
+      <BayLeaf x={40} y={120} rot={-12} size={0.85} />
+      <StarAnise x={255} y={240} rot={12} size={1.25} />
+      <StarAnise x={340} y={120} rot={-20} size={0.8} />
+      <BlackCardamom x={320} y={330} rot={-25} />
+      <BlackCardamom x={368} y={290} rot={35} />
+      <Clove x={120} y={210} rot={-60} />
+      <Clove x={150} y={190} rot={-20} />
+      <Clove x={135} y={240} rot={20} />
+      <g transform="translate(200 300)">
+        {PEPPERCORNS.map((p, i) => (
+          <g key={i}>
+            <circle cx={p.x} cy={p.y} r="6.5" fill="#1b1410" />
+            <circle cx={p.x - 2} cy={p.y - 2} r="2" fill="#5a4a3e" opacity="0.7" />
+          </g>
+        ))}
+      </g>
+      <g transform="translate(30 30)">
+        {FENNEL.map((f, i) => (
+          <ellipse key={i} cx={f.x} cy={f.y} rx="5" ry="1.8" transform={`rotate(${f.r} ${f.x} ${f.y})`} fill={i % 4 ? "#b5b46a" : "#8f9550"} />
+        ))}
+      </g>
+    </svg>
+  );
+}

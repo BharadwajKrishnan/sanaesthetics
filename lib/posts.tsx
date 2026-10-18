@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { HeroGarnish, PhotoTags, type PhotoTag } from "@/components/Artwork";
+import { HeroGarnish, PhotoTags, WholeSpices, type PhotoTag } from "@/components/Artwork";
 import { Zoomable } from "@/components/Zoomable";
 import { articleLink } from "@/lib/articles";
 import { Dabba } from "@/components/BrassDabba";
@@ -243,6 +243,99 @@ function AnjarapettiBody() {
   );
 }
 
+const SPICE_BOX = [
+  { name: "Black pepper", note: "warm, sharp and deeply aromatic." },
+  { name: "Fennel seeds", note: "slightly sweet, fresh and very fragrant." },
+  { name: "Cinnamon sticks", note: "woody, warm and gently sweet." },
+  { name: "Cloves", note: "tiny, but incredibly powerful in aroma." },
+  { name: "Star anise", note: "sweet, liquorice-like and instantly recognisable." },
+  { name: "Bay leaves", note: "subtle, but useful for building background aroma." },
+  { name: "Poppy seeds", note: "mild and nutty, often used to bring body and texture to certain preparations." },
+  { name: "Black cardamom", note: "smoky, bold and completely different from the sweeter green cardamom we are more familiar with." },
+];
+
+const SIDE_BOX = "mt-10 md:float-right md:mb-2 md:ml-8 md:mt-2 md:w-72 lg:float-none lg:mb-0 lg:ml-0 lg:mt-10 lg:w-auto xl:float-right xl:mb-2 xl:ml-8 xl:mt-2 xl:w-72";
+const WRAPPED = "md:text-left lg:text-justify xl:text-left";
+
+function BeyondTheBasicsBody() {
+  return (
+    <>
+      <p>One box is never quite enough in an Indian kitchen 😛</p>
+      <p>
+        Apart from my{" "}
+        <a {...issueLink("inside-the-anjarapetti")} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          anjarapetti
+        </a>
+        , I have another box filled with ingredients that I may not reach for every single day, but that I still would not want my
+        kitchen to be without.
+      </p>
+      <p>
+        What I like about this second box is that it changes the mood of the cooking. The anjarapetti feels like everyday rhythm;
+        this box feels more like depth, warmth and occasion.
+      </p>
+      <p>Inside, you will usually find:</p>
+      <dl className="mt-6 divide-y divide-line border-y border-line">
+        {SPICE_BOX.map((row) => (
+          <div key={row.name} className="grid gap-1 py-4 sm:grid-cols-[10rem_1fr] sm:gap-5">
+            <dt className="font-serif text-xl font-semibold text-maroon">{row.name}</dt>
+            <dd className="leading-relaxed text-ink/80">{row.note}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>
+        And then there are a few ingredients that sit elsewhere in my pantry but come out when a dish needs something a little
+        special.
+      </p>
+      <p>Saffron brings colour, aroma and a delicate floral character, especially to sweets and festive dishes.</p>
+      <p>
+        Cashews are much more familiar in South Indian cooking than saffron. I use them in sweets, payasam, festive rice dishes and
+        sometimes in savoury preparations where they add richness and texture.
+      </p>
+      <p className="font-serif text-2xl font-medium">What I find interesting about whole spices is that they never behave in exactly the same way.</p>
+      <p>
+        Crushed pepper gives a very different effect from whole pepper simmered in a gravy. Fennel smells completely different after
+        roasting. A cinnamon stick slowly infusing into a dish creates a softer aroma than ground cinnamon added directly.
+      </p>
+      <p>
+        And adding them to{" "}
+        <a {...articleLink("when-ingredients-meet-heat")} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          an oil
+        </a>{" "}
+        has its own science surprisingly!
+      </p>
+
+      {/* The Chettinad story, boxed at the side as the author asked. Where the column is wide enough (md, and again
+          from xl once the cover sits beside the text) it floats right and the closing paragraphs wrap around it,
+          set ragged so the narrow measure does not open rivers. Elsewhere it is a full-width box. */}
+      <aside className={`${SIDE_BOX} border-l-4 border-maroon bg-parchment p-6 text-left`}>
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-maroon">On the side</p>
+        <p className="mt-3 font-serif text-2xl font-semibold text-ink">The Chettinad story</p>
+        <p className="mt-3 text-base leading-relaxed text-ink/80">
+          Although non-vegetarian dishes are what many people first think of when they hear Chettinad, there is much more to the
+          cuisine than that.
+        </p>
+        <p className="mt-3 text-base leading-relaxed text-ink/80">
+          Its story is closely connected to the Chettiar community, whose trading networks stretched across South and Southeast Asia
+          over several centuries and brought new ingredients and influences into their cooking.
+        </p>
+        <p className="mt-3 text-base leading-relaxed text-ink/80">
+          What makes Chettinad cuisine especially interesting is that it does not depend only on the ingredients used, but also on
+          the techniques behind them — roasting, grinding, tempering and layering spices to build depth and aroma.
+        </p>
+      </aside>
+      <p className={WRAPPED}>
+        This is also why I find Chettinad cooking so fascinating. The cuisine shows beautifully how whole spices, freshly ground
+        masalas and careful roasting can build flavour in layers rather than all at once.
+      </p>
+      <p className={WRAPPED}>
+        Chettinad potato roast and vegetable kurma are two dishes I keep coming back to — easy enough for everyday cooking, but
+        special enough to serve when I have people over 🙂
+      </p>
+      <div className="clear-both" />
+    </>
+  );
+}
+
 export const posts: Post[] = [
   {
     slug: "arusuvai-where-tradition-meets-taste",
@@ -278,6 +371,17 @@ export const posts: Post[] = [
     Cover: AnjarapettiCover,
     readingTime: "3 min read",
     Body: AnjarapettiBody,
+  },
+  {
+    slug: "beyond-the-basics",
+    title: "Beyond the Basics: A Peek Inside My Spice Box",
+    eyebrow: "Issue 3",
+    excerpt:
+      "The box beside the anjarapetti: pepper, fennel, cinnamon, cloves, star anise, bay leaves, poppy seeds and black cardamom, with saffron and cashews waiting elsewhere in the pantry. Why whole spices never behave the same way twice, and what that has to do with Chettinad cooking.",
+    coverAlt: "Whole spices on a dark wooden board: cinnamon sticks, star anise, cloves, bay leaves, black cardamom, black pepper and fennel seeds",
+    Cover: WholeSpices,
+    readingTime: "3 min read",
+    Body: BeyondTheBasicsBody,
   },
 ];
 
