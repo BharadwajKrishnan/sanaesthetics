@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { Artwork, HeroGarnish, SprigOutline, Thali } from "@/components/Artwork";
+import { Artwork, HeroGarnish } from "@/components/Artwork";
 import { Dabba } from "@/components/BrassDabba";
 import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components/Icons";
 import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { KolamCorner, KolamDivider } from "@/components/Kolam";
+import { NewsletterTeaser } from "@/components/NewsletterTeaser";
 import { SignupForm } from "@/components/SignupForm";
 import { FlavourPyramid } from "@/components/FlavourPyramid";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
@@ -11,7 +12,7 @@ import { SixTastes } from "@/components/SixTastes";
 import { posts } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
 import { CLASSES } from "@/lib/classes";
-import { getPost, issueLink, latestPost } from "@/lib/posts";
+import { getPost, issueLink, posts as issues } from "@/lib/posts";
 import { PYRAMID } from "@/lib/pyramid";
 import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
@@ -33,7 +34,8 @@ const AUDIENCE = [
 
 const arusuvai = getPost("arusuvai-where-tradition-meets-taste")!;
 const issue1 = issueLink(arusuvai.slug);
-const latest = issueLink(latestPost.slug);
+// Only plain data crosses into the client component; the issues' React parts stay here.
+const TEASERS = issues.map(({ slug, title, eyebrow, teaser, cover, coverAlt }) => ({ slug, title, eyebrow, teaser, cover, coverAlt, link: issueLink(slug) }));
 
 const H2 = "font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-[3.5rem]";
 const PRIMARY = "group inline-flex items-center gap-2.5 rounded-md px-6 py-3 font-medium transition-colors";
@@ -102,52 +104,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Newsletter */}
+        {/* Newsletter: one issue at a time, in a loop. Kept short on purpose; the issues speak for themselves. */}
         <section id="newsletter" className="px-0 sm:px-4">
           <div className="relative mx-auto max-w-[88rem] overflow-hidden bg-parchment">
-            <KolamCorner className="pointer-events-none absolute right-2 top-2 w-32 -scale-x-100 text-brass/35 lg:w-44" />
-            <KolamCorner className="pointer-events-none absolute bottom-2 left-2 w-32 -scale-y-100 text-brass/35 lg:w-44" />
-            <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:px-8 lg:grid-cols-[0.95fr_1.25fr] lg:gap-14">
-              <div className="relative">
-                <SprigOutline className="pointer-events-none absolute -top-6 right-0 hidden w-36 text-ink/25 md:block" />
-                <Eyebrow>The newsletter</Eyebrow>
-                <h2 className={`${H2} mt-4 text-maroon`}>Stories, ingredients and the science behind South Indian flavour.</h2>
-                <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink/80">
-                  Through this newsletter, I explore South Indian vegetarian cooking through tradition, sensory science and the
-                  everyday ingredients in our kitchens. Each issue takes one idea, from the six tastes of a Tamil meal to the spice
-                  box by the stove, and follows it into the science.
-                </p>
-                <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-4">
-                  <a {...latest} className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
-                    Read the latest issue <Arrow />
-                  </a>
-                  <a {...issue1} className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
-                    Start with Issue 1: Arusuvai
-                  </a>
-                  <a href="#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
-                    Subscribe
-                  </a>
-                </div>
-              </div>
-
-              <article className="grid items-center gap-6 sm:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] sm:gap-8">
-                <Artwork
-                  src={latestPost.cover}
-                  alt={latestPost.coverAlt}
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 90vw"
-                  className="relative mx-auto aspect-[4/5] w-full max-w-md rounded-sm shadow-xl shadow-ink/15"
-                >
-                  {latestPost.Cover ? <latestPost.Cover /> : <Thali />}
-                </Artwork>
-                <div className="bg-cream/95 p-6 shadow-xl shadow-ink/10 sm:p-7">
-                  <Eyebrow>{latestPost.eyebrow} · the latest</Eyebrow>
-                  <h3 className="mt-3 font-serif text-[1.75rem] font-semibold leading-tight">{latestPost.title}</h3>
-                  <p className="mt-3 leading-relaxed text-ink/80">{latestPost.excerpt}</p>
-                  <p className="mt-5">
-                    <TextLink {...latest}>Read the issue</TextLink>
-                  </p>
-                </div>
-              </article>
+            <KolamCorner className="pointer-events-none absolute right-2 top-2 w-24 -scale-x-100 text-brass/35 lg:w-32" />
+            <KolamCorner className="pointer-events-none absolute bottom-2 left-2 w-24 -scale-y-100 text-brass/35 lg:w-32" />
+            <div className="relative mx-auto max-w-5xl px-5 py-12 sm:px-8 lg:py-14">
+              <NewsletterTeaser issues={TEASERS} />
             </div>
           </div>
         </section>

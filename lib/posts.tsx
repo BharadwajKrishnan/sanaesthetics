@@ -14,6 +14,8 @@ export type Post = {
   title: string;
   eyebrow: string;
   excerpt: string;
+  // One or two short lines for the homepage, meant to raise a question rather than answer it.
+  teaser: string;
   cover?: string;
   coverAlt: string;
   // Labels on the cover photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
@@ -379,6 +381,8 @@ export const posts: Post[] = [
     eyebrow: "Issue 1",
     excerpt:
       "Tamil kitchens counted six tastes long before anyone drew a molecule. Where the old idea and modern sensory science agree, where they part ways, and why balance matters more than a checklist.",
+    teaser:
+      "Tamil kitchens counted six tastes long before anyone drew a molecule. Sensory science agrees on four of them. So what are the other two doing on the plate?",
     cover: photos.issue1,
     coverAlt:
       "Arusuvai poster, the six tastes in Tamil food tradition: sweet (jaggery, payasam), sour (tamarind, raw mango), salty (salt, pickle), bitter (fenugreek, neem flowers, bitter gourd), pungent (chilli, black pepper) and astringent (raw banana, lentils)",
@@ -391,6 +395,8 @@ export const posts: Post[] = [
     eyebrow: "Issue 2",
     excerpt:
       "A spice box with five compartments, and the seeds, dals and powders that live in mine. What goes into a tempering, why one box is never enough, and what the box you keep closest to hand says about the way you cook.",
+    teaser:
+      "A box with five compartments, and no two kitchens fill it the same way. What does the box you keep closest to the stove say about how you cook?",
     cover: "/images/anjarapetti-issue-2.webp",
     coverAlt:
       "An open brass anjarapetti with chana dal, cumin seeds, fenugreek seeds, mustard seeds and urad dal, beside curry leaves, dried red chillies and a jar of hing",
@@ -414,6 +420,8 @@ export const posts: Post[] = [
     eyebrow: "Issue 3",
     excerpt:
       "The box beside the anjarapetti: pepper, fennel, cinnamon, cloves, star anise, bay leaves, poppy seeds and black cardamom, with saffron and cashews waiting elsewhere in the pantry. Why whole spices never behave the same way twice, and what that has to do with Chettinad cooking.",
+    teaser:
+      "Crushed pepper and whole pepper are not quite the same spice, and fennel changes its mind in a hot pan. Why do whole spices never behave the same way twice?",
     cover: "/images/whole-spices-issue-3.webp",
     coverAlt:
       "Whole spices on a bamboo board: star anise, a cinnamon stick, black pepper, fennel seeds, poppy seeds, bay leaves, coriander seeds, cloves and black cardamom",
