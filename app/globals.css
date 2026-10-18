@@ -382,6 +382,17 @@ button.bowl {
   100% { opacity: 0; transform: translateY(-22px) scaleY(1.15); }
 }
 
+/* The hero photo drifts in very slowly, the way a still camera never quite is */
+.kenburns {
+  transform-origin: 50% 46%;
+  animation: kenburns 26s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
 /* ---------- Hero text ---------- */
 
 .hero-line {
@@ -534,6 +545,7 @@ html.no-js .draw path {
   .orbit,
   .pulse-ring::before,
   .leaf-float,
+  .kenburns,
   .steam,
   .teaser-progress,
   .site-header {
