@@ -89,7 +89,7 @@ export default function Home() {
             <div className="relative lg:-mr-10 xl:-mr-20">
               <p
                 aria-hidden="true"
-                className="hero-fade absolute left-[4%] -top-2 z-10 hidden -rotate-[7deg] font-script text-[1.6rem] leading-[1.1] text-maroon sm:block lg:text-[1.45rem] xl:text-[1.7rem]"
+                className="hero-fade absolute left-[4%] top-3 z-10 hidden -rotate-[7deg] font-script text-[1.6rem] leading-[1.1] text-cream/90 drop-shadow-[0_1px_1px_rgb(0_0_0/0.5)] sm:block lg:text-[1.45rem] xl:text-[1.7rem]"
                 style={{ ["--i" as string]: 3 }}
               >
                 Ingredients
@@ -99,9 +99,9 @@ export default function Home() {
                 Science
                 <br />
                 Stories
-                <span className="mt-2 block h-px w-20 bg-maroon/60" />
+                <span className="mt-2 block h-px w-20 bg-cream/60" />
               </p>
-              <HeroLeaf className="mx-auto w-full max-w-[44rem] lg:max-w-none" />
+              <HeroLeaf className="mx-auto w-full max-w-[44rem] drop-shadow-[0_24px_40px_rgb(43_37_33/0.35)] lg:max-w-none" />
             </div>
           </div>
         </section>
