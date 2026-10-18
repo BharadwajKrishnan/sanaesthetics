@@ -8,7 +8,7 @@ import { Eyebrow } from "@/components/SiteChrome";
 
 // A short teaser for one newsletter issue at a time, moving on to the next every few seconds
 // and starting over after the last. Issues come in as plain data so the homepage (a server
-// component) can hand them over.
+// component) can hand them over. A thin brass line under the text fills over the dwell time.
 export type TeaserIssue = {
   slug: string;
   title: string;
@@ -43,6 +43,7 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
   }, [paused, stillMotion, issues.length]);
 
   const step = (by: number) => setActive((i) => (i + by + issues.length) % issues.length);
+  const running = !paused && !stillMotion && issues.length > 1;
 
   return (
     <div
@@ -53,11 +54,11 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
-      className="grid items-center gap-6 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-10"
+      className="grid items-center gap-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-8"
     >
       {/* Pictures and text are stacked in the same grid cells, so the band keeps the height of its tallest issue.
           Each picture is shown whole, at its own proportions, never cut to a frame. */}
-      <div className="grid w-44 items-center sm:w-48 lg:w-56">
+      <div className="grid w-36 items-center sm:w-40 lg:w-48">
         {issues.map((issue, i) => (
           <a
             key={issue.slug}
@@ -65,12 +66,12 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
             aria-label={issue.title}
             aria-hidden={i !== active}
             tabIndex={i === active ? undefined : -1}
-            className={`col-start-1 row-start-1 block overflow-hidden rounded-sm shadow-xl shadow-ink/15 transition-opacity duration-700 ${
-              i === active ? "opacity-100" : "pointer-events-none opacity-0"
+            className={`col-start-1 row-start-1 block overflow-hidden rounded-lg shadow-lg shadow-ink/15 transition-[opacity,transform] duration-700 ease-out ${
+              i === active ? "opacity-100 translate-y-0 rotate-0" : "pointer-events-none opacity-0 translate-y-2 -rotate-1"
             }`}
           >
             {issue.picture ? (
-              <Image src={issue.picture.src} alt={issue.picture.alt} width={issue.picture.width} height={issue.picture.height} sizes="(min-width: 1024px) 14rem, (min-width: 640px) 12rem, 11rem" quality={85} className="h-auto w-full" />
+              <Image src={issue.picture.src} alt={issue.picture.alt} width={issue.picture.width} height={issue.picture.height} sizes="(min-width: 1024px) 12rem, (min-width: 640px) 10rem, 9rem" quality={85} className="h-auto w-full" />
             ) : (
               <span className="umber-backdrop block aspect-[4/5]" />
             )}
@@ -83,11 +84,11 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
           <div
             key={issue.slug}
             aria-hidden={i !== active}
-            className={`col-start-1 row-start-1 transition-opacity duration-700 ${i === active ? "opacity-100" : "pointer-events-none opacity-0"}`}
+            className={`col-start-1 row-start-1 transition-[opacity,transform] duration-700 ease-out ${i === active ? "opacity-100 translate-x-0" : "pointer-events-none opacity-0 translate-x-3"}`}
           >
             <Eyebrow className="text-maroon">The newsletter · {issue.eyebrow}</Eyebrow>
-            <p className="mt-3 font-serif text-2xl font-medium leading-snug text-left sm:text-[1.75rem] lg:text-[2rem]">{issue.teaser}</p>
-            <p className="mt-4 text-left">
+            <p className="mt-2.5 text-left font-serif text-[1.45rem] font-medium leading-snug sm:text-[1.65rem] lg:text-[1.85rem]">{issue.teaser}</p>
+            <p className="mt-3 text-left text-[0.95rem]">
               <a {...issue.link} tabIndex={i === active ? undefined : -1} className="group font-medium underline decoration-ink/30 underline-offset-[6px] hover:decoration-ink">
                 Read <span className="italic">{issue.title}</span>
                 <span className="ml-2 inline-block align-[-2px]">
@@ -98,7 +99,11 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
           </div>
         ))}
 
-        <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+        <div className="mt-4 h-px w-full max-w-xs bg-ink/10">
+          {running && <span key={active} aria-hidden="true" className="teaser-progress block h-full bg-brass" style={{ ["--dwell" as string]: `${DWELL_MS}ms` }} />}
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <div className="flex items-center gap-1">
             <button type="button" onClick={() => step(-1)} aria-label="Previous issue" className="grid h-8 w-8 place-items-center rounded-full text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink">
               <span aria-hidden="true" className="inline-block rotate-180">
@@ -116,7 +121,7 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
                   onClick={() => setActive(i)}
                   className="grid h-6 w-4 place-items-center"
                 >
-                  <span className={`block h-2 rounded-full transition-all duration-500 ${i === active ? "w-6 bg-maroon" : "w-2 bg-ink/30 hover:bg-ink/60"}`} />
+                  <span className={`block h-1.5 rounded-full transition-all duration-500 ${i === active ? "w-6 bg-maroon" : "w-1.5 bg-ink/30 hover:bg-ink/60"}`} />
                 </button>
               ))}
             </div>
@@ -124,10 +129,10 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
               <Arrow />
             </button>
           </div>
-          <Link href="/newsletter" className="font-medium text-ink/80 underline decoration-ink/30 underline-offset-[5px] hover:text-ink hover:decoration-ink">
+          <Link href="/newsletter" className="link-grow font-medium text-ink/80 hover:text-ink">
             All issues
           </Link>
-          <Link href="#subscribe" className="font-medium text-ink/80 underline decoration-ink/30 underline-offset-[5px] hover:text-ink hover:decoration-ink">
+          <Link href="#subscribe" className="link-grow font-medium text-ink/80 hover:text-ink">
             Subscribe
           </Link>
         </div>

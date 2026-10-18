@@ -10,23 +10,29 @@
   --color-maroon: #7b2d26;
   --color-brass: #b98a44;
   --color-umber: #2e2119;
+  --color-leaf: #3f7a3a;
+  --color-leaf-deep: #2a5a2a;
+  --color-turmeric: #e0a21b;
   --font-serif: var(--font-cormorant), Georgia, serif;
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
   --font-script: var(--font-caveat), cursive;
   --font-tamil: var(--font-anek-tamil), var(--font-dm-sans), sans-serif;
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.2, 1.4, 0.4, 1);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: 5rem;
 }
 
 body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-variant-numeric: lining-nums;
+  text-rendering: optimizeLegibility;
 }
 
 /* The page stays put behind an enlarged picture */
@@ -34,21 +40,24 @@ html:has(dialog[open]) {
   overflow: hidden;
 }
 
-/* Body copy is justified; centred and left-aligned blocks stay as they are. In the base layer so that
-   an alignment utility on the element itself (text-left, md:text-left, ...) still wins. */
+/* Body copy is justified from tablet widths up; on a phone the columns are too narrow for it to read well.
+   In the base layer so that an alignment utility on the element itself (text-left, ...) still wins. */
 @layer base {
-  main p,
-  main li,
-  main dd {
-    text-align: justify;
-  }
+  @media (min-width: 640px) {
+    main p,
+    main li,
+    main dd {
+      text-align: justify;
+      hyphens: auto;
+    }
 
-  main .text-center p {
-    text-align: center;
-  }
+    main .text-center p {
+      text-align: center;
+    }
 
-  main .text-left p {
-    text-align: left;
+    main .text-left p {
+      text-align: left;
+    }
   }
 }
 
@@ -61,11 +70,40 @@ html:has(dialog[open]) {
   outline-color: var(--color-cream);
 }
 
+::selection {
+  background: rgb(185 138 68 / 0.35);
+}
+
+/* ---------- Surfaces ---------- */
+
 /* Warm, low-lit backdrop that stands in for food photography */
 .umber-backdrop {
   background:
     radial-gradient(ellipse 70% 60% at 62% 55%, rgb(120 84 50 / 0.55), transparent 70%),
     radial-gradient(ellipse at 30% 20%, #4a3526, #2e2119 60%, #1d1510);
+}
+
+/* A kolam dot grid, faded towards the edges, drawn behind the hero and the subscribe band */
+.kolam-dots {
+  background-image: radial-gradient(rgb(185 138 68 / 0.55) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 65% 50%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 80% at 65% 50%, #000 20%, transparent 75%);
+}
+
+.on-dark .kolam-dots {
+  background-image: radial-gradient(rgb(247 242 235 / 0.16) 1px, transparent 1.4px);
+}
+
+/* A faint paper grain over the dark bands, so the flat green reads as a surface */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
 }
 
 /* Hero artwork fades into the page on its left edge */
@@ -74,7 +112,144 @@ html:has(dialog[open]) {
   mask-image: linear-gradient(to right, transparent, rgb(0 0 0 / 0.18) 30%, #000 56%);
 }
 
-/* Brass masala dabba (anjarapetti) */
+/* ---------- Header ---------- */
+
+/* The header picks up a shadow once the page has scrolled, driven by the scroll position where the browser can. */
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    animation: header-scrolled linear both;
+    animation-timeline: scroll();
+    animation-range: 0 120px;
+  }
+}
+
+@keyframes header-scrolled {
+  to {
+    box-shadow: 0 10px 30px -18px rgb(43 37 33 / 0.35);
+    background-color: rgb(247 242 235 / 0.92);
+  }
+}
+
+.nav-link {
+  position: relative;
+  padding-block: 0.25rem;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--color-maroon);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out-soft);
+}
+
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* The hamburger folds into a cross while the menu is open */
+.burger span {
+  display: block;
+  height: 1.5px;
+  width: 20px;
+  background: currentColor;
+  transition: transform 300ms var(--ease-out-soft), opacity 200ms;
+  transform-origin: center;
+}
+
+details[open] > summary .burger span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+details[open] > summary .burger span:nth-child(2) {
+  opacity: 0;
+}
+
+details[open] > summary .burger span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+details[open] > .menu-panel {
+  animation: menu-in 320ms var(--ease-out-soft) both;
+}
+
+details[open] > .menu-panel > * {
+  animation: rise-in 500ms var(--ease-out-soft) both;
+  animation-delay: calc(60ms + var(--i, 0) * 45ms);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* ---------- Buttons and links ---------- */
+
+/* A sheen that sweeps across the primary buttons on hover */
+.btn-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.22) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 700ms var(--ease-out-soft);
+}
+
+.btn-sheen:hover::after {
+  transform: translateX(120%);
+}
+
+/* An underline that grows from the left on hover, for text links */
+.link-grow {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 300ms var(--ease-out-soft);
+  padding-bottom: 2px;
+}
+
+.link-grow:hover,
+.link-grow:focus-visible {
+  background-size: 100% 1px;
+}
+
+/* ---------- Cards ---------- */
+
+.card-lift {
+  transition: transform 400ms var(--ease-out-soft), box-shadow 400ms var(--ease-out-soft);
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 40px -24px rgb(43 37 33 / 0.35);
+}
+
+.card-lift img {
+  transition: transform 700ms var(--ease-out-soft);
+}
+
+.card-lift:hover img {
+  transform: scale(1.04);
+}
+
+/* ---------- Brass masala dabba (anjarapetti) ---------- */
+
 .dabba {
   background:
     radial-gradient(circle at 32% 26%, rgb(255 236 190 / 0.75), transparent 38%),
@@ -127,7 +302,7 @@ button.bowl {
   transform: scale(0.4);
   transform-box: fill-box;
   transform-origin: center;
-  transition: opacity 400ms ease, transform 500ms cubic-bezier(0.2, 1.6, 0.4, 1);
+  transition: opacity 400ms ease, transform 500ms var(--ease-spring);
 }
 
 .pan-item.in {
@@ -145,6 +320,175 @@ button.bowl {
   0%, 100% { transform: scale(0.6); opacity: 0.2; }
   50% { transform: scale(1.3); opacity: 0.7; }
 }
+
+/* ---------- The banana-leaf meal in the hero ---------- */
+
+/* The leaf settles onto the table, then the dishes are served one after another. */
+.leaf-in {
+  animation: leaf-in 1.1s var(--ease-out-soft) both;
+}
+
+@keyframes leaf-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96) rotate(-2deg);
+  }
+}
+
+.leaf-float {
+  animation: leaf-float 9s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes leaf-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(0.5deg); }
+}
+
+/* The pointer tilts the whole meal a few degrees, set as custom properties by the hero component */
+.leaf-tilt {
+  transform: perspective(1400px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 600ms var(--ease-out-soft);
+  transform-style: preserve-3d;
+}
+
+.dish {
+  opacity: 0;
+  transform: scale(0.3);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dish-in 650ms var(--ease-spring) both;
+  animation-delay: calc(650ms + var(--i, 0) * 85ms);
+}
+
+@keyframes dish-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.steam {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: steam 3.4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 900ms);
+  opacity: 0;
+}
+
+@keyframes steam {
+  0% { opacity: 0; transform: translateY(6px) scaleY(0.8); }
+  30% { opacity: 0.75; }
+  100% { opacity: 0; transform: translateY(-22px) scaleY(1.15); }
+}
+
+/* ---------- Hero text ---------- */
+
+.hero-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.hero-line > span {
+  display: block;
+  animation: line-up 900ms var(--ease-out-soft) both;
+  animation-delay: calc(120ms + var(--i, 0) * 120ms);
+}
+
+@keyframes line-up {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+}
+
+.hero-fade {
+  animation: rise-in 900ms var(--ease-out-soft) both;
+  animation-delay: calc(360ms + var(--i, 0) * 110ms);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/* ---------- Scroll reveal ---------- */
+
+/* Elements marked .reveal rise into view as they are scrolled to. Until the script marks the document (the
+   no-js class is removed in the first bytes of the body), everything is simply visible. */
+html:not(.no-js) .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 800ms var(--ease-out-soft), transform 800ms var(--ease-out-soft);
+  transition-delay: var(--d, 0ms);
+}
+
+html:not(.no-js) .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* The knot in a divider draws itself in once the divider is on screen */
+.draw path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  transition: stroke-dashoffset 1600ms var(--ease-out-soft);
+}
+
+.reveal.in .draw path,
+html.no-js .draw path {
+  stroke-dashoffset: 0;
+}
+
+/* ---------- Panels that swap (pyramid layers, tastes, teaser) ---------- */
+
+.swap-in {
+  animation: swap-in 500ms var(--ease-out-soft) both;
+}
+
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.teaser-progress {
+  transform-origin: left;
+  animation: progress linear both;
+  animation-duration: var(--dwell, 7000ms);
+}
+
+@keyframes progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* The ring of tastes turns slowly; the chosen taste breathes */
+.orbit {
+  animation: ring-spin 120s linear infinite;
+  transform-origin: center;
+}
+
+.pulse-ring::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  opacity: 0;
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+/* ---------- Ticker ---------- */
 
 /* Session topics scrolling past above the classes. The line holds two copies of the list; moving each
    by its own width and starting over reads as one endless loop. */
@@ -167,35 +511,52 @@ button.bowl {
   }
 }
 
-/* Scroll reveal, only where the browser supports it; otherwise content is simply visible */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 35%;
-    }
-  }
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-}
+/* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .bowl,
-  .pan-item {
+  .pan-item,
+  .card-lift,
+  .card-lift img,
+  .leaf-tilt,
+  .nav-link::after {
     transition: none;
+  }
+  .leaf-tilt {
+    transform: none;
   }
   .spin-slow,
   .sizzle,
-  .ticker-track {
+  .ticker-track,
+  .orbit,
+  .pulse-ring::before,
+  .leaf-float,
+  .steam,
+  .teaser-progress,
+  .site-header {
     animation: none;
+  }
+  .leaf-in,
+  .dish,
+  .hero-line > span,
+  .hero-fade,
+  .swap-in,
+  details[open] > .menu-panel,
+  details[open] > .menu-panel > * {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  html:not(.no-js) .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .draw path {
+    stroke-dashoffset: 0;
+    transition: none;
   }
 }

@@ -24,7 +24,7 @@ function Chevron({ className = "" }: { className?: string }) {
   );
 }
 
-const CHIP = "inline-flex items-center rounded-full border border-line bg-cream px-3 py-1 text-sm font-medium text-ink transition-colors hover:border-maroon hover:text-maroon";
+const CHIP = "inline-flex items-center rounded-full border border-line bg-cream px-3 py-1 text-[0.85rem] font-medium text-ink transition-[color,border-color,transform] hover:-translate-y-0.5 hover:border-maroon hover:text-maroon";
 const READ_LINK = "group font-medium underline decoration-ink/30 underline-offset-[6px] hover:decoration-ink";
 
 export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
@@ -33,8 +33,8 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
   const top = layers.length - 1;
 
   return (
-    <div className="mt-14 grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
-      <div className="mx-auto w-full max-w-[30rem]">
+    <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12">
+      <div className="reveal mx-auto w-full max-w-[26rem]">
         <div role="group" aria-label="Layers of the flavour pyramid" className="flex flex-col gap-0.5">
           {[...layers].reverse().map((layer) => {
             const i = layers.indexOf(layer);
@@ -50,24 +50,24 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
                 onFocus={() => setActive(i)}
                 aria-pressed={on}
                 aria-controls={`pyramid-panel-${layer.n}`}
-                className={`relative grid h-14 w-full cursor-pointer grid-cols-[2.75rem_1fr] items-center sm:h-16 motion-safe:transition-transform motion-safe:duration-200 ${
-                  on ? "translate-x-1" : ""
+                className={`relative grid h-11 w-full cursor-pointer grid-cols-[2.5rem_1fr] items-center sm:h-12 motion-safe:transition-transform motion-safe:duration-300 ${
+                  on ? "translate-x-1.5" : ""
                 }`}
               >
                 {/* Brass outline, drawn with the same polygon two pixels outside the band */}
                 <span
                   aria-hidden="true"
-                  className={`absolute inset-y-0 left-11 right-0 bg-brass motion-safe:transition-opacity ${on || i === top ? "" : "opacity-0"}`}
+                  className={`absolute inset-y-0 left-10 right-0 bg-brass motion-safe:transition-opacity ${on || i === top ? "" : "opacity-0"}`}
                   style={{ clipPath }}
                 />
-                <span aria-hidden="true" className={`absolute inset-y-[2px] left-[calc(2.75rem+2px)] right-[2px] ${layer.tone.bg}`} style={{ clipPath }} />
-                <span aria-hidden="true" className="relative flex flex-col items-center gap-1 pr-2 font-serif text-sm font-semibold text-brass">
-                  <Chevron className={on ? "" : "opacity-40"} />
+                <span aria-hidden="true" className={`absolute inset-y-[2px] left-[calc(2.5rem+2px)] right-[2px] ${layer.tone.bg} transition-[filter] ${on ? "brightness-110" : ""}`} style={{ clipPath }} />
+                <span aria-hidden="true" className="relative flex flex-col items-center gap-0.5 pr-2 font-serif text-[0.8rem] font-semibold text-brass">
+                  <Chevron className={`transition-opacity ${on ? "" : "opacity-40"}`} />
                   {String(layer.n).padStart(2, "0")}
                 </span>
                 <span className="relative flex items-center justify-center">
                   <span
-                    className={`text-balance text-center text-[0.68rem] font-semibold uppercase leading-tight tracking-[0.14em] sm:text-sm ${layer.tone.fg}`}
+                    className={`text-balance text-center text-[0.62rem] font-semibold uppercase leading-tight tracking-[0.14em] sm:text-[0.78rem] ${layer.tone.fg}`}
                     style={{ width: `${bottom - STEP / 2}%` }}
                   >
                     {layer.title}
@@ -77,24 +77,24 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
             );
           })}
         </div>
-        <p aria-hidden="true" className="mt-5 text-center font-script text-2xl text-brass">
+        <p aria-hidden="true" className="mt-3 text-center font-script text-2xl text-brass">
           Built from the ground up
         </p>
       </div>
 
-      <div aria-live="polite" className="max-w-lg lg:min-h-[26rem]">
+      <div aria-live="polite" className="reveal rounded-2xl border border-line/80 bg-white/50 p-5 sm:p-6 lg:min-h-[22rem]" style={{ ["--d" as string]: "100ms" }}>
         {layers.map((layer, i) => (
-          <section key={layer.id} id={`pyramid-panel-${layer.n}`} aria-labelledby={`pyramid-title-${layer.n}`} hidden={active !== i}>
-            <p className="text-xs font-medium uppercase tracking-[0.2em] text-maroon">
+          <section key={layer.id} id={`pyramid-panel-${layer.n}`} aria-labelledby={`pyramid-title-${layer.n}`} hidden={active !== i} className={active === i ? "swap-in" : ""}>
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-maroon">
               Layer {String(layer.n).padStart(2, "0")} · {layer.tagline}
             </p>
-            <h3 id={`pyramid-title-${layer.n}`} className="mt-3 font-serif text-4xl font-semibold leading-tight sm:text-5xl">
+            <h3 id={`pyramid-title-${layer.n}`} className="mt-2 font-serif text-3xl font-semibold leading-tight sm:text-4xl">
               {layer.title}
             </h3>
-            <p className="mt-4 text-lg leading-relaxed text-ink/80">{layer.blurb}</p>
+            <p className="mt-3 text-[1rem] leading-relaxed text-ink/80">{layer.blurb}</p>
 
             {layer.chips.length > 0 && (
-              <ul className="mt-6 flex flex-wrap gap-2">
+              <ul className="mt-4 flex flex-wrap gap-2">
                 {layer.chips.map((chip) => (
                   <li key={chip.label}>
                     {chip.link.target ? (
@@ -111,12 +111,12 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
               </ul>
             )}
 
-            <div className="mt-7 border-t border-line pt-5">
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-brass">Read</p>
-              <ul className="mt-3 space-y-2">
+            <div className="mt-5 border-t border-line pt-4">
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-brass">Read</p>
+              <ul className="mt-2 space-y-1.5 text-[0.95rem]">
                 {layer.reads.map((read) => (
                   <li key={read.link.href + read.title} className="flex items-baseline gap-3">
-                    <span className="w-14 shrink-0 text-xs uppercase tracking-[0.14em] text-ink/55">{read.kind}</span>
+                    <span className="w-14 shrink-0 text-[0.68rem] uppercase tracking-[0.14em] text-ink/55">{read.kind}</span>
                     {read.link.target ? (
                       <a {...read.link} className={READ_LINK}>
                         {read.title}
@@ -140,7 +140,7 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
             <button
               type="button"
               onClick={() => setActive(i === top ? 0 : i + 1)}
-              className="mt-7 inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-maroon hover:underline hover:underline-offset-4"
+              className="mt-5 inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-maroon hover:underline hover:underline-offset-4"
             >
               {i === top ? (
                 <>

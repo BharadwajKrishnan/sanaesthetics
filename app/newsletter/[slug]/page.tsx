@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArticlePage } from "@/components/ArticlePage";
 import { Thali } from "@/components/Artwork";
 import { Arrow } from "@/components/Icons";
-import { TextLink } from "@/components/SiteChrome";
+import { PRIMARY, TextLink } from "@/components/SiteChrome";
 import { getPost, posts } from "@/lib/posts";
 import { openGraphShared, site } from "@/lib/site";
 
@@ -43,7 +43,7 @@ export default async function Issue({ params }: PageProps<"/newsletter/[slug]">)
       fallback={post.Cover ? <post.Cover /> : <Thali />}
       footer={
         <>
-          <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
+          <Link href="/#subscribe" className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
             Subscribe to the newsletter <Arrow />
           </Link>
           <TextLink href="/newsletter">All issues</TextLink>

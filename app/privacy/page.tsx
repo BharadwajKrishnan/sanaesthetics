@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { KolamDivider } from "@/components/Kolam";
-import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
+import { CONTAINER, Eyebrow, H1, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { openGraphShared, site } from "@/lib/site";
 
 // Plain-language notice: a hobby site that keeps two email lists, and nothing else.
@@ -106,22 +106,24 @@ export default function Privacy() {
     <>
       <SiteHeader current="/privacy" />
       <main id="main" className="overflow-x-clip">
-        <section className="mx-auto max-w-3xl px-5 pb-24 pt-12 sm:px-8 lg:pt-20">
+        <section className={`${CONTAINER} max-w-3xl pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+          <div className="reveal">
           <Eyebrow className="text-maroon">Privacy</Eyebrow>
-          <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">What this site keeps, and why.</h1>
-          <p className="mt-6 text-lg leading-relaxed text-ink/80">
+          <h1 className={`mt-3 ${H1}`}>What this site keeps, and why.</h1>
+          <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/80">
             The short version: if you sign up, your name and email address go on a list so that the newsletter can reach you. Nothing
             else is collected, and one email is enough to be taken off again.
           </p>
-          <p className="mt-3 text-sm text-ink/60">Last updated {UPDATED}.</p>
+          <p className="mt-2 text-sm text-ink/60">Last updated {UPDATED}.</p>
+          </div>
 
-          <KolamDivider className="mt-12 text-brass" />
+          <KolamDivider className="mt-8 text-brass" />
 
-          <div className="mt-12 space-y-12">
+          <div className="mt-8 space-y-8">
             {SECTIONS.map((section) => (
-              <section key={section.title}>
-                <h2 className="font-serif text-3xl font-semibold leading-tight">{section.title}</h2>
-                <div className="mt-4 space-y-4 text-lg leading-relaxed text-ink/80">
+              <section key={section.title} className="reveal">
+                <h2 className="font-serif text-2xl font-semibold leading-tight sm:text-3xl">{section.title}</h2>
+                <div className="mt-3 space-y-3 text-[1.0625rem] leading-relaxed text-ink/80">
                   {section.body.map((paragraph, i) => (
                     <p key={i}>{paragraph}</p>
                   ))}

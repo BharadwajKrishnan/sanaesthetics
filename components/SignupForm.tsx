@@ -54,7 +54,7 @@ function Select({
   options: { value: string; label: string }[];
 }) {
   return (
-    <div className="relative mt-2">
+    <div className="relative mt-1.5">
       <select
         id={id}
         value={value}
@@ -137,8 +137,10 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
   const isError = state === "class" || state === "format" || state === "name" || state === "invalid" || state === "phone" || state === "failed";
   const message = state === "subscribed" ? copy.subscribed : state === "exists" ? copy.exists : ERRORS[state];
 
-  const label = `block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`;
-  const field = `min-w-0 rounded-md border px-4 py-3 text-ink placeholder:text-ink/40 ${dark ? "border-cream bg-cream" : "border-line bg-white"}`;
+  const label = `block text-[0.68rem] font-semibold uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`;
+  const field = `min-w-0 rounded-lg border px-4 py-2.5 text-ink shadow-sm shadow-ink/5 transition-[border-color,box-shadow] placeholder:text-ink/40 focus:outline-none focus:ring-2 ${
+    dark ? "border-cream bg-cream focus:ring-brass/60" : "border-line bg-white focus:border-forest/60 focus:ring-forest/20"
+  } aria-[invalid=true]:border-maroon`;
   const describedBy = message ? `${id}-msg` : undefined;
   const reset = () => {
     if (state !== "idle") setState("idle");
@@ -148,7 +150,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
     <button
       type="submit"
       disabled={state === "sending"}
-      className={`rounded-md px-6 py-3 font-medium transition-colors disabled:opacity-60 ${
+      className={`btn-sheen rounded-full px-6 py-2.5 font-medium transition-colors disabled:opacity-60 ${
         dark ? "bg-cream text-forest-deep hover:bg-parchment" : "bg-forest text-cream hover:bg-forest-deep"
       }`}
     >
@@ -179,7 +181,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           />
           {askFormat && (
             <>
-              <label htmlFor={`${id}-format`} className={`mt-4 ${label}`}>
+              <label htmlFor={`${id}-format`} className={`mt-3.5 ${label}`}>
                 Online or in person?
               </label>
               <Select
@@ -199,7 +201,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           )}
         </>
       )}
-      <label htmlFor={`${id}-name`} className={`${label} ${list === "waitlist" ? "mt-4" : ""}`}>
+      <label htmlFor={`${id}-name`} className={`${label} ${list === "waitlist" ? "mt-3.5" : ""}`}>
         Name
       </label>
       <input
@@ -215,9 +217,9 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
         }}
         aria-invalid={state === "name"}
         aria-describedby={describedBy}
-        className={`mt-2 w-full ${field}`}
+        className={`mt-1.5 w-full ${field}`}
       />
-      <label htmlFor={id} className={`mt-4 ${label}`}>
+      <label htmlFor={id} className={`mt-3.5 ${label}`}>
         Email address
       </label>
       {/* Honeypot: hidden from people, filled in by bots */}
@@ -227,7 +229,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       </div>
       {/* The newsletter form keeps its button beside the email field. The classes form has more fields, so the
           email field runs full width and the button comes after the phone number. */}
-      <div className={`mt-2 flex flex-col gap-2 ${list === "waitlist" ? "" : "sm:flex-row"}`}>
+      <div className={`mt-1.5 flex flex-col gap-2 ${list === "waitlist" ? "" : "sm:flex-row"}`}>
         <input
           id={id}
           type="email"
@@ -246,7 +248,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       </div>
       {list === "waitlist" && (
         <>
-          <label htmlFor={`${id}-phone`} className={`mt-4 ${label}`}>
+          <label htmlFor={`${id}-phone`} className={`mt-3.5 ${label}`}>
             Phone <span className="normal-case tracking-normal opacity-80">(optional)</span>
           </label>
           <input
@@ -262,19 +264,19 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
             }}
             aria-invalid={state === "phone"}
             aria-describedby={describedBy}
-            className={`mt-2 w-full ${field}`}
+            className={`mt-1.5 w-full ${field}`}
           />
-          <div className={`mt-5 flex ${center ? "justify-center" : ""}`}>{submit}</div>
+          <div className={`mt-4 flex ${center ? "justify-center" : ""}`}>{submit}</div>
         </>
       )}
       <p
         id={`${id}-msg`}
         role="status"
-        className={`mt-3 min-h-6 text-[0.95rem] ${isError ? "font-semibold" : ""} ${dark ? "text-cream" : "text-ink"}`}
+        className={`mt-2.5 min-h-6 text-[0.95rem] ${isError ? "font-semibold" : ""} ${dark ? "text-cream" : "text-ink"}`}
       >
         {message}
       </p>
-      <p className={`mt-1 text-sm leading-relaxed ${dark ? "text-cream/65" : "text-ink/60"}`}>
+      <p className={`mt-1 text-[0.8rem] leading-relaxed ${dark ? "text-cream/65" : "text-ink/60"}`}>
         {copy.consent}{" "}
         <Link href="/privacy" className={`underline underline-offset-4 ${dark ? "decoration-cream/40 hover:decoration-cream" : "decoration-ink/30 hover:decoration-ink"}`}>
           How your details are handled

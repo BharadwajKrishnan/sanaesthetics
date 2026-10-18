@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Artwork, SprigOutline } from "@/components/Artwork";
 import { Arrow } from "@/components/Icons";
 import { KolamDivider } from "@/components/Kolam";
-import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
+import { CONTAINER, Eyebrow, H1, PRIMARY, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { photos } from "@/lib/photos";
 import { openGraphShared, site } from "@/lib/site";
 
@@ -50,23 +50,25 @@ export default function About() {
       <SiteHeader current="/about" />
 
       <main id="main" className="overflow-x-clip">
-        <section className="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:pb-28 lg:pt-20">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-20">
+        <section className={`${CONTAINER} pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-14">
             {/* Story */}
             <div>
-              <Eyebrow className="text-maroon">About me</Eyebrow>
-              <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">{TITLE}</h1>
-              <p className="mt-8 max-w-2xl text-xl leading-relaxed text-ink/90">
-                Hi, I’m {site.author}. I’m a full-time Research Technologist and have been living in Germany for the past eight
-                years.
-              </p>
+              <div className="reveal">
+                <Eyebrow className="text-maroon">About me</Eyebrow>
+                <h1 className={`mt-3 ${H1}`}>{TITLE}</h1>
+                <p className="mt-5 max-w-2xl font-serif text-xl font-medium leading-snug text-ink/90 sm:text-2xl">
+                  Hi, I’m {site.author}. I’m a full-time Research Technologist and have been living in Germany for the past eight
+                  years.
+                </p>
+              </div>
 
               {/* The photo sits here on small screens, between the greeting and the story. */}
-              <div className="mt-10 lg:hidden">
+              <div className="mt-8 lg:hidden">
                 <Portrait />
               </div>
 
-              <div className="mt-8 max-w-2xl space-y-6 text-lg leading-relaxed text-ink/80">
+              <div className="mt-6 max-w-2xl space-y-4 text-[1.0625rem] leading-relaxed text-ink/80">
                 {STORY.map((paragraph) => (
                   <p key={paragraph.slice(0, 24)} className="reveal">
                     {paragraph}
@@ -74,25 +76,25 @@ export default function About() {
                 ))}
               </div>
 
-              <blockquote className="reveal my-12 max-w-2xl border-l-4 border-maroon pl-6 sm:pl-8">
-                <p className="font-serif text-3xl font-semibold leading-tight text-maroon sm:text-4xl">“A Curious Cook, Always Learning.”</p>
+              <blockquote className="reveal my-8 max-w-2xl rounded-r-xl border-l-4 border-maroon bg-parchment py-4 pl-5 pr-5 sm:pl-7">
+                <p className="font-serif text-2xl font-semibold italic leading-tight text-maroon sm:text-3xl">“A Curious Cook, Always Learning.”</p>
               </blockquote>
 
               {photos.grinding && (
-                <figure className="reveal mb-12 max-w-md">
+                <figure className="reveal mb-8 max-w-sm">
                   <Artwork
                     src={photos.grinding}
                     alt={`${site.author} grinding with a stone mortar and pestle at the kitchen table`}
-                    sizes="(min-width: 640px) 28rem, 90vw"
+                    sizes="(min-width: 640px) 24rem, 90vw"
                     zoom={false}
-                    className="relative aspect-[4/5] rounded-sm shadow-xl shadow-ink/15"
+                    className="relative aspect-[4/5] rounded-xl shadow-xl shadow-ink/15"
                   >
                     {null}
                   </Artwork>
                 </figure>
               )}
 
-              <div className="max-w-2xl space-y-6 text-lg leading-relaxed text-ink/80">
+              <div className="max-w-2xl space-y-4 text-[1.0625rem] leading-relaxed text-ink/80">
                 {LEARNING.map((paragraph) => (
                   <p key={paragraph.slice(0, 24)} className="reveal">
                     {paragraph}
@@ -100,12 +102,12 @@ export default function About() {
                 ))}
               </div>
 
-              <KolamDivider className="mt-12 text-brass" />
-              <div className="reveal mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
-                <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
+              <KolamDivider className="mt-8 text-brass" />
+              <div className="reveal mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+                <Link href="/#subscribe" className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
                   Subscribe to the newsletter <Arrow />
                 </Link>
-                <Link href="/recipes" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
+                <Link href="/recipes" className="link-grow font-medium text-ink/85 hover:text-ink">
                   Browse the recipes
                 </Link>
               </div>
@@ -113,7 +115,7 @@ export default function About() {
 
             {/* Photo, on the right on large screens */}
             <div className="hidden lg:block">
-              <div className="sticky top-28">
+              <div className="sticky top-24">
                 <Portrait />
               </div>
             </div>
@@ -128,18 +130,18 @@ export default function About() {
 
 function Portrait() {
   return (
-    <figure className="mx-auto max-w-md lg:max-w-none">
+    <figure className="reveal mx-auto max-w-sm lg:max-w-none">
       <Artwork
         src={photos.portrait}
         alt={`${site.author} at a kitchen table, beside a blue and white tea set`}
-        sizes="(min-width: 1024px) 36vw, (min-width: 640px) 28rem, 90vw"
+        sizes="(min-width: 1024px) 34vw, (min-width: 640px) 24rem, 90vw"
         priority
         zoom={false}
-        className="relative aspect-square rounded-sm shadow-xl shadow-ink/15"
+        className="relative aspect-square rounded-xl shadow-xl shadow-ink/15"
       >
         <PortraitPlaceholder />
       </Artwork>
-      <figcaption className="mt-4 text-sm leading-relaxed text-ink/70">
+      <figcaption className="mt-3 text-sm leading-relaxed text-ink/70">
         <span className="font-medium text-ink">{site.author}</span>
         <br />
         Research Technologist in the flavour industry. Home cook of South Indian vegetarian food. Living in Germany.

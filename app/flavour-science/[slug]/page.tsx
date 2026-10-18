@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArticlePage } from "@/components/ArticlePage";
 import { TemperingPan } from "@/components/Artwork";
 import { Arrow } from "@/components/Icons";
-import { TextLink } from "@/components/SiteChrome";
+import { PRIMARY, TextLink } from "@/components/SiteChrome";
 import { articles, getArticle } from "@/lib/articles";
 import { openGraphShared, site } from "@/lib/site";
 
@@ -42,7 +42,7 @@ export default async function FlavourScienceArticle({ params }: PageProps<"/flav
       fallback={<TemperingPan />}
       footer={
         <>
-          <Link href="/#subscribe" className="group inline-flex items-center gap-2.5 rounded-md bg-maroon px-6 py-3 font-medium text-cream transition-colors hover:bg-[#62231d]">
+          <Link href="/#subscribe" className={`${PRIMARY} bg-maroon text-cream hover:bg-[#62231d]`}>
             Subscribe to the newsletter <Arrow />
           </Link>
           <TextLink href="/flavour-science">All articles</TextLink>

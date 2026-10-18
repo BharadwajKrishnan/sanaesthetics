@@ -40,9 +40,9 @@ function KnotPaths({ x, y, size }: { x: number; y: number; size: number }) {
   );
 }
 
-export function KolamKnot({ className = "h-8 w-8" }: Props) {
+export function KolamKnot({ className = "h-8 w-8", draw = false }: Props & { draw?: boolean }) {
   return (
-    <svg viewBox="0 0 100 100" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="2.2">
+    <svg viewBox="0 0 100 100" aria-hidden="true" className={`${draw ? "draw " : ""}${className}`} fill="none" stroke="currentColor" strokeWidth="2.2">
       <KnotPaths x={50} y={50} size={100} />
     </svg>
   );
@@ -66,13 +66,14 @@ export function KolamCorner({ className = "" }: Props) {
   );
 }
 
-// A divider: a hairline either side of a small knot, with dots stepping towards it.
+// A divider: a hairline either side of a small knot, with dots stepping towards it. The knot draws itself
+// in as the divider scrolls into view.
 export function KolamDivider({ className = "text-brass" }: Props) {
   return (
-    <div aria-hidden="true" className={`flex items-center gap-3 ${className}`}>
+    <div aria-hidden="true" className={`reveal flex items-center gap-3 ${className}`}>
       <span className="h-px flex-1 bg-current opacity-40" />
       <Dots />
-      <KolamKnot className="h-9 w-9 shrink-0" />
+      <KolamKnot draw className="h-8 w-8 shrink-0" />
       <Dots />
       <span className="h-px flex-1 bg-current opacity-40" />
     </div>

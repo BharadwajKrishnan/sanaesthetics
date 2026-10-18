@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Artwork, Thali } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
-import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
+import { CONTAINER, Eyebrow, H1, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
 import { openGraphShared, site } from "@/lib/site";
 
@@ -18,11 +18,11 @@ export default function Newsletter() {
     <>
       <SiteHeader current="/newsletter" />
       <main id="main" className="overflow-x-clip">
-        <section className="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:pb-28 lg:pt-20">
-          <div className="max-w-3xl">
+        <section className={`${CONTAINER} pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+          <div className="reveal max-w-3xl">
             <Eyebrow className="text-maroon">The newsletter</Eyebrow>
-            <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">Stories, ingredients and the science behind South Indian flavour.</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
+            <h1 className={`mt-3 ${H1}`}>Stories, ingredients and the science behind South Indian flavour.</h1>
+            <p className="mt-4 max-w-2xl text-[1.0625rem] leading-relaxed text-ink/75">
               Every issue is here to read in full, from the first. To get the next one by email,{" "}
               <Link href="/#subscribe" className="font-medium underline decoration-ink/40 underline-offset-[6px] hover:decoration-ink">
                 subscribe
@@ -31,34 +31,36 @@ export default function Newsletter() {
             </p>
           </div>
 
-          <KolamDivider className="mt-14 text-brass" />
-          <ul className="mt-12 grid gap-12">
-            {posts.map((post) => (
-              <li key={post.slug} className="reveal grid items-center gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)]">
-                <Artwork
-                  src={post.cover}
-                  alt={post.coverAlt}
-                  link={{ ...issueLink(post.slug), "aria-label": post.title }}
-                  sizes="(min-width: 1024px) 24vw, (min-width: 640px) 33vw, 90vw"
-                  className={`relative max-w-sm rounded-sm shadow-xl shadow-ink/15 ${post.coverAspect ?? "aspect-[4/5]"}`}
-                >
-                  {post.Cover ? <post.Cover /> : <Thali />}
-                </Artwork>
-                <div>
-                  <Eyebrow>{post.eyebrow}</Eyebrow>
-                  <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight sm:text-4xl">
-                    <a {...issueLink(post.slug)} className="hover:text-maroon">
-                      {post.title}
-                    </a>
-                  </h2>
-                  <p className="mt-4 max-w-2xl leading-relaxed text-ink/80">{post.excerpt}</p>
-                  <p className="mt-3 text-sm text-ink/60">
-                    {site.author} · {post.readingTime}
-                  </p>
-                  <p className="mt-5">
-                    <TextLink {...issueLink(post.slug)}>Read the issue</TextLink>
-                  </p>
-                </div>
+          <KolamDivider className="mt-8 text-brass" />
+          <ul className="mt-8 grid gap-5">
+            {posts.map((post, i) => (
+              <li key={post.slug} className="reveal" style={{ ["--d" as string]: `${i * 80}ms` }}>
+                <article className="card-lift grid items-center gap-5 rounded-2xl border border-line/80 bg-white/60 p-4 sm:grid-cols-[11rem_minmax(0,1fr)] sm:p-5 lg:grid-cols-[13rem_minmax(0,1fr)]">
+                  <Artwork
+                    src={post.cover}
+                    alt={post.coverAlt}
+                    link={{ ...issueLink(post.slug), "aria-label": post.title }}
+                    sizes="(min-width: 1024px) 13rem, (min-width: 640px) 11rem, 90vw"
+                    className={`relative w-full max-w-[13rem] rounded-xl shadow-lg shadow-ink/15 ${post.coverAspect ?? "aspect-[4/5]"}`}
+                  >
+                    {post.Cover ? <post.Cover /> : <Thali />}
+                  </Artwork>
+                  <div>
+                    <Eyebrow>{post.eyebrow}</Eyebrow>
+                    <h2 className="mt-2 font-serif text-[1.75rem] font-semibold leading-tight sm:text-3xl">
+                      <a {...issueLink(post.slug)} className="transition-colors hover:text-maroon">
+                        {post.title}
+                      </a>
+                    </h2>
+                    <p className="mt-2.5 max-w-2xl text-[0.95rem] leading-relaxed text-ink/75">{post.excerpt}</p>
+                    <p className="mt-2 text-sm text-ink/60">
+                      {site.author} · {post.readingTime}
+                    </p>
+                    <p className="mt-3 text-[0.95rem]">
+                      <TextLink {...issueLink(post.slug)}>Read the issue</TextLink>
+                    </p>
+                  </div>
+                </article>
               </li>
             ))}
           </ul>

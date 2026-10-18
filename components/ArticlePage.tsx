@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Artwork, PhotoTags, type PhotoTag } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
-import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
+import { CONTAINER, Eyebrow, H1, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { site } from "@/lib/site";
 
 // Long-form page layout shared by newsletter issues and flavour science articles:
@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 
 // Body copy comes as plain elements and is styled here, so the content files stay unstyled.
 const BODY =
-  "mt-10 text-lg leading-relaxed text-ink/85 [&>p]:mt-6 [&>p:first-child]:mt-0 [&>h2]:mt-14 [&>h2]:font-serif [&>h2]:text-4xl [&>h2]:font-semibold [&>h2]:leading-tight [&>h2]:text-ink sm:[&>h2]:text-[2.75rem] [&>h3]:mt-10 [&>h3]:font-serif [&>h3]:text-2xl [&>h3]:font-semibold [&>h3]:text-ink [&>figure]:my-10";
+  "mt-8 text-[1.0625rem] leading-relaxed text-ink/85 [&>p]:mt-5 [&>p:first-child]:mt-0 [&>h2]:mt-11 [&>h2]:font-serif [&>h2]:text-3xl [&>h2]:font-semibold [&>h2]:leading-tight [&>h2]:text-ink sm:[&>h2]:text-[2.25rem] [&>h3]:mt-8 [&>h3]:font-serif [&>h3]:text-2xl [&>h3]:font-semibold [&>h3]:text-ink [&>figure]:my-8";
 
 export function ArticlePage({
   current,
@@ -41,8 +41,8 @@ export function ArticlePage({
 }) {
   const tags = cover && coverTags?.length ? coverTags : undefined;
   const picture = (
-    <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-      <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw" priority className={`relative w-full rounded-sm shadow-xl shadow-ink/15 ${coverAspect}`}>
+    <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+      <Artwork src={cover} alt={coverAlt} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 24rem, 90vw" priority className={`relative w-full rounded-xl shadow-xl shadow-ink/15 ${coverAspect}`}>
         {fallback}
       </Artwork>
       {tags && <PhotoTags tags={tags} />}
@@ -52,30 +52,30 @@ export function ArticlePage({
     <>
       <SiteHeader current={current} />
       <main id="main" className="overflow-x-clip">
-        <article className="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 lg:pb-28 lg:pt-20">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-20">
+        <article className={`${CONTAINER} pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-14">
             <div className="max-w-3xl">
               <p className="text-sm">
-                <Link href={back.href} className="text-ink/60 hover:text-ink hover:underline hover:underline-offset-4">
+                <Link href={back.href} className="link-grow text-ink/60 hover:text-ink">
                   ← {back.label}
                 </Link>
               </p>
-              <Eyebrow className="mt-8 text-maroon">{eyebrow}</Eyebrow>
-              <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">{title}</h1>
-              <p className="mt-5 text-sm text-ink/60">
+              <Eyebrow className="mt-6 text-maroon">{eyebrow}</Eyebrow>
+              <h1 className={`mt-3 ${H1}`}>{title}</h1>
+              <p className="mt-3 text-sm text-ink/60">
                 By {site.author} · {readingTime}
               </p>
 
-              <div className="mt-10 lg:hidden">{picture}</div>
+              <div className="mt-8 lg:hidden">{picture}</div>
 
               <div className={BODY}>{children}</div>
 
-              <KolamDivider className="mt-14 text-brass" />
-              <div className="reveal mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">{footer}</div>
+              <KolamDivider className="mt-10 text-brass" />
+              <div className="reveal mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">{footer}</div>
             </div>
 
             <div className="hidden lg:block">
-              <div className="sticky top-28">{picture}</div>
+              <div className="sticky top-24">{picture}</div>
             </div>
           </div>
         </article>

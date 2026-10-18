@@ -59,10 +59,15 @@ export function SixTastes() {
   const t = TASTES[active];
 
   return (
-    <div className="mt-14 grid items-center gap-12 lg:grid-cols-2">
-      <div className="relative mx-auto aspect-square w-full max-w-[28rem]">
-        <div className="absolute left-1/2 top-1/2 flex aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-dashed border-cream/40 text-center">
-          <span className="font-tamil text-xl font-semibold leading-tight text-cream sm:text-2xl" lang="ta">
+    <div className="mt-8 grid items-center gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12">
+      <div className="reveal relative mx-auto aspect-square w-full max-w-[22rem] sm:max-w-[24rem]">
+        {/* A dashed ring turning slowly behind the tastes */}
+        <svg viewBox="0 0 100 100" aria-hidden="true" className="orbit absolute inset-0 h-full w-full text-cream/25">
+          <circle cx="50" cy="50" r="34.5" fill="none" stroke="currentColor" strokeWidth="0.4" strokeDasharray="1.5 3" />
+          <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" strokeWidth="0.3" strokeDasharray="0.6 4" />
+        </svg>
+        <div className="absolute left-1/2 top-1/2 flex aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-dashed border-cream/40 bg-forest-deep/60 text-center">
+          <span className="font-tamil text-lg font-semibold leading-tight text-cream sm:text-xl" lang="ta">
             அறு
             <br />
             சுவை
@@ -70,6 +75,7 @@ export function SixTastes() {
         </div>
         {TASTES.map((taste, i) => {
           const a = ((-90 + i * 60) * Math.PI) / 180;
+          const on = active === i;
           return (
             <button
               key={taste.english}
@@ -77,42 +83,44 @@ export function SixTastes() {
               onClick={() => setActive(i)}
               onMouseEnter={() => setActive(i)}
               onFocus={() => setActive(i)}
-              aria-pressed={active === i}
-              className={`absolute flex aspect-square w-[31%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border transition-colors duration-200 ${
-                active === i ? "border-cream bg-cream text-forest-deep" : "border-cream/35 text-cream hover:border-cream"
+              aria-pressed={on}
+              className={`absolute flex aspect-square w-[31%] -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-center justify-center rounded-full border transition-[background-color,color,border-color,transform] duration-300 ${
+                on ? "pulse-ring scale-105 border-cream bg-cream text-forest-deep shadow-lg shadow-black/30" : "border-cream/35 bg-forest-deep/70 text-cream hover:border-cream hover:scale-105"
               }`}
               style={{
                 left: `${(50 + 34.5 * Math.cos(a)).toFixed(2)}%`,
                 top: `${(50 + 34.5 * Math.sin(a)).toFixed(2)}%`,
               }}
             >
-              <span className="font-tamil text-base font-semibold sm:text-xl" lang="ta" aria-hidden="true">
+              <span className="font-tamil text-sm font-semibold sm:text-lg" lang="ta" aria-hidden="true">
                 {taste.tamil}
               </span>
-              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.14em] sm:text-xs">{taste.english}</span>
+              <span className="text-[0.6rem] font-semibold uppercase tracking-[0.14em] sm:text-[0.7rem]">{taste.english}</span>
             </button>
           );
         })}
       </div>
 
-      <div aria-live="polite">
-        <p className="font-tamil text-6xl font-semibold leading-none sm:text-7xl" lang="ta">
-          {t.tamil}
-        </p>
-        <p className="mt-5 font-serif text-5xl font-semibold">
-          {t.english} <span className="font-sans text-xl italic text-cream/60">{t.roman}</span>
-        </p>
-        <p className="mt-5 min-h-[5.5rem] max-w-lg text-lg leading-relaxed text-cream/80">{t.does}</p>
-        <dl className="mt-6 grid max-w-lg grid-cols-2 gap-6 border-t border-cream/20 pt-6">
-          <div>
-            <dt className="text-xs font-medium uppercase tracking-[0.18em] text-brass">Found in</dt>
-            <dd className="mt-2">{t.found}</dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium uppercase tracking-[0.18em] text-brass">The molecule</dt>
-            <dd className="mt-2 italic">{t.molecule}</dd>
-          </div>
-        </dl>
+      <div aria-live="polite" className="reveal" style={{ ["--d" as string]: "100ms" }}>
+        <div key={t.english} className="swap-in">
+          <p className="font-tamil text-5xl font-semibold leading-none sm:text-6xl" lang="ta">
+            {t.tamil}
+          </p>
+          <p className="mt-3 font-serif text-4xl font-semibold sm:text-5xl">
+            {t.english} <span className="font-sans text-lg italic text-cream/60">{t.roman}</span>
+          </p>
+          <p className="mt-3 min-h-[4.5rem] max-w-lg text-[1.0625rem] leading-relaxed text-cream/80">{t.does}</p>
+          <dl className="mt-4 grid max-w-lg grid-cols-2 gap-5 border-t border-cream/20 pt-4">
+            <div>
+              <dt className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brass">Found in</dt>
+              <dd className="mt-1.5 text-[0.95rem]">{t.found}</dd>
+            </div>
+            <div>
+              <dt className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brass">The molecule</dt>
+              <dd className="mt-1.5 text-[0.95rem] italic">{t.molecule}</dd>
+            </div>
+          </dl>
+        </div>
       </div>
     </div>
   );

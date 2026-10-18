@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { KolamCorner } from "@/components/Kolam";
 import { SignupForm } from "@/components/SignupForm";
-import { Eyebrow, SiteFooter, SiteHeader } from "@/components/SiteChrome";
+import { CONTAINER, Eyebrow, H1, SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -15,16 +16,20 @@ export default function Subscribe() {
     <>
       <SiteHeader current="/subscribe" />
       <main id="main" className="overflow-x-clip">
-        <section className="mx-auto max-w-2xl px-5 pb-24 pt-16 sm:px-8 lg:pt-24">
-          <Eyebrow className="text-maroon">The newsletter</Eyebrow>
-          <h1 className="mt-4 font-serif text-[clamp(2.5rem,4.6vw,4.2rem)] font-medium leading-[1.04]">
-            Stories, ingredients and the science behind South Indian flavour.
-          </h1>
-          <p className="mt-6 text-lg leading-relaxed text-ink/85">
-            One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam, and a reply to any issue is enough to be taken off the list.
-          </p>
-          <div className="mt-10">
-            <SignupForm list="newsletter" />
+        <section className={`${CONTAINER} pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+          <div className="reveal relative mx-auto max-w-2xl overflow-hidden rounded-2xl border border-line/80 bg-parchment px-5 py-8 sm:px-10 sm:py-10">
+            <KolamCorner className="pointer-events-none absolute right-1 top-1 w-16 -scale-x-100 text-brass/40 sm:w-20" />
+            <KolamCorner className="pointer-events-none absolute bottom-1 left-1 w-16 -scale-y-100 text-brass/40 sm:w-20" />
+            <div className="relative">
+              <Eyebrow className="text-maroon">The newsletter</Eyebrow>
+              <h1 className={`mt-3 ${H1}`}>Stories, ingredients and the science behind South Indian flavour.</h1>
+              <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/80">
+                One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam, and a reply to any issue is enough to be taken off the list.
+              </p>
+              <div className="mt-7">
+                <SignupForm list="newsletter" />
+              </div>
+            </div>
           </div>
         </section>
       </main>
