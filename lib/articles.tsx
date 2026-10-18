@@ -389,7 +389,9 @@ function TemperingBody() {
   );
 }
 
-// Each spice's signature molecule, as the article lists them.
+// Each spice's signature molecule, as the article lists them. The box floats beside the spice sections on
+// medium screens and again from xl, once the cover sits beside the text; in between the column is too narrow.
+const SPICE_BOX = "my-6 md:float-right md:mb-3 md:ml-8 md:mt-1 md:w-72 lg:float-none lg:mb-0 lg:ml-0 lg:mt-6 lg:w-auto xl:float-right xl:mb-3 xl:ml-8 xl:mt-1 xl:w-72";
 const MOLECULES = [
   { spice: "Pepper", molecule: "piperine" },
   { spice: "Fennel", molecule: "anethole" },
@@ -426,19 +428,20 @@ function SpicesBody() {
       <p>Each spice has its own characteristic chemistry, which is why the same technique can produce very different results.</p>
 
       <h2>Different spices, different chemistry</h2>
-      <figure>
-        <dl className="grid gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 sm:[&>div:last-child:nth-child(odd)]:col-span-2">
+      {/* The list sits in a box at the side, as the author asked; where the column is narrow it sits in the flow instead. */}
+      <aside className={`${SPICE_BOX} border-l-4 border-maroon bg-parchment p-5 text-left`}>
+        <dl className="divide-y divide-line">
           {MOLECULES.map((row) => (
-            <div key={row.spice} className="flex items-baseline gap-3 bg-parchment px-5 py-3">
-              <dt className="font-serif text-lg font-semibold text-maroon">{row.spice}</dt>
+            <div key={row.spice} className="flex items-baseline gap-2.5 py-2">
+              <dt className="shrink-0 font-serif text-lg font-semibold leading-tight text-maroon">{row.spice}</dt>
               <span aria-hidden="true" className="text-brass">
                 →
               </span>
-              <dd className="text-left text-base italic leading-snug text-ink/80">{row.molecule}</dd>
+              <dd className="text-left text-[0.95rem] italic leading-snug text-ink/80">{row.molecule}</dd>
             </div>
           ))}
         </dl>
-      </figure>
+      </aside>
 
       <h3>Black pepper — pungency and aroma</h3>
       <p>Pepper also contains volatile aroma compounds that give freshly crushed pepper its woody, citrusy and warm character.</p>
@@ -486,26 +489,50 @@ function SpicesBody() {
 
       <h2>“So what makes the difference — heat, grinding, oil, or the way we use the spice?”</h2>
       <p>One can either dry roast a spice or grind it or even use it as a whole. It depends on the requirement of the dish and the final taste you want to achieve.</p>
+      {/* What heat, grinding and oil do is the subject of the sessions: shown blurred, with the invitation on top. */}
+      <div className="relative mt-6 clear-both overflow-hidden">
+        <div aria-hidden="true" className="pointer-events-none select-none space-y-5 bg-parchment px-6 py-8 text-base leading-relaxed blur-[5px] sm:px-8">
+          <p>
+            As the spice warms, moisture is reduced and aromatic compounds become easier to release. Heat can also create new toasted and
+            roasted notes through chemical reactions within the spice.
+          </p>
+          <p className="font-serif text-2xl font-medium text-ink">But there is a very small window between fragrant and burnt.</p>
+          <p>Gentle roasting can make spices warmer, deeper and more complex. Too much heat can destroy delicate aroma compounds and create harsh, bitter or burnt flavours instead.</p>
+          <p>That is why we often say “roast until aromatic” rather than giving an exact number of minutes. The smell itself becomes an important cooking cue.</p>
+          <p>
+            Grinding changes flavour mainly by breaking the spice open and increasing its surface area. More aroma compounds are exposed at
+            once, which is why freshly ground spices smell so intense — but also why they lose aroma faster during storage.
+          </p>
+          <p>
+            When spices are <strong>heated in oil</strong>, another layer of flavour development happens.
+          </p>
+          <p>
+            Many aroma molecules have some affinity for fat, so oil can help extract and carry them. Once that flavoured oil is mixed through
+            the dish, the aroma can spread much more effectively than if the spices had simply been added to water.
+          </p>
+          <p>This is one reason why a small quantity of spices bloomed in oil can influence an entire curry.</p>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+          <aside className="w-full max-w-xl rounded-r-xl border-l-4 border-maroon bg-cream p-6 shadow-xl shadow-ink/15 sm:p-8">
+            <p className="text-left font-serif text-2xl font-semibold">Curious what’s happening behind the blur?</p>
+            <p className="mt-3 leading-relaxed text-ink/85">
+              We explore this together in my Flavour Science sessions — with real ingredients, tasting and simple experiments.
+            </p>
+            <p className="mt-4">
+              <Link href="/#classes" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+                See the classes
+              </Link>
+            </p>
+          </aside>
+        </div>
+      </div>
       <p>
-        As the spice warms, moisture is reduced and aromatic compounds become easier to release. Heat can also create new toasted and
-        roasted notes through chemical reactions within the spice.
+        The same principle appears in{" "}
+        <a {...articleLink("when-ingredients-meet-heat")} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          tempering
+        </a>{" "}
+        too: the oil is not only cooking the spices — it is also helping transport flavour.
       </p>
-      <p className="font-serif text-2xl font-medium text-ink">But there is a very small window between fragrant and burnt.</p>
-      <p>Gentle roasting can make spices warmer, deeper and more complex. Too much heat can destroy delicate aroma compounds and create harsh, bitter or burnt flavours instead.</p>
-      <p>That is why we often say “roast until aromatic” rather than giving an exact number of minutes. The smell itself becomes an important cooking cue.</p>
-      <p>
-        Grinding changes flavour mainly by breaking the spice open and increasing its surface area. More aroma compounds are exposed at
-        once, which is why freshly ground spices smell so intense — but also why they lose aroma faster during storage.
-      </p>
-      <p>
-        When spices are <strong>heated in oil</strong>, another layer of flavour development happens.
-      </p>
-      <p>
-        Many aroma molecules have some affinity for fat, so oil can help extract and carry them. Once that flavoured oil is mixed through
-        the dish, the aroma can spread much more effectively than if the spices had simply been added to water.
-      </p>
-      <p>This is one reason why a small quantity of spices bloomed in oil can influence an entire curry.</p>
-      <p>The same principle appears in tempering too: the oil is not only cooking the spices — it is also helping transport flavour.</p>
     </>
   );
 }
