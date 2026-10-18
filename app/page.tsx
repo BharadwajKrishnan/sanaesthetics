@@ -25,7 +25,7 @@ const FEATURES = [
 ];
 
 const AUDIENCE = [
-  "You are new to South Indian cooking and the spice box looks like a puzzle.",
+  "Bring a topic, and let’s explore it together.",
   "You cook South Indian vegetarian food at home and want it to taste the way you remember.",
   "You live far from home and want to reconnect with the food you grew up with.",
   "You like knowing why a recipe works, not only how.",
