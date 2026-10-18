@@ -35,7 +35,14 @@ const AUDIENCE = [
 const arusuvai = getPost("arusuvai-where-tradition-meets-taste")!;
 const issue1 = issueLink(arusuvai.slug);
 // Only plain data crosses into the client component; the issues' React parts stay here.
-const TEASERS = issues.map(({ slug, title, eyebrow, teaser, cover, coverAlt }) => ({ slug, title, eyebrow, teaser, cover, coverAlt, link: issueLink(slug) }));
+const TEASERS = issues.map(({ slug, title, eyebrow, teaser, teaserPicture, cover, coverAlt }) => ({
+  slug,
+  title,
+  eyebrow,
+  teaser,
+  picture: teaserPicture ?? (cover ? { src: cover, alt: coverAlt, width: 900, height: 1125 } : undefined),
+  link: issueLink(slug),
+}));
 
 const H2 = "font-serif text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-[3.5rem]";
 const PRIMARY = "group inline-flex items-center gap-2.5 rounded-md px-6 py-3 font-medium transition-colors";

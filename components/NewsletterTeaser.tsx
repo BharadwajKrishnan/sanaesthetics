@@ -14,8 +14,7 @@ export type TeaserIssue = {
   title: string;
   eyebrow: string;
   teaser: string;
-  cover?: string;
-  coverAlt: string;
+  picture?: { src: string; alt: string; width: number; height: number };
   link: { href: string; target: string; rel: string };
 };
 
@@ -56,8 +55,9 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
       onBlur={() => setPaused(false)}
       className="grid items-center gap-6 sm:grid-cols-[auto_minmax(0,1fr)] sm:gap-10"
     >
-      {/* Covers and text are stacked in the same grid cells, so the band keeps the height of its tallest issue. */}
-      <div className="grid w-28 sm:w-36 lg:w-44">
+      {/* Pictures and text are stacked in the same grid cells, so the band keeps the height of its tallest issue.
+          Each picture is shown whole, at its own proportions, never cut to a frame. */}
+      <div className="grid w-44 items-center sm:w-48 lg:w-56">
         {issues.map((issue, i) => (
           <a
             key={issue.slug}
@@ -65,11 +65,15 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
             aria-label={issue.title}
             aria-hidden={i !== active}
             tabIndex={i === active ? undefined : -1}
-            className={`umber-backdrop relative col-start-1 row-start-1 block aspect-[4/5] overflow-hidden rounded-sm shadow-xl shadow-ink/15 transition-opacity duration-700 ${
+            className={`col-start-1 row-start-1 block overflow-hidden rounded-sm shadow-xl shadow-ink/15 transition-opacity duration-700 ${
               i === active ? "opacity-100" : "pointer-events-none opacity-0"
             }`}
           >
-            {issue.cover && <Image src={issue.cover} alt={issue.coverAlt} fill sizes="(min-width: 1024px) 11rem, (min-width: 640px) 9rem, 7rem" quality={85} className="object-cover" />}
+            {issue.picture ? (
+              <Image src={issue.picture.src} alt={issue.picture.alt} width={issue.picture.width} height={issue.picture.height} sizes="(min-width: 1024px) 14rem, (min-width: 640px) 12rem, 11rem" quality={85} className="h-auto w-full" />
+            ) : (
+              <span className="umber-backdrop block aspect-[4/5]" />
+            )}
           </a>
         ))}
       </div>

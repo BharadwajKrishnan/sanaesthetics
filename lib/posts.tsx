@@ -16,6 +16,8 @@ export type Post = {
   excerpt: string;
   // One or two short lines for the homepage, meant to raise a question rather than answer it.
   teaser: string;
+  // The picture beside the teaser, shown whole at its own proportions. Defaults to the cover, which is 900 by 1125.
+  teaserPicture?: { src: string; alt: string; width: number; height: number };
   cover?: string;
   coverAlt: string;
   // Labels on the cover photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
@@ -384,6 +386,7 @@ export const posts: Post[] = [
     teaser:
       "Tamil kitchens counted six tastes long before anyone drew a molecule. Sensory science agrees on four of them. So what are the other two doing on the plate?",
     cover: photos.issue1,
+    teaserPicture: photos.issue1 ? { src: photos.issue1, alt: "Arusuvai poster: the six tastes in Tamil food tradition", width: 1149, height: 1369 } : undefined,
     coverAlt:
       "Arusuvai poster, the six tastes in Tamil food tradition: sweet (jaggery, payasam), sour (tamarind, raw mango), salty (salt, pickle), bitter (fenugreek, neem flowers, bitter gourd), pungent (chilli, black pepper) and astringent (raw banana, lentils)",
     readingTime: "5 min read",
@@ -423,6 +426,7 @@ export const posts: Post[] = [
     teaser:
       "Crushed pepper and whole pepper are not quite the same spice, and fennel changes its mind in a hot pan. Why do whole spices never behave the same way twice?",
     cover: "/images/whole-spices-issue-3.webp",
+    teaserPicture: { src: BOARD_PHOTO, alt: BOARD_ALT, width: 1600, height: 900 },
     coverAlt:
       "Whole spices on a bamboo board: star anise, a cinnamon stick, black pepper, fennel seeds, poppy seeds, bay leaves, coriander seeds, cloves and black cardamom",
     coverTags: COVER_TAGS,
