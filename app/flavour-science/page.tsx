@@ -37,7 +37,7 @@ export default function FlavourScience() {
                     alt={article.coverAlt}
                     link={{ ...articleLink(article.slug), "aria-label": article.title }}
                     sizes="(min-width: 1024px) 15rem, (min-width: 640px) 12rem, 90vw"
-                    className={`relative w-full max-w-[15rem] rounded-xl shadow-lg shadow-ink/15 ${article.coverAspect ?? "aspect-[4/3]"}`}
+                    className={`relative mx-auto w-full max-w-[15rem] rounded-xl sm:mx-0 shadow-lg shadow-ink/15 ${article.coverAspect ?? "aspect-[4/3]"}`}
                   >
                     <TemperingPan />
                   </Artwork>

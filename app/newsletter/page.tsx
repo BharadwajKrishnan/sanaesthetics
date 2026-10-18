@@ -41,7 +41,7 @@ export default function Newsletter() {
                     alt={post.coverAlt}
                     link={{ ...issueLink(post.slug), "aria-label": post.title }}
                     sizes="(min-width: 1024px) 13rem, (min-width: 640px) 11rem, 90vw"
-                    className={`relative w-full max-w-[13rem] rounded-xl shadow-lg shadow-ink/15 ${post.coverAspect ?? "aspect-[4/5]"}`}
+                    className={`relative mx-auto w-full max-w-[13rem] rounded-xl sm:mx-0 shadow-lg shadow-ink/15 ${post.coverAspect ?? "aspect-[4/5]"}`}
                   >
                     {post.Cover ? <post.Cover /> : <Thali />}
                   </Artwork>
