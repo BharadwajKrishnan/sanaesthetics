@@ -254,6 +254,34 @@ const SPICE_BOX = [
   { name: "Black cardamom", note: "smoky, bold and completely different from the sweeter green cardamom we are more familiar with." },
 ];
 
+// Issue 3's board of whole spices: the whole photo, with every ingredient labelled, sits in the body; the
+// cover is a 4:5 cut of the same picture. Coordinates as on the other covers: percentages of each picture.
+const BOARD_PHOTO = "/images/whole-spices-board.webp";
+const BOARD_ALT =
+  "Whole spices laid out on a bamboo board: star anise, a cinnamon stick, bay leaves, black pepper, fennel seeds, poppy seeds, coriander seeds, cloves and black cardamom";
+const BOARD_TAGS: PhotoTag[] = [
+  { label: "Star anise", at: { left: 29, top: 12 }, text: { left: 42, top: 6 } },
+  { label: "Cinnamon", at: { left: 34, top: 26 }, text: { left: 52, top: 14 } },
+  { label: "Bay leaves", at: { left: 12, top: 36 }, text: { left: 7, top: 26 } },
+  { label: "Black pepper", at: { left: 35, top: 38 }, text: { left: 50, top: 32 } },
+  { label: "Fennel seeds", at: { left: 46, top: 50 }, text: { left: 64, top: 44 } },
+  { label: "Poppy seeds", at: { left: 59, top: 54 }, text: { left: 76, top: 58 } },
+  { label: "Coriander seeds", at: { left: 22, top: 66 }, text: { left: 12, top: 76 } },
+  { label: "Cloves", at: { left: 44, top: 76 }, text: { left: 56, top: 92 } },
+  { label: "Black cardamom", at: { left: 62, top: 82 }, text: { left: 78, top: 74 } },
+];
+const COVER_TAGS: PhotoTag[] = [
+  { label: "Star anise", at: { left: 24, top: 12 }, text: { left: 50, top: 8 } },
+  { label: "Cinnamon", at: { left: 30, top: 26 }, text: { left: 54, top: 22 } },
+  { label: "Black pepper", at: { left: 38, top: 36 }, text: { left: 60, top: 36 } },
+  { label: "Fennel seeds", at: { left: 64, top: 46 }, text: { left: 80, top: 46 } },
+  { label: "Poppy seeds", at: { left: 92, top: 54 }, text: { left: 82, top: 68 } },
+  { label: "Black cardamom", at: { left: 82, top: 80 }, text: { left: 66, top: 80 } },
+  { label: "Bay leaves", at: { left: 6, top: 58 }, text: { left: 14, top: 92 } },
+  { label: "Coriander seeds", at: { left: 14, top: 66 }, text: { left: 38, top: 86 } },
+  { label: "Cloves", at: { left: 58, top: 72 }, text: { left: 64, top: 95 } },
+];
+
 const SIDE_BOX = "mt-10 md:float-right md:mb-2 md:ml-8 md:mt-2 md:w-72 lg:float-none lg:mb-0 lg:ml-0 lg:mt-10 lg:w-auto xl:float-right xl:mb-2 xl:ml-8 xl:mt-2 xl:w-72";
 const WRAPPED = "md:text-left lg:text-justify xl:text-left";
 
@@ -282,6 +310,13 @@ function BeyondTheBasicsBody() {
           </div>
         ))}
       </dl>
+      <figure>
+        <div className="relative mx-auto max-w-3xl">
+          <Image src={BOARD_PHOTO} alt={BOARD_ALT} width={1600} height={900} quality={90} sizes="(min-width: 640px) 48rem, 90vw" className="h-auto w-full" />
+          <Zoomable src={BOARD_PHOTO} alt={BOARD_ALT} badgePosition="right-3 top-3" />
+          <PhotoTags tags={BOARD_TAGS} />
+        </div>
+      </figure>
       <p>
         And then there are a few ingredients that sit elsewhere in my pantry but come out when a dish needs something a little
         special.
@@ -378,7 +413,10 @@ export const posts: Post[] = [
     eyebrow: "Issue 3",
     excerpt:
       "The box beside the anjarapetti: pepper, fennel, cinnamon, cloves, star anise, bay leaves, poppy seeds and black cardamom, with saffron and cashews waiting elsewhere in the pantry. Why whole spices never behave the same way twice, and what that has to do with Chettinad cooking.",
-    coverAlt: "Whole spices on a dark wooden board: cinnamon sticks, star anise, cloves, bay leaves, black cardamom, black pepper and fennel seeds",
+    cover: "/images/whole-spices-issue-3.webp",
+    coverAlt:
+      "Whole spices on a bamboo board: star anise, a cinnamon stick, black pepper, fennel seeds, poppy seeds, bay leaves, coriander seeds, cloves and black cardamom",
+    coverTags: COVER_TAGS,
     Cover: WholeSpices,
     readingTime: "3 min read",
     Body: BeyondTheBasicsBody,
