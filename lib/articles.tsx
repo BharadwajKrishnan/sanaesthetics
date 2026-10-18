@@ -543,10 +543,9 @@ export const articles: Article[] = [
     title: "When Spices Wake Up",
     eyebrow: "Flavour science · Whole spices",
     excerpt: "Whole spices may look quiet sitting inside a box, but the moment we crush them, roast them or add them to hot oil, they begin to change.",
-    // Sandhya's photo of the whole spices, shared with Issue 3.
-    cover: "/images/whole-spices-board.webp",
+    cover: "/images/spices-wake-up.webp",
     coverAlt:
-      "Whole spices laid out on a bamboo board: star anise, a cinnamon stick, bay leaves, black pepper, fennel seeds, poppy seeds, coriander seeds, cloves and black cardamom",
+      "Three ways spices wake up, drawn in watercolour: a pan over a flame for heat, a mortar and pestle for grinding, and spices blooming in a pan of oil, with aroma molecules rising above them",
     coverAspect: "aspect-[16/9]",
     readingTime: "5 min read",
     Body: SpicesBody,
