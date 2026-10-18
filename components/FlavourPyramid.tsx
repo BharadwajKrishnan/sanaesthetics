@@ -24,8 +24,7 @@ function Chevron({ className = "" }: { className?: string }) {
   );
 }
 
-const CHIP_LINKED = "inline-flex items-center rounded-full border border-line bg-cream px-3 py-1 text-sm font-medium text-ink transition-colors hover:border-maroon hover:text-maroon";
-const CHIP_PLAIN = "inline-flex items-center rounded-full border border-line px-3 py-1 text-sm text-ink/70";
+const CHIP = "inline-flex items-center rounded-full border border-line bg-cream px-3 py-1 text-sm font-medium text-ink transition-colors hover:border-maroon hover:text-maroon";
 const READ_LINK = "group font-medium underline decoration-ink/30 underline-offset-[6px] hover:decoration-ink";
 
 export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
@@ -98,16 +97,14 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
               <ul className="mt-6 flex flex-wrap gap-2">
                 {layer.chips.map((chip) => (
                   <li key={chip.label}>
-                    {chip.link?.target ? (
-                      <a {...chip.link} className={CHIP_LINKED}>
+                    {chip.link.target ? (
+                      <a {...chip.link} className={CHIP}>
                         {chip.label}
                       </a>
-                    ) : chip.link ? (
-                      <Link href={chip.link.href} className={CHIP_LINKED}>
+                    ) : (
+                      <Link href={chip.link.href} className={CHIP}>
                         {chip.label}
                       </Link>
-                    ) : (
-                      <span className={CHIP_PLAIN}>{chip.label}</span>
                     )}
                   </li>
                 ))}

@@ -3,12 +3,12 @@ import { getPost, issueLink } from "@/lib/posts";
 import { getRecipe, recipePath } from "@/lib/recipes";
 
 // Sandhya's flavour pyramid: how a South Indian dish is built, read from the foundation upward.
-// A chip with a link points at writing that already exists; the rest are plain labels.
+// Every chip points at writing that already exists; a topic gets its chip once there is something to read.
 // This file imports the content modules, so it is only used from server components. The pyramid
 // component receives the resolved, serialisable layers as props.
 
 export type PyramidLink = { href: string; target?: "_blank"; rel?: "noopener" };
-export type PyramidChip = { label: string; link?: PyramidLink };
+export type PyramidChip = { label: string; link: PyramidLink };
 export type PyramidRead = { kind: "Issue" | "Article" | "Recipe" | "Recipes"; title: string; link: PyramidLink };
 export type PyramidLayer = {
   n: number;
@@ -57,10 +57,7 @@ export const PYRAMID: PyramidLayer[] = [
     blurb:
       "The foundation. Before any technique or ingredient there is a kitchen you grew up in, a festival you waited for, and a cup of coffee shared with someone.",
     chips: [
-      { label: "Family recipes" },
-      { label: "Rituals" },
       { label: "Festival foods", link: pachadi.link },
-      { label: "Regional traditions" },
       { label: "Coffee with my father", link: coffee.link },
       { label: "Arusuvai traditions", link: arusuvai.link },
     ],
@@ -75,8 +72,6 @@ export const PYRAMID: PyramidLayer[] = [
     blurb: "How cooking changes ingredients: the pop in hot oil, the browning, the grind on stone, the slow thickening of a gravy.",
     chips: [
       { label: "Tempering", link: tempering.link },
-      { label: "Grinding on the ammikkal" },
-      { label: "Fermentation" },
       { label: "Roasting", link: coffee.link },
       { label: "Simmering", link: vathakuzhambu.link },
     ],
@@ -90,14 +85,11 @@ export const PYRAMID: PyramidLayer[] = [
     tagline: "What we use",
     blurb: "The pantry: what sits in the spice box, what hangs in the kitchen, and why each one earns its place.",
     chips: [
-      { label: "Coconut" },
       { label: "Tamarind", link: vathakuzhambu.link },
       { label: "Curry leaves", link: tempering.link },
       { label: "Chillies", link: tempering.link },
       { label: "Dals", link: tempering.link },
       { label: "Oils", link: tempering.link },
-      { label: "Rice" },
-      { label: "Sesame oil" },
     ],
     reads: [{ kind: "Issue", ...anjarapetti }],
     tone: { bg: "bg-forest", fg: "text-cream" },
@@ -112,7 +104,6 @@ export const PYRAMID: PyramidLayer[] = [
       { label: "Curry leaves in hot oil", link: tempering.link },
       { label: "Mustard seeds popping", link: tempering.link },
       { label: "Filter coffee aroma", link: coffee.link },
-      { label: "Froth on coffee" },
     ],
     reads: [{ kind: "Article", ...coffee }],
     tone: { bg: "bg-brass", fg: "text-ink" },
