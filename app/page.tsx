@@ -26,7 +26,7 @@ const FEATURES = [
 ];
 
 const AUDIENCE = [
-  "Bring a topic, and let’s explore it together.",
+  "You are new to South Indian cooking and the spice box looks like a puzzle.",
   "You cook South Indian vegetarian food at home and want it to taste the way you remember.",
   "You live far from home and want to reconnect with the food you grew up with.",
   "You like knowing why a recipe works, not only how.",
@@ -214,7 +214,8 @@ export default function Home() {
               <Eyebrow className="text-maroon">Classes · online &amp; in-person · by request</Eyebrow>
               <h2 className={`${H2} mt-4`}>Classes where you cook, ask and understand.</h2>
             </div>
-            <ol className="mt-14 grid gap-px bg-line sm:grid-cols-2">
+            <TopicsTicker topics={TOPICS} className="mt-12" />
+            <ol className="mt-12 grid gap-px bg-line sm:grid-cols-2">
               {CLASSES.map((item, i) => (
                 <li key={item.title} className="reveal bg-parchment py-8 pr-8 sm:p-8">
                   <p className="font-serif text-lg font-semibold text-maroon">{String(i + 1).padStart(2, "0")}</p>
@@ -232,11 +233,8 @@ export default function Home() {
                   email, and I will write back with what is possible, when, and at what cost.
                 </p>
               </div>
-              <div className="w-full max-w-md lg:justify-self-end">
-                <TopicsTicker rows={TOPICS} />
-                <div className="mt-8">
-                  <SignupForm list="waitlist" />
-                </div>
+              <div className="lg:justify-self-end">
+                <SignupForm list="waitlist" />
               </div>
             </div>
           </div>

@@ -11,7 +11,7 @@ export const CLASSES = [
     // A cooking session is asked for in one of these formats; the form offers the choice once the class is picked.
     formats: FORMATS,
   },
-  { id: "flavour-science", title: "Flavour Science Session", body: "One idea per session, such as tempering or fermentation, shown at the stove." },
+  { id: "flavour-science", title: "Flavour Science Session", body: "Bring a topic, and let’s explore it together." },
 ] as const;
 
 export type ClassId = (typeof CLASSES)[number]["id"];
@@ -34,8 +34,12 @@ export function classLabel(cls: Class, format?: Format) {
   return hasFormats(cls) && format ? `${cls.title} (${format})` : cls.title;
 }
 
-// Session topics advertised beside the request form, one row per group, scrolling past.
-export const TOPICS: readonly (readonly string[])[] = [
-  ["From Decoction to Cup: South Indian Filter Coffee", "Everyday Cooking Techniques: Tempering, Roasting & Balancing Flavours", "South Indian Cooking from Scratch"],
-  ["Make Your Own South Indian Filter Coffee", "Feel the Heat: The Art of Tempering", "A Simple South Indian Meal"],
+// Session topics advertised above the classes, scrolling past in one line.
+export const TOPICS: readonly string[] = [
+  "From Decoction to Cup: South Indian Filter Coffee",
+  "Everyday Cooking Techniques: Tempering, Roasting & Balancing Flavours",
+  "South Indian Cooking from Scratch",
+  "Make Your Own South Indian Filter Coffee",
+  "Feel the Heat: The Art of Tempering",
+  "A Simple South Indian Meal",
 ];
