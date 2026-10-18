@@ -9,9 +9,10 @@ import { SignupForm } from "@/components/SignupForm";
 import { FlavourPyramid } from "@/components/FlavourPyramid";
 import { Eyebrow, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { SixTastes } from "@/components/SixTastes";
+import { TopicsTicker } from "@/components/TopicsTicker";
 import { posts } from "@/lib/instagram";
 import { photos } from "@/lib/photos";
-import { CLASSES } from "@/lib/classes";
+import { CLASSES, TOPICS } from "@/lib/classes";
 import { getPost, issueLink, posts as issues } from "@/lib/posts";
 import { PYRAMID } from "@/lib/pyramid";
 import { recipePath, recipes } from "@/lib/recipes";
@@ -231,8 +232,11 @@ export default function Home() {
                   email, and I will write back with what is possible, when, and at what cost.
                 </p>
               </div>
-              <div className="lg:justify-self-end">
-                <SignupForm list="waitlist" />
+              <div className="w-full max-w-md lg:justify-self-end">
+                <TopicsTicker rows={TOPICS} />
+                <div className="mt-8">
+                  <SignupForm list="waitlist" />
+                </div>
               </div>
             </div>
           </div>

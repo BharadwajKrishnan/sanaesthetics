@@ -33,3 +33,9 @@ export function isFormat(value: string): value is Format {
 export function classLabel(cls: Class, format?: Format) {
   return hasFormats(cls) && format ? `${cls.title} (${format})` : cls.title;
 }
+
+// Session topics advertised beside the request form, one row per group, scrolling past.
+export const TOPICS: readonly (readonly string[])[] = [
+  ["From Decoction to Cup: South Indian Filter Coffee", "Everyday Cooking Techniques: Tempering, Roasting & Balancing Flavours", "South Indian Cooking from Scratch"],
+  ["Make Your Own South Indian Filter Coffee", "Feel the Heat: The Art of Tempering", "A Simple South Indian Meal"],
+];
