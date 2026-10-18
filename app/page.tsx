@@ -19,11 +19,12 @@ import { PYRAMID } from "@/lib/pyramid";
 import { recipePath, recipes } from "@/lib/recipes";
 import { site } from "@/lib/site";
 
+// Each chip in the hero opens the section or page it names.
 const FEATURES = [
-  { Icon: SproutIcon, lines: ["Recipes", "with a story"] },
-  { Icon: FlaskIcon, lines: ["Flavour", "science"] },
-  { Icon: TempleIcon, lines: ["Culture", "& heritage"] },
-  { Icon: BowlIcon, lines: ["Classes", "online & in-person"] },
+  { Icon: SproutIcon, lines: ["Recipes", "with a story"], href: "/recipes" },
+  { Icon: FlaskIcon, lines: ["Flavour", "science"], href: "/flavour-science" },
+  { Icon: TempleIcon, lines: ["Culture", "& heritage"], href: "/#culture" },
+  { Icon: BowlIcon, lines: ["Classes", "online & in-person"], href: "/#classes" },
 ];
 
 const AUDIENCE = [
@@ -76,14 +77,19 @@ export default function Home() {
                 </a>
               </p>
               <ul className="hero-fade mt-8 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2" style={{ ["--i" as string]: 2 }}>
-                {FEATURES.map(({ Icon, lines }) => (
-                  <li key={lines[0]} className="flex items-center gap-2.5 whitespace-nowrap rounded-xl border border-line/80 bg-white/40 px-3 py-2 text-left text-[0.8rem] leading-tight text-ink/85">
-                    <Icon className="h-7 w-7 shrink-0 text-maroon" />
-                    <span>
-                      {lines[0]}
-                      <br />
-                      {lines[1]}
-                    </span>
+                {FEATURES.map(({ Icon, lines, href }) => (
+                  <li key={lines[0]}>
+                    <Link
+                      href={href}
+                      className="group flex items-center gap-2.5 whitespace-nowrap rounded-xl border border-line/80 bg-white/40 px-3 py-2 text-left text-[0.8rem] leading-tight text-ink/85 transition-[border-color,background-color,transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-maroon/50 hover:bg-white/80 hover:shadow-md hover:shadow-ink/10"
+                    >
+                      <Icon className="h-7 w-7 shrink-0 text-maroon transition-transform duration-300 group-hover:scale-110" />
+                      <span>
+                        {lines[0]}
+                        <br />
+                        {lines[1]}
+                      </span>
+                    </Link>
                   </li>
                 ))}
               </ul>
