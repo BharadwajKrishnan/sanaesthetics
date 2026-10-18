@@ -25,9 +25,9 @@ const FEATURES = [
 ];
 
 const AUDIENCE = [
+  "You are new to South Indian cooking and the spice box looks like a puzzle.",
   "You cook South Indian vegetarian food at home and want it to taste the way you remember.",
   "You live far from home and want to reconnect with the food you grew up with.",
-  "You are new to South Indian cooking and the spice box looks like a puzzle.",
   "You like knowing why a recipe works, not only how.",
   "You have a family recipe that deserves to be written down properly.",
 ];
@@ -213,7 +213,7 @@ export default function Home() {
               <Eyebrow className="text-maroon">Classes · online &amp; in-person · by request</Eyebrow>
               <h2 className={`${H2} mt-4`}>Classes where you cook, ask and understand.</h2>
             </div>
-            <ol className="mt-14 grid gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
+            <ol className="mt-14 grid gap-px bg-line sm:grid-cols-2">
               {CLASSES.map((item, i) => (
                 <li key={item.title} className="reveal bg-parchment py-8 pr-8 sm:p-8">
                   <p className="font-serif text-lg font-semibold text-maroon">{String(i + 1).padStart(2, "0")}</p>

@@ -1,4 +1,4 @@
-import { getClass } from "@/lib/classes";
+import { classLabel, getClass, hasFormats, isFormat } from "@/lib/classes";
 import { LISTS, notify, type List } from "@/lib/signups";
 
 export const runtime = "nodejs";
@@ -25,6 +25,11 @@ export async function POST(request: Request) {
   if (list === "waitlist" && !cls) {
     return Response.json({ error: "class" }, { status: 400 });
   }
+  // A cooking session is asked for online or in person; the format is required for that class and ignored otherwise.
+  const format = typeof body?.format === "string" && isFormat(body.format) ? body.format : undefined;
+  if (cls && hasFormats(cls) && !format) {
+    return Response.json({ error: "format" }, { status: 400 });
+  }
   // Optional on the classes form, passed on exactly as typed (spaces, "+" and all); "" when not given, so the sheet
   // column is always filled. Only an absurd length is refused.
   const phone = list === "waitlist" && typeof body?.phone === "string" ? body.phone : "";
@@ -36,7 +41,7 @@ export async function POST(request: Request) {
     return Response.json({ status: "subscribed" });
   }
   try {
-    const status = await notify({ event: "subscribed", list, name, email, classType: cls?.title, phone: list === "waitlist" ? phone : undefined, subscribedAt: new Date().toISOString() });
+    const status = await notify({ event: "subscribed", list, name, email, classType: cls && classLabel(cls, format), phone: list === "waitlist" ? phone : undefined, subscribedAt: new Date().toISOString() });
     return Response.json({ status: status === "exists" ? "exists" : "subscribed" });
   } catch (error) {
     console.error("[signup] could not reach the webhook", error);

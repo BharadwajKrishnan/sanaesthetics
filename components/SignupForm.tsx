@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useId, useState } from "react";
-import { CLASSES } from "@/lib/classes";
+import { CLASSES, getClass, hasFormats } from "@/lib/classes";
 import type { List } from "@/lib/signups";
 
-type State = "idle" | "sending" | "subscribed" | "exists" | "class" | "name" | "invalid" | "phone" | "failed";
+type State = "idle" | "sending" | "subscribed" | "exists" | "class" | "format" | "name" | "invalid" | "phone" | "failed";
 
 const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string; consent: string }> = {
   waitlist: {
@@ -26,15 +26,70 @@ const COPY: Record<List, { cta: string; sending: string; subscribed: string; exi
 
 const ERRORS: Partial<Record<State, string>> = {
   class: "Choose a class.",
+  format: "Choose online or in person.",
   name: "Enter your name.",
   invalid: "Enter an email address like name@example.com.",
   phone: "That phone number is too long.",
   failed: "The list couldn't be reached. Please try again in a few minutes.",
 };
 
+// A dropdown with its arrow drawn inside the field's padding; the browser's own sits hard against the edge.
+function Select({
+  id,
+  value,
+  onChange,
+  invalid,
+  describedBy,
+  field,
+  placeholder,
+  options,
+}: {
+  id: string;
+  value: string;
+  onChange: (value: string) => void;
+  invalid: boolean;
+  describedBy?: string;
+  field: string;
+  placeholder: string;
+  options: { value: string; label: string }[];
+}) {
+  return (
+    <div className="relative mt-2">
+      <select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        aria-invalid={invalid}
+        aria-describedby={describedBy}
+        className={`w-full appearance-none pr-11 ${field} ${value ? "" : "text-ink/40"}`}
+      >
+        <option value="">{placeholder}</option>
+        {options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+      </select>
+      <svg
+        viewBox="0 0 20 20"
+        aria-hidden="true"
+        className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/60"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M5 8l5 5 5-5" />
+      </svg>
+    </div>
+  );
+}
+
 export function SignupForm({ list, tone = "light", center = false }: { list: List; tone?: "light" | "dark"; center?: boolean }) {
   const id = useId();
   const [classId, setClassId] = useState("");
+  const [format, setFormat] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -42,11 +97,18 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
   const [state, setState] = useState<State>("idle");
   const copy = COPY[list];
   const dark = tone === "dark";
+  // A cooking session is asked for online or in person; the choice appears once that class is picked.
+  const chosen = getClass(classId);
+  const askFormat = !!chosen && hasFormats(chosen);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (list === "waitlist" && !classId) {
       setState("class");
+      return;
+    }
+    if (list === "waitlist" && askFormat && !format) {
+      setState("format");
       return;
     }
     if (!name.trim()) {
@@ -62,17 +124,17 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       const res = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ list, name, email, website, classType: list === "waitlist" ? classId : undefined, phone: list === "waitlist" ? phone : undefined }),
+        body: JSON.stringify({ list, name, email, website, classType: list === "waitlist" ? classId : undefined, format: askFormat ? format : undefined, phone: list === "waitlist" ? phone : undefined }),
       });
       const data = await res.json();
       if (res.ok) setState(data.status === "exists" ? "exists" : "subscribed");
-      else setState(data.error === "class" ? "class" : data.error === "name" ? "name" : data.error === "invalid" ? "invalid" : data.error === "phone" ? "phone" : "failed");
+      else setState(data.error === "class" ? "class" : data.error === "format" ? "format" : data.error === "name" ? "name" : data.error === "invalid" ? "invalid" : data.error === "phone" ? "phone" : "failed");
     } catch {
       setState("failed");
     }
   }
 
-  const isError = state === "class" || state === "name" || state === "invalid" || state === "phone" || state === "failed";
+  const isError = state === "class" || state === "format" || state === "name" || state === "invalid" || state === "phone" || state === "failed";
   const message = state === "subscribed" ? copy.subscribed : state === "exists" ? copy.exists : ERRORS[state];
 
   const label = `block text-xs font-medium uppercase tracking-[0.18em] ${dark ? "text-cream/75" : "text-ink/60"}`;
@@ -101,39 +163,40 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
           <label htmlFor={`${id}-class`} className={label}>
             Which class?
           </label>
-          {/* The browser's own arrow sits hard against the edge; this draws one inside the field's padding instead. */}
-          <div className="relative mt-2">
-            <select
-              id={`${id}-class`}
-              value={classId}
-              onChange={(e) => {
-                setClassId(e.target.value);
-                reset();
-              }}
-              aria-invalid={state === "class"}
-              aria-describedby={describedBy}
-              className={`w-full appearance-none pr-11 ${field} ${classId ? "" : "text-ink/40"}`}
-            >
-              <option value="">Choose a class</option>
-              {CLASSES.map((c) => (
-                <option key={c.id} value={c.id}>
-                  {c.title}
-                </option>
-              ))}
-            </select>
-            <svg
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-              className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/60"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M5 8l5 5 5-5" />
-            </svg>
-          </div>
+          <Select
+            id={`${id}-class`}
+            value={classId}
+            onChange={(value) => {
+              setClassId(value);
+              setFormat("");
+              reset();
+            }}
+            invalid={state === "class"}
+            describedBy={describedBy}
+            field={field}
+            placeholder="Choose a class"
+            options={CLASSES.map((c) => ({ value: c.id, label: c.title }))}
+          />
+          {askFormat && (
+            <>
+              <label htmlFor={`${id}-format`} className={`mt-4 ${label}`}>
+                Online or in person?
+              </label>
+              <Select
+                id={`${id}-format`}
+                value={format}
+                onChange={(value) => {
+                  setFormat(value);
+                  reset();
+                }}
+                invalid={state === "format"}
+                describedBy={describedBy}
+                field={field}
+                placeholder="Choose a format"
+                options={chosen.formats.map((f) => ({ value: f, label: f }))}
+              />
+            </>
+          )}
         </>
       )}
       <label htmlFor={`${id}-name`} className={`${label} ${list === "waitlist" ? "mt-4" : ""}`}>
