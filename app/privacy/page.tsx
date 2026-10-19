@@ -31,8 +31,8 @@ const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
     title: "What the two forms collect",
     body: [
       <>
-        The site has two sign-up forms: one for the newsletter and one for requesting a class. Each asks for your name and your email
-        address; the classes form also asks which class you are interested in and, if you choose to give it, a phone number. When you
+        The site has two sign-up forms: one for the newsletter and one for requesting a session. Each asks for your name and your email
+        address; the sessions form also asks which session you are interested in and, if you choose to give it, a phone number. When you
         submit a form the site also records which list you joined and the time.
       </>,
       <>That is everything. There are no accounts, no passwords and no payment details.</>,
@@ -55,7 +55,7 @@ const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
     title: "What it is used for",
     body: [
       <>
-        The newsletter list receives the newsletter, when there is an issue. The waitlist receives news about the classes, if and when
+        The newsletter list receives the newsletter, when there is an issue. The waitlist receives news about the sessions, if and when
         they happen. Neither list is used for anything else.
       </>,
     ],

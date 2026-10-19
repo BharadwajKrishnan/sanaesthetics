@@ -1,6 +1,6 @@
 # South Indian Food Lab
 
-The site behind southindianfoodlab.com: South Indian vegetarian cooking, explored through tradition, technique and flavour science. A newsletter, written recipes, flavour-science articles, an About page and a classes request form. Next.js 16 (App Router), React 19, Tailwind v4, no database and no CMS: every piece of content is a TypeScript file.
+The site behind southindianfoodlab.com: South Indian vegetarian cooking, explored through tradition, technique and flavour science. A newsletter, written recipes, flavour-science articles, an About page and a sessions request form. Next.js 16 (App Router), React 19, Tailwind v4, no database and no CMS: every piece of content is a TypeScript file.
 
 ## Run locally
 
@@ -13,25 +13,25 @@ Then open http://localhost:3000. `npm run build` makes the production build and 
 
 ## Where things live
 
-- `app/page.tsx`: the homepage, section by section (hero, newsletter, flavour pyramid, six tastes, recipes, classes, about, subscribe).
+- `app/page.tsx`: the homepage, section by section (hero, flavour pyramid, newsletter, six tastes, recipes, sessions, about, subscribe).
 - `app/about`, `app/newsletter`, `app/flavour-science`, `app/recipes`, `app/privacy`, `app/subscribe`: the other pages. `app/not-found.tsx` is the 404 page.
 - `app/robots.ts`, `app/sitemap.ts`, `app/opengraph-image.tsx`, `app/icon.tsx`, `app/apple-icon.tsx`: robots, the sitemap (built from the content files), the social-card image and the icons. `app/fonts/` holds the one font the social card needs.
 - `lib/site.ts`: brand name, domain, author, contact email, navigation, Instagram handle, and `openGraphShared`, which every page spreads into its `openGraph` so the social image is kept.
 - `lib/posts.tsx`: the newsletter issues; `lib/articles.tsx`: the flavour-science articles; `lib/recipes.ts`: the written recipes. Each entry becomes a page under `/newsletter`, `/flavour-science` or `/recipes`. Links to issues and articles go through `issueLink()` / `articleLink()` so they always open in a new tab; recipes use `recipePath()` and open in the same tab. `latestPost` is the newest issue, which the homepage features. Each recipe names the issue it relates to in `issueSlug`.
 - `lib/pyramid.ts` and `components/FlavourPyramid.tsx`: Sandhya's flavour pyramid on the homepage. Chips link only to writing that exists; slugs are checked at build time.
-- `lib/classes.ts`: the classes shown on the homepage and offered in the request form.
+- `lib/classes.ts`: the sessions shown on the homepage and offered in the request form.
 - `lib/photos.ts`: photos for the picture slots (hero, issue 1, the two About photos, the spice-box cutout). Until a slot has a photo, an illustration from `components/Artwork.tsx` is drawn instead. Put photos in `public/images/` and set their paths here.
 - `lib/instagram.ts`: the reels and posts shown under "Recipes with a story". Add a line to feature another one.
 - `components/SixTastes.tsx`: the interactive six tastes on the homepage. `components/Zoomable.tsx` makes photos enlargeable; `components/ArticlePage.tsx` is the long-form layout shared by issues and articles; `components/Kolam.tsx` holds the ornaments.
-- `components/SignupForm.tsx`: the form used for the newsletter and for class requests.
+- `components/SignupForm.tsx`: the form used for the newsletter and for session requests.
 - `lib/signups.ts`, `app/api/signup/`: the signup flow described below.
 - `next.config.ts`: image quality and the `/blog` to `/newsletter` redirects.
 
-## Signups and class requests
+## Signups and session requests
 
 The site keeps no list of its own. It hands every submission to an n8n workflow, which adds the row to a Google Sheet straight away. No confirmation email is sent, so the site's copy promises only that a reply to any issue is enough to be taken off the list. The privacy page (`app/privacy/page.tsx`) describes this in plain language; the contact address it shows is `contactEmail` in `lib/site.ts`.
 
-1. A reader enters their name and email address. On the classes form they also pick a class and may leave a phone number. The site POSTs a `subscribed` event to the webhook.
+1. A reader enters their name and email address. On the sessions form they also pick a session and may leave a phone number. The site POSTs a `subscribed` event to the webhook.
 2. The workflow adds the row to the Google Sheet, or updates its row if the address is already there.
 3. The form tells the reader they are on the list, or that their request was received.
 

@@ -448,7 +448,7 @@ html.no-js .draw path {
 
 /* ---------- Ticker ---------- */
 
-/* Session topics scrolling past above the classes. The line holds two copies of the list; moving each
+/* Session topics scrolling past above the sessions. The line holds two copies of the list; moving each
    by its own width and starting over reads as one endless loop. */
 .ticker-fade {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);

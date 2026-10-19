@@ -9,7 +9,7 @@ type State = "idle" | "sending" | "subscribed" | "exists" | "class" | "format" |
 
 const COPY: Record<List, { cta: string; sending: string; subscribed: string; exists: string; consent: string }> = {
   waitlist: {
-    cta: "Request a class",
+    cta: "Request a session",
     sending: "Sending…",
     subscribed: "Request received. I will write back with what is possible, and when.",
     exists: "A request from this address is already on the list. I will be in touch.",
@@ -25,7 +25,7 @@ const COPY: Record<List, { cta: string; sending: string; subscribed: string; exi
 };
 
 const ERRORS: Partial<Record<State, string>> = {
-  class: "Choose a class.",
+  class: "Choose a session.",
   format: "Choose online or in person.",
   name: "Enter your name.",
   invalid: "Enter an email address like name@example.com.",
@@ -97,7 +97,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
   const [state, setState] = useState<State>("idle");
   const copy = COPY[list];
   const dark = tone === "dark";
-  // A cooking session is asked for online or in person; the choice appears once that class is picked.
+  // A cooking session is asked for online or in person; the choice appears once that session is picked.
   const chosen = getClass(classId);
   const askFormat = !!chosen && hasFormats(chosen);
 
@@ -163,7 +163,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
       {list === "waitlist" && (
         <>
           <label htmlFor={`${id}-class`} className={label}>
-            Which class?
+            Which session?
           </label>
           <Select
             id={`${id}-class`}
@@ -176,7 +176,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
             invalid={state === "class"}
             describedBy={describedBy}
             field={field}
-            placeholder="Choose a class"
+            placeholder="Choose a session"
             options={CLASSES.map((c) => ({ value: c.id, label: c.title }))}
           />
           {askFormat && (
@@ -227,7 +227,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
         <label htmlFor={`${id}-website`}>Website</label>
         <input id={`${id}-website`} type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} />
       </div>
-      {/* The newsletter form keeps its button beside the email field. The classes form has more fields, so the
+      {/* The newsletter form keeps its button beside the email field. The sessions form has more fields, so the
           email field runs full width and the button comes after the phone number. */}
       <div className={`mt-1.5 flex flex-col gap-2 ${list === "waitlist" ? "" : "sm:flex-row"}`}>
         <input

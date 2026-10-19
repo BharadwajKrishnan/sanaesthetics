@@ -24,7 +24,7 @@ const FEATURES = [
   { Icon: SproutIcon, lines: ["Recipes", "with a story"], href: "/recipes" },
   { Icon: FlaskIcon, lines: ["Flavour", "science"], href: "/flavour-science" },
   { Icon: TempleIcon, lines: ["Culture", "& heritage"], href: "/#culture" },
-  { Icon: BowlIcon, lines: ["Classes", "online & in-person"], href: "/#classes" },
+  { Icon: BowlIcon, lines: ["Sessions", "online & in-person"], href: "/#sessions" },
 ];
 
 const AUDIENCE = [
@@ -201,10 +201,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Classes */}
-        <section id="classes" className="bg-parchment">
+        {/* Sessions */}
+        <section id="sessions" className="bg-parchment">
           <div className={`${CONTAINER} ${SECTION}`}>
-            <SectionHead eyebrow={<>Classes · online &amp; in-person · by request</>} title="Classes where you cook, ask and understand." />
+            <SectionHead eyebrow={<>Sessions · online &amp; in-person · by request</>} title="Sessions where you cook, ask and understand." />
             <TopicsTicker topics={TOPICS} className="mt-6" />
             <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:gap-10">
               <div>
@@ -218,9 +218,9 @@ export default function Home() {
                   ))}
                 </ol>
                 <div className="reveal mt-6">
-                  <h3 className="font-serif text-2xl font-semibold">Request a class</h3>
+                  <h3 className="font-serif text-2xl font-semibold">Request a session</h3>
                   <p className="mt-2 max-w-lg text-[0.95rem] leading-relaxed text-ink/75">
-                    Classes run when there are enough requests for one. Pick the class you are interested in and leave your name and
+                    Sessions run when there are enough requests for one. Pick the session you are interested in and leave your name and
                     email, and I will write back with what is possible, when, and at what cost.
                   </p>
                 </div>

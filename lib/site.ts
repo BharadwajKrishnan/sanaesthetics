@@ -18,7 +18,7 @@ export const site = {
     { href: "/recipes", label: "Recipes" },
     { href: "/flavour-science", label: "Flavour Science" },
     { href: "/#culture", label: "Culture" },
-    { href: "/#classes", label: "Classes" },
+    { href: "/#sessions", label: "Sessions" },
     { href: "/about", label: "About Me" },
   ],
 };

@@ -30,7 +30,7 @@ export async function POST(request: Request) {
   if (cls && hasFormats(cls) && !format) {
     return Response.json({ error: "format" }, { status: 400 });
   }
-  // Optional on the classes form, passed on exactly as typed (spaces, "+" and all); "" when not given, so the sheet
+  // Optional on the sessions form, passed on exactly as typed (spaces, "+" and all); "" when not given, so the sheet
   // column is always filled. Only an absurd length is refused.
   const phone = list === "waitlist" && typeof body?.phone === "string" ? body.phone : "";
   if (phone.length > 64) {

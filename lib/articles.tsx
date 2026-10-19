@@ -144,7 +144,7 @@ function DecoctionBody() {
 
       <h2>Four things that can change your decoction</h2>
       <p>Even if you use exactly the same coffee blend, your decoction can taste different depending on how you brew it.</p>
-      {/* The four variables are the subject of the classes: shown blurred, with the invitation on top. */}
+      {/* The four variables are the subject of the sessions: shown blurred, with the invitation on top. */}
       <div className="relative mt-6 max-h-[34rem] overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none select-none blur-[5px]">
           {VARIABLES.map((v, i) => (
@@ -166,12 +166,12 @@ function DecoctionBody() {
           <aside className="w-full max-w-xl border-l-4 border-maroon bg-parchment p-6 shadow-xl shadow-ink/15 sm:p-8">
             <p className="text-left font-serif text-2xl font-semibold">Want to explore it further?</p>
             <p className="mt-3 leading-relaxed text-ink/85">
-              In my classes, we will look more closely at how grind size, the coffee-to-water ratio, water temperature and contact
+              In my sessions, we will look more closely at how grind size, the coffee-to-water ratio, water temperature and contact
               time influence the decoction — and how to adjust them to make a cup that suits your own taste.
             </p>
             <p className="mt-4">
-              <Link href="/#classes" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
-                See the classes
+              <Link href="/#sessions" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+                See the sessions
               </Link>
             </p>
           </aside>
@@ -342,7 +342,7 @@ function TemperingBody() {
       <p>So the order of tempering ingredients is not arbitrary. It is a practical way of exposing each ingredient to roughly the amount of heat it needs.</p>
 
       <h2>Why the order matters</h2>
-      {/* The order is the subject of the classes: shown blurred, with the invitation on top. */}
+      {/* The order is the subject of the sessions: shown blurred, with the invitation on top. */}
       <div className="relative mt-6 overflow-hidden">
         <ul aria-hidden="true" className="pointer-events-none grid select-none gap-8 bg-parchment px-6 py-10 blur-[5px] sm:px-8">
           {ORDER.map((item, i) => (
@@ -359,12 +359,12 @@ function TemperingBody() {
           <aside className="w-full max-w-xl border-l-4 border-maroon bg-cream p-6 shadow-xl shadow-ink/15 sm:p-8">
             <p className="text-left font-serif text-2xl font-semibold">Want to know why the order is important?</p>
             <p className="mt-3 leading-relaxed text-ink/85">
-              Live demo classes and online classes will show you exactly how: which ingredient goes in first, what to listen and look
+              Live demo sessions and online sessions will show you exactly how: which ingredient goes in first, what to listen and look
               for, and when the next one is ready to follow.
             </p>
             <p className="mt-4">
-              <Link href="/#classes" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
-                See the classes
+              <Link href="/#sessions" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+                See the sessions
               </Link>
             </p>
           </aside>
@@ -519,8 +519,8 @@ function SpicesBody() {
               We explore this together in my Flavour Science sessions — with real ingredients, tasting and simple experiments.
             </p>
             <p className="mt-4">
-              <Link href="/#classes" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
-                See the classes
+              <Link href="/#sessions" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+                See the sessions
               </Link>
             </p>
           </aside>
