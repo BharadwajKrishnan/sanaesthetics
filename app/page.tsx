@@ -113,17 +113,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Newsletter: one issue at a time, in a loop. Kept short on purpose; the issues speak for themselves. */}
-        <section id="newsletter" className={`${CONTAINER} pb-4 pt-2 sm:pb-6`}>
-          <div className="reveal relative overflow-hidden rounded-2xl border border-line/70 bg-parchment px-5 py-6 sm:px-8 sm:py-7">
-            <KolamCorner className="pointer-events-none absolute right-1 top-1 w-16 -scale-x-100 text-brass/35 sm:w-20" />
-            <KolamCorner className="pointer-events-none absolute bottom-1 left-1 w-16 -scale-y-100 text-brass/35 sm:w-20" />
-            <div className="relative">
-              <NewsletterTeaser issues={TEASERS} />
-            </div>
-          </div>
-        </section>
-
         {/* The flavour pyramid: how a South Indian dish is built, layer by layer */}
         <section id="pyramid" className={`${CONTAINER} ${SECTION}`}>
           <SectionHead
@@ -132,6 +121,17 @@ export default function Home() {
             lede="Six layers, from the kitchens we grew up in to the taste on the tongue. Pick a layer to see what lives there and what has been written about it so far."
           />
           <FlavourPyramid layers={PYRAMID} />
+        </section>
+
+        {/* Newsletter: one issue at a time, in a loop. Kept short on purpose; the issues speak for themselves. */}
+        <section id="newsletter" className={`${CONTAINER} pb-10 sm:pb-14`}>
+          <div className="reveal relative overflow-hidden rounded-2xl border border-line/70 bg-parchment px-5 py-6 sm:px-8 sm:py-7">
+            <KolamCorner className="pointer-events-none absolute right-1 top-1 w-16 -scale-x-100 text-brass/35 sm:w-20" />
+            <KolamCorner className="pointer-events-none absolute bottom-1 left-1 w-16 -scale-y-100 text-brass/35 sm:w-20" />
+            <div className="relative">
+              <NewsletterTeaser issues={TEASERS} />
+            </div>
+          </div>
         </section>
 
         {/* Culture: the six tastes, previewing issue 1 */}
