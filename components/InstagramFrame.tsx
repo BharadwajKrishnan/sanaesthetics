@@ -15,18 +15,16 @@ export function InstagramFrame({ src, title, tall }: { src: string; title: strin
   }
   return (
     <div className={`flex ${height} flex-col items-center justify-center gap-4 bg-parchment px-6 text-center`}>
-      <p className="max-w-xs text-[0.95rem] leading-relaxed text-ink/75">
-        This post is shown in a frame from Instagram. Loading it lets Meta see your IP address and set its own cookies.
-      </p>
+      <p className="max-w-xs text-[0.95rem] leading-relaxed text-ink/75">This post is embedded from Instagram and may set cookies.</p>
       <button
         type="button"
         onClick={() => setShown(true)}
         className="btn-sheen rounded-full bg-forest px-5 py-2 text-sm font-medium text-cream transition-colors hover:bg-forest-deep"
       >
-        Show this post
+        Show post
       </button>
       <button type="button" onClick={() => setConsent("all")} className="text-sm underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
-        Always show Instagram posts
+        Always show embedded posts
       </button>
     </div>
   );
