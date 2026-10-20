@@ -13,34 +13,31 @@ export function CookieNotice() {
   if (!ready || (choice !== null && !open)) return null;
   return (
     <section
-      aria-labelledby={`${id}-title`}
+      aria-label="Cookies"
       aria-describedby={`${id}-body`}
-      className="cookie-notice fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl rounded-2xl border border-line bg-cream p-5 shadow-xl shadow-ink/15 sm:inset-x-6 sm:bottom-6 sm:p-6"
+      className="cookie-notice fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-lg flex-wrap items-center gap-x-4 gap-y-2.5 rounded-xl border border-line bg-cream px-4 py-3 text-sm shadow-lg shadow-ink/15 sm:inset-x-6 sm:bottom-5 sm:flex-nowrap"
     >
-      <p id={`${id}-title`} className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-ink/60">
-        Cookies
+      <p id={`${id}-body`} className="basis-full text-left leading-snug text-ink/80 sm:min-w-0 sm:flex-1 sm:basis-auto">
+        Cookies are used only for embedded content.{" "}
+        <Link href="/privacy" className="whitespace-nowrap underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+          Privacy
+        </Link>
       </p>
-      <p id={`${id}-body`} className="mt-2 text-left text-[0.95rem] leading-relaxed text-ink/80">
-        Cookies are used only for embedded content. The rest of the site sets none.
-      </p>
-      <div className="mt-4 flex flex-wrap items-center gap-2.5">
+      <div className="flex shrink-0 items-center gap-2">
         <button
           type="button"
           onClick={() => setConsent("all")}
-          className="btn-sheen rounded-full bg-forest px-5 py-2 text-sm font-medium text-cream transition-colors hover:bg-forest-deep"
+          className="btn-sheen rounded-full bg-forest px-4 py-1.5 font-medium text-cream transition-colors hover:bg-forest-deep"
         >
           Accept
         </button>
         <button
           type="button"
           onClick={() => setConsent("essential")}
-          className="rounded-full border border-forest px-5 py-2 text-sm font-medium text-forest transition-colors hover:bg-forest hover:text-cream"
+          className="rounded-full border border-forest px-4 py-1.5 font-medium text-forest transition-colors hover:bg-forest hover:text-cream"
         >
           Essential only
         </button>
-        <Link href="/privacy" className="ml-auto text-sm underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
-          Privacy
-        </Link>
       </div>
     </section>
   );
