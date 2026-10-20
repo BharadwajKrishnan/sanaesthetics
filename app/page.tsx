@@ -221,8 +221,8 @@ export default function Home() {
                 <div className="reveal mt-6">
                   <h3 className="font-serif text-2xl font-semibold">Request a session</h3>
                   <p className="mt-2 max-w-lg text-[0.95rem] leading-relaxed text-ink/75">
-                    Sessions run when there are enough requests for one. Pick the session you are interested in and leave your name and
-                    email, and I will write back with what is possible, when, and at what cost.
+                    Ask, and we will set one up around you. Pick the session you are interested in and leave your name and email, and
+                    I will write back with what is possible, when, and at what cost.
                   </p>
                 </div>
               </div>
