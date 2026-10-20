@@ -15,9 +15,9 @@ export function CookieNotice() {
     <section
       aria-label="Cookies"
       aria-describedby={`${id}-body`}
-      className="cookie-notice fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-lg flex-wrap items-center gap-x-4 gap-y-2.5 rounded-xl border border-line bg-cream px-4 py-3 text-sm shadow-lg shadow-ink/15 sm:inset-x-6 sm:bottom-5 sm:flex-nowrap"
+      className="cookie-notice fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-2xl flex-wrap items-center gap-x-4 gap-y-2.5 rounded-xl border border-line bg-cream px-4 py-3 text-sm shadow-lg shadow-ink/15 sm:inset-x-6 sm:bottom-5 sm:flex-nowrap"
     >
-      <p id={`${id}-body`} className="basis-full text-left leading-snug text-ink/80 sm:min-w-0 sm:flex-1 sm:basis-auto">
+      <p id={`${id}-body`} className="basis-full text-left leading-snug text-ink/80 sm:flex-1 sm:basis-auto sm:whitespace-nowrap">
         Cookies are used only for embedded content.{" "}
         <Link href="/privacy" className="whitespace-nowrap underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
           Privacy
