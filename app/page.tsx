@@ -164,8 +164,9 @@ export default function Home() {
               <Eyebrow className="text-maroon">Recipes with a story</Eyebrow>
               <h2 className={`${H2} mt-3`}>From the kitchen, one post at a time.</h2>
               <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-ink/75">
-                The recipes start life on Instagram, with a note on why each ingredient was chosen. The written versions, with
-                quantities and the science, live on the Recipes page.
+                Each recipe comes with its story and the science of why every ingredient earns its place. The written versions,
+                with quantities and method, live on the Recipes page. Instagram has the cooking videos and whatever is on the
+                stove this week.
               </p>
               <p className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2 text-[0.95rem]">
                 <TextLink href="/recipes">Browse the written recipes</TextLink>
@@ -233,24 +234,24 @@ export default function Home() {
         </section>
 
         {/* About */}
-        <section id="about" className={`${CONTAINER} ${SECTION} grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12`}>
+        {/* About: kept smaller than the other sections; the full story is on the About page. */}
+        <section id="about" className={`${CONTAINER} grid gap-6 py-10 sm:py-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10`}>
           <div className="reveal">
             <Eyebrow className="text-maroon">About</Eyebrow>
-            <h2 className={`${H2} mt-3`}>A home cook&apos;s notebook, grown up.</h2>
-            <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-ink/75">
-              It started as a cook&apos;s notebook on Instagram: an Indian home cook in Germany, cooking vegetarian, baking on
-              weekends, planning menus for friends and waiting on the Indian grocery delivery. Every post carried a note on why
-              an ingredient was chosen. {site.name} is where those notes become recipes, stories and the science behind them.
+            <h2 className="mt-2 font-serif text-[clamp(1.5rem,2.4vw,2rem)] font-semibold leading-[1.1] text-balance">A home cook&apos;s notebook, grown up.</h2>
+            <p className="mt-3 max-w-lg text-[0.95rem] leading-relaxed text-ink/75">
+              It started as a cook&apos;s notebook on Instagram, kept by an Indian home cook in Germany. {site.name} is where those
+              notes become recipes, stories and the science behind them.
             </p>
-            <p className="mt-5">
+            <p className="mt-4 text-[0.95rem]">
               <TextLink href="/about">{`Meet ${site.author.split(" ")[0]}`}</TextLink>
             </p>
           </div>
           <div className="reveal" style={{ ["--d" as string]: "100ms" }}>
-            <p className="font-serif text-2xl font-semibold">Pull up a chair if this sounds like you.</p>
-            <ul className="mt-4 border-t border-line">
+            <p className="font-serif text-xl font-semibold">Pull up a chair if this sounds like you.</p>
+            <ul className="mt-3 border-t border-line">
               {AUDIENCE.map((line, i) => (
-                <li key={line} className="reveal flex items-baseline gap-3 border-b border-line py-3 text-[1rem] leading-snug" style={{ ["--d" as string]: `${i * 70}ms` }}>
+                <li key={line} className="reveal flex items-baseline gap-3 border-b border-line py-2.5 text-[0.95rem] leading-snug" style={{ ["--d" as string]: `${i * 70}ms` }}>
                   <span aria-hidden="true" className="inline-block h-1.5 w-1.5 shrink-0 -translate-y-0.5 rounded-full bg-maroon" />
                   {line}
                 </li>

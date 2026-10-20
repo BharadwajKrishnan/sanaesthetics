@@ -9,8 +9,12 @@ import type { PyramidLayer } from "@/lib/pyramid";
 // resolved, so this file never imports the article bodies. All six panels are in the page; the inactive
 // ones carry the `hidden` attribute, so every link is there for crawlers and for readers without JS.
 
-// Each layer's band is 13% of the width narrower than the one below it, so the sides form one straight line.
-const STEP = 13;
+// Each layer's band is 14% of the width narrower than the one below it, and the apex runs on to a point, so the
+// sides form one straight line from the foundation to the tip. The apex band is taller for the same reason: its base
+// is 30% wide, so closing it at the same slope takes 30/14 of a band's height.
+const STEP = 14;
+const BAND = "h-11 sm:h-12";
+const APEX = "h-[5.9rem] sm:h-[6.45rem]";
 
 function trapezoid(bottom: number, top: number) {
   return `polygon(${(100 - bottom) / 2}% 100%, ${(100 + bottom) / 2}% 100%, ${(100 + top) / 2}% 0, ${(100 - top) / 2}% 0)`;
@@ -39,8 +43,9 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
           {[...layers].reverse().map((layer) => {
             const i = layers.indexOf(layer);
             const on = active === i;
+            const apex = i === top;
             const bottom = 100 - STEP * i;
-            const clipPath = trapezoid(bottom, bottom - STEP);
+            const clipPath = trapezoid(bottom, apex ? 0 : bottom - STEP);
             return (
               <button
                 key={layer.id}
@@ -50,7 +55,7 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
                 onFocus={() => setActive(i)}
                 aria-pressed={on}
                 aria-controls={`pyramid-panel-${layer.n}`}
-                className={`relative grid h-11 w-full cursor-pointer grid-cols-[2.5rem_1fr] items-center sm:h-12 motion-safe:transition-transform motion-safe:duration-300 ${
+                className={`relative grid w-full cursor-pointer grid-cols-[2.5rem_1fr] items-center motion-safe:transition-transform motion-safe:duration-300 ${apex ? APEX : BAND} ${
                   on ? "translate-x-1.5" : ""
                 }`}
               >
@@ -65,10 +70,11 @@ export function FlavourPyramid({ layers }: { layers: PyramidLayer[] }) {
                   <Chevron className={`transition-opacity ${on ? "" : "opacity-40"}`} />
                   {String(layer.n).padStart(2, "0")}
                 </span>
-                <span className="relative flex items-center justify-center">
+                {/* The apex label sits low in the triangle, where it is wide enough to hold the word. */}
+                <span className={`relative flex justify-center ${apex ? "h-full items-end pb-3 sm:pb-3.5" : "items-center"}`}>
                   <span
                     className={`text-balance text-center text-[0.62rem] font-semibold uppercase leading-tight tracking-[0.14em] sm:text-[0.78rem] ${layer.tone.fg}`}
-                    style={{ width: `${bottom - STEP / 2}%` }}
+                    style={{ width: `${apex ? bottom * 0.8 : bottom - STEP / 2}%` }}
                   >
                     {layer.title}
                   </span>

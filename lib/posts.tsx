@@ -205,7 +205,7 @@ function AnjarapettiBody() {
       </dl>
       <p>And, of course, tempering does not stop with what is inside the box.</p>
       <p>
-        Curry leaves, dried red chillies and hing (asafoetida) are three ingredients I often reach for as well. They bring their own
+        <strong>Curry leaves</strong>, <strong>dried red chillies</strong> and <strong>hing</strong> (asafoetida) are three ingredients I often reach for as well. They bring their own
         powerful aromas and can completely change the character of a dish.
       </p>
 
@@ -278,9 +278,6 @@ const BOARD_TAGS: PhotoTag[] = [
   { label: "Black cardamom", at: { left: 62, top: 82 }, text: { left: 78, top: 74 } },
 ];
 
-const SIDE_BOX = "mt-10 md:float-right md:mb-2 md:ml-8 md:mt-2 md:w-72 lg:float-none lg:mb-0 lg:ml-0 lg:mt-10 lg:w-auto xl:float-right xl:mb-2 xl:ml-8 xl:mt-2 xl:w-72";
-const WRAPPED = "md:text-left lg:text-justify xl:text-left";
-
 function BeyondTheBasicsBody() {
   return (
     <>
@@ -310,9 +307,11 @@ function BeyondTheBasicsBody() {
         And then there are a few ingredients that sit elsewhere in my pantry but come out when a dish needs something a little
         special.
       </p>
-      <p>Saffron brings colour, aroma and a delicate floral character, especially to sweets and festive dishes.</p>
       <p>
-        Cashews are much more familiar in South Indian cooking than saffron. I use them in sweets, payasam, festive rice dishes and
+        <strong>Saffron</strong> brings colour, aroma and a delicate floral character, especially to sweets and festive dishes.
+      </p>
+      <p>
+        <strong>Cashews</strong> are much more familiar in South Indian cooking than saffron. I use them in sweets, payasam, festive rice dishes and
         sometimes in savoury preparations where they add richness and texture.
       </p>
       <p className="font-serif text-2xl font-medium">What I find interesting about whole spices is that they never behave in exactly the same way.</p>
@@ -328,10 +327,16 @@ function BeyondTheBasicsBody() {
         has its own science surprisingly!
       </p>
 
-      {/* The Chettinad story, boxed at the side as the author asked. Where the column is wide enough (md, and again
-          from xl once the cover sits beside the text) it floats right and the closing paragraphs wrap around it,
-          set ragged so the narrow measure does not open rivers. Elsewhere it is a full-width box. */}
-      <aside className={`${SIDE_BOX} border-l-4 border-maroon bg-parchment p-6 text-left`}>
+      <p>
+        This is also why I find Chettinad cooking so fascinating. The cuisine shows beautifully how whole spices, freshly ground
+        masalas and careful roasting can build flavour in layers rather than all at once.
+      </p>
+      <p>
+        <RecipeLink slug="chettinad-urulai-roast">Chettinad potato roast</RecipeLink> and vegetable kurma are two dishes I keep coming back to — easy enough for everyday cooking, but
+        special enough to serve when I have people over 🙂
+      </p>
+      {/* The Chettinad story, boxed, after the closing paragraph as the author asked. */}
+      <aside className="mt-10 border-l-4 border-maroon bg-parchment p-6">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-maroon">On the side</p>
         <p className="mt-3 font-serif text-2xl font-semibold text-ink">The Chettinad story</p>
         <p className="mt-3 text-base leading-relaxed text-ink/80">
@@ -347,15 +352,6 @@ function BeyondTheBasicsBody() {
           the techniques behind them — roasting, grinding, tempering and layering spices to build depth and aroma.
         </p>
       </aside>
-      <p className={WRAPPED}>
-        This is also why I find Chettinad cooking so fascinating. The cuisine shows beautifully how whole spices, freshly ground
-        masalas and careful roasting can build flavour in layers rather than all at once.
-      </p>
-      <p className={WRAPPED}>
-        <RecipeLink slug="chettinad-urulai-roast">Chettinad potato roast</RecipeLink> and vegetable kurma are two dishes I keep coming back to — easy enough for everyday cooking, but
-        special enough to serve when I have people over 🙂
-      </p>
-      <div className="clear-both" />
     </>
   );
 }
