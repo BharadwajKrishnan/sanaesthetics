@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: { ...openGraphShared, title: "Privacy", description: `How ${site.name} handles your details.`, url: "/privacy", type: "website" },
 };
 
-const UPDATED = "16 October 2026";
+const UPDATED = "20 October 2026";
 
 const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
   {
@@ -73,8 +73,18 @@ const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
     title: "Cookies, analytics and fonts",
     body: [
       <>
-        The site sets no cookies of its own and runs no analytics or tracking. Fonts are served from the site itself, so reading a page
-        does not call out to a font service.
+        The site sets no cookies of its own. The one thing it remembers about you is the answer you give in the cookie notice, which is
+        kept in your browser&apos;s local storage, read only by this site and never sent anywhere. Fonts are served from the site itself,
+        so reading a page does not call out to a font service.
+      </>,
+      <>
+        Visits are counted with{" "}
+        <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer" className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+          Vercel Web Analytics
+        </a>
+        , which uses no cookies and builds no profile of you. It records the page viewed, the page that linked to it, your country, and
+        the kind of browser and device, and it tells one visit from the next with a short-lived hash that is discarded daily. Your IP
+        address is not stored.
       </>,
     ],
   },
@@ -82,12 +92,14 @@ const SECTIONS: { title: string; body: React.ReactNode[] }[] = [
     title: "Embedded Instagram posts",
     body: [
       <>
-        The Recipes section on the home page shows a few Instagram posts in embedded frames. They load from instagram.com as you scroll
-        to them, and at that point Meta can see your IP address and may set its own cookies, as described in{" "}
+        The Recipes section on the home page shows a few Instagram posts in embedded frames. They load from instagram.com only once
+        you allow it, either in the cookie notice on your first visit or with the button shown in a post&apos;s place. Until then nothing
+        is fetched from Meta. Once a post loads, Meta can see your IP address and may set its own cookies, as described in{" "}
         <a href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener noreferrer" className="underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
           Instagram&apos;s privacy policy
         </a>
-        . Nothing else on the site loads from a third party.
+        . You can change your answer at any time with &ldquo;Cookie settings&rdquo; at the foot of every page. Nothing else on the site
+        loads from a third party.
       </>,
     ],
   },
@@ -111,8 +123,8 @@ export default function Privacy() {
           <Eyebrow className="text-maroon">Privacy</Eyebrow>
           <h1 className={`mt-3 ${H1}`}>What this site keeps, and why.</h1>
           <p className="mt-4 text-[1.0625rem] leading-relaxed text-ink/80">
-            The short version: if you sign up, your name and email address go on a list so that the newsletter can reach you. Nothing
-            else is collected, and one email is enough to be taken off again.
+            The short version: if you sign up, your name and email address go on a list so that the newsletter can reach you. Visits are
+            counted without cookies, nothing else is collected, and one email is enough to be taken off again.
           </p>
           <p className="mt-2 text-sm text-ink/60">Last updated {UPDATED}.</p>
           </div>

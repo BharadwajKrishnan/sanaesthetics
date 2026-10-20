@@ -469,6 +469,19 @@ html.no-js .draw path {
   }
 }
 
+/* ---------- Cookie notice ---------- */
+
+.cookie-notice {
+  animation: notice-in 420ms var(--ease-out-soft) both;
+}
+
+@keyframes notice-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -500,7 +513,8 @@ html.no-js .draw path {
   .hero-fade,
   .swap-in,
   details[open] > .menu-panel,
-  details[open] > .menu-panel > * {
+  details[open] > .menu-panel > *,
+  .cookie-notice {
     animation: none;
     opacity: 1;
     transform: none;

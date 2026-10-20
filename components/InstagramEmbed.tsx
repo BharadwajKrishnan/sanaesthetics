@@ -1,4 +1,5 @@
 import type { InstagramItem } from "@/lib/instagram";
+import { InstagramFrame } from "@/components/InstagramFrame";
 
 export function InstagramEmbed({ item }: { item: InstagramItem }) {
   const url = `https://www.instagram.com/${item.kind === "reel" ? "reel" : "p"}/${item.id}/`;
@@ -8,13 +9,7 @@ export function InstagramEmbed({ item }: { item: InstagramItem }) {
         {item.src ? (
           <video src={item.src} controls playsInline preload="metadata" className="block aspect-[9/16] w-full bg-umber object-cover" />
         ) : (
-          <iframe
-            src={`${url}embed/`}
-            title={`${item.title} on Instagram`}
-            loading="lazy"
-            allow="encrypted-media; picture-in-picture; fullscreen"
-            className={`block w-full ${item.kind === "reel" ? "h-[600px]" : "h-[500px]"}`}
-          />
+          <InstagramFrame src={`${url}embed/`} title={`${item.title} on Instagram`} tall={item.kind === "reel"} />
         )}
       </div>
       <figcaption className="flex flex-1 flex-col px-4 pb-4 pt-3.5">

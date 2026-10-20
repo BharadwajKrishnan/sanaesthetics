@@ -24,8 +24,9 @@ Then open http://localhost:3000. `npm run build` makes the production build and 
 - `lib/instagram.ts`: the reels and posts shown under "Recipes with a story". Add a line to feature another one.
 - `components/SixTastes.tsx`: the interactive six tastes on the homepage. `components/Zoomable.tsx` makes photos enlargeable; `components/ArticlePage.tsx` is the long-form layout shared by issues and articles; `components/Kolam.tsx` holds the ornaments.
 - `components/SignupForm.tsx`: the form used for the newsletter and for session requests.
+- `lib/consent.ts`, `components/CookieNotice.tsx`, `components/InstagramFrame.tsx`: the cookie notice. The site sets no cookies and its analytics (Vercel Web Analytics, added in `app/layout.tsx`) are cookieless, so the notice only asks whether the Instagram embeds may load from Meta. The answer lives in local storage; "Cookie settings" in the footer reopens the notice, and an unloaded post can be shown on its own with the button in its place.
 - `lib/signups.ts`, `app/api/signup/`: the signup flow described below.
-- `next.config.ts`: image quality and the `/blog` to `/newsletter` redirects.
+- `next.config.ts`: image quality, security headers and the `/blog` to `/newsletter` redirects.
 
 ## Signups and session requests
 

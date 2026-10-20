@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Arrow } from "@/components/Icons";
+import { CookieSettingsButton } from "@/components/CookieNotice";
 import { KolamBorder, KolamKnot } from "@/components/Kolam";
 import { MobileMenu } from "@/components/MobileMenu";
 import { site } from "@/lib/site";
@@ -189,6 +190,8 @@ export function SiteFooter() {
             <Link href="/privacy" className="link-grow hover:text-cream">
               Privacy
             </Link>
+            <span aria-hidden="true"> · </span>
+            <CookieSettingsButton className="link-grow cursor-pointer hover:text-cream" />
           </span>
           <span>{site.domain}</span>
         </p>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Anek_Tamil, Caveat, Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { CookieNotice } from "@/components/CookieNotice";
 import { RevealObserver } from "@/components/Reveal";
 import { ScrollToHash } from "@/components/ScrollToHash";
 import { site } from "@/lib/site";
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <RevealObserver />
         <ScrollToHash />
         {children}
+        <CookieNotice />
         <Analytics />
       </body>
     </html>
