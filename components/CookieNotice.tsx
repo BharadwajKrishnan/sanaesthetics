@@ -6,7 +6,8 @@ import { openConsent, setConsent, useConsent } from "@/lib/consent";
 
 // The notice shown on a first visit, and again from the footer's "Cookie settings". It asks one thing: whether
 // embedded content (the Instagram posts on the home page) may load and set its cookies. Everything else on the
-// site works without a choice; the privacy page carries the details.
+// site works without a choice; the privacy page carries the details. The sentence never wraps: on phones its
+// type shrinks with the viewport so that it still fits on one line.
 export function CookieNotice() {
   const id = useId();
   const { ready, choice, open } = useConsent();
@@ -15,15 +16,15 @@ export function CookieNotice() {
     <section
       aria-label="Cookies"
       aria-describedby={`${id}-body`}
-      className="cookie-notice fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-2xl flex-wrap items-center gap-x-4 gap-y-2.5 rounded-xl border border-line bg-cream px-4 py-3 text-sm shadow-lg shadow-ink/15 sm:inset-x-6 sm:bottom-5 sm:flex-nowrap"
+      className="cookie-notice fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-2xl flex-wrap items-center gap-x-4 gap-y-2.5 rounded-xl border border-line bg-cream px-3 py-3 text-[clamp(0.6rem,4vw_-_3px,0.875rem)] shadow-lg sm:px-4 sm:text-sm shadow-ink/15 sm:inset-x-6 sm:bottom-5 sm:flex-nowrap"
     >
-      <p id={`${id}-body`} className="basis-full text-left leading-snug text-ink/80 sm:flex-1 sm:basis-auto sm:whitespace-nowrap">
+      <p id={`${id}-body`} className="basis-full whitespace-nowrap text-left leading-snug text-ink/80 sm:flex-1 sm:basis-auto">
         Cookies are used only for embedded content.{" "}
         <Link href="/privacy" className="whitespace-nowrap underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
           Privacy
         </Link>
       </p>
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex shrink-0 items-center gap-2 text-[0.8rem] sm:text-sm">
         <button
           type="button"
           onClick={() => setConsent("all")}
