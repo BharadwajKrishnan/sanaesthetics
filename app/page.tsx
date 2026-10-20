@@ -165,8 +165,8 @@ export default function Home() {
               <h2 className={`${H2} mt-3`}>From the kitchen, one post at a time.</h2>
               <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-ink/75">
                 Each recipe comes with its story and the science of why every ingredient earns its place. The written versions,
-                with quantities and method, live on the Recipes page. Instagram has the cooking videos and whatever is on the
-                stove this week.
+                with quantities and method, live on the Recipes page. Instagram is where I cook for the pleasure of it, in
+                pictures and short videos. If that is your kind of thing, come and have a look.
               </p>
               <p className="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2 text-[0.95rem]">
                 <TextLink href="/recipes">Browse the written recipes</TextLink>
