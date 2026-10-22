@@ -7,6 +7,7 @@ import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { KolamCorner } from "@/components/Kolam";
 import { NewsletterTeaser } from "@/components/NewsletterTeaser";
 import { SignupForm } from "@/components/SignupForm";
+import { SubscribeLink } from "@/components/SubscribeLink";
 import { FlavourPyramid } from "@/components/FlavourPyramid";
 import { CONTAINER, Eyebrow, H2, PRIMARY, SECTION, SectionHead, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { SixTastes } from "@/components/SixTastes";
@@ -150,9 +151,9 @@ export default function Home() {
               <TextLink {...issue1} className="text-cream decoration-cream/40 hover:decoration-cream">
                 Read issue 1 in full
               </TextLink>
-              <Link href="#subscribe" className="link-grow font-medium text-cream/85 hover:text-cream">
+              <SubscribeLink className="link-grow font-medium text-cream/85 hover:text-cream">
                 Subscribe to the newsletter
-              </Link>
+              </SubscribeLink>
             </div>
           </div>
         </section>

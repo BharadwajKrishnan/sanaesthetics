@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Arrow } from "@/components/Icons";
 import { Eyebrow } from "@/components/SiteChrome";
+import { SubscribeLink } from "@/components/SubscribeLink";
 
 // A short teaser for one newsletter issue at a time, moving on to the next every few seconds
 // and starting over after the last. Issues come in as plain data so the homepage (a server
@@ -132,9 +133,9 @@ export function NewsletterTeaser({ issues }: { issues: TeaserIssue[] }) {
           <Link href="/newsletter" className="link-grow font-medium text-ink/80 hover:text-ink">
             All issues
           </Link>
-          <Link href="#subscribe" className="link-grow font-medium text-ink/80 hover:text-ink">
+          <SubscribeLink className="link-grow font-medium text-ink/80 hover:text-ink">
             Subscribe
-          </Link>
+          </SubscribeLink>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { Arrow } from "@/components/Icons";
 import { CookieSettingsButton } from "@/components/CookieNotice";
 import { KolamBorder, KolamKnot } from "@/components/Kolam";
 import { MobileMenu } from "@/components/MobileMenu";
+import { SubscribeLink } from "@/components/SubscribeLink";
 import { site } from "@/lib/site";
 
 // Shared widths and spacing, so every page lines up and no section runs long.
@@ -123,9 +124,9 @@ export function SiteHeader({ current }: { current: string }) {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <Link href="/#subscribe" className={`${PRIMARY} hidden bg-forest px-4 py-2 text-sm text-cream hover:bg-forest-deep sm:inline-flex`}>
+            <SubscribeLink className={`${PRIMARY} hidden bg-forest px-4 py-2 text-sm text-cream hover:bg-forest-deep sm:inline-flex`}>
               Subscribe
-            </Link>
+            </SubscribeLink>
             <MobileMenu />
           </div>
         </div>
@@ -175,9 +176,9 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <Link href="/#subscribe" className="link-grow text-cream/85 hover:text-cream">
+              <SubscribeLink className="link-grow text-cream/85 hover:text-cream">
                 Newsletter
-              </Link>
+              </SubscribeLink>
             </li>
           </ul>
         </div>

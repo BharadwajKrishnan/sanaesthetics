@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
+import { SubscribeLink } from "@/components/SubscribeLink";
 import { site } from "@/lib/site";
 
 // Small-screen menu. A <details> works without JavaScript; the script only closes it after a link is tapped.
@@ -33,14 +34,13 @@ export function MobileMenu() {
             </span>
           </Link>
         ))}
-        <Link
-          href="/#subscribe"
+        <SubscribeLink
           onClick={close}
           style={{ ["--i" as string]: site.nav.length }}
           className="mt-4 flex justify-center rounded-full bg-forest px-4 py-2.5 font-medium text-cream hover:bg-forest-deep sm:hidden"
         >
           Subscribe
-        </Link>
+        </SubscribeLink>
       </nav>
     </details>
   );
