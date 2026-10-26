@@ -356,6 +356,65 @@ function BeyondTheBasicsBody() {
   );
 }
 
+const OILS = [
+  { name: "Coconut oil", note: "distinctly aromatic, rich and very recognisable. It gives dishes a strong regional character and works especially well in Kerala-style cooking, stir-fries and dishes where you actually want to taste the oil itself." },
+  { name: "Sesame oil", note: "deep, nutty and slightly earthy. It has a bold flavour, so it becomes part of the dish rather than staying in the background. I especially associate it with kuzhambu, pickles and many Tamil-style preparations." },
+  { name: "Groundnut oil", note: "mild, slightly nutty and rounded. It works well for everyday cooking because it supports the spices without overpowering them, and it is very comfortable for frying, roasting and sautéing." },
+  { name: "Rapeseed oil", note: "much more neutral in flavour, especially in its refined form. I use it when I want the ingredients, spices and tempering to stand out more than the oil itself." },
+  { name: "Ghee", note: "technically not an oil, but clarified butterfat. It is rich, buttery and deeply aromatic, bringing warmth and a fuller mouthfeel. I especially associate it with pongal, sweets, festive dishes and finishing a dish just before serving." },
+];
+
+// Issue 4's cover is Sandhya's drawing of the six oils in a row, shown whole.
+const OILS_PICTURE = "/images/oils-i-reach-for.webp";
+const OILS_ALT =
+  "A row of drawn jars and bottles, each labelled: coconut oil beside a halved coconut, sesame oil with a bowl of seeds, groundnut oil with peanuts, rapeseed oil with yellow flowers, ghee in a jar with a spoon, and olive oil with a sprig of olives";
+
+function OilsBody() {
+  return (
+    <>
+      <p>
+        Just like my{" "}
+        <a {...issueLink("inside-the-anjarapetti")} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          anjarapetti
+        </a>{" "}
+        has five to seven compartments, I also have a small collection of oils that my hands automatically reach for whenever I
+        start cooking — whether it is something quick or something that needs a little more time.
+      </p>
+      <p>The oil I choose does not really depend on what happens to be available. It depends almost entirely on what I am going to cook.</p>
+      <p>
+        For me, certain oils are closely connected to certain dishes. Sometimes it is because of the flavour, sometimes because that
+        is simply how I grew up eating it, and sometimes because tradition has taught us that a particular oil belongs there.
+      </p>
+      <p className="font-serif text-2xl font-medium">Oil may often be almost invisible on the plate, but in some dishes, it quietly plays the main character.</p>
+
+      <h2>The oils you will usually find in my cupboard</h2>
+      <dl className="mt-6 divide-y divide-line border-y border-line">
+        {OILS.map((row) => (
+          <div key={row.name} className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-5">
+            <dt className="font-serif text-xl font-semibold text-maroon">{row.name}</dt>
+            <dd className="leading-relaxed text-ink/80">{row.note}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>And because my kitchen does not stop with South Indian cooking, you will also find a bottle of olive oil somewhere in there 😉.</p>
+      <p>
+        What I find interesting is that each of these brings something completely different to the food — its own aroma, richness,
+        mouthfeel and character.
+      </p>
+      <p className="font-serif text-2xl font-medium">And sometimes, changing just the oil can make a familiar dish feel like a completely different one.</p>
+
+      <h2>So where does the oil really make a difference?</h2>
+      <p>
+        One of the clearest examples in my kitchen is <strong>vathakuzhambu</strong>. For me, sesame oil is not optional here — its
+        deep, nutty character becomes part of the flavour of the kuzhambu itself.
+      </p>
+      <p>
+        You can find my recipe here: <RecipeLink slug="vathakuzhambu">Vathakuzhambu →</RecipeLink>
+      </p>
+    </>
+  );
+}
+
 export const posts: Post[] = [
   {
     slug: "arusuvai-where-tradition-meets-taste",
@@ -414,6 +473,22 @@ export const posts: Post[] = [
     Cover: WholeSpices,
     readingTime: "3 min read",
     Body: BeyondTheBasicsBody,
+  },
+  {
+    slug: "oils-i-reach-for",
+    title: "Oils I Reach For",
+    eyebrow: "Issue 4",
+    excerpt:
+      "Coconut, sesame, groundnut, rapeseed and ghee, with a bottle of olive oil at the back: the oils in Sandhya's cupboard, the dishes each one belongs to, and why vathakuzhambu is not vathakuzhambu without sesame oil.",
+    teaser:
+      "Five bottles and a jar of ghee, and the dish decides which one comes out. When does an oil stop being what you cook in and become what you taste?",
+    cover: OILS_PICTURE,
+    coverAlt: OILS_ALT,
+    coverAspect: "aspect-[16/9]",
+    // The first three oils, close to square, so the drawing reads at teaser size.
+    teaserPicture: { src: "/images/oils-i-reach-for-teaser.webp", alt: "Drawn jars and bottles of coconut oil, sesame oil and groundnut oil, each with its seed or nut beside it", width: 780, height: 690 },
+    readingTime: "3 min read",
+    Body: OilsBody,
   },
 ];
 
