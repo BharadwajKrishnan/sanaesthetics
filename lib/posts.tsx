@@ -1,11 +1,10 @@
 import Image from "next/image";
-import Link from "next/link";
 import { HeroGarnish, PhotoTags, WholeSpices, type PhotoTag } from "@/components/Artwork";
 import { Zoomable } from "@/components/Zoomable";
 import { articleLink } from "@/lib/articles";
 import { Dabba } from "@/components/BrassDabba";
 import { photos } from "@/lib/photos";
-import { recipePath } from "@/lib/recipes";
+import { recipeLink } from "@/lib/recipes";
 
 // Newsletter issues, oldest first. Add one at the end and it gets its own page at /newsletter/<slug>.
 
@@ -41,9 +40,9 @@ const SCIENCE = [
 
 function RecipeLink({ slug, children }: { slug: string; children: string }) {
   return (
-    <Link href={recipePath(slug)} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+    <a {...recipeLink(slug)} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
       {children}
-    </Link>
+    </a>
   );
 }
 

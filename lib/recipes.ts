@@ -204,3 +204,8 @@ export function getRecipe(slug: string) {
 export function recipePath(slug: string) {
   return `/recipes/${slug}`;
 }
+
+// A recipe linked from inside an issue or article opens in a new tab, like the issues themselves. Spread this onto the link.
+export function recipeLink(slug: string) {
+  return { href: recipePath(slug), target: "_blank", rel: "noopener" } as const;
+}
