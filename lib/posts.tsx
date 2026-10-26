@@ -379,14 +379,14 @@ function OilsBody() {
         has five to seven compartments, I also have a small collection of oils that my hands automatically reach for whenever I
         start cooking — whether it is something quick or something that needs a little more time.
       </p>
-      <p>The oil I choose does not really depend on what happens to be available. It depends almost entirely on what I am going to cook.</p>
+      <p>The oil I choose does not really depend on what happens to be available. It depends almost entirely on <strong>what I am going to cook</strong>.</p>
       <p>
         For me, certain oils are closely connected to certain dishes. Sometimes it is because of the flavour, sometimes because that
         is simply how I grew up eating it, and sometimes because tradition has taught us that a particular oil belongs there.
       </p>
       <p className="font-serif text-2xl font-medium">Oil may often be almost invisible on the plate, but in some dishes, it quietly plays the main character.</p>
 
-      <h2>The oils you will usually find in my cupboard</h2>
+      <p>The oils you will usually find in my cupboard are:</p>
       <dl className="mt-6 divide-y divide-line border-y border-line">
         {OILS.map((row) => (
           <div key={row.name} className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr] sm:gap-5">
@@ -395,7 +395,7 @@ function OilsBody() {
           </div>
         ))}
       </dl>
-      <p>And because my kitchen does not stop with South Indian cooking, you will also find a bottle of olive oil somewhere in there 😉.</p>
+      <p>And because my kitchen does not stop with South Indian cooking, you will also find a bottle of <strong>olive oil</strong> somewhere in there 😉.</p>
       <p>
         What I find interesting is that each of these brings something completely different to the food — its own aroma, richness,
         mouthfeel and character.
@@ -404,11 +404,14 @@ function OilsBody() {
 
       <h2>So where does the oil really make a difference?</h2>
       <p>
-        One of the clearest examples in my kitchen is <strong>vathakuzhambu</strong>. For me, sesame oil is not optional here — its
+        One of the clearest examples in my kitchen is <strong>Vathakuzhambu</strong>. For me, sesame oil is not optional here — its
         deep, nutty character becomes part of the flavour of the kuzhambu itself.
       </p>
       <p>
-        You can find my recipe here: <RecipeLink slug="vathakuzhambu">Vathakuzhambu →</RecipeLink>
+        You can find my recipe here:{" "}
+        <a {...recipeLink("vathakuzhambu")} className="font-semibold text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          Vathakuzhambu →
+        </a>
       </p>
     </>
   );
