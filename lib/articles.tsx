@@ -537,6 +537,159 @@ function SpicesBody() {
   );
 }
 
+const OIL_DOES = ["transfer heat", "extract and carry aroma compounds", "change mouthfeel", "help flavour spread through a dish"];
+const FAT_FEELS = ["smoother", "richer", "more coating on the palate", "more full-bodied"];
+const STABILITY = ["fatty-acid composition", "degree of refining", "natural antioxidants", "heating time", "repeated use"];
+
+// The same tempering in four fats. The subject of the sessions, so shown blurred, as the author asked in her comment.
+const SAME_SPICES = [
+  { fat: "In a neutral refined oil", what: "the mustard, chilli and curry leaves may dominate." },
+  { fat: "In sesame oil", what: "the oil contributes its own deep, characteristic flavour." },
+  { fat: "In coconut oil", what: "the coconut aroma becomes part of the final profile." },
+  { fat: "With ghee", what: "buttery and cooked-milk aromas add another layer." },
+];
+
+const FAT_PICTURE = "/images/fat-carries-flavour.webp";
+const FAT_ALT =
+  "Six drawn panels on how fat carries flavour: fat-soluble aroma compounds such as terpenes, phenolics and aldehydes; aroma molecules dissolving inside an oil droplet; heat releasing aroma compounds into the oil during tempering; hydrophobic molecules that dissolve in oil but not in water; oil carrying flavour molecules through a dish; and oil forming a thin coating on the tongue that feels smoother, richer and more full-bodied";
+
+function PlainList({ items }: { items: string[] }) {
+  return (
+    <ul className="my-6 grid gap-2 sm:grid-cols-2">
+      {items.map((item) => (
+        <li key={item} className="flex items-baseline gap-3 font-serif text-xl font-medium text-ink">
+          <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-brass" />
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function FatBody() {
+  return (
+    <>
+      <p className="font-serif text-2xl font-medium italic text-maroon">How oils shape aroma, texture and the way we experience food</p>
+      <p>Oil and Indian cooking are almost inseparable.</p>
+      <p>
+        In South Indian cooking especially,{" "}
+        <a href="/newsletter/oils-i-reach-for" target="_blank" rel="noopener" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          the fat we choose
+        </a>{" "}
+        is often more than a cooking medium. Sesame oil in a kuzhambu, coconut oil in a Kerala-style preparation or ghee over hot pongal
+        can completely change the character of a dish.
+      </p>
+      <p>
+        The fat we choose — and the way we use it — influences <strong>aroma, texture, heat transfer and flavour perception</strong>.
+      </p>
+      <p className="font-serif text-2xl font-medium text-ink">So what exactly is happening?</p>
+      <p>Oil can do several things at once:</p>
+      <PlainList items={OIL_DOES} />
+      <p>
+        This is especially clear during{" "}
+        <a {...articleLink("when-ingredients-meet-heat")} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+          tempering
+        </a>
+        .
+      </p>
+      <p>Many aroma molecules do not behave equally well in water and fat.</p>
+      <p>
+        Some are relatively <strong>hydrophobic</strong>, meaning they interact more readily with fats than with water. When they dissolve
+        into the fat phase, oil can help distribute them through the dish.
+      </p>
+      <p>This is one reason a small quantity of spices heated in oil can influence an entire pot of food.</p>
+      <p>
+        But fat does not simply make every aroma stronger. It can also affect <strong>how and when aroma compounds are released</strong>{" "}
+        while we eat.
+      </p>
+      <p>
+        So rather than thinking of fat only as an amplifier, it is useful to think of it as part of the <strong>flavour-delivery system</strong>.
+      </p>
+
+      <h2>Flavour is more than taste</h2>
+      <p>Our tongue detects basic tastes, but much of what we casually call “taste” is actually aroma perceived through the nose.</p>
+      <p>Fat can influence that experience by interacting with aromatic molecules and changing how they are released.</p>
+      <p>
+        That is why changing the fat in a familiar dish can make it feel surprisingly different — even when the spice mixture remains the
+        same.
+      </p>
+      <figure>
+        <div className="relative">
+          <Image src={FAT_PICTURE} alt={FAT_ALT} width={1536} height={1024} quality={90} sizes="(min-width: 1024px) 48rem, 90vw" className="w-full rounded-sm" />
+          <Zoomable src={FAT_PICTURE} alt={FAT_ALT} />
+        </div>
+      </figure>
+
+      <h2>Fat changes mouthfeel too</h2>
+      <p>Fat can make food feel:</p>
+      <PlainList items={FAT_FEELS} />
+      <p>That coating effect can also change how long flavours seem to linger in the mouth.</p>
+      <p>
+        A dish cooked with ghee therefore does not feel the same as one cooked with a neutral oil, even before we consider the aroma of the
+        ghee itself.
+      </p>
+
+      <h2>The same spices, a different oil</h2>
+      {/* Blurred, as the author asked in her comment on this section: what the fats do to the same tempering is for the sessions. */}
+      <div className="relative mt-6 overflow-hidden">
+        <div aria-hidden="true" className="pointer-events-none select-none space-y-5 bg-parchment px-6 py-8 text-base leading-relaxed blur-[5px] sm:px-8">
+          <p>Imagine the same basic tempering added to different fats.</p>
+          <ul className="grid gap-3">
+            {SAME_SPICES.map((row) => (
+              <li key={row.fat}>
+                <strong className="text-maroon">{row.fat}</strong>, {row.what}
+              </li>
+            ))}
+          </ul>
+          <p>The spices may be similar, but the flavour background has changed.</p>
+          <p className="font-serif text-2xl font-medium text-ink">So choosing an oil is already a flavour decision.</p>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center p-4">
+          <aside className="w-full max-w-xl rounded-r-xl border-l-4 border-maroon bg-cream p-6 shadow-xl shadow-ink/15 sm:p-8">
+            <p className="text-left font-serif text-2xl font-semibold">Want to taste the difference?</p>
+            <p className="mt-3 leading-relaxed text-ink/85">
+              In my sessions, we add the same tempering to different fats and taste them side by side — and see how the oil alone changes
+              the whole dish.
+            </p>
+            <p className="mt-4">
+              <Link href="/#sessions" className="font-medium text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+                See the sessions
+              </Link>
+            </p>
+          </aside>
+        </div>
+      </div>
+
+      <h2>And what about heat?</h2>
+      <p>Different fats behave differently when heated.</p>
+      <p>The cooking method and the oil itself both matter.</p>
+      <p>
+        The <strong>smoke point</strong> tells us when visible smoke begins to appear, but it does not tell us everything about how an oil
+        behaves during cooking.
+      </p>
+      <p>Its stability also depends on factors such as:</p>
+      <PlainList items={STABILITY} />
+      <p>An oil can begin undergoing chemical changes before visible smoke appears, so:</p>
+      <p className="font-serif text-2xl font-semibold text-maroon">higher smoke point ≠ automatically better oil</p>
+
+      <h2>Traditional oils and modern kitchens</h2>
+      <p>An unrefined oil usually retains more of its natural aroma and flavour.</p>
+      <p>
+        A refined oil is generally milder, and its behaviour during cooking can differ because some compounds are removed or altered during
+        processing.
+      </p>
+      <p>For me, choosing an oil is not about labelling one traditional oil as “good” and another as “bad”.</p>
+      <p>
+        It is about understanding <strong>what the oil contributes, how it is processed, how it behaves during cooking and how much of it we use</strong>.
+      </p>
+      <p>It may look like one of the quietest ingredients in the pan, but chemically and sensorially, they can shape the entire dish.</p>
+      <p className="font-serif text-2xl font-semibold text-ink">
+        Oil is not just where the cooking happens. Sometimes, it is part of the flavour architecture itself.
+      </p>
+    </>
+  );
+}
+
 export const articles: Article[] = [
   {
     slug: "when-spices-wake-up",
@@ -573,6 +726,18 @@ export const articles: Article[] = [
     coverAlt: "The structure of caffeine, a naturally occurring alkaloid in coffee",
     readingTime: "6 min read",
     Body: DecoctionBody,
+  },
+  {
+    slug: "why-does-fat-carry-flavour",
+    title: "Why Does Fat Carry Flavour?",
+    eyebrow: "Flavour science · Oils",
+    excerpt:
+      "Sesame oil in a kuzhambu, coconut oil in a Kerala dish, ghee over hot pongal: why the fat you cook in changes aroma, mouthfeel and how flavour is released, what a smoke point does and does not tell you, and why choosing an oil is already a flavour decision.",
+    // The tempering panel of the drawing; the whole drawing is in the article.
+    cover: "/images/fat-carries-flavour-cover.webp",
+    coverAlt: "A drawn kadai of tempering over a flame, with aroma molecules rising from the hot oil",
+    readingTime: "4 min read",
+    Body: FatBody,
   },
 ];
 
