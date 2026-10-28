@@ -50,6 +50,57 @@ export function BowlIcon(props: IconProps) {
   );
 }
 
+// The recipe categories, each drawn as the vessel it is served in.
+
+// All recipes: a thali with its small bowls.
+export function ThaliIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="20" cy="20" r="16" />
+      <circle cx="20" cy="20" r="12.5" strokeDasharray="1 2.6" />
+      <circle cx="14" cy="15" r="3.6" />
+      <circle cx="24.5" cy="13.5" r="3" />
+      <circle cx="22" cy="24.5" r="4.6" />
+    </Svg>
+  );
+}
+
+// Main dish: a kuzhambu pot, steaming.
+export function PotIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M9 18c-2.5 3-3 6.5-2 9.5C8.5 32 13.5 35 20 35s11.5-3 13-7.5c1-3 .5-6.5-2-9.5Z" />
+      <path d="M7.5 18h25M11 15h18" />
+      <path d="M15 11c1.2-1.8-1-2.6 0-4.6M20 11c1.2-1.8-1-2.6 0-4.6M25 11c1.2-1.8-1-2.6 0-4.6" />
+    </Svg>
+  );
+}
+
+// Festive special: an agal lamp, lit.
+export function LampIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M5 25h28.5l3.5-3c-.5 7-7.5 11-17 11S5.5 30 5 25Z" />
+      <path d="M20 25v-3" />
+      <path d="M20 6c3 4 4.5 7 4.5 9.5a4.5 4.5 0 0 1-9 0C15.5 13 17 10 20 6Z" />
+      <path d="M20 13.5c1 1.4 1.4 2.4 1.4 3.2a1.4 1.4 0 0 1-2.8 0c0-.8.4-1.8 1.4-3.2Z" />
+      <path d="M9 9.5l2 2M31 9.5l-2 2M5 17h2.5M35 17h-2.5" />
+    </Svg>
+  );
+}
+
+// Side dish: a kadai, with pieces tossed up off the spatula.
+export function KadaiIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M5 21h30c0 7-6.5 12-15 12S5 28 5 21Z" />
+      <path d="M5 21c-2.5 0-3.5-2.5-1.5-3.5M35 21c2.5 0 3.5-2.5 1.5-3.5" />
+      <path d="M23 19 33 5.5" />
+      <path d="m12.5 13.5 2.3-1.6 1.6 2.3-2.3 1.6ZM17.5 8l2.1-1.2 1.2 2.1-2.1 1.2Z" />
+    </Svg>
+  );
+}
+
 export function Arrow() {
   return (
     <svg viewBox="0 0 20 20" aria-hidden="true" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
