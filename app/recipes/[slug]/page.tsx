@@ -5,7 +5,7 @@ import { Artwork, PhotoTags, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { CONTAINER, Eyebrow, H1, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { getPost, issueLink } from "@/lib/posts";
-import { getRecipe, recipes, type Recipe } from "@/lib/recipes";
+import { getCategory, getRecipe, recipes, type Recipe } from "@/lib/recipes";
 import { openGraphShared, site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -44,6 +44,10 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                 <p className="text-sm">
                   <Link href="/recipes" className="link-grow text-ink/60 hover:text-ink">
                     ← All recipes
+                  </Link>
+                  <span className="text-ink/40"> · </span>
+                  <Link href={`/recipes#${recipe.category}`} className="link-grow text-ink/60 hover:text-ink">
+                    {getCategory(recipe.category).name}
                   </Link>
                 </p>
                 <Eyebrow className="mt-6 text-maroon">{recipe.eyebrow}</Eyebrow>

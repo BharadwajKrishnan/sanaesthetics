@@ -2,10 +2,20 @@ import type { PhotoTag } from "@/components/Artwork";
 
 // Written recipes, one object each. Add a recipe here and it gets its own page at /recipes/<slug>.
 
+// The sections of the recipes page, in the order they appear. Each recipe belongs to one.
+export const recipeCategories = [
+  { id: "main-dish", name: "Main Dish", description: "Gravies and kuzhambus to pour over a plate of rice." },
+  { id: "festive-special", name: "Festive Special", description: "Dishes made for a festival or a special day." },
+  { id: "side-dish", name: "Side Dish", description: "Roasts and stir-fries to eat alongside rice and gravy." },
+] as const;
+
+export type RecipeCategory = (typeof recipeCategories)[number]["id"];
+
 export type Recipe = {
   slug: string;
   title: string;
   tamil?: string;
+  category: RecipeCategory;
   eyebrow: string;
   summary: string;
   // The finished dish, shown on the recipe card and at the top of the recipe page. Until set, `photo` is used,
@@ -37,6 +47,7 @@ export const recipes: Recipe[] = [
     slug: "vathakuzhambu",
     title: "Vathakuzhambu",
     tamil: "வத்தக்குழம்பு",
+    category: "main-dish",
     eyebrow: "Tamarind gravy · Tamil Nadu",
     summary:
       "A sour, spicy tamarind gravy made in sesame oil, with a spice powder that makes it lip-smacking and a pinch of jaggery to round out the edges.",
@@ -102,6 +113,7 @@ export const recipes: Recipe[] = [
     slug: "mangai-pachadi",
     title: "Mangai Pachadi",
     tamil: "மாங்காய் பச்சடி",
+    category: "festive-special",
     eyebrow: "Raw mango relish · Tamil New Year",
     summary:
       "Raw mango simmered with jaggery, chilli and salt, finished with a mustard-seed tempering and a pinch of neem flowers: all six tastes in one bowl.",
@@ -151,6 +163,7 @@ export const recipes: Recipe[] = [
     slug: "chettinad-urulai-roast",
     title: "Chettinad Urulai Roast",
     tamil: "உருளைக்கிழங்கு வறுவல்",
+    category: "side-dish",
     eyebrow: "Potato roast · Chettinad",
     summary:
       "Boiled potatoes tossed in a freshly roasted, coarsely ground masala of red chilli, coriander, pepper and fennel, until the edges turn slightly crisp.",
@@ -199,6 +212,10 @@ export const recipePromise = "I cook by instinct, but I test and measure the rec
 
 export function getRecipe(slug: string) {
   return recipes.find((recipe) => recipe.slug === slug);
+}
+
+export function getCategory(id: RecipeCategory) {
+  return recipeCategories.find((category) => category.id === id)!;
 }
 
 export function recipePath(slug: string) {
