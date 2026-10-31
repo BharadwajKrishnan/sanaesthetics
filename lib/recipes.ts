@@ -216,6 +216,8 @@ export const recipes: Recipe[] = [
     eyebrow: "Tamarind and coconut gravy · Tamil Brahmin",
     summary:
       "Brinjal and white chickpeas simmered in tamarind, thickened with a roasted coconut-spice paste and finished with a sesame oil tempering.",
+    cover: "/images/kathrikai-kondakadalai-pitlai.webp",
+    coverAlt: "Kathrikai kondakadalai pitlai in a steel bowl, seen from above: a thick golden gravy with pieces of brinjal, chickpeas, mustard seeds and curry leaves",
     intro: [
       "**Kathrikai Kondakadalai Pitlai** is my adapted version of a traditional Tamil Brahmin dish, often prepared for festive meals and special occasions. Like vathakuzhambu, it brings together a balance of tanginess, spice and richness. Tamarind provides acidity, chickpeas add body, brinjal absorbs the flavours, and coconut rounds everything off.",
       "Traditionally, pitlai is often prepared with black chickpeas and bitter gourd. In this modified version, I use white chickpeas for their accessibility and brinjal for its ability to absorb the flavours of tamarind, roasted spices and coconut, while retaining the essence of the original dish.",
