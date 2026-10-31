@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Artwork, PhotoTags, TemperingPan } from "@/components/Artwork";
 import { KolamDivider } from "@/components/Kolam";
 import { CONTAINER, Eyebrow, H1, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
+import { articleLink } from "@/lib/articles";
 import { getPost, issueLink } from "@/lib/posts";
 import { getCategory, getRecipe, recipes, type Recipe } from "@/lib/recipes";
 import { openGraphShared, site } from "@/lib/site";
@@ -30,7 +31,8 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   if (!recipe) notFound();
 
   // The newsletter issue that talks about this dish.
-  const related = getPost(recipe.issueSlug);
+  const related = recipe.issueSlug ? getPost(recipe.issueSlug) : undefined;
+  const { link } = recipe.ready;
 
   return (
     <>
@@ -66,9 +68,12 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
 
                 <div className="mt-6 space-y-4 text-[1.0625rem] leading-relaxed text-ink/85">
                   {recipe.intro.map((paragraph) => (
-                    <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                    <p key={paragraph.slice(0, 24)}>
+                      {/* Every second piece sits between a pair of ** */}
+                      {paragraph.split("**").map((piece, i) => (i % 2 ? <strong key={piece} className="font-semibold text-ink">{piece}</strong> : piece))}
+                    </p>
                   ))}
-                  <p className="font-medium text-ink">{recipe.serve}</p>
+                  {recipe.serve && <p className="font-medium text-ink">{recipe.serve}</p>}
                 </div>
               </div>
               <div className="hidden lg:block">
@@ -114,8 +119,18 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                 <div className="reveal mt-8 rounded-r-xl border-l-4 border-maroon bg-parchment py-4 pl-5 pr-5 sm:pl-7">
                   <h3 className="font-serif text-2xl font-semibold">{recipe.ready.title}</h3>
                   <div className="mt-2 space-y-3 text-[0.95rem] leading-relaxed text-ink/85">
-                    {recipe.ready.body.map((paragraph) => (
-                      <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                    {recipe.ready.body.map((paragraph, i) => (
+                      <p key={paragraph.slice(0, 24)}>
+                        {paragraph}
+                        {link && i === recipe.ready.body.length - 1 && (
+                          <>
+                            {" "}
+                            <a {...articleLink(link.articleSlug)} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-4 transition-colors hover:decoration-maroon">
+                              {link.text}
+                            </a>
+                          </>
+                        )}
+                      </p>
                     ))}
                   </div>
                 </div>

@@ -32,14 +32,16 @@ export type Recipe = {
   photoTags?: PhotoTag[];
   // A short, highlighted tip shown under the photo.
   tip?: string;
+  // A stretch wrapped in ** is shown in bold.
   intro: string[];
-  serve: string;
+  serve?: string;
   ingredients: { group: string; items: string[] }[];
   steps: string[];
-  ready: { title: string; body: string[] };
+  // The box under the method. `link` closes its last paragraph with a sentence linking to a flavour science article.
+  ready: { title: string; body: string[]; link?: { text: string; articleSlug: string } };
   // The newsletter issue that talks about this dish, and why it is worth reading after the recipe.
-  issueSlug: string;
-  readMore: string;
+  issueSlug?: string;
+  readMore?: string;
 };
 
 export const recipes: Recipe[] = [
@@ -205,6 +207,48 @@ export const recipes: Recipe[] = [
     },
     issueSlug: "beyond-the-basics",
     readMore: "Pepper, fennel and coriander seeds all come out of the second spice box. Issue 3 opens it, and looks at why Chettinad cooking builds flavour in layers.",
+  },
+  {
+    slug: "kathrikai-kondakadalai-pitlai",
+    title: "Kathrikai Kondakadalai Pitlai",
+    tamil: "கத்திரிக்காய் கொண்டைக்கடலை பிட்லை",
+    category: "main-dish",
+    eyebrow: "Tamarind and coconut gravy · Tamil Brahmin",
+    summary:
+      "Brinjal and white chickpeas simmered in tamarind, thickened with a roasted coconut-spice paste and finished with a sesame oil tempering.",
+    intro: [
+      "**Kathrikai Kondakadalai Pitlai** is my adapted version of a traditional Tamil Brahmin dish, often prepared for festive meals and special occasions. Like vathakuzhambu, it brings together a balance of tanginess, spice and richness. Tamarind provides acidity, chickpeas add body, brinjal absorbs the flavours, and coconut rounds everything off.",
+      "Traditionally, pitlai is often prepared with black chickpeas and bitter gourd. In this modified version, I use white chickpeas for their accessibility and brinjal for its ability to absorb the flavours of tamarind, roasted spices and coconut, while retaining the essence of the original dish.",
+    ],
+    ingredients: [
+      {
+        group: "For the Pitlai",
+        items: ["2 medium brinjals, cubed", "1 cup cooked white chickpeas", "Lemon-sized ball of tamarind", "½ tsp turmeric powder", "Salt to taste"],
+      },
+      {
+        group: "To Roast and Grind",
+        items: ["1 tbsp coriander seeds", "2 tsp chana dal", "1 tsp urad dal", "4 dried red chillies", "¼ cup grated coconut"],
+      },
+      {
+        group: "For Tempering",
+        items: ["1 tsp sesame oil", "½ tsp mustard seeds", "1 sprig curry leaves", "A pinch of asafoetida"],
+      },
+    ],
+    steps: [
+      "Soak the tamarind in warm water and extract about 2 cups of tamarind water.",
+      "Dry roast the coriander seeds, chana dal, urad dal and dried red chillies until aromatic. Add the coconut and roast briefly. Cool and grind to a smooth paste with a little water.",
+      "Cook the brinjal in the tamarind water with turmeric and salt until tender.",
+      "Add the cooked chickpeas and simmer for 5 minutes.",
+      "Stir in the ground coconut-spice paste. Add water if required to reach a thick, pourable consistency. Simmer gently for 8 to 10 minutes.",
+      "Heat sesame oil in a small pan and temper with the ingredients listed under For Tempering. Pour the tempering over the pitlai. Serve hot.",
+    ],
+    ready: {
+      title: "Food Lab Note 🌿",
+      body: [
+        "While sesame oil is my usual choice, I occasionally reach for coconut oil instead. The result is not simply a different aroma, but a different flavour experience altogether. It is a small kitchen experiment that reinforces a question I keep returning to:",
+      ],
+      link: { text: "how much does the choice of oil influence the way we perceive a dish?", articleSlug: "why-does-fat-carry-flavour" },
+    },
   },
 ];
 
