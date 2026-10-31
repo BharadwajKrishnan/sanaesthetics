@@ -692,18 +692,6 @@ function FatBody() {
 
 export const articles: Article[] = [
   {
-    slug: "when-spices-wake-up",
-    title: "When Spices Wake Up",
-    eyebrow: "Flavour science · Whole spices",
-    excerpt: "Whole spices may look quiet sitting inside a box, but the moment we crush them, roast them or add them to hot oil, they begin to change.",
-    cover: "/images/spices-wake-up.webp",
-    coverAlt:
-      "Three ways spices wake up, drawn in watercolour: a pan over a flame for heat, a mortar and pestle for grinding, and spices blooming in a pan of oil, with aroma molecules rising above them",
-    coverAspect: "aspect-[16/9]",
-    readingTime: "5 min read",
-    Body: SpicesBody,
-  },
-  {
     slug: "when-ingredients-meet-heat",
     title: "When Ingredients Meet Heat",
     eyebrow: "Flavour science · Tempering",
@@ -726,6 +714,18 @@ export const articles: Article[] = [
     coverAlt: "The structure of caffeine, a naturally occurring alkaloid in coffee",
     readingTime: "6 min read",
     Body: DecoctionBody,
+  },
+  {
+    slug: "when-spices-wake-up",
+    title: "When Spices Wake Up",
+    eyebrow: "Flavour science · Whole spices",
+    excerpt: "Whole spices may look quiet sitting inside a box, but the moment we crush them, roast them or add them to hot oil, they begin to change.",
+    cover: "/images/spices-wake-up.webp",
+    coverAlt:
+      "Three ways spices wake up, drawn in watercolour: a pan over a flame for heat, a mortar and pestle for grinding, and spices blooming in a pan of oil, with aroma molecules rising above them",
+    coverAspect: "aspect-[16/9]",
+    readingTime: "5 min read",
+    Body: SpicesBody,
   },
   {
     slug: "why-does-fat-carry-flavour",
