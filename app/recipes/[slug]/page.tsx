@@ -201,7 +201,7 @@ function Photo({ recipe }: { recipe: Recipe }) {
       </figure>
       {second && (
         <figure className="relative">
-          <Artwork src={second} alt={recipe.photoAlt ?? ""} sizes={sizes} className={`relative w-full rounded-xl shadow-xl shadow-ink/15 ${tags ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
+          <Artwork src={second} alt={recipe.photoAlt ?? ""} sizes={sizes} className={`relative w-full rounded-xl shadow-xl shadow-ink/15 ${recipe.photoAspect === "2/3" ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
             <TemperingPan />
           </Artwork>
           {tags && <PhotoTags tags={tags} />}

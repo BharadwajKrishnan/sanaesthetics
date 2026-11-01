@@ -28,6 +28,8 @@ export type Recipe = {
   // recipe page (for example the ingredients, with labels).
   photo?: string;
   photoAlt?: string;
+  // The second picture is shown 4:5 like the cover, unless it is a tall one.
+  photoAspect?: "2/3";
   // Labels on the photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
   photoTags?: PhotoTag[];
   // A stretch wrapped in ** is shown in bold.
@@ -62,6 +64,7 @@ export const recipes: Recipe[] = [
     coverAlt: "Manathakkali vathakuzhambu in a brass vessel: a dark tamarind gravy with shallots, dried berries, red chillies and curry leaves, a plate of rice and appalam behind",
     photo: "/images/vathakuzhambu-tamarind.webp",
     photoAlt: "A block of tamarind and a bowl of sambar powder beside a ceramic jar",
+    photoAspect: "2/3",
     photoTags: [
       { label: "Sambar powder", at: { left: 60, top: 24 }, text: { left: 82, top: 14 } },
       { label: "Tamarind", at: { left: 72, top: 84 }, text: { left: 84, top: 92 } },
@@ -272,11 +275,8 @@ export const recipes: Recipe[] = [
     cover: "/images/orange-peel-pachadi.webp",
     coverAlt: "Orange peel pachadi in an iron kadai, seen from above: pieces of clementine peel in a glossy, dark tamarind gravy with mustard seeds, green chillies and curry leaves",
     photo: "/images/orange-peel-pachadi-peel.webp",
-    photoAlt: "Three peeled clementines in a steel bowl, and their peel finely chopped on a green chopping board",
-    photoTags: [
-      { label: "Peeled clementines", at: { left: 19, top: 28 }, text: { left: 32, top: 5 } },
-      { label: "Peel, finely chopped", at: { left: 88, top: 82 }, text: { left: 60, top: 96 } },
-    ],
+    photoAlt: "Clementine peel, finely chopped, in a heap on a green chopping board",
+    photoTags: [{ label: "Clementine peel, finely chopped", at: { left: 52, top: 88 }, text: { left: 52, top: 95 } }],
     intro: [
       "**Orange Thol Pachadi** is a seasonal dish that I make quite often during the winter months in Germany. Oranges are at their best through the winter season, and this recipe is a lovely way to make use of them. For this version, I have used clementines.",
       "The preparation is quite similar to making a vathakuzhambu. However, the addition of jaggery towards the end brings a gentle sweetness that balances the flavours. And with sesame oil forming the base, this is one of those dishes where you might not want to skip or substitute the traditional ingredients!",
