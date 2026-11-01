@@ -30,15 +30,20 @@ export type Recipe = {
   photoAlt?: string;
   // Labels on the photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
   photoTags?: PhotoTag[];
-  // A short, highlighted tip shown under the photo.
-  tip?: string;
   // A stretch wrapped in ** is shown in bold.
   intro: string[];
   serve?: string;
+  // How many the recipe feeds and how long it takes, shown under the story. Every recipe gives all three.
+  serves: string;
+  prepTime: string;
+  cookTime: string;
   ingredients: { group: string; items: string[] }[];
+  // Plain steps, without a bold label in front: the numbers do that job.
   steps: string[];
-  // The box under the method. `link` closes its last paragraph with a sentence linking to a flavour science article.
-  ready: { title: string; body: string[]; link?: { text: string; articleSlug: string } };
+  // The "Kitchen tips" box under the method, the same on every recipe. `tipsLink` closes the last tip with a sentence
+  // linking to a flavour science article.
+  tips: string[];
+  tipsLink?: { text: string; articleSlug: string };
   // The newsletter issue that talks about this dish, and why it is worth reading after the recipe.
   issueSlug?: string;
   readMore?: string;
@@ -61,7 +66,6 @@ export const recipes: Recipe[] = [
       { label: "Sambar powder", at: { left: 60, top: 24 }, text: { left: 82, top: 14 } },
       { label: "Tamarind", at: { left: 72, top: 84 }, text: { left: 84, top: 92 } },
     ],
-    tip: "Store tamarind in a ceramic jar. Tamarind is acidic and slowly reacts with metal, which gives it a metallic taste. Ceramic is inert, so the flavour stays clean.",
     intro: [
       "Vathakuzhambu is a much cherished food in South Indian homes and will be slurped in no time.",
       "It is a tamarind-based gravy made traditionally with gingelly or sesame oil, and it is known for its longer shelf life.",
@@ -69,6 +73,9 @@ export const recipes: Recipe[] = [
       "Apart from these, a spice powder is made which makes the dish lip-smacking.",
     ],
     serve: "Vathakuzhambu is paired with piping hot rice. Accompaniments could include appalam and any type of poriyal.",
+    serves: "4",
+    prepTime: "20 minutes",
+    cookTime: "30 to 40 minutes",
     ingredients: [
       {
         group: "For the tamarind extract",
@@ -98,16 +105,14 @@ export const recipes: Recipe[] = [
       "Pour in the tamarind extract carefully and add salt.",
       "Bring the mixture to a boil, then reduce to medium-low heat and let it simmer uncovered for about 20 to 30 minutes.",
       "If it becomes too thick, add a little hot water. If it is still watery, continue simmering until it reaches a thick, pourable consistency.",
-      "Some households add rice flour to thicken the kuzhambu, but it is purely optional.",
       "Let it rest for 15 to 30 minutes before serving if possible. The flavour usually becomes more rounded as it sits.",
     ],
-    ready: {
-      title: "How do you know it is ready?",
-      body: [
-        "The raw tamarind smell should be gone, the gravy should have reduced visibly, and a thin sheen of sesame oil should appear on top. The flavour should be sour and spicy, but not harsh.",
-        "Taste once the kuzhambu has reduced. If the sourness feels very sharp, add the optional ½ teaspoon of jaggery. The jaggery should not make the dish taste sweet. It should simply round out the sourness and bitterness.",
-      ],
-    },
+    tips: [
+      "It is ready when the raw tamarind smell has gone, the gravy has reduced visibly and a thin sheen of sesame oil appears on top. The flavour should be sour and spicy, but not harsh.",
+      "Taste once the kuzhambu has reduced. If the sourness feels very sharp, add the optional ½ teaspoon of jaggery. It should not make the dish taste sweet, only round out the sourness and bitterness.",
+      "Some households add rice flour to thicken the kuzhambu, but it is purely optional.",
+      "Store tamarind in a ceramic jar. Tamarind is acidic and slowly reacts with metal, which gives it a metallic taste. Ceramic is inert, so the flavour stays clean.",
+    ],
     issueSlug: "arusuvai-where-tradition-meets-taste",
     readMore: "Why does half a teaspoon of jaggery change this dish so much? Issue 1 looks at the six tastes and how a small adjustment rebalances a whole meal.",
   },
@@ -127,6 +132,9 @@ export const recipes: Recipe[] = [
       "Household versions vary, and that is what makes the recipe feel authentic rather than fixed.",
     ],
     serve: "Serve warm or at room temperature.",
+    serves: "4",
+    prepTime: "10 minutes",
+    cookTime: "15 to 20 minutes",
     ingredients: [
       {
         group: "For the pachadi",
@@ -150,14 +158,11 @@ export const recipes: Recipe[] = [
       "Add the jaggery and stir until it dissolves completely.",
       "Continue cooking for another 3 to 5 minutes, until the mixture looks glossy and lightly syrupy. Add a little more water if it becomes too thick.",
       "For the tempering, heat the oil in a small pan. Add the mustard seeds and let them splutter. Add the asafoetida and curry leaves, then pour the tempering over the pachadi.",
+    ],
+    tips: [
+      "The mango should be soft but not completely mashed. The jaggery should round out the mango’s sharp sourness, while the chilli and salt keep the dish lively.",
       "If using neem flowers, add only a very small amount. Their bitterness should sit in the background rather than dominate the dish.",
     ],
-    ready: {
-      title: "What to look for",
-      body: [
-        "The mango should be soft but not completely mashed. The jaggery should round out the mango’s sharp sourness, while the chilli and salt keep the dish lively.",
-      ],
-    },
     issueSlug: "arusuvai-where-tradition-meets-taste",
     readMore: "Why do Tamil kitchens put all six tastes in one bowl for the new year? Issue 1 looks at where that tradition and modern sensory science meet.",
   },
@@ -173,6 +178,9 @@ export const recipes: Recipe[] = [
     coverAlt: "Chettinad urulai roast in a brass bowl: cubes of potato coated in a coarse brown masala with mustard seeds, curry leaves and a dried red chilli",
     intro: ["For this recipe we first need a spice mix, which forms the base of a Chettinad urulai (potato) roast."],
     serve: "I normally serve it with piping hot rasam rice, or with curd rice (this can never go wrong 😛).",
+    serves: "4",
+    prepTime: "15 minutes",
+    cookTime: "30 minutes",
     ingredients: [
       {
         group: "For the spice mix",
@@ -201,10 +209,10 @@ export const recipes: Recipe[] = [
       "Now add the freshly ground spice mix. Cook on low to medium heat for a few more minutes, turning the potatoes gently until the masala coats them and the edges start becoming slightly crisp.",
       "Finish with fresh coriander.",
     ],
-    ready: {
-      title: "How should it taste?",
-      body: ["The final dish should be peppery, aromatic and slightly crisp on the outside, without the spices tasting burnt or overly bitter."],
-    },
+    tips: [
+      "The final dish should be peppery, aromatic and slightly crisp on the outside, without the spices tasting burnt or overly bitter.",
+      "Grind the spice mix coarsely rather than to a fine powder: a little texture is what makes the roast.",
+    ],
     issueSlug: "beyond-the-basics",
     readMore: "Pepper, fennel and coriander seeds all come out of the second spice box. Issue 3 opens it, and looks at why Chettinad cooking builds flavour in layers.",
   },
@@ -222,6 +230,9 @@ export const recipes: Recipe[] = [
       "**Kathrikai Kondakadalai Pitlai** is my adapted version of a traditional Tamil Brahmin dish, often prepared for festive meals and special occasions. Like vathakuzhambu, it brings together a balance of tanginess, spice and richness. Tamarind provides acidity, chickpeas add body, brinjal absorbs the flavours, and coconut rounds everything off.",
       "Traditionally, pitlai is often prepared with black chickpeas and bitter gourd. In this modified version, I use white chickpeas for their accessibility and brinjal for its ability to absorb the flavours of tamarind, roasted spices and coconut, while retaining the essence of the original dish.",
     ],
+    serves: "4",
+    prepTime: "20 minutes",
+    cookTime: "25 to 30 minutes",
     ingredients: [
       {
         group: "For the Pitlai",
@@ -244,13 +255,72 @@ export const recipes: Recipe[] = [
       "Stir in the ground coconut-spice paste. Add water if required to reach a thick, pourable consistency. Simmer gently for 8 to 10 minutes.",
       "Heat sesame oil in a small pan and temper with the ingredients listed under For Tempering. Pour the tempering over the pitlai. Serve hot.",
     ],
-    ready: {
-      title: "Food Lab Note 🌿",
-      body: [
-        "While sesame oil is my usual choice, I occasionally reach for coconut oil instead. The result is not simply a different aroma, but a different flavour experience altogether. It is a small kitchen experiment that reinforces a question I keep returning to:",
-      ],
-      link: { text: "how much does the choice of oil influence the way we perceive a dish?", articleSlug: "why-does-fat-carry-flavour" },
-    },
+    tips: [
+      "Add water a little at a time after the coconut paste goes in. The pitlai should be thick but still pourable.",
+      "While sesame oil is my usual choice, I occasionally reach for coconut oil instead. The result is not simply a different aroma, but a different flavour experience altogether. It is a small kitchen experiment that reinforces a question I keep returning to:",
+    ],
+    tipsLink: { text: "how much does the choice of oil influence the way we perceive a dish?", articleSlug: "why-does-fat-carry-flavour" },
+  },
+  {
+    slug: "orange-peel-pachadi",
+    title: "Orange Peel Pachadi",
+    tamil: "ஆரஞ்சு தோல் பச்சடி",
+    category: "main-dish",
+    eyebrow: "Citrus peel in tamarind · Winter special",
+    summary:
+      "Finely chopped clementine peel simmered in a sesame oil and tamarind gravy, the way a vathakuzhambu is made, with jaggery at the end to balance the bitterness.",
+    cover: "/images/orange-peel-pachadi.webp",
+    coverAlt: "Orange peel pachadi in an iron kadai, seen from above: pieces of clementine peel in a glossy, dark tamarind gravy with mustard seeds, green chillies and curry leaves",
+    photo: "/images/orange-peel-pachadi-peel.webp",
+    photoAlt: "Three peeled clementines in a steel bowl, and their peel finely chopped on a green chopping board",
+    photoTags: [
+      { label: "Peeled clementines", at: { left: 19, top: 28 }, text: { left: 32, top: 5 } },
+      { label: "Peel, finely chopped", at: { left: 88, top: 82 }, text: { left: 60, top: 96 } },
+    ],
+    intro: [
+      "**Orange Thol Pachadi** is a seasonal dish that I make quite often during the winter months in Germany. Oranges are at their best through the winter season, and this recipe is a lovely way to make use of them. For this version, I have used clementines.",
+      "The preparation is quite similar to making a vathakuzhambu. However, the addition of jaggery towards the end brings a gentle sweetness that balances the flavours. And with sesame oil forming the base, this is one of those dishes where you might not want to skip or substitute the traditional ingredients!",
+    ],
+    serve: "This pachadi also tastes good cold, keeps for a while, and tastes best with curd rice.",
+    serves: "4",
+    prepTime: "15 minutes",
+    cookTime: "20 to 25 minutes",
+    ingredients: [
+      {
+        group: "For the tamarind extract",
+        items: ["About 1 tbsp tamarind", "1 cup warm water, to soak the tamarind"],
+      },
+      {
+        group: "For the pachadi",
+        items: [
+          "Peel of 3 clementines, finely chopped",
+          "1½ tbsp gingelly (sesame) oil",
+          "½ tsp mustard seeds",
+          "¼ tsp fenugreek seeds",
+          "2 green chillies, slit lengthwise",
+          "1 sprig curry leaves",
+          "A pinch of asafoetida (hing)",
+          "¼ tsp turmeric powder",
+          "1½ tsp sambar podi",
+          "Salt, to taste",
+          "1 to 2 tsp jaggery, according to taste",
+        ],
+      },
+    ],
+    steps: [
+      "Wash the clementines thoroughly. Remove the peel and chop it finely. If the white pith is particularly thick, scrape away some of it. Blanch the chopped peel in boiling water for 3 to 4 minutes, then drain.",
+      "Soak the tamarind in the warm water and squeeze out the extract.",
+      "Heat the gingelly oil in a kadai. Add the mustard seeds and let them splutter. Add the fenugreek seeds, followed by the green chillies, curry leaves and asafoetida.",
+      "Add the chopped clementine peel and sauté for a few minutes until it softens slightly.",
+      "Add the turmeric powder and sambar podi. Stir briefly over low heat so the spice powder does not burn.",
+      "Pour in the tamarind extract and add salt. Bring to a gentle boil, then simmer for 12 to 15 minutes, or until the peel is tender and the kuzhambu begins to thicken.",
+      "Add the jaggery and simmer for another 2 to 3 minutes. Adjust the consistency with a little water if needed. The finished kuzhambu should be glossy and thick, similar to vathakuzhambu.",
+      "Allow it to rest for a few minutes before serving. The flavours deepen as it sits.",
+    ],
+    tips: [
+      "Clementine peel has a natural bitterness, so adjust the jaggery to balance the tamarind and spice.",
+      "For recipes using citrus peel, choose fruit explicitly labelled as suitable for eating with the peel, and check any post-harvest treatment information. Wash thoroughly; washing alone does not guarantee that treated peel is suitable for cooking.",
+    ],
   },
 ];
 

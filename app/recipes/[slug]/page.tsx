@@ -32,7 +32,12 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
 
   // The newsletter issue that talks about this dish.
   const related = recipe.issueSlug ? getPost(recipe.issueSlug) : undefined;
-  const { link } = recipe.ready;
+  const { tipsLink } = recipe;
+  const facts = [
+    { label: "Serves", value: recipe.serves },
+    { label: "Preparation", value: recipe.prepTime },
+    { label: "Cooking", value: recipe.cookTime },
+  ];
 
   return (
     <>
@@ -75,6 +80,17 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                   ))}
                   {recipe.serve && <p className="font-medium text-ink">{recipe.serve}</p>}
                 </div>
+
+                <dl className="mt-8 grid grid-cols-3 gap-4 border-y border-line py-4">
+                  {facts.map((fact) => (
+                    <div key={fact.label}>
+                      <dt>
+                        <Eyebrow rule={false}>{fact.label}</Eyebrow>
+                      </dt>
+                      <dd className="mt-1 font-serif text-lg font-semibold leading-tight text-ink sm:text-xl">{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
               <div className="hidden lg:block">
                 <Photo recipe={recipe} />
@@ -117,22 +133,25 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                 </ol>
 
                 <div className="reveal mt-8 rounded-r-xl border-l-4 border-maroon bg-parchment py-4 pl-5 pr-5 sm:pl-7">
-                  <h3 className="font-serif text-2xl font-semibold">{recipe.ready.title}</h3>
-                  <div className="mt-2 space-y-3 text-[0.95rem] leading-relaxed text-ink/85">
-                    {recipe.ready.body.map((paragraph, i) => (
-                      <p key={paragraph.slice(0, 24)}>
-                        {paragraph}
-                        {link && i === recipe.ready.body.length - 1 && (
-                          <>
-                            {" "}
-                            <a {...articleLink(link.articleSlug)} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-4 transition-colors hover:decoration-maroon">
-                              {link.text}
-                            </a>
-                          </>
-                        )}
-                      </p>
+                  <h3 className="font-serif text-2xl font-semibold">Kitchen tips</h3>
+                  <ul className="mt-3 space-y-3 text-[0.95rem] leading-relaxed text-ink/85">
+                    {recipe.tips.map((tip, i) => (
+                      <li key={tip.slice(0, 24)} className="flex items-baseline gap-3">
+                        <span aria-hidden="true" className="inline-block h-1.5 w-1.5 shrink-0 -translate-y-0.5 rounded-full bg-maroon" />
+                        <span>
+                          {tip}
+                          {tipsLink && i === recipe.tips.length - 1 && (
+                            <>
+                              {" "}
+                              <a {...articleLink(tipsLink.articleSlug)} className="font-medium text-maroon underline decoration-maroon/40 underline-offset-4 transition-colors hover:decoration-maroon">
+                                {tipsLink.text}
+                              </a>
+                            </>
+                          )}
+                        </span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
 
                 {related && (
@@ -154,7 +173,7 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   );
 }
 
-// The finished dish on top, then the second picture (the ingredients, with labels) and the tip, when there is one.
+// The finished dish on top, then the second picture (the ingredients, with labels), when there is one.
 function Photo({ recipe }: { recipe: Recipe }) {
   const cover = recipe.cover ?? recipe.photo;
   const second = recipe.cover && recipe.photo ? recipe.photo : undefined;
@@ -180,22 +199,12 @@ function Photo({ recipe }: { recipe: Recipe }) {
           </figcaption>
         )}
       </figure>
-      {(second || recipe.tip) && (
-        <figure>
-          {second && (
-            <div className="relative">
-              <Artwork src={second} alt={recipe.photoAlt ?? ""} sizes={sizes} className={`relative w-full rounded-xl shadow-xl shadow-ink/15 ${tags ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
-                <TemperingPan />
-              </Artwork>
-              {tags && <PhotoTags tags={tags} />}
-            </div>
-          )}
-          {recipe.tip && (
-            <figcaption className={`${second ? "mt-4" : ""} rounded-r-xl border-l-4 border-brass bg-parchment px-4 py-3 text-[0.95rem] leading-relaxed text-ink/85`}>
-              <span className="mr-2 font-serif text-lg font-semibold text-maroon">Pro tip</span>
-              {recipe.tip}
-            </figcaption>
-          )}
+      {second && (
+        <figure className="relative">
+          <Artwork src={second} alt={recipe.photoAlt ?? ""} sizes={sizes} className={`relative w-full rounded-xl shadow-xl shadow-ink/15 ${tags ? "aspect-[2/3]" : "aspect-[4/5]"}`}>
+            <TemperingPan />
+          </Artwork>
+          {tags && <PhotoTags tags={tags} />}
         </figure>
       )}
     </div>
