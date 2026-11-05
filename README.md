@@ -34,7 +34,8 @@ The site keeps no list of its own. It hands every submission to an n8n workflow,
 
 1. A reader enters their name and email address. On the sessions form they also pick a session and may leave a phone number. The site POSTs a `subscribed` event to the webhook.
 2. The workflow adds the row to the Google Sheet, or updates its row if the address is already there.
-3. The form tells the reader they are on the list, or that their request was received.
+3. A newsletter signup then gets the welcome email (`marketing/email/welcome.html`, sent from Sandhya's IONOS mailbox by a Send Email node after the sheet step). Class requests get no email.
+4. The form tells the reader they are on the list, or that their request was received.
 
 Set these in `.env.local` locally and in the host's environment settings when deployed (see `.env.example`):
 
@@ -64,3 +65,5 @@ A ready-made workflow is in `n8n/signup-workflow.json`. Import it in n8n (Workfl
 1. Copy the **Webhook** node's production URL into `SIGNUP_WEBHOOK_URL`. To keep other callers out, set the node's authentication to Header Auth with a credential named `xi-api-key`, and put its value in `SIGNUP_WEBHOOK_SECRET`.
 2. On **Append or update row in sheet**, connect a Google Sheets credential and pick the spreadsheet and sheet. The sheet needs a header row with `name`, `email`, `list`, `classType`, `phone` and `subscribedAt`. Rows are matched on `email`, so an address is never added twice; a second class request from the same address updates its row.
 3. Activate the workflow.
+
+The live workflow has grown past this export: an **If** node splits class requests from newsletter signups into two sheets, and a **Send welcome email** node (SMTP, credential "South Indian Food Lab mailbox (IONOS)") follows the newsletter sheet. It is set to continue on error, so a mail failure never breaks the signup; check the n8n executions list if welcome emails stop arriving. After editing the workflow in n8n, **Publish** the new version, or production keeps running the old one.
