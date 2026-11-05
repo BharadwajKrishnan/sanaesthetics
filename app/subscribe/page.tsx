@@ -16,7 +16,7 @@ export default function Subscribe() {
     <>
       <SiteHeader current="/subscribe" />
       <main id="main" className="overflow-x-clip">
-        <section className={`${CONTAINER} pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+        <section className={`${CONTAINER} pb-12 pt-6 sm:pb-16 lg:pt-10`}>
           <div className="reveal relative mx-auto max-w-2xl overflow-hidden rounded-2xl border border-line/80 bg-parchment px-5 py-8 sm:px-10 sm:py-10">
             <KolamCorner className="pointer-events-none absolute right-1 top-1 w-16 -scale-x-100 text-brass/40 sm:w-20" />
             <KolamCorner className="pointer-events-none absolute bottom-1 left-1 w-16 -scale-y-100 text-brass/40 sm:w-20" />

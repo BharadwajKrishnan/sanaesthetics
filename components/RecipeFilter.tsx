@@ -48,7 +48,7 @@ export function RecipeFilter({ recipes }: { recipes: Recipe[] }) {
 
   return (
     <>
-      <div role="group" aria-label="Filter recipes by category" className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
+      <div role="group" aria-label="Filter recipes by category" className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
         {filters.map((f, i) => {
           const on = f.id === filter;
           const Icon = ICONS[f.id];
@@ -100,11 +100,11 @@ export function RecipeFilter({ recipes }: { recipes: Recipe[] }) {
         {`Showing ${shown.length} ${shown.length === 1 ? "recipe" : "recipes"}: ${current.name}`}
       </p>
 
-      <div key={filter} className="swap-in mt-10 sm:mt-12">
+      <div key={filter} className="swap-in mt-8 sm:mt-10">
         {shown.length === 1 ? (
           <FeatureCard recipe={shown[0]} />
         ) : (
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {shown.map((recipe) => (
               <li key={recipe.slug}>
                 <RecipeCard recipe={recipe} tagged={filter === "all"} />
@@ -137,7 +137,7 @@ function RecipeCard({ recipe, tagged }: { recipe: Recipe; tagged: boolean }) {
           src={recipe.cover ?? recipe.photo}
           alt={recipe.coverAlt ?? recipe.photoAlt ?? recipe.title}
           link={{ href: recipePath(recipe.slug), "aria-label": recipe.title }}
-          sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
+          sizes="(min-width: 1280px) 330px, (min-width: 1024px) 360px, (min-width: 640px) 45vw, 90vw"
           className="relative aspect-[4/5]"
         >
           <TemperingPan />
@@ -167,7 +167,7 @@ function FeatureCard({ recipe }: { recipe: Recipe }) {
         src={recipe.cover ?? recipe.photo}
         alt={recipe.coverAlt ?? recipe.photoAlt ?? recipe.title}
         link={{ href: recipePath(recipe.slug), "aria-label": recipe.title }}
-        sizes="(min-width: 1152px) 540px, (min-width: 768px) 48vw, 92vw"
+        sizes="(min-width: 1536px) 650px, (min-width: 1152px) 540px, (min-width: 768px) 48vw, 92vw"
         className="relative aspect-[4/5] md:aspect-auto md:min-h-[32rem]"
       >
         <TemperingPan />

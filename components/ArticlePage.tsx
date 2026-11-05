@@ -52,7 +52,7 @@ export function ArticlePage({
     <>
       <SiteHeader current={current} />
       <main id="main" className="overflow-x-clip">
-        <article className={`${CONTAINER} pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+        <article className={`${CONTAINER} pb-12 pt-6 sm:pb-16 lg:pt-10`}>
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-14">
             <div className="max-w-3xl">
               <p className="text-sm">

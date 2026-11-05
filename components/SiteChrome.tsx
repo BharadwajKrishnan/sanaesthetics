@@ -7,8 +7,8 @@ import { SubscribeLink } from "@/components/SubscribeLink";
 import { site } from "@/lib/site";
 
 // Shared widths and spacing, so every page lines up and no section runs long.
-export const CONTAINER = "mx-auto w-full max-w-6xl px-4 sm:px-6";
-export const SECTION = "py-12 sm:py-16";
+export const CONTAINER = "mx-auto w-full max-w-6xl px-4 sm:px-6 xl:max-w-7xl 2xl:max-w-[88rem]";
+export const SECTION = "py-10 sm:py-14";
 export const H1 = "font-serif text-[clamp(2.2rem,4.4vw,3.6rem)] font-medium leading-[1.04] text-balance";
 export const H2 = "font-serif text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold leading-[1.06] text-balance";
 export const PRIMARY = "btn-sheen group inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-[0.95rem] font-medium transition-colors";

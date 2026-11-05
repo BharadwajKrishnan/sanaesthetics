@@ -118,7 +118,8 @@ export default function Privacy() {
     <>
       <SiteHeader current="/privacy" />
       <main id="main" className="overflow-x-clip">
-        <section className={`${CONTAINER} max-w-3xl pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+        <section className={`${CONTAINER} pb-12 pt-6 sm:pb-16 lg:pt-10`}>
+          <div className="max-w-3xl">
           <div className="reveal">
           <Eyebrow className="text-maroon">Privacy</Eyebrow>
           <h1 className={`mt-3 ${H1}`}>What this site keeps, and why.</h1>
@@ -129,9 +130,9 @@ export default function Privacy() {
           <p className="mt-2 text-sm text-ink/60">Last updated {UPDATED}.</p>
           </div>
 
-          <KolamDivider className="mt-8 text-brass" />
+          <KolamDivider className="mt-6 text-brass" />
 
-          <div className="mt-8 space-y-8">
+          <div className="mt-6 space-y-8">
             {SECTIONS.map((section) => (
               <section key={section.title} className="reveal">
                 <h2 className="font-serif text-2xl font-semibold leading-tight sm:text-3xl">{section.title}</h2>
@@ -142,6 +143,7 @@ export default function Privacy() {
                 </div>
               </section>
             ))}
+          </div>
           </div>
         </section>
       </main>

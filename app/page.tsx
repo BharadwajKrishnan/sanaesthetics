@@ -59,7 +59,7 @@ export default function Home() {
           <div aria-hidden="true" className="kolam-dots absolute inset-y-0 right-0 hidden w-[60%] lg:block" />
           <KolamCorner className="pointer-events-none absolute left-2 top-2 hidden w-20 text-brass/60 md:block lg:w-24" />
           <KolamCorner className="pointer-events-none absolute bottom-2 left-2 hidden w-20 -scale-y-100 text-brass/60 md:block lg:w-24" />
-          <div className={`${CONTAINER} relative grid items-center gap-6 py-8 sm:py-10 lg:min-h-[min(calc(100svh-4rem),36rem)] lg:py-8 lg:grid-cols-[minmax(0,11fr)_minmax(0,13fr)] lg:gap-6`}>
+          <div className={`${CONTAINER} relative grid items-center gap-6 py-8 sm:py-10 lg:py-10 lg:grid-cols-[minmax(0,11fr)_minmax(0,13fr)] lg:gap-10`}>
             <div className="relative z-10">
               <h1 className="font-serif text-[clamp(2.5rem,3.7vw,3.8rem)] font-medium leading-[1.02]">
                 <span className="hero-line" style={{ ["--i" as string]: 0 }}>
@@ -69,7 +69,7 @@ export default function Home() {
                   <span>A deeper understanding.</span>
                 </span>
               </h1>
-              <p className="hero-fade mt-4 max-w-md text-[1.0625rem] leading-relaxed text-ink/80" style={{ ["--i" as string]: 0 }}>
+              <p className="hero-fade mt-4 max-w-lg text-[1.0625rem] leading-relaxed text-ink/80" style={{ ["--i" as string]: 0 }}>
                 South Indian vegetarian recipes, stories and flavour science, from a home kitchen to a wider table.
               </p>
               <p className="hero-fade mt-6" style={{ ["--i" as string]: 1 }}>
@@ -77,7 +77,7 @@ export default function Home() {
                   Explore the Kitchen <Arrow />
                 </a>
               </p>
-              <ul className="hero-fade mt-8 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2" style={{ ["--i" as string]: 2 }}>
+              <ul className="hero-fade mt-6 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-2" style={{ ["--i" as string]: 2 }}>
                 {FEATURES.map(({ Icon, lines, href }) => (
                   <li key={lines[0]}>
                     <Link
@@ -99,7 +99,7 @@ export default function Home() {
             <div className="relative">
               <HeroFrame className="mx-auto w-full max-w-[34rem] lg:max-w-none">
                 <figure>
-                  <Artwork src={photos.hero} alt="" sizes="(min-width: 1024px) 55vw, (min-width: 640px) 34rem, 100vw" priority className="relative aspect-[4/5] rounded-2xl shadow-2xl shadow-ink/30 sm:aspect-square lg:aspect-[5/4]">
+                  <Artwork src={photos.hero} alt="" sizes="(min-width: 1536px) 46rem, (min-width: 1024px) 55vw, (min-width: 640px) 34rem, 100vw" priority className="relative aspect-[4/5] rounded-2xl shadow-2xl shadow-ink/30 sm:aspect-square lg:aspect-[5/4]">
                     <HeroGarnish />
                     <Dabba sizes="(min-width: 1024px) 24rem, (min-width: 640px) 20rem, 60vw" priority className="absolute left-1/2 top-1/2 w-[min(60%,22rem)] -translate-x-1/2 -translate-y-1/2" />
                   </Artwork>
@@ -125,7 +125,7 @@ export default function Home() {
         </section>
 
         {/* Newsletter: one issue at a time, in a loop. Kept short on purpose; the issues speak for themselves. */}
-        <section id="newsletter" className={`${CONTAINER} pb-10 sm:pb-14`}>
+        <section id="newsletter" className={`${CONTAINER} pb-8 sm:pb-12`}>
           <div className="reveal relative overflow-hidden rounded-2xl border border-line/70 bg-parchment px-5 py-6 sm:px-8 sm:py-7">
             <KolamCorner className="pointer-events-none absolute right-1 top-1 w-16 -scale-x-100 text-brass/35 sm:w-20" />
             <KolamCorner className="pointer-events-none absolute bottom-1 left-1 w-16 -scale-y-100 text-brass/35 sm:w-20" />
@@ -208,7 +208,7 @@ export default function Home() {
           <div className={`${CONTAINER} ${SECTION}`}>
             <SectionHead eyebrow={<>Sessions · online &amp; in-person · by request</>} title="Sessions where you cook, ask and understand." />
             <TopicsTicker topics={TOPICS} className="mt-6" />
-            <div className="mt-8 grid gap-8 lg:grid-cols-2 lg:gap-10">
+            <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-10">
               <div>
                 <ol className="grid gap-3">
                   {CLASSES.map((item, i) => (
@@ -268,16 +268,18 @@ export default function Home() {
           <KolamCorner className="pointer-events-none absolute right-2 top-2 w-20 -scale-x-100 text-cream/25 lg:w-28" />
           <KolamCorner className="pointer-events-none absolute bottom-2 left-2 w-20 -scale-y-100 text-cream/25 lg:w-28" />
           <KolamCorner className="pointer-events-none absolute bottom-2 right-2 w-20 -scale-x-100 -scale-y-100 text-cream/25 lg:w-28" />
-          <div className="reveal relative mx-auto max-w-xl px-4 py-14 text-center sm:px-6 sm:py-16">
-            <Eyebrow className="justify-center text-brass">The newsletter</Eyebrow>
-            <h2 className={`${H2} mt-3`}>Straight to your inbox.</h2>
-            <p className="mt-3 font-serif text-xl font-medium italic text-cream/90 sm:text-2xl">Stories, ingredients and the science behind South Indian flavour.</p>
-            <p className="mx-auto mt-4 max-w-md text-[0.95rem] leading-relaxed text-cream/75">
-              One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam,
-              and a reply to any issue is enough to be taken off the list.
-            </p>
-            <div className="mt-7">
-              <SignupForm list="newsletter" tone="dark" center />
+          <div className={`${CONTAINER} reveal relative grid gap-8 py-12 sm:py-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-14`}>
+            <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-none">
+              <Eyebrow className="justify-center text-brass lg:justify-start">The newsletter</Eyebrow>
+              <h2 className={`${H2} mt-3 text-center lg:text-left`}>Straight to your inbox.</h2>
+              <p className="mt-3 text-center font-serif text-xl font-medium italic text-cream/90 sm:text-2xl lg:text-left">Stories, ingredients and the science behind South Indian flavour.</p>
+              <p className="mx-auto mt-4 max-w-md text-center text-[0.95rem] leading-relaxed text-cream/75 lg:mx-0 lg:max-w-lg lg:text-left">
+                One letter at a time: a recipe, the science that makes it work, and the story of the kitchen it came from. No spam,
+                and a reply to any issue is enough to be taken off the list.
+              </p>
+            </div>
+            <div className="mx-auto w-full max-w-xl lg:mx-0 lg:max-w-md lg:justify-self-end">
+              <SignupForm list="newsletter" tone="dark" center="below-lg" />
             </div>
           </div>
         </section>

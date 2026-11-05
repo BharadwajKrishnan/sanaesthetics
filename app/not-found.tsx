@@ -21,7 +21,7 @@ export default function NotFound() {
     <>
       <SiteHeader current="" />
       <main id="main" className="overflow-x-clip">
-        <section className={`${CONTAINER} pb-14 pt-10 sm:pb-20 lg:pt-14`}>
+        <section className={`${CONTAINER} pb-12 pt-8 sm:pb-16 lg:pt-12`}>
           <div className="reveal max-w-2xl">
             <Eyebrow className="text-maroon">404 · Page not found</Eyebrow>
             <h1 className={`mt-3 ${H1}`}>Nothing is simmering at this address.</h1>

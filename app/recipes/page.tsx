@@ -17,7 +17,7 @@ export default function Recipes() {
     <>
       <SiteHeader current="/recipes" />
       <main id="main" className="overflow-x-clip">
-        <section className={`${CONTAINER} pb-14 pt-8 sm:pb-20 lg:pt-12`}>
+        <section className={`${CONTAINER} pb-12 pt-6 sm:pb-16 lg:pt-10`}>
           <div className="reveal grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-end">
             <div>
               <Eyebrow className="text-maroon">Recipes</Eyebrow>
@@ -29,7 +29,7 @@ export default function Recipes() {
             </div>
           </div>
 
-          <KolamDivider className="mt-8 text-brass" />
+          <KolamDivider className="mt-6 text-brass" />
           <RecipeFilter recipes={recipes} />
         </section>
       </main>

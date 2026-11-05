@@ -57,6 +57,13 @@ html:has(dialog[open]) {
       text-align: left;
     }
   }
+
+  /* The same for a block that only goes left once it sits beside something, from desktop widths up. */
+  @media (min-width: 1024px) {
+    main .lg\:text-left p {
+      text-align: left;
+    }
+  }
 }
 
 :focus-visible {

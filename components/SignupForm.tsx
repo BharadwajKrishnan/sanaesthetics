@@ -86,7 +86,8 @@ function Select({
   );
 }
 
-export function SignupForm({ list, tone = "light", center = false }: { list: List; tone?: "light" | "dark"; center?: boolean }) {
+// `center` lines the form up in the middle; "below-lg" does so only until the band around it goes two-column.
+export function SignupForm({ list, tone = "light", center = false }: { list: List; tone?: "light" | "dark"; center?: boolean | "below-lg" }) {
   const id = useId();
   const [classId, setClassId] = useState("");
   const [format, setFormat] = useState("");
@@ -159,7 +160,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
   );
 
   return (
-    <form onSubmit={onSubmit} noValidate className={`relative w-full max-w-md ${center ? "mx-auto text-center" : ""}`}>
+    <form onSubmit={onSubmit} noValidate className={`relative w-full max-w-md ${center === true ? "mx-auto text-center" : center === "below-lg" ? "mx-auto text-center lg:mx-0 lg:text-left" : ""}`}>
       {list === "waitlist" && (
         <>
           <label htmlFor={`${id}-class`} className={label}>
@@ -266,7 +267,7 @@ export function SignupForm({ list, tone = "light", center = false }: { list: Lis
             aria-describedby={describedBy}
             className={`mt-1.5 w-full ${field}`}
           />
-          <div className={`mt-4 flex ${center ? "justify-center" : ""}`}>{submit}</div>
+          <div className={`mt-4 flex ${center === true ? "justify-center" : center === "below-lg" ? "justify-center lg:justify-start" : ""}`}>{submit}</div>
         </>
       )}
       <p
