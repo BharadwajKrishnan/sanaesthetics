@@ -36,9 +36,9 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
   const related = recipe.issueSlug ? getPost(recipe.issueSlug) : undefined;
   const { tipsLink } = recipe;
   // The number the recipe was written for; the reader can scale the ingredients from it.
-  const base = parseServes(recipe.serves);
+  const base = parseServes(recipe.serves ?? "");
   const facts: { label: string; value: React.ReactNode }[] = [
-    { label: "Serves", value: <ServingsStepper fallback={recipe.serves} /> },
+    recipe.makes ? { label: "Makes", value: recipe.makes } : { label: "Serves", value: <ServingsStepper fallback={recipe.serves ?? ""} /> },
     { label: "Preparation", value: recipe.prepTime },
     { label: "Cooking", value: recipe.cookTime },
   ];

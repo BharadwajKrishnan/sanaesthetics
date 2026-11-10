@@ -35,8 +35,10 @@ export type Recipe = {
   // A stretch wrapped in ** is shown in bold.
   intro: string[];
   serve?: string;
-  // How many the recipe feeds and how long it takes, shown under the story. Every recipe gives all three.
-  serves: string;
+  // How many the recipe feeds and how long it takes, shown under the story. Every recipe gives the two times and
+  // either `serves` (a number the reader can scale from) or, for something made rather than served, `makes`.
+  serves?: string;
+  makes?: string;
   prepTime: string;
   cookTime: string;
   ingredients: { group: string; items: string[] }[];
@@ -321,6 +323,44 @@ export const recipes: Recipe[] = [
       "Clementine peel has a natural bitterness, so adjust the jaggery to balance the tamarind and spice.",
       "For recipes using citrus peel, choose fruit explicitly labelled as suitable for eating with the peel, and check any post-harvest treatment information. Wash thoroughly; washing alone does not guarantee that treated peel is suitable for cooking.",
     ],
+  },
+  {
+    slug: "homemade-ghee",
+    title: "Homemade Ghee",
+    tamil: "நெய்",
+    category: "festive-special",
+    eyebrow: "Clarified butter · Every festive kitchen",
+    summary:
+      "Unsalted butter simmered gently until the water has gone and the milk solids turn golden and nutty: a jar of golden, fragrant ghee from the simplest of ingredients.",
+    cover: "/images/homemade-ghee.webp",
+    coverAlt: "Homemade ghee in a steel vessel, seen from above: clear golden fat with the browned milk solids settled beneath it",
+    intro: [
+      "Homemade ghee has a lovely aroma that fills the kitchen. Made by slowly heating butter, it is a simple process that transforms ordinary butter into golden, fragrant ghee.",
+    ],
+    makes: "About 180 to 200 g",
+    prepTime: "5 minutes",
+    cookTime: "15 to 20 minutes",
+    ingredients: [
+      {
+        group: "For the ghee",
+        items: ["250 g unsalted butter (Süßrahmbutter or mildgesäuerte Butter: both can be used)"],
+      },
+    ],
+    steps: [
+      "Cut the butter into big cubes and place it in a heavy-bottomed pan.",
+      "Melt it over low to medium-low heat.",
+      "Allow it to simmer gently. It will foam and bubble as the water evaporates.",
+      "Continue cooking until the milk solids settle at the bottom and turn light golden brown. The bubbling will become quieter, and a nutty aroma will develop.",
+      "Switch off the heat as soon as the solids are golden. Be careful not to let them burn.",
+      "Allow it to settle briefly.",
+      "If you like, strain the clear golden ghee through a fine sieve or muslin cloth into a clean, completely dry jar.",
+      "Let it cool before closing the jar.",
+    ],
+    tips: [
+      "The key to good ghee is patience. Gentle heat allows the water to evaporate and the milk solids to develop their characteristic nutty aroma.",
+    ],
+    issueSlug: "oils-i-reach-for",
+    readMore: "Ghee is the one jar in the cupboard that is not an oil at all. Issue 4 lines up the five oils beside it and looks at when the fat you cook in becomes part of what you taste.",
   },
 ];
 
