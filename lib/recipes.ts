@@ -512,6 +512,55 @@ export const recipes: Recipe[] = [
       "Sometimes what we describe as flavour is not only taste or aroma. It is also the sound of the first bite and the texture that follows.",
     ],
   },
+  {
+    slug: "deepavali-legiyam",
+    title: "Deepavali Legiyam",
+    tamil: "தீபாவளி லேகியம்",
+    category: "festive-special",
+    eyebrow: "Spiced jaggery paste · After the Deepavali feast",
+    summary: "A small-batch, spice-based version made with everyday kitchen ingredients: coriander, cumin, ajwain, pepper and dry ginger cooked into jaggery with ghee and sesame oil.",
+    cover: "/images/deepavali-legiyam.webp",
+    coverAlt: "Deepavali legiyam in a small copper bowl: a dark, glossy paste, on a table laid for the festival",
+    intro: [
+      "In many Tamil households, Deepavali celebrations are not complete without a small serving of **Deepavali legiyam**. After a morning filled with sweets, savouries and a festive meal, this dark, aromatic preparation is traditionally served in a small quantity.",
+      "The tradition is rooted in the Tamil idea of Unave Marundhu — the belief that food and the ingredients we use in everyday cooking can also support our well-being.",
+      "Deepavali usually falls during the Tamil month of Aippasi (October to November), which coincides with the Northeast Monsoon in Tamil Nadu. It is a time of changing weather, family gatherings and, of course, plenty of festive food.",
+      "In many homes, preparations for legiyam begin well before the festival. Families traditionally visit local country medicine shops, known as Naatu Marundhu Kadai, to source herbs, roots and spices. Traditional versions can contain a wide variety of ingredients, each contributing its own aroma and character.",
+      "Today, some households make simpler versions using spices already available in the kitchen. The recipe below is one such small-batch version, bringing together coriander, cumin, ajwain, black pepper and dry ginger with jaggery, ghee and sesame oil.",
+      "For me, legiyam is more than the final item on the Deepavali menu. It is a reminder of how food traditions carry care across generations — often through the little things our mothers and grandmothers made sure we never missed.",
+    ],
+    serve: "Serve a small portion, after the festive meal.",
+    makes: "About 4 small servings",
+    prepTime: "5 minutes",
+    cookTime: "10 to 15 minutes",
+    ingredients: [
+      {
+        group: "For the spice powder",
+        items: ["1 tsp coriander seeds (dhania)", "¼ tsp cumin seeds (jeeragam)", "¼ tsp carom seeds (omam, or ajwain)", "6 to 8 black peppercorns (milagu)", "A generous pinch of dry ginger powder (sukku)"],
+      },
+      {
+        group: "For the legiyam",
+        items: ["2 tbsp grated jaggery (vellam)", "1 tbsp water", "½ tbsp ghee", "½ tsp sesame oil", "A few drops of honey (optional)"],
+      },
+    ],
+    steps: [
+      "Place the coriander seeds, cumin seeds, carom seeds and black peppercorns in a small pan. Dry roast over low heat for a minute or two, until fragrant, taking care not to burn them. Allow the spices to cool.",
+      "Grind the roasted spices into a fine powder and mix in the dry ginger powder.",
+      "In a small, heavy-bottomed pan, add the jaggery and water. Heat gently until the jaggery dissolves. Strain if needed to remove any impurities, then return the syrup to the pan.",
+      "Add the ground spice mixture to the jaggery syrup. Cook over low heat, stirring continuously, until the mixture thickens into a cohesive paste.",
+      "Add the ghee and sesame oil gradually, stirring until they are incorporated and the mixture develops a glossy appearance. Switch off the heat once it reaches a thick, soft consistency.",
+      "Allow the legiyam to cool. If using honey, stir in a few drops only after it has cooled. Serve a small portion.",
+    ],
+    tips: [
+      "Keep the heat low throughout, to prevent the jaggery and spices from burning.",
+      "The mixture will thicken further as it cools, so avoid cooking it until it becomes too hard.",
+      "Adjust the jaggery slightly according to your taste.",
+      "This is a simplified home-style version; traditional family recipes may use a much wider selection of herbs and spices.",
+      "Store in a clean, dry, airtight container in the refrigerator and use a clean, dry spoon.",
+    ],
+    issueSlug: "deepavali-in-my-home",
+    readMore: "Legiyam closes the Deepavali meal at home. Issue 5, the festive edition, is about those mornings, and the potluck table this year's batch was made for.",
+  },
 ];
 
 export const recipePromise = "I cook by instinct, but I test and measure the recipes here so you can reproduce them.";

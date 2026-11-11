@@ -445,7 +445,7 @@ const DEEPAVALI_MENU: { name: string; slug?: string }[] = [
   { name: "Avarakkai poriyal" },
   { name: "Chettinad urulai roast", slug: "chettinad-urulai-roast" },
   { name: "Curd rice" },
-  { name: "Deepavali legiyam" },
+  { name: "Deepavali legiyam", slug: "deepavali-legiyam" },
 ];
 // What was on the table that has a written recipe.
 const DEEPAVALI_RECIPES = [
@@ -453,6 +453,7 @@ const DEEPAVALI_RECIPES = [
   { slug: "ribbon-pakoda", title: "Ribbon Pakoda", note: "the part of the mixture I always reached for, pressed from rice flour and gram flour." },
   { slug: "paruppu-poli", title: "Paruppu Poli", note: "a thin flatbread around a chana dal and jaggery filling, cooked with ghee." },
   { slug: "chettinad-urulai-roast", title: "Chettinad Urulai Roast", note: "boiled potatoes tossed in a freshly ground pepper and fennel masala until the edges crisp." },
+  { slug: "deepavali-legiyam", title: "Deepavali Legiyam", note: "the small spiced jaggery paste that closes the feast, from everyday kitchen spices." },
   { slug: "homemade-ghee", title: "Homemade Ghee", note: "the jar everything festive starts with." },
 ];
 
@@ -494,8 +495,8 @@ function DeepavaliBody() {
       </p>
       <p>
         And, of course, there was the grand South Indian festive meal. After all that eating, we would finish with a small serving
-        of Deepavali legiyam — a traditional herbal preparation made in many South Indian homes and believed to help with digestion
-        after the festive feast.
+        of <RecipeLink slug="deepavali-legiyam">Deepavali legiyam</RecipeLink> — a traditional herbal preparation made in many
+        South Indian homes and believed to help with digestion after the festive feast.
       </p>
 
       <h2>This year&apos;s table</h2>
