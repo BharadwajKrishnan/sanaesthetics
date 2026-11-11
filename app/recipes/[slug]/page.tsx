@@ -127,6 +127,8 @@ export default async function RecipePage({ params }: PageProps<"/recipes/[slug]"
                     ))}
                   </ol>
 
+                  <RecipeVideo recipe={recipe} />
+
                   <div className="reveal mt-8 rounded-r-xl border-l-4 border-maroon bg-parchment py-4 pl-5 pr-5 sm:pl-7">
                     <h3 className="font-serif text-2xl font-semibold">Kitchen tips</h3>
                     <ul className="mt-3 space-y-3 text-[0.95rem] leading-relaxed text-ink/85">
@@ -190,6 +192,29 @@ function CoverPhoto({ recipe }: { recipe: Recipe }) {
           </a>
         </figcaption>
       )}
+    </figure>
+  );
+}
+
+// A short clip of the cooking, after the method. Muted and looping, so it plays on its own like a moving picture;
+// the controls are there for anyone who wants to pause it. The cover photo stands in until it loads.
+function RecipeVideo({ recipe }: { recipe: Recipe }) {
+  if (!recipe.video) return null;
+  return (
+    <figure className="reveal mt-8">
+      <video
+        src={recipe.video.src}
+        poster={recipe.cover}
+        autoPlay
+        muted
+        loop
+        playsInline
+        controls
+        preload="metadata"
+        aria-label={recipe.video.caption}
+        className="mx-auto w-full max-w-sm rounded-xl shadow-xl shadow-ink/15"
+      />
+      <figcaption className="mt-3 text-center text-sm text-ink/60">{recipe.video.caption}</figcaption>
     </figure>
   );
 }

@@ -32,6 +32,8 @@ export type Recipe = {
   photoAspect?: "2/3";
   // Labels on the photo: a dot at the edge of the ingredient and the text in an empty spot, as percentages of its width and height.
   photoTags?: PhotoTag[];
+  // A short clip under the method, muted and looping: path under public/, with a line saying what it shows.
+  video?: { src: string; caption: string };
   // A stretch wrapped in ** is shown in bold.
   intro: string[];
   serve?: string;
@@ -521,6 +523,7 @@ export const recipes: Recipe[] = [
     summary: "A small-batch, spice-based version made with everyday kitchen ingredients: coriander, cumin, ajwain, pepper and dry ginger cooked into jaggery with ghee and sesame oil.",
     cover: "/images/deepavali-legiyam.webp",
     coverAlt: "Deepavali legiyam coming together in the pan: a dark, glossy paste of ground spices and jaggery, thickened until it holds its shape",
+    video: { src: "/videos/deepavali-legiyam.mp4", caption: "The legiyam coming together: the spice powder and jaggery syrup cooked down until the paste holds its shape and turns glossy." },
     intro: [
       "In many Tamil households, Deepavali celebrations are not complete without a small serving of **Deepavali legiyam**. After a morning filled with sweets, savouries and a festive meal, this dark, aromatic preparation is traditionally served in a small quantity.",
       "The tradition is rooted in the Tamil idea of Unave Marundhu — the belief that food and the ingredients we use in everyday cooking can also support our well-being.",
