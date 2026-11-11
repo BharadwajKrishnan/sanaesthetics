@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Artwork, Thali } from "@/components/Artwork";
+import { LampIcon } from "@/components/Icons";
 import { KolamDivider } from "@/components/Kolam";
 import { CONTAINER, Eyebrow, H1, SiteFooter, SiteHeader, TextLink } from "@/components/SiteChrome";
 import { issueLink, posts } from "@/lib/posts";
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
 };
 
 export default function Newsletter() {
+  // A festive edition is picked out above the list; the rest follow in order.
+  const festive = posts.find((post) => post.festive);
+  const regular = posts.filter((post) => post !== festive);
   return (
     <>
       <SiteHeader current="/newsletter" />
@@ -32,8 +36,46 @@ export default function Newsletter() {
           </div>
 
           <KolamDivider className="mt-6 text-brass" />
+
+          {festive && (
+            <article className="reveal relative mt-6 overflow-hidden rounded-2xl border border-brass/70 bg-forest-deep text-cream shadow-xl shadow-ink/15">
+              <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brass/20 blur-3xl" />
+              <div className="relative grid items-center gap-6 p-5 sm:grid-cols-[14rem_minmax(0,1fr)] sm:p-7 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-10">
+                <Artwork
+                  src={festive.cover}
+                  alt={festive.coverAlt}
+                  link={{ ...issueLink(festive.slug), "aria-label": festive.title }}
+                  sizes="(min-width: 1024px) 16rem, (min-width: 640px) 14rem, 90vw"
+                  className={`relative mx-auto w-full max-w-[16rem] rounded-xl shadow-lg shadow-black/30 sm:mx-0 ${festive.coverAspect ?? "aspect-[4/5]"}`}
+                >
+                  {festive.Cover ? <festive.Cover /> : <Thali />}
+                </Artwork>
+                <div>
+                  <p className="flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-brass">
+                    <LampIcon className="h-6 w-6" />
+                    <span>Festive edition · {festive.festive} · {festive.eyebrow.replace(/ · Festive edition$/, "")}</span>
+                  </p>
+                  <h2 className="mt-3 font-serif text-3xl font-semibold leading-tight sm:text-[2.25rem]">
+                    <a {...issueLink(festive.slug)} className="transition-colors hover:text-brass">
+                      {festive.title}
+                    </a>
+                  </h2>
+                  <p className="mt-3 max-w-2xl text-[1.0625rem] leading-relaxed text-cream/80">{festive.excerpt}</p>
+                  <p className="mt-2 text-sm text-cream/60">
+                    {site.author} · {festive.readingTime}
+                  </p>
+                  <p className="mt-4">
+                    <TextLink {...issueLink(festive.slug)} className="text-cream decoration-cream/40 hover:decoration-cream">
+                      Read the festive issue
+                    </TextLink>
+                  </p>
+                </div>
+              </div>
+            </article>
+          )}
+
           <ul className="mt-6 grid gap-5 lg:grid-cols-2">
-            {posts.map((post, i) => (
+            {regular.map((post, i) => (
               <li key={post.slug} className="reveal" style={{ ["--d" as string]: `${i * 80}ms` }}>
                 <article className="card-lift grid items-center gap-5 rounded-2xl border border-line/80 bg-white/60 p-4 sm:grid-cols-[11rem_minmax(0,1fr)] sm:p-5 lg:grid-cols-[12rem_minmax(0,1fr)]">
                   <Artwork

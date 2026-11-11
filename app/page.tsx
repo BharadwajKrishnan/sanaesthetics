@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Artwork, HeroGarnish } from "@/components/Artwork";
 import { Dabba } from "@/components/BrassDabba";
 import { HeroFrame } from "@/components/HeroFrame";
-import { Arrow, BowlIcon, FlaskIcon, SproutIcon, TempleIcon } from "@/components/Icons";
+import { Arrow, BowlIcon, FlaskIcon, LampIcon, SproutIcon, TempleIcon } from "@/components/Icons";
 import { InstagramEmbed } from "@/components/InstagramEmbed";
 import { KolamCorner } from "@/components/Kolam";
 import { NewsletterTeaser } from "@/components/NewsletterTeaser";
@@ -39,6 +40,8 @@ const AUDIENCE = [
 const arusuvai = getPost("arusuvai-where-tradition-meets-taste")!;
 const issue1 = issueLink(arusuvai.slug);
 // Only plain data crosses into the client component; the issues' React parts stay here.
+// The festive edition, picked out above the teaser loop while there is one.
+const festive = issues.find((issue) => issue.festive);
 const TEASERS = issues.map(({ slug, title, eyebrow, teaser, teaserPicture, cover, coverAlt }) => ({
   slug,
   title,
@@ -126,6 +129,30 @@ export default function Home() {
 
         {/* Newsletter: one issue at a time, in a loop. Kept short on purpose; the issues speak for themselves. */}
         <section id="newsletter" className={`${CONTAINER} pb-8 sm:pb-12`}>
+          {festive && (
+            <a {...issueLink(festive.slug)} className="reveal group relative mb-5 grid overflow-hidden rounded-2xl border border-brass/70 bg-forest-deep text-cream shadow-xl shadow-ink/15 sm:grid-cols-[minmax(0,1fr)_16rem] lg:grid-cols-[minmax(0,1fr)_20rem]">
+              <div aria-hidden="true" className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brass/20 blur-3xl" />
+              <div className="relative px-5 py-6 sm:px-8 sm:py-7">
+                <p className="flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-brass">
+                  <LampIcon className="h-6 w-6" />
+                  <span>Festive edition · {festive.festive}</span>
+                </p>
+                <h2 className="mt-3 font-serif text-[1.65rem] font-semibold leading-tight sm:text-[2rem]">{festive.title}</h2>
+                <p className="mt-3 max-w-xl text-[1.0625rem] leading-relaxed text-cream/80">{festive.teaser}</p>
+                <p className="mt-4 font-medium underline decoration-cream/40 underline-offset-[6px] group-hover:decoration-cream">
+                  Read the festive issue
+                  <span className="ml-2 inline-block align-[-2px]">
+                    <Arrow />
+                  </span>
+                </p>
+              </div>
+              {festive.cover && (
+                <div className="relative aspect-[16/10] sm:aspect-auto">
+                  <Image src={festive.cover} alt={festive.coverAlt} fill sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 100vw" quality={85} className="object-cover object-top" />
+                </div>
+              )}
+            </a>
+          )}
           <div className="reveal relative overflow-hidden rounded-2xl border border-line/70 bg-parchment px-5 py-6 sm:px-8 sm:py-7">
             <KolamCorner className="pointer-events-none absolute right-1 top-1 w-16 -scale-x-100 text-brass/35 sm:w-20" />
             <KolamCorner className="pointer-events-none absolute bottom-1 left-1 w-16 -scale-y-100 text-brass/35 sm:w-20" />

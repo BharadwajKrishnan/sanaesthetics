@@ -26,6 +26,8 @@ export type Post = {
   // Drawn in place of the cover photo until there is one. Defaults to the thali.
   Cover?: () => React.ReactNode;
   readingTime: string;
+  // Set on a festive edition, naming the festival: the issue is picked out on the newsletter page and the homepage.
+  festive?: string;
   Body: () => React.ReactNode;
 };
 
@@ -417,6 +419,141 @@ function OilsBody() {
   );
 }
 
+// Issue 5: Sandhya at this year's Deepavali table is the cover; the table itself, with every dish labelled, sits in the body.
+const DEEPAVALI_COVER = "/images/deepavali-sandhya.webp";
+const DEEPAVALI_COVER_ALT =
+  "Sandhya in a red kurta at a table laid for Deepavali: a bowl of vellai appam, a wire basket of ribbon pakoda, paruppu poli, Chettinad urulai roast, legiyam and a spread of sweets, among fairy lights and yellow roses";
+const DEEPAVALI_TABLE = "/images/deepavali-table.webp";
+const DEEPAVALI_TABLE_ALT =
+  "The Deepavali potluck table from above: paruppu poli in a square bowl, a brass bowl of Chettinad urulai roast, a small bowl of legiyam, puliyodharai on a tray, a wire basket of ribbon pakoda, a round bowl of vellai appam, and sweets laid out on gold-printed paper among fairy lights";
+const DEEPAVALI_TAGS: PhotoTag[] = [
+  { label: "Paruppu poli", at: { left: 22, top: 52 }, text: { left: 14, top: 43 } },
+  { label: "Chettinad urulai roast", at: { left: 33, top: 45 }, text: { left: 26, top: 33 } },
+  { label: "Deepavali legiyam", at: { left: 44, top: 47 }, text: { left: 55, top: 39 } },
+  { label: "Puliyodharai", at: { left: 34, top: 60 }, text: { left: 41, top: 70 } },
+  { label: "Ribbon pakoda", at: { left: 29, top: 83 }, text: { left: 26, top: 93 } },
+  { label: "Vellai appam", at: { left: 51, top: 60 }, text: { left: 52, top: 52 } },
+  { label: "Sweets", at: { left: 77, top: 73 }, text: { left: 84, top: 86 } },
+];
+// The potluck invitation: the menu as it went out, and the dishes with a written recipe.
+const DEEPAVALI_MENU: { name: string; slug?: string }[] = [
+  { name: "Paruppu poli", slug: "paruppu-poli" },
+  { name: "Ribbon pakoda", slug: "ribbon-pakoda" },
+  { name: "Vellai appam", slug: "vellai-appam" },
+  { name: "Puliyodharai rice" },
+  { name: "Pudalangai kootu" },
+  { name: "Avarakkai poriyal" },
+  { name: "Chettinad urulai roast", slug: "chettinad-urulai-roast" },
+  { name: "Curd rice" },
+  { name: "Deepavali legiyam" },
+];
+// What was on the table that has a written recipe.
+const DEEPAVALI_RECIPES = [
+  { slug: "vellai-appam", title: "Vellai Appam", note: "the fried snack of my Deepavali mornings, from a rice and urad dal batter." },
+  { slug: "ribbon-pakoda", title: "Ribbon Pakoda", note: "the part of the mixture I always reached for, pressed from rice flour and gram flour." },
+  { slug: "paruppu-poli", title: "Paruppu Poli", note: "a thin flatbread around a chana dal and jaggery filling, cooked with ghee." },
+  { slug: "chettinad-urulai-roast", title: "Chettinad Urulai Roast", note: "boiled potatoes tossed in a freshly ground pepper and fennel masala until the edges crisp." },
+  { slug: "homemade-ghee", title: "Homemade Ghee", note: "the jar everything festive starts with." },
+];
+
+function DeepavaliBody() {
+  return (
+    <>
+      <p>
+        The moment I hear Deepavali, my mind goes straight to waking up early, long before sunrise. It could be the only day of
+        the year when I am genuinely excited to wake up that early!
+      </p>
+      <p>
+        In our household, the celebrations begin the night before. We lay out our new clothes, along with the sweets and snacks
+        prepared by Amma, in front of the shrine. It is a small ritual, but one that builds so much excitement for the morning
+        ahead.
+      </p>
+      <p>
+        The next morning, the eldest person in the family applies a little sesame oil to our hair. We then take our traditional
+        oil bath with hot water. This ritual is associated with the celebration of Lord Krishna&apos;s victory over Narakasura.
+        Once the bath is done, we put on our new clothes and get ready for the festivities — which, of course, include bursting
+        firecrackers!
+      </p>
+      <p>
+        Some of my fondest childhood memories of Deepavali are from visits to my grandparents&apos; house. The whole family would
+        come together, exchange homemade sweets and snacks, and spend the evening after sunset bursting firecrackers. There was so
+        much excitement, laughter and togetherness. It remains one of my happiest memories, and I would trade anything to
+        experience those days again.
+      </p>
+
+      <h2>And how can we talk about Deepavali without talking about the food?</h2>
+      <p>
+        Amma would prepare an elaborate spread of sweets and savouries for the occasion. Once we were done with the excitement of
+        the morning firecrackers, we would look forward to her freshly made{" "}
+        <RecipeLink slug="vellai-appam">vellai appam</RecipeLink> — a delicious fried snack that was always a favourite.
+      </p>
+      <p>
+        Then came the mixture. As the name suggests, it is a combination of different savoury snacks, often made using gram flour
+        and rice flour. Every handful brought together different shapes, textures and crunch. It was almost impossible to stop at
+        just one!
+      </p>
+      <p>
+        And, of course, there was the grand South Indian festive meal. After all that eating, we would finish with a small serving
+        of Deepavali legiyam — a traditional herbal preparation made in many South Indian homes and believed to help with digestion
+        after the festive feast.
+      </p>
+
+      <h2>This year&apos;s table</h2>
+      <p>
+        This Deepavali, far from Amma&apos;s kitchen, I hosted a potluck at home: from noon onwards, everyone bringing a dish to
+        share. Everything on this table was cooked for it, from the vellai appam and ribbon pakoda of my childhood mornings to
+        the legiyam that closes the meal.
+      </p>
+      <aside className="my-8 border-l-4 border-brass bg-parchment p-6">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-maroon">The invitation</p>
+        <p className="mt-2 font-serif text-2xl font-semibold text-ink">Deepavali potluck · Sandhya&apos;s home · 12:00 onwards · bring a dish to share</p>
+        <ul className="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+          {DEEPAVALI_MENU.map((dish) => (
+            <li key={dish.name} className="flex items-baseline gap-3 font-serif text-xl">
+              <span aria-hidden="true" className="h-2 w-2 shrink-0 rounded-full bg-brass" />
+              {dish.slug ? <RecipeLink slug={dish.slug}>{dish.name}</RecipeLink> : dish.name}
+            </li>
+          ))}
+        </ul>
+      </aside>
+      <figure>
+        <div className="relative mx-auto w-full">
+          <Image src={DEEPAVALI_TABLE} alt={DEEPAVALI_TABLE_ALT} width={1600} height={900} quality={90} sizes="(min-width: 1024px) 44rem, 90vw" className="h-auto w-full rounded-xl" />
+          <Zoomable src={DEEPAVALI_TABLE} alt={DEEPAVALI_TABLE_ALT} />
+          <PhotoTags tags={DEEPAVALI_TAGS} />
+        </div>
+        <figcaption className="mt-3 text-sm text-ink/60">The Deepavali potluck table, before the guests arrived.</figcaption>
+      </figure>
+      <p>The ones with a written recipe, so you can cook them for your own table:</p>
+      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+        {DEEPAVALI_RECIPES.map((recipe) => (
+          <li key={recipe.slug} className="rounded-xl border border-line/80 bg-white/60 p-4">
+            <a {...recipeLink(recipe.slug)} className="font-serif text-xl font-semibold text-maroon underline decoration-maroon/40 underline-offset-[5px] hover:decoration-maroon">
+              {recipe.title}
+            </a>
+            <p className="mt-1 text-[0.95rem] leading-relaxed text-ink/75">{recipe.note}</p>
+          </li>
+        ))}
+      </ul>
+
+      <h2>What stays</h2>
+      <p>
+        When I think about Deepavali today, I remember more than the sweets, snacks or firecrackers. I remember the excitement of
+        waking up before sunrise, the rituals we followed every year, the house filled with the aroma of Amma&apos;s cooking, and
+        the joy of having the whole family together.
+      </p>
+      <p className="font-serif text-2xl font-medium">
+        “Some aromas instantly take me back to my childhood kitchen. The smell of butter slowly turning into{" "}
+        <RecipeLink slug="homemade-ghee">golden ghee</RecipeLink> is certainly one of them.”
+      </p>
+      <p>
+        Perhaps that is what makes these festivals so special. The food is wonderful, the traditions are meaningful, but it is the
+        memories and the people we share them with that stay with us.
+      </p>
+    </>
+  );
+}
+
 export const posts: Post[] = [
   {
     slug: "arusuvai-where-tradition-meets-taste",
@@ -491,6 +628,22 @@ export const posts: Post[] = [
     teaserPicture: { src: "/images/oils-i-reach-for-teaser.webp", alt: "Drawn jars and bottles of coconut oil, sesame oil and groundnut oil, each with its seed or nut beside it", width: 780, height: 690 },
     readingTime: "3 min read",
     Body: OilsBody,
+  },
+  {
+    slug: "deepavali-in-my-home",
+    title: "Deepavali in My Home: Memories, Rituals and Food",
+    eyebrow: "Issue 5 · Festive edition",
+    festive: "Deepavali",
+    excerpt:
+      "Waking before sunrise, the oil bath, Amma's vellai appam and a handful of mixture: Sandhya's Deepavali at home, and the table she cooked for this year's potluck, with the recipes to go with it.",
+    teaser:
+      "Vellai appam, ribbon pakoda and paruppu poli, cooked for a Deepavali potluck. What is it about this one morning that still makes me wake up before sunrise?",
+    cover: DEEPAVALI_COVER,
+    coverAlt: DEEPAVALI_COVER_ALT,
+    // Paruppu poli, ribbon pakoda and vellai appam together, from the table photo.
+    teaserPicture: { src: "/images/deepavali-teaser.webp", alt: "Paruppu poli, a basket of ribbon pakoda and a bowl of vellai appam on the Deepavali table", width: 840, height: 520 },
+    readingTime: "4 min read",
+    Body: DeepavaliBody,
   },
 ];
 
