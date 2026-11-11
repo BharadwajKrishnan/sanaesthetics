@@ -520,7 +520,7 @@ export const recipes: Recipe[] = [
     eyebrow: "Spiced jaggery paste · After the Deepavali feast",
     summary: "A small-batch, spice-based version made with everyday kitchen ingredients: coriander, cumin, ajwain, pepper and dry ginger cooked into jaggery with ghee and sesame oil.",
     cover: "/images/deepavali-legiyam.webp",
-    coverAlt: "Deepavali legiyam in a small copper bowl: a dark, glossy paste, on a table laid for the festival",
+    coverAlt: "Deepavali legiyam coming together in the pan: a dark, glossy paste of ground spices and jaggery, thickened until it holds its shape",
     intro: [
       "In many Tamil households, Deepavali celebrations are not complete without a small serving of **Deepavali legiyam**. After a morning filled with sweets, savouries and a festive meal, this dark, aromatic preparation is traditionally served in a small quantity.",
       "The tradition is rooted in the Tamil idea of Unave Marundhu — the belief that food and the ingredients we use in everyday cooking can also support our well-being.",
