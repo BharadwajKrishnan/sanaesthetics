@@ -369,6 +369,8 @@ export const recipes: Recipe[] = [
     category: "festive-special",
     eyebrow: "Rice and urad dal fritters · Diwali",
     summary: "A festive South Indian snack made from rice and urad dal, traditionally prepared during Diwali and other special occasions.",
+    cover: "/images/vellai-appam.webp",
+    coverAlt: "Vellai appam in a round bowl: pale golden fritters of rice and urad dal batter, flecked with green chilli and curry leaf",
     intro: [
       "For me, Diwali and Vellai Appam belong together.",
       "Long before the sweets are opened and the savoury snacks are arranged, I find myself looking forward to the batch of Vellai Appam made by my mother. Crisp at the edges, soft within, and best enjoyed fresh from the kitchen, it is one of those festive foods that immediately signals celebration.",
@@ -423,6 +425,8 @@ export const recipes: Recipe[] = [
     eyebrow: "Sweet stuffed flatbread · Festive sweet",
     summary:
       "A thin maida flatbread wrapped around a filling of chana dal and jaggery, scented with cardamom and cooked on the tawa with ghee until the edges turn lightly crisp.",
+    cover: "/images/paruppu-poli.webp",
+    coverAlt: "Paruppu poli in a white square bowl: thin golden flatbreads with browned spots, folded over one another",
     intro: [
       "**Paruppu Poli**, which translates to stuffed flatbread, is a festive sweet enjoyed across many parts of South India. The word puranam refers to the filling enclosed within the thin outer dough, while poli refers to the flatbread itself.",
       "Over generations, families have developed their own variations of the filling, while the dough has remained largely unchanged. Across India, similar preparations exist under different names, each reflecting regional ingredients and traditions, yet sharing the same idea of a soft flatbread wrapped around a sweet filling.",
@@ -470,6 +474,8 @@ export const recipes: Recipe[] = [
     category: "festive-special",
     eyebrow: "Rice and gram flour snack · Diwali",
     summary: "Crisp, light and quietly addictive, Ribbon Pakoda is one of those festive snacks that remain in the tin long after Diwali has passed.",
+    cover: "/images/ribbon-pakoda.webp",
+    coverAlt: "Ribbon pakoda in a wire frying basket on a tray: crisp golden ribbons of rice and gram flour",
     intro: [
       "Now we come to the savoury side of the festive table, because no South Indian celebration ever feels complete without it.",
       "I have surprisingly little experience using the murukku soppu, the traditional press used to shape many South Indian snacks. Yet it is a piece of equipment that seems to exist in almost every household, often in multiple sizes and designs, passed down through generations along with the recipes themselves.",
